@@ -93,10 +93,10 @@ class _AuthenticateState extends State<Authenticate> {
         child: AbsorbPointer(
           absorbing: Tools.isTouchLocked,
           child: Scaffold(
-            body: Center(
-              child: Column(
+            body: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Spacer(),
+                    // const Spacer(),
                     ListView(
                 children: [
                   const SizedBox(
@@ -203,9 +203,8 @@ class _AuthenticateState extends State<Authenticate> {
                   ),
                 ],
               ),
-                    const Spacer(),
+                    // const Spacer(),
                   ]),
-            ),
           ),
         ),
       ),
