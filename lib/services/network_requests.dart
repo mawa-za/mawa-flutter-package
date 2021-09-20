@@ -1,0 +1,381 @@
+// ignore_for_file: avoid_print
+part of mawa;
+
+
+class NetworkRequests {
+  // final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
+  NetworkRequests() {_getToken();}
+
+  Future<void> _getToken ()async {
+
+    _key = preferences.then((SharedPreferences prefs) {
+      return (prefs.getString(SharedPreferencesKeys.token) ?? '');
+    });
+    print('key' + _key.toString());
+  }
+
+  static const String methodGet = 'get';
+  static const String methodPost = 'post';
+  static const String methodPut = 'put';
+  static String server = 'dev';
+  static String pot = '8181';
+  final String endpointURL = 'api-$server.mawa.co.za:$pot';
+  static String path = '/mawa-api/resources/';
+  late http.Response feedback;
+  late final Future<String> _key;
+  static String token = '';
+  static String otp = '';
+  static int statusCode = 100;
+
+  static const int requestTime = 60;
+
+  static Map<String, String> headers({required String tokenKey}) {
+    return {
+      "Content-type": "application/json",
+      "Authorization": "Bearer $tokenKey"
+    };
+  }
+
+  Map statusMessages = {
+    200: 'OK',
+    201: 'Created',
+    202: 'Accepted',
+    203: 'Non-Authoritative Information',
+    204: 'No Content',
+    205: 'Reset Content',
+    206: 'Partial Content',
+    207: 'Multi-Status (WebDAV)',
+    208: 'Already Reported (WebDAV)',
+    226: 'IM Used',
+    300: 'Multiple Choices',
+    301: 'Moved Permanently',
+    302: 'Found',
+    303: 'See Other',
+    304: 'Not Modified',
+    305: 'Use Proxy',
+    306: '(Unused)',
+    307: 'Temporary Redirect',
+    308: 'Permanent Redirect (experimental)',
+    400: 'Bad Request',
+    401: 'Unauthorized',
+    402: 'Payment Required',
+    403: 'Forbidden',
+    404: 'Not Found',
+    405: 'Method Not Allowed',
+    406: 'Not Acceptable',
+    407: 'Proxy Authentication Required',
+    408: 'Request Timeout',
+    409: 'Conflict',
+    410: 'Gone',
+    411: 'Length Required',
+    412: 'Precondition Failed',
+    413: 'Request Entity Too Large',
+    414: 'Request-URI Too Long',
+    415: 'Unsupported Media Type',
+    416: 'Requested Range Not Satisfiable',
+    417: 'Expectation Failed',
+    418: 'I\'m a teapot (RFC 2324)',
+    420: 'Enhance Your Calm (Twitter)',
+    422: 'Unprocessable Entity (WebDAV)',
+    423: 'Locked (WebDAV)',
+    424: 'Failed Dependency (WebDAV)',
+    425: 'Reserved for WebDAV',
+    426: 'Upgrade Required',
+    428: 'Precondition Required',
+    429: 'Too Many Requests',
+    431: 'Request Header Fields Too Large',
+    444: 'No Response (Nginx)',
+    449: 'Retry With (Microsoft)',
+    450: 'Blocked by Windows Parental Controls (Microsoft)',
+    451: 'Unavailable For Legal Reasons',
+    499: 'Client Closed Request (Nginx)',
+    500: 'Internal Server Error',
+    501: 'Not Implemented',
+    502: 'Bad Gateway',
+    503: 'Service Unavailable',
+    504: 'Gateway Timeout',
+    505: 'HTTP Version Not Supported',
+    506: 'Variant Also Negotiates (Experimental)',
+    507: 'Insufficient Storage (WebDAV)',
+    508: 'Loop Detected (WebDAV)',
+    509: 'Bandwidth Limit Exceeded (Apache)',
+    510: 'Not Extended',
+    511: 'Network Authentication Required',
+    598: 'Network read timeout error',
+    599: 'Network connect timeout error',
+  };
+
+
+  Future<dynamic> securedMawaAPI(String method,
+      {required String resource,
+        Map? body,
+        Map<String, dynamic>? queryParameters}) async {
+    // token == null ? token = await _key: null;
+    final SharedPreferences prefs = await preferences;
+
+    token = await (prefs.getString(SharedPreferencesKeys.token) ?? '');
+
+        dynamic url;
+    // statusCode == null? statusCode= 100: null;
+    // server == 'qas'
+    //     ? url =  Uri.https(endpointURL, path + resource, queryParameters)
+    //     : url = Uri.http(endpointURL, path + resource, queryParameters);
+    url = Uri.https(endpointURL, path + resource, queryParameters);
+    print('status code: $statusCode');
+    if(statusCode != 401){
+      try {
+        print('\n' + token.toString() +'\n');
+        print(endpointURL);
+        print(path);
+        print(resource);
+        print(body ?? queryParameters);
+        switch (method) {
+          case methodGet:
+            feedback = await http.get(
+              url,
+              headers: headers(tokenKey: token.toString()),
+            );
+            break;
+          case methodPost:
+            feedback = await http.post(
+              // Uri.https(endpointURL, path + resource, queryParameters),
+                url,
+                headers: headers(tokenKey: token.toString()),
+                body: jsonEncode(body));
+            break;
+          case methodPut:
+            print('wow wow $token');
+            feedback = await http.put(url,
+                // Uri.https(endpointURL, path + resource),
+                headers: headers(tokenKey: token.toString()), body: jsonEncode(body));
+            break;
+        }
+
+        print(resource + feedback.body);
+        print('\n' +
+            feedback.runtimeType.toString() +
+            feedback.contentLength.toString() +
+            '\n');
+        statusCode = feedback.statusCode;
+        switch (NetworkRequests.statusCode) {
+          case 200:
+            {
+              try {
+                return jsonDecode(feedback.body);
+              } catch (e) {
+                print(e.toString());
+              }
+            }
+            break;
+          case 401:
+            { Navigator.pushReplacementNamed(Tools.context, Authenticate.id);
+            }
+            break;
+          case 404:
+            {
+              Tools.isTouchLocked = false;
+              // message(message: 'Server Is Down', textColor: Colors.redAccent, isLock: false);
+              Alerts.flushbar(context: Tools.context, message: 'Server Down',positive: false, popContext: true);
+            }
+            break;
+          case 417:
+            {
+
+            }
+            break;
+          case 405:
+            {
+              Tools.isTouchLocked = false;
+              // message(message: 'Login failed', textColor: Colors.redAccent, isLock: false);
+              Alerts.flushbar(context: Tools.context, message: 'Not Allowed',positive: false);
+
+
+            }
+            break;
+          case 500:
+            {
+              Tools.isTouchLocked = false;
+              Alerts.flushbar(context: Tools.context, message: 'Server Error',positive: false);
+
+
+            }
+            break;
+          case 0:
+            {
+              Tools.isTouchLocked = false;
+              Alerts.flushbar(context: Tools.context, message: 'Network Error',positive: false, popContext: true);
+            }
+            break;
+          case 1:
+            {
+              Tools.isTouchLocked = false;
+              Alerts.flushbar(context: Tools.context, message: 'Network Error',positive: false, popContext: true);
+            }
+            break;
+          default:
+            {
+              Tools.isTouchLocked = false;
+              Alerts.flushbar(context: Tools.context, message: 'Request Failed',positive: false);
+            }
+            break;
+        }
+
+        // else if (statusCode >= 400 && statusCode < 600 && statusCode != 417) {}
+
+      }
+      on TimeoutException catch(e){
+        Tools.isTouchLocked = false;
+        print(e.toString());
+        Alerts.flushbar(context: Tools.context, message: 'Request Timed Out. \nCheck Network Connection.',positive: false);
+      }
+      on SocketException catch (e){
+        Tools.isTouchLocked = false;
+        print(e.toString());
+        Alerts.flushbar(context: Tools.context, message: 'Encountered Network Problem',positive: false);
+      }
+    }
+    else {
+      // Authorize(context: Tools.context).attempt();
+      Navigator.pushReplacementNamed(Tools.context, Authenticate.id);
+    }
+  }
+
+
+  Future unsecuredMawaAPI(String method,
+      {required String resource,
+        Map<String, String>? payload,
+        Map<String, dynamic>? queryParameters,
+        required BuildContext context, String? direct}) async {
+    dynamic url;
+    server == 'qas'
+        ? url =  Uri.https(endpointURL, path + resource,queryParameters)
+        : url = Uri.https(endpointURL, path + resource, queryParameters);
+    Map<String, String> headers = {
+      "Content-type": "application/json; charset=UTF-8"
+    }; //
+    print('howl');
+
+    print(endpointURL);
+    print(NetworkRequests.path);
+    print(resource);
+    print(payload);
+    print('\n');
+
+    try {
+      // final
+      // http.Response response =
+      // await http.post(
+      //     url,
+      //     headers: headers,
+      //     body: jsonEncode(payload));
+
+      switch (method) {
+        case methodGet:
+          feedback = await http.get(
+            url,
+            headers: headers,
+
+          );
+          break;
+        case methodPost:
+          feedback = await http.post(
+              url,
+              headers: headers,
+              body: jsonEncode(payload));
+          break;
+        case methodPut:
+          print('wow wow $token');
+          feedback = await http.put(url,
+              headers: headers,
+              body: jsonEncode(payload));
+          break;
+      }
+      print('6854486');
+      statusCode = feedback.statusCode;
+
+      print('this ${feedback.statusCode}');
+      print('this ${feedback.body}');
+
+      // if (statusCode == 200) {
+      //
+      // }
+      switch (NetworkRequests.statusCode) {
+        case 200:
+          {
+            dynamic data;
+            Tools.isTouchLocked = false;
+            data = jsonDecode(feedback.body);
+            if(resource == Resources.otp) {
+              otp = await data.toString();
+            }
+            if(resource == Resources.authenticate) {
+              token = await data[JsonResponseKeys.token];
+
+              final SharedPreferences prefs = await preferences;
+              final String string = token;
+
+              preferences.then((SharedPreferences prefs) {
+                return (prefs.setString(SharedPreferencesKeys.token, token));
+              });
+              /*// final String string = (prefs.getString(SharedPreferencesKeys.token) ?? '');
+
+             // _key =
+                 prefs.setString(SharedPreferencesKeys.token, string)
+            //      .then((bool success) {
+            //   return token;
+            // })
+            ;*/
+              await User().getUserDetails(payload![JsonResponseKeys.userID]!);
+              Navigator.pushReplacementNamed(context, direct!);
+            }
+
+            print('token oyjfjdbfjd\n' + token.toString());
+          }
+          break;
+        case 401:
+          {
+            Tools.isTouchLocked = false;
+            Alerts.flushbar(context: Tools.context, message: 'Incorrect login',positive: false, popContext: true);
+          }
+          break;
+        case 404:
+          {
+            Tools.isTouchLocked = false;
+            Alerts.flushbar(context: Tools.context, message: 'Server Down',positive: false, popContext: true);
+          }
+          break;
+        case 0:
+          {
+            Tools.isTouchLocked = false;
+            Alerts.flushbar(context: Tools.context, message: 'Network Error',positive: false, popContext: true);
+          }
+          break;
+        case 1:
+          {
+            Tools.isTouchLocked = false;
+            Alerts.flushbar(context: Tools.context, message: 'Network Error',positive: false, popContext: true);
+          }
+          break;
+        default:
+          {
+            Tools.isTouchLocked = false;
+            Alerts.flushbar(context: Tools.context, message: 'Login failed',positive: false);
+          }
+          break;
+      }
+      // print('yoghurt ' + token.toString());
+      Tools.isTouchLocked = false;
+    }
+    on TimeoutException catch(e){
+      Tools.isTouchLocked = false;
+      print(e.toString());
+      Alerts.flushbar(context: Tools.context, message: 'Request Timed Out. \nCheck Network Connection.',positive: false);
+    }
+    on SocketException catch (e){
+      Tools.isTouchLocked = false;
+      print(e.toString());
+      Alerts.flushbar(context: Tools.context, message: 'Encountered Network Problem',positive: false);
+    }
+  }
+}
