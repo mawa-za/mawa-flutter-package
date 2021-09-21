@@ -77,6 +77,10 @@ class Resources{
   static const String resetPassword = 'passwordReset';
   static const String forgotPassword = 'forgotPassword';
   static const String versions = 'versions';
+  static const String leaves = 'leaves';
+  static const String leavesApprovers = 'leavesApprovers';
+  static const String leavesToApprove = 'leavesToApprove';
+  static const String leaveProfiles = 'leaveProfiles';
 
 
   static const String ticketStatusNew = 'new';
@@ -88,16 +92,6 @@ class Resources{
 
 class JsonPayloadKeys{
 
-  static const String filter = 'filter';
-  static const String filterValue = 'x';
-  static const String assignedTo = 'assignedTo';
-  static const String assignedToID = 'assignedToID';
-  static const String clintID = 'clintID';
-  static const String status = 'status';
-
-  static const String partnerID = 'partnerID';
-  static const String ticketID = 'ticketID';
-
   static const String otp = 'otp';
   static const String otpPartnerEmail = 'partnerEmail';
 
@@ -107,6 +101,39 @@ class JsonPayloadKeys{
   static const String ticketStatusInProgress = 'Inprogress';
   static const String ticketStatusCompleted = 'Completed';
   static const String ticketStatusResolved = 'Resolved';
+
+  static const String loggedByID = 'loggedByID';
+  static const String approverID = 'approverID';
+  static const String startDate = 'startDate';
+  static const String endDate = 'endDate';
+  static const String leaveType = 'leaveType';
+
+// static const String  = '';
+}
+
+class QueryParameters{
+
+  static const String versionAppName = 'appName';
+  static const String versionApkVersionCode = 'versionNumber';
+  static const String versionAppUsable = 'appUsable';
+  static const String partnerFunction = 'partnerFunction';
+  static const String partnerFunctionEmployee = 'EMPLOYEE';
+  static const String partnerFunctionOrganization = 'ORGANIZATION';
+
+  static const String partnerNo = 'partnerNo';
+  static const String otp = 'otp';
+
+  static const String filter = 'filter';
+  static const String filterValue = 'x';
+  static const String assignedTo = 'assignedTo';
+  static const String assignedToID = 'assignedToID';
+  static const String clintID = 'clintID';
+  static const String status = 'status';
+
+  static const String partnerID = 'partnerID';
+  static const String ticketID = 'ticketID';
+  static const String approverId = 'approverId';
+
 }
 
 class SharedPreferencesKeys{

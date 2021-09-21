@@ -86,7 +86,7 @@ class OTP {
   validateOTP() async {
     await NetworkRequests().unsecuredMawaAPI(NetworkRequests.methodGet,
         resource: Resources.otp,
-        queryParameters: {JsonPayloadKeys.otp: NetworkRequests.otp},
+        queryParameters: {QueryParameters.otp: NetworkRequests.otp},
         context: context);
     if (NetworkRequests.statusCode == 200) {
       if (NetworkRequests.otp == _invalid) {
