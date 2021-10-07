@@ -38,3 +38,4 @@ part 'services/fields.dart';
 part 'services/persons.dart';
 part 'services/memberships.dart';
 part 'services/transaction_notes.dart';
+part 'services/products.dart';

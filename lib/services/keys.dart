@@ -121,6 +121,12 @@ static const String policyPremium = 'premium';
 static const String policyAmountDue = 'amountDue';
 static const String policySalesRepresentativeDetails =
     'salesRepresentativeDetails';
+
+  static const String productId = 'id';
+  static const String productDescription = 'description';
+  static const String productCategory = 'category';
+  static const String productUnitPrice = 'unitPrice';
+
 }
 
 class Resources{
@@ -158,6 +164,7 @@ class Resources{
   static const String edit = 'Edit';
 
   static const String roles = 'roles';
+  static const String productsResource = 'products';
 
 
   static const String ticketStatusNew = 'new';

@@ -5,6 +5,9 @@ late final GlobalKey<NavigatorState> navKey = GlobalKey<NavigatorState>();
 
 class Tools{
 
+  static const String productCategoryFuneralPolicy = 'FUNERALPOLICY';
+  static const String productCategoryTombstone = 'TOMBSTONE';
+
   // static late bool isTracking;
   static late String lastPage;
   static late BuildContext context;
