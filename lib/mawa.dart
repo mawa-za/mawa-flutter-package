@@ -39,3 +39,4 @@ part 'services/persons.dart';
 part 'services/memberships.dart';
 part 'services/transaction_notes.dart';
 part 'services/products.dart';
+part 'services/workcenters.dart';

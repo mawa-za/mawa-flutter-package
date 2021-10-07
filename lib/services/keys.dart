@@ -127,6 +127,13 @@ static const String policySalesRepresentativeDetails =
   static const String productCategory = 'category';
   static const String productUnitPrice = 'unitPrice';
 
+  static const String workCentresId = 'id';
+  static const String workCentresDescription = 'description';
+  static const String workCentresPath = 'path';
+
+  static const String workCentresWorkCenter = 'workcenter';
+  static const String workCentresRole = 'role';
+  static const String workCentresPosition = 'position';
 }
 
 class Resources{
@@ -152,6 +159,7 @@ class Resources{
   static const String transactionNotes = 'transactionNotes';
   static const String personResource = 'persons';
   static const String membershipsResource = 'policies';
+  static const String workCentersResource = 'workcenters';
 
 
   static const String approve = 'Approve';
