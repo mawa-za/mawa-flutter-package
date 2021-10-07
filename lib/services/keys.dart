@@ -130,6 +130,8 @@ class Resources{
   static const String leavesToApprove = 'leavesToApprove';
   static const String leaveProfiles = 'leaveProfiles';
   static const String transactionNotes = 'transactionNotes';
+  static const String personResource = 'persons';
+
 
   static const String approve = 'Approve';
   static const String approveCancellation = 'ApproveCancellation';
