@@ -31,3 +31,4 @@ part 'services/otp.dart';
 part 'services/tools.dart';
 part 'services/user.dart';
 part 'services/versioning.dart';
+part 'services/client_policy.dart';
