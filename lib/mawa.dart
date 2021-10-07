@@ -17,8 +17,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:device_info/device_info.dart';
-import 'dart:io';
-import 'package:flutter/services.dart';
+import 'package:geolocator/geolocator.dart';
 
 part 'screens/alerts.dart';
 part 'screens/authenticate.dart';
@@ -44,3 +43,4 @@ part 'services/transaction_notes.dart';
 part 'services/products.dart';
 part 'services/workcenters.dart';
 part 'services/device_info.dart';
+part 'services/location.dart';
