@@ -107,6 +107,20 @@ class JsonResponseKeys{
   static const String transactionLoggedById = 'loggedById';
   static const String transactionLoggedBy = 'loggedBy';
 
+static const String policyId = 'id';
+static const String policyCustomerId = 'customerId';
+static const String policyProductId = 'productId';
+static const String policyProductProduct = 'product';
+static const String policyDateJoined = 'dateJoined';
+static const String policyDateEffective = 'dateEffective';
+static const String policyCustomerDetails = 'customerDetails';
+static const String policySalesRepId = 'salesRepresentativeId';
+static const String policyStatus = 'status';
+static const String policyStatusReason = 'statusReason';
+static const String policyPremium = 'premium';
+static const String policyAmountDue = 'amountDue';
+static const String policySalesRepresentativeDetails =
+    'salesRepresentativeDetails';
 }
 
 class Resources{
@@ -131,6 +145,7 @@ class Resources{
   static const String leaveProfiles = 'leaveProfiles';
   static const String transactionNotes = 'transactionNotes';
   static const String personResource = 'persons';
+  static const String membershipsResource = 'policies';
 
 
   static const String approve = 'Approve';

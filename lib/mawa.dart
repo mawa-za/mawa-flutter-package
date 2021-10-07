@@ -36,3 +36,5 @@ part 'services/employees.dart';
 part 'services/leaves.dart';
 part 'services/fields.dart';
 part 'services/persons.dart';
+part 'services/memberships.dart';
+part 'services/transaction_notes.dart';
