@@ -81,6 +81,7 @@ class Resources{
   static const String leavesApprovers = 'leavesApprovers';
   static const String leavesToApprove = 'leavesToApprove';
   static const String leaveProfiles = 'leaveProfiles';
+  static const String policiesResource = 'policies';
 
 
   static const String ticketStatusNew = 'new';
