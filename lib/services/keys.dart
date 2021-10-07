@@ -160,6 +160,8 @@ class Resources{
   static const String personResource = 'persons';
   static const String membershipsResource = 'policies';
   static const String workCentersResource = 'workcenters';
+  static const String receiptsResource = 'receipts';
+  static const String cashupResource = 'cashup';
 
 
   static const String approve = 'Approve';
