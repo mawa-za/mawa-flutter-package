@@ -28,6 +28,9 @@ dev_dependencies:
   another_flushbar: ^1.10.23
   permission_handler: ^8.1.6
   fluttertoast: ^8.0.8
+  device_info: ^2.0.2
+  geolocator: ^7.1.1
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

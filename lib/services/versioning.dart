@@ -40,8 +40,8 @@ class ApkVersion {
 
   checkApkValidity(/*{String versionCode}*/) async {
     Map<String, dynamic>? query = {
-      JsonResponseKeys.versionApkVersionCode:version,
-      JsonResponseKeys.versionAppName:appName
+      QueryParameters.versionApkVersionCode:version,
+      QueryParameters.versionAppName:appName
     };
     dynamic response = await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet, resource: Resources.versions, queryParameters: query);
     print(response ?? 'nothing');
