@@ -34,3 +34,4 @@ part 'services/versioning.dart';
 part 'services/client_policy.dart';
 part 'services/employees.dart';
 part 'services/leaves.dart';
+part 'services/fields.dart';
