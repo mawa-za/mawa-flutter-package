@@ -44,3 +44,4 @@ part 'services/products.dart';
 part 'services/workcenters.dart';
 part 'services/device_info.dart';
 part 'services/location.dart';
+part 'services/receipts.dart';
