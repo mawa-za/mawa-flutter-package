@@ -14,7 +14,7 @@ class Persons {
 
   static Future personSearch({required String id, required String idType,}) async {
     String resource =
-        '${Resources.personResource}/?idnumber=$id&idtype=$idType&filter=x';
+        '${Resources.persons}/?idnumber=$id&idtype=$idType&filter=x';
     return await NetworkRequests()
         .securedMawaAPI(NetworkRequests.methodGet, resource: resource);
   }
@@ -30,26 +30,26 @@ class Persons {
   static getPerson(String personId) async {
     print('person $personId');
     return await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-        resource: '${Resources.personResource}/$personId');
+        resource: '${Resources.persons}/$personId');
   }
 
   Future<dynamic> adaNewClient(clientDetails) async {
     return NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
-        resource: Resources.personResource, body: clientDetails);
+        resource: Resources.persons, body: clientDetails);
   }
 
   static Future assignPersonRole({required String personID, required String personRole}) async{
     await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
-        resource: '${Resources.personResource}/$personID/roles?role=$personRole');
+        resource: '${Resources.persons}/$personID/roles?role=$personRole');
   }
 
   addPersonDetail({required String personID, required String path, required String field, required String detail}) async{
     NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
-        resource: '${Resources.personResource}/$personID/$path', body: {field: detail});
+        resource: '${Resources.persons}/$personID/$path', body: {field: detail});
   }
 
   getPersonDetail({required String option,}) async {
     return await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-        resource: '${Resources.personResource}/${Persons.personId}/$option');
+        resource: '${Resources.persons}/${Persons.personId}/$option');
   }
 }

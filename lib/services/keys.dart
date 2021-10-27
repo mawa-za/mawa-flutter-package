@@ -157,12 +157,11 @@ class Resources{
   static const String leavesToApprove = 'leavesToApprove';
   static const String leaveProfiles = 'leaveProfiles';
   static const String transactionNotes = 'transactionNotes';
-  static const String personResource = 'persons';
-  static const String membershipsResource = 'policies';
-  static const String workCentersResource = 'workcenters';
-  static const String receiptsResource = 'receipts';
-  static const String cashupResource = 'cashup';
-
+  static const String persons = 'persons';
+  static const String workCenters = 'workcenters';
+  static const String receipts = 'receipts';
+  static const String cashup = 'cashup';
+  static const String policies = 'policies';
 
   static const String approve = 'Approve';
   static const String approveCancellation = 'ApproveCancellation';
@@ -174,7 +173,7 @@ class Resources{
   static const String edit = 'Edit';
 
   static const String roles = 'roles';
-  static const String productsResource = 'products';
+  static const String products = 'products';
 
 
   static const String ticketStatusNew = 'new';

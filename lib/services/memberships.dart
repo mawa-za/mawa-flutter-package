@@ -9,7 +9,7 @@ class Memberships {
 
   membershipsSearch({String? partnerRole, String? idNumber}) async {
     List policies = await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-        resource: Resources.membershipsResource,
+        resource: Resources.policies,
         queryParameters: {
           'idnumber': idNumber ?? Persons.person[JsonResponseKeys.personIdNumber] ?? Persons.personIdNumber,
           'partnerRole': partnerRole
@@ -25,7 +25,7 @@ class Memberships {
   membershipGet(policyId) async {
     policy.clear();
      dynamic response = await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-        resource: '${Resources.membershipsResource}/$policyId');
+        resource: '${Resources.policies}/$policyId');
     print('try'+response.toString());
     // policy == null ? policy = {} : response != null ? response.isNotEmpty ? policy = response : policy = {}  : policy = {} ;
     if( response != null && response.isNotEmpty){
