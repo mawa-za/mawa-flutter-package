@@ -13,79 +13,6 @@ class User{
   static late String password;
   static late String email;
 
-  // requestAuthentication(context) async {
-  //     FocusScope.of(context).unfocus();
-  //     Alerts.flushbar.show(context);
-  //     message(message: 'Please Wait' , textColor: Colors.blue, isLock: true);
-  //
-  //     User.userID = username;
-  //     User.password = password;
-  //     await NetworkRequests().authenticateUser(
-  //         resource: NetworkRequests.authenticateResource,
-  //         payload: {"userID": "${User.userID}", "password": "${User.password}"});
-  //     switch (NetworkRequests.statusCode) {
-  //       case 200:
-  //         {
-  //           List roles = User.userRoles.values.toList();
-  //           // List workCenters = [];
-  //           // for (int index = 0; index <roles.length; index++) {
-  //           //   await WorkCenters().getWorkCenters(role: roles[index]);
-  //           //   workCenters.addAll(WorkCenters.workCentersList);
-  //           // }
-  //           // if(workCenters.contains('CASHUP')){
-  //           if(roles.contains('CASHIER') || roles.contains('SYSTEMADMINISTRATOR')){
-  //
-  //             message(message: '' , textColor: Colors.blue, isLock: false);
-  //             if(MawaPrinter.printerType == null){
-  //               PrinterTypeSelection(context: context).build();
-  //               // setState((){});
-  //             }
-  //             Navigator.pushReplacementNamed(context, SearchScreen.id);
-  //
-  //             location = Location();
-  //             device = DeviceInfo();
-  //             User().getUserDetails(User.userID!);
-  //             Employees().getAllEmployees();
-  //           }
-  //           else {
-  //             message(message: 'No Access' , textColor: Colors.redAccent, isLock: false);
-  //             Alerts().openPopup(context,
-  //                 title: 'Oops! ',
-  //                 message:
-  //                 'It Seems You Do Not Have Privileges To Use This App  ');
-  //           }
-  //         }
-  //         break;
-  //       case 401:
-  //         {
-  //           message(message: 'Incorrect login' , textColor: Colors.redAccent, isLock: false);
-  //           Alerts.flushbar(context: SharedResources.context!, message: 'Incorrect login',positive: false, popContext: true);
-  //         }
-  //         break;
-  //       case 404:
-  //         {
-  //           message(message: 'Server Is Down', textColor: Colors.redAccent, isLock: false);
-  //         }
-  //         break;
-  //       case 0:
-  //         {
-  //           message(message: 'Network Error', textColor: Colors.redAccent, isLock: false);
-  //         }
-  //         break;
-  //       case 1:
-  //         {
-  //           message(message: 'Network Error', textColor: Colors.redAccent, isLock: false);
-  //         }
-  //         break;
-  //       default:
-  //         {
-  //           message(message: 'Login failed', textColor: Colors.redAccent, isLock: false);
-  //           Alerts.flushbar(context: SharedResources.context!, message: 'Not Connected To Any Network',positive: false);
-  //         }
-  //         break;
-  //     }
-  // }
-
   getUserDetails (String username) async {
     loggedInUser.clear();
     try {
@@ -97,6 +24,7 @@ class User{
       // )
           ;
       partnerId = loggedInUser[JsonResponses.usersPartner];
+      Persons.personId = loggedInUser[JsonResponses.usersPartner];
       groupId =  loggedInUser[JsonResponses.usersPartner];
 
     }
