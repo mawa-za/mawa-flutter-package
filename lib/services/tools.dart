@@ -9,11 +9,16 @@ class Tools{
   static const String productCategoryTombstone = 'TOMBSTONE';
 
   // static late bool isTracking;
+
+  static const String close = 'Close';
+  static const String pause = 'Pause';
+  static dynamic previousContext;
   static late String lastPage;
   static late BuildContext context;
   static int pageIndex = 0;
   static bool isTouchLocked = false;
   static String screenMessage = '';
+  static late Widget body;
 
   late String email;
 
@@ -41,10 +46,10 @@ class Tools{
   }
 
   forgotPasswordPopup({String? message}) {
-    return Alert(
+    return AwesomeDialog(
         context: context,
         title: 'Forgot Password',
-        content: Column(
+        body: Column(
           children: [
             Text(message ?? '', style: const TextStyle(color: Colors.red)),
             Form(
@@ -85,16 +90,15 @@ class Tools{
                 ))
           ],
         ),
-        buttons: [
-          DialogButton(
+        btnOk: DialogButton(
             child: const Text('Proceed'),
             onPressed: () => _forgotPasswordFormKey.currentState!.validate()
                 ? submitEmail()
                 : null,
             color: Colors.green,
           ),
-          Constants.dialogCloseButton(context: context),
-        ]).show();
+        btnCancel: Constants.dialogCloseButton(context: context),
+        ).show();
   }
 
   static final Map<String, int> tabs = {
@@ -129,10 +133,10 @@ class Tools{
   }
 
   passwordResetPopup(context) {
-    return Alert(
+    return AwesomeDialog(
         context: context,
         title: 'Reset Password',
-        content: Form(
+        body: Form(
           key: _resetPasswordFormKey,
           child: Column(
             children: [
@@ -180,8 +184,7 @@ class Tools{
             ],
           ),
         ),
-        buttons: [
-          DialogButton(
+        btnOk: DialogButton(
             onPressed: () {
               print(_newPasswordController.value.text.toString());
               if (_resetPasswordFormKey.currentState!.validate()) {
@@ -194,12 +197,8 @@ class Tools{
             ),
             color: Colors.green,
           ),
-          DialogButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Cancel'),
-            color: Colors.orange,
-          )
-        ]).show();
+      btnCancel: Constants.dialogCloseButton(context: context),
+        ).show();
   }
 
 }
