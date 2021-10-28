@@ -10,7 +10,7 @@ class NetworkRequests {
   Future<void> _getToken ()async {
 
     _key = preferences.then((SharedPreferences prefs) {
-      return (prefs.getString(SharedPreferences.token) ?? '');
+      return (prefs.getString(SharedPrefs.token) ?? '');
     });
     print('key' + _key.toString());
   }
@@ -114,7 +114,7 @@ class NetworkRequests {
     // token == null ? token = await _key: null;
     final SharedPreferences prefs = await preferences;
 
-    token = await (prefs.getString(SharedPreferences.token) ?? '');
+    token = await (prefs.getString(SharedPrefs.token) ?? '');
 
         dynamic url;
     // statusCode == null? statusCode= 100: null;
@@ -316,7 +316,7 @@ class NetworkRequests {
               final String string = token;
 
               preferences.then((SharedPreferences prefs) {
-                return (prefs.setString(SharedPreferences.token, token));
+                return (prefs.setString(SharedPrefs.token, token));
               });
               /*// final String string = (prefs.getString(SharedPreferencesKeys.token) ?? '');
 
