@@ -110,22 +110,23 @@ class NetworkRequests {
   Future<dynamic> securedMawaAPI(String method,
       {required String resource,
         Map? body,
-        Map<String, dynamic>? queryParameters}) async {
+        Map<String, dynamic>? queryParameters}) async  {
     // token == null ? token = await _key: null;
     final SharedPreferences prefs = await preferences;
 
     token = await (prefs.getString(SharedPrefs.token) ?? '');
 
-        dynamic url;
+    dynamic url;
     // statusCode == null? statusCode= 100: null;
     // server == 'qas'
     //     ? url =  Uri.https(endpointURL, path + resource, queryParameters)
     //     : url = Uri.http(endpointURL, path + resource, queryParameters);
     url = Uri.https(endpointURL, path + resource, queryParameters);
     print('status code: $statusCode');
-    if(statusCode != 401){
+    if (statusCode != 401) {
       try {
-        print('\n' + token.toString() +'\n');
+        print('\n' + token.toString() + '\n');
+        print(method);
         print(endpointURL);
         print(path);
         print(resource);
@@ -148,7 +149,8 @@ class NetworkRequests {
             print('wow wow $token');
             feedback = await http.put(url,
                 // Uri.https(endpointURL, path + resource),
-                headers: headers(tokenKey: token.toString()), body: jsonEncode(body));
+                headers: headers(tokenKey: token.toString()),
+                body: jsonEncode(body));
             break;
         }
 
@@ -158,6 +160,7 @@ class NetworkRequests {
             feedback.contentLength.toString() +
             '\n');
         statusCode = feedback.statusCode;
+        print('status code: $statusCode');
         switch (NetworkRequests.statusCode) {
           case 200:
             {
@@ -169,73 +172,107 @@ class NetworkRequests {
             }
             break;
           case 401:
-            { Navigator.pushReplacementNamed(Tools.context, Authenticate.id);
+            {
+              Navigator.pushReplacementNamed(Tools.context, Authenticate.id);
             }
             break;
           case 404:
             {
               Tools.isTouchLocked = false;
               // message(message: 'Server Is Down', textColor: Colors.redAccent, isLock: false);
-              Alerts.flushbar(context: Tools.context, message: 'Server Down',positive: false, popContext: true);
+              Alerts.flushbar(
+                  context: Tools.context,
+                  message: 'Server Down',
+                  positive: false,
+                  popContext: false);
             }
             break;
           case 417:
             {
-
+              Alerts.flushbar(
+                  context: Tools.context,
+                  message: NetworkRequests()
+                      .statusMessages[NetworkRequests.statusCode],
+                  positive: false,
+                  popContext: false);
             }
             break;
           case 405:
             {
               Tools.isTouchLocked = false;
               // message(message: 'Login failed', textColor: Colors.redAccent, isLock: false);
-              Alerts.flushbar(context: Tools.context, message: 'Not Allowed',positive: false);
-
-
+              Alerts.flushbar(
+                  context: Tools.context,
+                  message: 'Not Allowed',
+                  positive: false);
             }
             break;
           case 500:
             {
               Tools.isTouchLocked = false;
-              Alerts.flushbar(context: Tools.context, message: 'Server Error',positive: false);
-
-
+              Alerts.flushbar(
+                  context: Tools.context,
+                  message: 'Server Error',
+                  positive: false);
             }
             break;
           case 0:
             {
               Tools.isTouchLocked = false;
-              Alerts.flushbar(context: Tools.context, message: 'Network Error',positive: false, popContext: true);
+              Alerts.flushbar(
+                  context: Tools.context,
+                  message: 'Network Error',
+                  positive: false,
+                  popContext: false);
             }
             break;
           case 1:
             {
               Tools.isTouchLocked = false;
-              Alerts.flushbar(context: Tools.context, message: 'Network Error',positive: false, popContext: true);
+              Alerts.flushbar(
+                  context: Tools.context,
+                  message: 'Network Error',
+                  positive: false,
+                  popContext: false);
             }
             break;
           default:
             {
               Tools.isTouchLocked = false;
-              Alerts.flushbar(context: Tools.context, message: 'Request Failed',positive: false);
+              Alerts.flushbar(
+                  context: Tools.context,
+                  message: 'Request Failed',
+                  positive: false);
             }
             break;
         }
 
         // else if (statusCode >= 400 && statusCode < 600 && statusCode != 417) {}
 
-      }
-      on TimeoutException catch(e){
+      } on TimeoutException catch (e) {
+        // Navigator.maybePop(Tools.context);
         Tools.isTouchLocked = false;
         print(e.toString());
-        Alerts.flushbar(context: Tools.context, message: 'Request Timed Out. \nCheck Network Connection.',positive: false);
-      }
-      on SocketException catch (e){
+        Alerts.flushbar(
+            context: Tools.context,
+            message: 'Request Timed Out. \nCheck Network Connection.',
+            positive: false);
+      } on SocketException catch (e) {
         Tools.isTouchLocked = false;
         print(e.toString());
-        Alerts.flushbar(context: Tools.context, message: 'Encountered Network Problem',positive: false);
+        Alerts.flushbar(
+            context: Tools.context,
+            message: 'Encountered Network Problem',
+            positive: false);
+      } on HandshakeException catch (e) {
+        Tools.isTouchLocked = false;
+        print(e.toString());
+        Alerts.flushbar(
+            context: Tools.context,
+            message: 'Request Terminated During Handshake',
+            positive: false);
       }
-    }
-    else {
+    } else {
       // Authorize(context: Tools.context).attempt();
       Navigator.pushReplacementNamed(Tools.context, Authenticate.id);
     }
@@ -312,11 +349,11 @@ class NetworkRequests {
             if(resource == Resources.authenticate) {
               token = await data[JsonResponses.token];
 
-              final SharedPreferences prefs = await preferences;
-              final String string = token;
-
               preferences.then((SharedPreferences prefs) {
                 return (prefs.setString(SharedPrefs.token, token));
+              });
+              preferences.then((SharedPreferences prefs) {
+                return (prefs.setString(SharedPrefs.username, User.username));
               });
               /*// final String string = (prefs.getString(SharedPreferencesKeys.token) ?? '');
 
@@ -336,46 +373,80 @@ class NetworkRequests {
         case 401:
           {
             Tools.isTouchLocked = false;
-            Alerts.flushbar(context: Tools.context, message: 'Incorrect login',positive: false, popContext: true);
+            Alerts.flushbar(
+                context: Tools.context,
+                message: 'Incorrect login',
+                positive: false,
+                popContext: true);
           }
           break;
         case 404:
           {
             Tools.isTouchLocked = false;
-            Alerts.flushbar(context: Tools.context, message: 'Server Down',positive: false, popContext: true);
+            Alerts.flushbar(
+                context: Tools.context,
+                message: 'Server Down',
+                positive: false,
+                popContext: true);
           }
           break;
         case 0:
           {
             Tools.isTouchLocked = false;
-            Alerts.flushbar(context: Tools.context, message: 'Network Error',positive: false, popContext: true);
+            Alerts.flushbar(
+                context: Tools.context,
+                message: 'Network Error',
+                positive: false,
+                popContext: true);
           }
           break;
         case 1:
           {
             Tools.isTouchLocked = false;
-            Alerts.flushbar(context: Tools.context, message: 'Network Error',positive: false, popContext: true);
+            Alerts.flushbar(
+                context: Tools.context,
+                message: 'Network Error',
+                positive: false,
+                popContext: true);
           }
           break;
         default:
           {
             Tools.isTouchLocked = false;
-            Alerts.flushbar(context: Tools.context, message: 'Login failed',positive: false);
+            Alerts.flushbar(
+              context: Tools.context,
+              message: 'Login failed',
+              positive: false,
+              popContext: true,);
           }
           break;
       }
       // print('yoghurt ' + token.toString());
       Tools.isTouchLocked = false;
-    }
-    on TimeoutException catch(e){
+    } on TimeoutException catch (e) {
       Tools.isTouchLocked = false;
       print(e.toString());
-      Alerts.flushbar(context: Tools.context, message: 'Request Timed Out. \nCheck Network Connection.',positive: false);
-    }
-    on SocketException catch (e){
+      Alerts.flushbar(
+        context: Tools.context,
+        message: 'Request Timed Out. \nCheck Network Connection.',
+        positive: false,
+        popContext: true,);
+    } on SocketException catch (e) {
       Tools.isTouchLocked = false;
       print(e.toString());
-      Alerts.flushbar(context: Tools.context, message: 'Encountered Network Problem',positive: false);
+      Alerts.flushbar(
+          context: Tools.context,
+          message: 'Encountered Network Problem',
+          positive: false);
+    } on HandshakeException catch (e) {
+      Tools.isTouchLocked = false;
+      print(e.toString());
+      Alerts.flushbar(
+        context: Tools.context,
+        message: 'Request Terminated During Handshake',
+        positive: false,
+        popContext: true,
+      );
     }
   }
 }
