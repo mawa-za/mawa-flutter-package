@@ -262,7 +262,7 @@ class StatusReasons {
   static const String Rejected = 'Rejected';
 }
 
-class SharedPreferences{
+class SharedPrefs{
   static const token = 'token';
   static const username = 'username';
   static const lastPage = 'lastPage';

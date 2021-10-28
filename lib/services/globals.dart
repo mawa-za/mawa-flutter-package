@@ -8,7 +8,7 @@ final Future<SharedPreferences> preferences = SharedPreferences.getInstance();
 setLastPage(String page) async {
   final SharedPreferences prefs = await preferences;
 
-  prefs.setString(SharedPreferences.lastPage, page);
+  prefs.setString(SharedPrefs.lastPage, page);
   Tools.lastPage  = page;
   print('now ' + page);
 }
