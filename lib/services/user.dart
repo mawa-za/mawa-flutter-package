@@ -96,8 +96,8 @@ class User{
           resource: '${Resources.users}/$username')
       // )
           ;
-      partnerId = loggedInUser[JsonResponseKeys.usersPartner];
-      groupId =  loggedInUser[JsonResponseKeys.usersPartner];
+      partnerId = loggedInUser[JsonResponses.usersPartner];
+      groupId =  loggedInUser[JsonResponses.usersPartner];
 
     }
     catch(e){
@@ -140,8 +140,8 @@ class User{
         resource: '${Resources.users}/$username/roles');
     if(list.isNotEmpty && list.runtimeType == Constants.list.runtimeType){
       for (int i = 0; i < list.length; i++) {
-        userRoles[list[i][JsonResponseKeys.usersRolesDescription]] =
-        list[i][JsonResponseKeys.usersRolesId];
+        userRoles[list[i][JsonResponses.usersRolesDescription]] =
+        list[i][JsonResponses.usersRolesId];
       }
     }
   }

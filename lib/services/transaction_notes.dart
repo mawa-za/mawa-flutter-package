@@ -12,9 +12,9 @@ class TransactionNotes {
     return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
         resource: Resources.transactionNotes,
         body: {
-          JsonPayloadKeys.value: value,
-          JsonPayloadKeys.type: type,
-          JsonPayloadKeys.transaction: transaction,
+          JsonPayloads.value: value,
+          JsonPayloads.type: type,
+          JsonPayloads.transaction: transaction,
         });
   }
 

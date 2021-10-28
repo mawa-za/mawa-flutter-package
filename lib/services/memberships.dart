@@ -11,7 +11,7 @@ class Memberships {
     List policies = await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
         resource: Resources.policies,
         queryParameters: {
-          'idnumber': idNumber ?? Persons.person[JsonResponseKeys.personIdNumber] ?? Persons.personIdNumber,
+          'idnumber': idNumber ?? Persons.person[JsonResponses.personIdNumber] ?? Persons.personIdNumber,
           'partnerRole': partnerRole
         }) ?? [];
     if(/*policies.runtimeType == List &&*/ policies.isNotEmpty){
@@ -40,7 +40,7 @@ class Memberships {
       policy.clear();
       allPolicies.clear();
     }
-    policy == null ? policyId = policy[JsonResponseKeys.policyId] : policyId = '';
+    policy == null ? policyId = policy[JsonResponses.policyId] : policyId = '';
     print('\n2try'+policy.toString());
   }
 }
