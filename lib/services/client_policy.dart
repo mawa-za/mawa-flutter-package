@@ -4,16 +4,16 @@ class Policies {
 
   getPolicyDetails(policyID) async {
   return await NetworkRequests()
-        .securedMawaAPI(NetworkRequests.methodGet, resource: '${Resources.policiesResource}/$policyID');
+        .securedMawaAPI(NetworkRequests.methodGet, resource: '${Resources.policies}/$policyID');
   }
 
   createNewPolicy(details) async {
     return await NetworkRequests()
-        .securedMawaAPI(NetworkRequests.methodPost, resource: '${Resources.policiesResource}', body: details);
+        .securedMawaAPI(NetworkRequests.methodPost, resource: '${Resources.policies}', body: details);
   }
 
   searchClientPolicies(String idNumber) async {
     return await NetworkRequests()
-        .securedMawaAPI(NetworkRequests.methodGet, resource: '${Resources.policiesResource}/$idNumber');
+        .securedMawaAPI(NetworkRequests.methodGet, resource: '${Resources.policies}/$idNumber');
   }
 }

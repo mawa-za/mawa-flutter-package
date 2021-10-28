@@ -21,7 +21,7 @@ class Receipts {
     };
 
     return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
-        resource: Resources.receiptsResource, body: payment);
+        resource: Resources.receipts, body: payment);
   }
 
   userProcessedReceipts(bool filter) async {
@@ -31,7 +31,7 @@ class Receipts {
     receiptsList = [];
     receiptsList = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
-        resource: Resources.receiptsResource,
+        resource: Resources.receipts,
         queryParameters: {
           'processedBy': User.loggedInUser[JsonResponseKeys.usersId],
           'filter': filterString
@@ -43,7 +43,7 @@ class Receipts {
     // print('referenceNo'+referenceNo);
     List receipts = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
-        resource: Resources.receiptsResource,
+        resource: Resources.receipts,
         queryParameters: {'reference': referenceNo});
     print(receipts.runtimeType);
     // receipts.runtimeType == List &&
@@ -53,14 +53,14 @@ class Receipts {
 
   processCashup() {
     return NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
-        resource: Resources.cashupResource);
+        resource: Resources.cashup);
   }
 
   getReceipt({required String receiptId}) async {
     receiptId != null
         ? receipt = await NetworkRequests().securedMawaAPI(
                 NetworkRequests.methodGet,
-                resource: '${Resources.receiptsResource}/$receiptId') ??
+                resource: '${Resources.receipts}/$receiptId') ??
             {}
         : receipt = {};
   }
@@ -68,7 +68,7 @@ class Receipts {
   getCashupCollection() async {
     cashupsList = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
-        resource: Resources.cashupResource,
+        resource: Resources.cashup,
         queryParameters: {'processor': 'me'});
   }
 
@@ -77,7 +77,7 @@ class Receipts {
     if (cashupId != null) {
       response = await NetworkRequests().securedMawaAPI(
             NetworkRequests.methodGet,
-            resource: '${Resources.cashupResource}/$cashupId',
+            resource: '${Resources.cashup}/$cashupId',
           ) ??
           {};
       response.runtimeType != List && response.runtimeType != String

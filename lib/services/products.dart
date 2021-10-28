@@ -16,7 +16,7 @@ class Products {
   productsList(context, category) async {
     products = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
-        resource: Resources.productsResource,
+        resource: Resources.products,
         queryParameters: {'category': category}); //
     print('products $products');
     return products;
