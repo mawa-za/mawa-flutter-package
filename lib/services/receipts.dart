@@ -33,7 +33,7 @@ class Receipts {
         NetworkRequests.methodGet,
         resource: Resources.receipts,
         queryParameters: {
-          'processedBy': User.loggedInUser[JsonResponseKeys.usersId],
+          'processedBy': User.loggedInUser[JsonResponses.usersId],
           'filter': filterString
         });
   }

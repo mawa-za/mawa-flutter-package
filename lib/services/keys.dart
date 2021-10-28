@@ -1,6 +1,6 @@
 part of mawa;
 
-class JsonResponseKeys{
+class JsonResponses{
   static const String token = 'token';
   static const String userID = 'userID';
 
@@ -119,8 +119,7 @@ static const String policyStatus = 'status';
 static const String policyStatusReason = 'statusReason';
 static const String policyPremium = 'premium';
 static const String policyAmountDue = 'amountDue';
-static const String policySalesRepresentativeDetails =
-    'salesRepresentativeDetails';
+static const String policySalesRepresentativeDetails = 'salesRepresentativeDetails';
 
   static const String productId = 'id';
   static const String productDescription = 'description';
@@ -134,6 +133,10 @@ static const String policySalesRepresentativeDetails =
   static const String workCentresWorkCenter = 'workcenter';
   static const String workCentresRole = 'role';
   static const String workCentresPosition = 'position';
+
+  // static const String = '';
+
+  static const String leaveApprover = 'approver';
 }
 
 class Resources{
@@ -184,7 +187,7 @@ class Resources{
 
 }
 
-class JsonPayloadKeys{
+class JsonPayloads{
 
   static const String value = 'value';
   static const String type = 'type';
@@ -248,6 +251,7 @@ class Statuses{
   static const String pending = 'Pending';
   static const String approved = 'Approved';
   static const String cancelled = 'Cancelled';
+  static const String rejected = 'Rejected';
 }
 
 class StatusReasons {
@@ -255,9 +259,10 @@ class StatusReasons {
   static const String awaitingApproval = 'Awaiting Approval';
   static const String awaitingCancelApproval = 'Awaiting Cancel Approval';
   static const String awaitingEditApproval = 'Awaiting Edit Approval';
+  static const String Rejected = 'Rejected';
 }
 
-class SharedPreferencesKeys{
+class SharedPreferences{
   static const token = 'token';
   static const username = 'username';
   static const lastPage = 'lastPage';

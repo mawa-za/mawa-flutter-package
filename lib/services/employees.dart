@@ -11,11 +11,11 @@ class Employees {
     Map<String, String> mapUsers = {};
     if (emps != null) {
       for (int i = 0; i < emps.length; i++) {
-        emps[i][JsonResponseKeys.usersFirstName] != null &&
-                emps[i][JsonResponseKeys.usersFirstName] != null
-            ? mapUsers['${emps[i][JsonResponseKeys.usersId]}'] =
-                '${emps[i][JsonResponseKeys.usersLastName] ?? 'Surname not Supplied'}, ${emps[i][JsonResponseKeys.usersFirstName] ?? 'Name not Supplied'}' //'${listUsers[i][JsonKeys.usersLastName]}, ${listUsers[i][JsonKeys.usersFirstName]}'
-            : mapUsers['${emps[i][JsonResponseKeys.usersId]}'] = 'No Name Provided';
+        emps[i][JsonResponses.usersFirstName] != null &&
+                emps[i][JsonResponses.usersFirstName] != null
+            ? mapUsers['${emps[i][JsonResponses.usersId]}'] =
+                '${emps[i][JsonResponses.usersLastName] ?? 'Surname not Supplied'}, ${emps[i][JsonResponses.usersFirstName] ?? 'Name not Supplied'}' //'${listUsers[i][JsonKeys.usersLastName]}, ${listUsers[i][JsonKeys.usersFirstName]}'
+            : mapUsers['${emps[i][JsonResponses.usersId]}'] = 'No Name Provided';
       }
     }
     employees = emps;

@@ -29,7 +29,7 @@ class FieldOptions {
         });
     if (NetworkRequests.statusCode == 200) {
       for (int index = 0; index < response.length;  index++) {
-        fieldOptions['${response[index][JsonResponseKeys.fieldOptionDescription]}'] = response[index][JsonResponseKeys.fieldOptionCode];
+        fieldOptions['${response[index][JsonResponses.fieldOptionDescription]}'] = response[index][JsonResponses.fieldOptionCode];
       }
       // fieldOptions = response;
     } else {

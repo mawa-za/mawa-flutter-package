@@ -28,19 +28,19 @@ class Products {
     Map<String, String> data = {};
     if (list != null) {
       switch (key) {
-        case JsonResponseKeys.productId:
+        case JsonResponses.productId:
           {
             for (int i = 0; i < list.length; i++) {
-              data['${list[i][JsonResponseKeys.productId]}'] =
-                  list[i][JsonResponseKeys.productDescription];
+              data['${list[i][JsonResponses.productId]}'] =
+                  list[i][JsonResponses.productDescription];
             }
           }
           break;
-        case JsonResponseKeys.productDescription:
+        case JsonResponses.productDescription:
           {
             for (int i = 0; i < list.length; i++) {
-              data['${list[i][JsonResponseKeys.productDescription]}'] =
-              list[i][JsonResponseKeys.productId];
+              data['${list[i][JsonResponses.productDescription]}'] =
+              list[i][JsonResponses.productId];
             }
           }
           break;

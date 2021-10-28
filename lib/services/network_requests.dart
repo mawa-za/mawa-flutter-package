@@ -10,7 +10,7 @@ class NetworkRequests {
   Future<void> _getToken ()async {
 
     _key = preferences.then((SharedPreferences prefs) {
-      return (prefs.getString(SharedPreferencesKeys.token) ?? '');
+      return (prefs.getString(SharedPreferences.token) ?? '');
     });
     print('key' + _key.toString());
   }
@@ -114,7 +114,7 @@ class NetworkRequests {
     // token == null ? token = await _key: null;
     final SharedPreferences prefs = await preferences;
 
-    token = await (prefs.getString(SharedPreferencesKeys.token) ?? '');
+    token = await (prefs.getString(SharedPreferences.token) ?? '');
 
         dynamic url;
     // statusCode == null? statusCode= 100: null;
@@ -310,13 +310,13 @@ class NetworkRequests {
               otp = await data.toString();
             }
             if(resource == Resources.authenticate) {
-              token = await data[JsonResponseKeys.token];
+              token = await data[JsonResponses.token];
 
               final SharedPreferences prefs = await preferences;
               final String string = token;
 
               preferences.then((SharedPreferences prefs) {
-                return (prefs.setString(SharedPreferencesKeys.token, token));
+                return (prefs.setString(SharedPreferences.token, token));
               });
               /*// final String string = (prefs.getString(SharedPreferencesKeys.token) ?? '');
 
@@ -326,7 +326,7 @@ class NetworkRequests {
             //   return token;
             // })
             ;*/
-              await User().getUserDetails(payload![JsonResponseKeys.userID]!);
+              await User().getUserDetails(payload![JsonResponses.userID]!);
               Navigator.pushReplacementNamed(context, direct!);
             }
 

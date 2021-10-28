@@ -14,7 +14,7 @@ class Leaves {
         resource: Resources.leaveProfiles,
         queryParameters: {
           QueryParameters.partnerNo:
-              User.loggedInUser[JsonResponseKeys.usersPartner],
+              User.loggedInUser[JsonResponses.usersPartner],
           QueryParameters.partnerFunction: partnerFunctionType
         });
 
@@ -31,7 +31,7 @@ class Leaves {
     approvers = await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodGet,
       resource: Resources.leaves + '/' + Resources.leavesApprovers,
-      queryParameters: specificOrg ? {QueryParameters.organisationId: User.loggedInUser[JsonResponseKeys.usersGroupId]} :null,
+      queryParameters: specificOrg ? {QueryParameters.organisationId: User.loggedInUser[JsonResponses.usersGroupId]} :null,
     );
 
     return approvers;
@@ -50,14 +50,14 @@ class Leaves {
           NetworkRequests.methodPost,
           resource: Resources.leaves,
           body: {
-            JsonPayloadKeys.loggedByID:
-                User.loggedInUser[JsonResponseKeys.usersPartner],
-            JsonPayloadKeys.approverID: approver,
-            JsonPayloadKeys.startDate: startDate.toString(),
-            JsonPayloadKeys.endDate: endDate,
-            JsonPayloadKeys.leaveType: leaveType,
-            JsonPayloadKeys.description: description,
-            JsonPayloadKeys.subDescription: subDescription,
+            JsonPayloads.loggedByID:
+                User.loggedInUser[JsonResponses.usersPartner],
+            JsonPayloads.approverID: approver,
+            JsonPayloads.startDate: startDate.toString(),
+            JsonPayloads.endDate: endDate,
+            JsonPayloads.leaveType: leaveType,
+            JsonPayloads.description: description,
+            JsonPayloads.subDescription: subDescription,
           });
       if (NetworkRequests.statusCode == 200 ||
           NetworkRequests.statusCode == 201) {
@@ -73,7 +73,7 @@ class Leaves {
           resource: Resources.leaves + '/' + Resources.leavesToApprove,
           queryParameters: {
             QueryParameters.approverId:
-                User.loggedInUser[JsonResponseKeys.usersPartner]
+                User.loggedInUser[JsonResponses.usersPartner]
           });
     print('jo\n$resp\nj');
     if(NetworkRequests.statusCode == 200 /*&& resp != null*/) {
@@ -92,7 +92,7 @@ class Leaves {
         resource: Resources.leaves,
         queryParameters: {
           QueryParameters.partnerId:
-          User.loggedInUser[JsonResponseKeys.usersPartner],
+          User.loggedInUser[JsonResponses.usersPartner],
         });
     // /mawa-api/resources/leaves/?partnerId=PN0000000013
     if (NetworkRequests.statusCode == 200)  {
