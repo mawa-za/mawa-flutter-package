@@ -40,7 +40,7 @@ class Memberships {
       policy.clear();
       allPolicies.clear();
     }
-    policy == null ? policyId = policy[JsonResponses.policyId] : policyId = '';
+    policy == null ? policyId = policy[JsonResponses.id] : policyId = '';
     print('\n2try'+policy.toString());
   }
 }

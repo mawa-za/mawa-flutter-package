@@ -34,7 +34,7 @@ class Tools{
     Navigator.of(context).pop();
     Alerts.flushbar(context: context, message: 'Please Wait');
     await NetworkRequests().unsecuredMawaAPI(NetworkRequests.methodPost,
-        resource: Resources.otp, payload: {JsonPayloads.otpPartnerEmail: email}, context: context);
+        resource: Resources.otp, payload: {JsonPayloads.partnerEmail: email}, context: context);
     Tools.isTouchLocked = true;
     Authenticate.message = 'Please Wait';
     OTP(context).postOTPRequest();
