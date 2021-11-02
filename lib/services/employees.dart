@@ -13,9 +13,9 @@ class Employees {
       for (int i = 0; i < emps.length; i++) {
         emps[i][JsonResponses.usersFirstName] != null &&
                 emps[i][JsonResponses.usersFirstName] != null
-            ? mapUsers['${emps[i][JsonResponses.usersId]}'] =
+            ? mapUsers['${emps[i][JsonResponses.id]}'] =
                 '${emps[i][JsonResponses.usersLastName] ?? 'Surname not Supplied'}, ${emps[i][JsonResponses.usersFirstName] ?? 'Name not Supplied'}' //'${listUsers[i][JsonKeys.usersLastName]}, ${listUsers[i][JsonKeys.usersFirstName]}'
-            : mapUsers['${emps[i][JsonResponses.usersId]}'] = 'No Name Provided';
+            : mapUsers['${emps[i][JsonResponses.id]}'] = 'No Name Provided';
       }
     }
     employees = emps;

@@ -12,7 +12,7 @@ class WorkCenters {
     );
     List<String> list = [];
     for (int i = 0; i < centers.length; i++) {
-      list.add(centers[i][JsonResponses.workCentresWorkCenter]);
+      list.add(centers[i][JsonResponses.workCenter]);
     }
     workCentersList = list;
     print('dgh  ' + workCentersList.toString());//?role=CASHIER

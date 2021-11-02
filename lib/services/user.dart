@@ -69,7 +69,8 @@ class User{
     if(list.isNotEmpty && list.runtimeType == Constants.list.runtimeType){
       for (int i = 0; i < list.length; i++) {
         userRoles[list[i][JsonResponses.usersRolesDescription]] =
-        list[i][JsonResponses.usersRolesId];
+        list[i][JsonResponses.id
+        ];
       }
     }
   }
