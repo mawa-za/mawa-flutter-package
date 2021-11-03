@@ -16,8 +16,8 @@ import 'package:http/http.dart' as http;
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:another_flushbar/flushbar.dart';
-import 'package:device_info/device_info.dart';
-import 'package:geolocator/geolocator.dart';
+// import 'package:device_info/device_info.dart';
+// import 'package:geolocator/geolocator.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 part 'screens/alerts.dart';

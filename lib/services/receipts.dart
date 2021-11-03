@@ -17,7 +17,7 @@ class Receipts {
       'amount': '$amount',
       'terminalId': '${DeviceInfo.platformImei.toString()}',
       'location': '${Location.address.toString()}',
-      'terminalType': '${DeviceInfo.terminal.toString()}'
+      'terminalType': ''//'${DeviceInfo.terminal.toString()}'
     };
 
     return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
