@@ -6,7 +6,7 @@ class Authenticate extends StatefulWidget {
   static Color messageColor = Colors.redAccent;
   static late VoidCallback postAuthenticate;
 
-  Authenticate({route, required afterAuthorization}){
+  Authenticate({route, required VoidCallback afterAuthorization}){
     redirect = route;
     postAuthenticate = afterAuthorization;
   }
