@@ -283,7 +283,9 @@ class NetworkRequests {
       {required String resource,
         Map<String, String>? payload,
         Map<String, dynamic>? queryParameters,
-        required BuildContext context, String? direct}) async {
+        required BuildContext context, String? direct,
+        Function? postAuthenticate,
+      }) async {
     dynamic url;
     server == 'qas'
         ? url =  Uri.https(endpointURL, path + resource,queryParameters)
@@ -364,7 +366,8 @@ class NetworkRequests {
             // })
             ;*/
               await User().getUserDetails(payload![JsonResponses.userID]!);
-              Navigator.pushReplacementNamed(context, direct!);
+              // Navigator.pushReplacementNamed(context, direct!);
+              postAuthenticate;
             }
 
             print('token oyjfjdbfjd\n' + token.toString());

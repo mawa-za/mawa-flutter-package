@@ -4,9 +4,11 @@ class Authenticate extends StatefulWidget {
   static const String id = 'Login';
   static String? message;
   static Color messageColor = Colors.redAccent;
+  static late Function postAuthenticate;
 
-  Authenticate(route){
+  Authenticate({route, required afterAuthorization}){
     redirect = route;
+    postAuthenticate = afterAuthorization;
   }
 
   @override
@@ -33,7 +35,7 @@ class _AuthenticateState extends State<Authenticate> {
             "userID": User.username,
             "password": User.password},
           context: context,
-          direct: redirect);
+          direct: redirect, postAuthenticate: Authenticate.postAuthenticate);
     }
     setState(() {
 
