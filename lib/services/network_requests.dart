@@ -284,7 +284,7 @@ class NetworkRequests {
         Map<String, String>? payload,
         Map<String, dynamic>? queryParameters,
         required BuildContext context, String? direct,
-        Function? postAuthenticate,
+        VoidCallback? postAuthenticate,
       }) async {
     dynamic url;
     server == 'qas'

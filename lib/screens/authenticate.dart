@@ -4,7 +4,7 @@ class Authenticate extends StatefulWidget {
   static const String id = 'Login';
   static String? message;
   static Color messageColor = Colors.redAccent;
-  static late Function postAuthenticate;
+  static late VoidCallback postAuthenticate;
 
   Authenticate({route, required afterAuthorization}){
     redirect = route;
