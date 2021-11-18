@@ -269,6 +269,7 @@ class StatusReasons {
 }
 
 class SharedPrefs{
+  static const server = 'server';
   static const token = 'token';
   static const username = 'username';
   static const lastPage = 'lastPage';
