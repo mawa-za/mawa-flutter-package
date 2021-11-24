@@ -12,6 +12,7 @@ class Tools{
 
   static const String close = 'Close';
   static const String pause = 'Pause';
+  static const String stop = 'Stop';
   static const String resolve = 'Resolve';
   static dynamic previousContext;
   static late String lastPage;
