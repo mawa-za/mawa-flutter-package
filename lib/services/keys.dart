@@ -246,6 +246,7 @@ class QueryParameters{
   static const String approverId = 'approverId';
 
   static const String field = 'field';
+  static const String value = 'value';
 
   static const String organisationId = 'organisationId';
   static const String endDAte = 'endDate';
