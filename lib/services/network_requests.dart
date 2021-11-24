@@ -18,7 +18,7 @@ class NetworkRequests {
   static const String methodGet = 'get';
   static const String methodPost = 'post';
   static const String methodPut = 'put';
-  static String server = 'dev';
+  static String server = 'qas';
   static String pot = '8181';
   final String endpointURL = 'api-$server.mawa.co.za:$pot';
   static String path = '/mawa-api/resources/';
