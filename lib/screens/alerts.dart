@@ -28,14 +28,21 @@ class Alerts{
       backgroundColor = Colors.red[100]!;
       textColor = Colors.red;
     }
+    else{
+      duration = const Duration(seconds: 5);
+      backgroundColor = Colors.blueGrey;
+      textColor = Colors.black;
+    }
     return Flushbar(
       duration: duration,
       message: message,
       messageColor: textColor,
-      backgroundColor: backgroundColor!,
+      backgroundColor: backgroundColor,
       showProgressIndicator:  showProgressIndicator,
       flushbarPosition: FlushbarPosition.TOP,
-      flushbarStyle: FlushbarStyle.FLOATING, ).show(context);
+      flushbarStyle: FlushbarStyle.FLOATING,
+      onTap: (_) => Navigator.of(Tools.context).pop(),
+    ).show(context);
   }
   static Future<bool> exitPrompt(BuildContext context)  async {
 
@@ -44,6 +51,7 @@ class Alerts{
     dynamic dlg =
 
     AwesomeDialog(
+      onDissmissCallback: (O){print('hello');},
       context: context,
       dialogType: DialogType.QUESTION,
       animType: AnimType.BOTTOMSLIDE,

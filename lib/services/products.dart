@@ -16,7 +16,7 @@ class Products {
   productsList(context, category) async {
     products = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
-        resource: Resources.productsResource,
+        resource: Resources.products,
         queryParameters: {'category': category}); //
     print('products $products');
     return products;
@@ -28,19 +28,19 @@ class Products {
     Map<String, String> data = {};
     if (list != null) {
       switch (key) {
-        case JsonResponseKeys.productId:
+        case JsonResponses.id:
           {
             for (int i = 0; i < list.length; i++) {
-              data['${list[i][JsonResponseKeys.productId]}'] =
-                  list[i][JsonResponseKeys.productDescription];
+              data['${list[i][JsonResponses.id]}'] =
+                  list[i][JsonResponses.productDescription];
             }
           }
           break;
-        case JsonResponseKeys.productDescription:
+        case JsonResponses.productDescription:
           {
             for (int i = 0; i < list.length; i++) {
-              data['${list[i][JsonResponseKeys.productDescription]}'] =
-              list[i][JsonResponseKeys.productId];
+              data['${list[i][JsonResponses.productDescription]}'] =
+              list[i][JsonResponses.id];
             }
           }
           break;

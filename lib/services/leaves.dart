@@ -1,20 +1,23 @@
 part of mawa;
 
-class Leaves {
+class Leaves  {
   static late String leaveID;
   static late List myProfiles;
-  static late List myLeaves;
+  static late List myLeaves = [];
   static late List leaveTypes;
   static List approvers = [];
   static late List pendingResponse;
 
   leaveProfile({required String partnerFunctionType}) async {
+    String? partner;
+    if(partnerFunctionType == QueryParameters.partnerFunctionEmployee){partner = User.loggedInUser[JsonResponses.usersPartner];}
+    if(partnerFunctionType == QueryParameters.partnerFunctionOrganization){partner = User.loggedInUser[JsonResponses.usersGroupId];}
+
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: Resources.leaveProfiles,
         queryParameters: {
-          QueryParameters.partnerNo:
-              User.loggedInUser[JsonResponseKeys.usersPartner],
+          QueryParameters.partnerNo:partner,
           QueryParameters.partnerFunction: partnerFunctionType
         });
 
@@ -31,7 +34,7 @@ class Leaves {
     approvers = await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodGet,
       resource: Resources.leaves + '/' + Resources.leavesApprovers,
-      queryParameters: specificOrg ? {QueryParameters.organisationId: User.loggedInUser[JsonResponseKeys.usersGroupId]} :null,
+      queryParameters: specificOrg ? {QueryParameters.organisationId: User.loggedInUser[JsonResponses.usersGroupId]} :null,
     );
 
     return approvers;
@@ -39,25 +42,25 @@ class Leaves {
 
   logLeave(
       {required String approver,
-      required dynamic startDate,
-       dynamic endDate,
-      required String leaveType,
-      String? description,
-      String? subDescription
+        required dynamic startDate,
+        dynamic endDate,
+        required String leaveType,
+        String? description,
+        String? subDescription
       }) async {
     {
       dynamic response = await NetworkRequests().securedMawaAPI(
           NetworkRequests.methodPost,
           resource: Resources.leaves,
           body: {
-            JsonPayloadKeys.loggedByID:
-                User.loggedInUser[JsonResponseKeys.usersPartner],
-            JsonPayloadKeys.approverID: approver,
-            JsonPayloadKeys.startDate: startDate.toString(),
-            JsonPayloadKeys.endDate: endDate,
-            JsonPayloadKeys.leaveType: leaveType,
-            JsonPayloadKeys.description: description,
-            JsonPayloadKeys.subDescription: subDescription,
+            JsonPayloads.loggedByID:
+            User.loggedInUser[JsonResponses.usersPartner],
+            JsonPayloads.approverID: approver,
+            JsonPayloads.startDate: startDate.toString(),
+            JsonPayloads.endDate: endDate,
+            JsonPayloads.leaveType: leaveType,
+            JsonPayloads.description: description,
+            JsonPayloads.subDescription: subDescription,
           });
       if (NetworkRequests.statusCode == 200 ||
           NetworkRequests.statusCode == 201) {
@@ -70,16 +73,16 @@ class Leaves {
 
   pendingRequests() async {
     dynamic resp  = await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-          resource: Resources.leaves + '/' + Resources.leavesToApprove,
-          queryParameters: {
-            QueryParameters.approverId:
-                User.loggedInUser[JsonResponseKeys.usersPartner]
-          });
+        resource: Resources.leaves + '/' + Resources.leavesToApprove,
+        queryParameters: {
+          QueryParameters.approverId:
+          User.loggedInUser[JsonResponses.usersPartner]
+        });
     print('jo\n$resp\nj');
     if(NetworkRequests.statusCode == 200 /*&& resp != null*/) {
       pendingResponse = resp;
     }
-      else{
+    else{
       pendingResponse.clear();
     }
     return pendingResponse;
@@ -92,7 +95,7 @@ class Leaves {
         resource: Resources.leaves,
         queryParameters: {
           QueryParameters.partnerId:
-          User.loggedInUser[JsonResponseKeys.usersPartner],
+          User.loggedInUser[JsonResponses.usersPartner],
         });
     // /mawa-api/resources/leaves/?partnerId=PN0000000013
     if (NetworkRequests.statusCode == 200)  {
@@ -105,8 +108,8 @@ class Leaves {
 
   getLeave(String id) async{
     return await NetworkRequests().securedMawaAPI(
-        NetworkRequests.methodGet,
-        resource: Resources.leaves + '/' + id,);
+      NetworkRequests.methodGet,
+      resource: Resources.leaves + '/' + id,);
   }
 
   Future<bool> updateLeaveStatus({required String path,required String method}) async {
@@ -116,7 +119,7 @@ class Leaves {
   }
 
   editLeave(endDate) async {
-     return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPut, resource: Resources.leaves + '/' + Leaves.leaveID + '/' + Resources.edit, queryParameters: {QueryParameters.endDAte: endDate}) ?? false;
+    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPut, resource: Resources.leaves + '/' + Leaves.leaveID + '/' + Resources.edit, queryParameters: {QueryParameters.endDAte: endDate}) ?? false;
 
   }
 }

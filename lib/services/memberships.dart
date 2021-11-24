@@ -9,9 +9,9 @@ class Memberships {
 
   membershipsSearch({String? partnerRole, String? idNumber}) async {
     List policies = await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-        resource: Resources.membershipsResource,
+        resource: Resources.policies,
         queryParameters: {
-          'idnumber': idNumber ?? Persons.person[JsonResponseKeys.personIdNumber] ?? Persons.personIdNumber,
+          'idnumber': idNumber ?? Persons.person[JsonResponses.personIdNumber] ?? Persons.personIdNumber,
           'partnerRole': partnerRole
         }) ?? [];
     if(/*policies.runtimeType == List &&*/ policies.isNotEmpty){
@@ -25,7 +25,7 @@ class Memberships {
   membershipGet(policyId) async {
     policy.clear();
      dynamic response = await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-        resource: '${Resources.membershipsResource}/$policyId');
+        resource: '${Resources.policies}/$policyId');
     print('try'+response.toString());
     // policy == null ? policy = {} : response != null ? response.isNotEmpty ? policy = response : policy = {}  : policy = {} ;
     if( response != null && response.isNotEmpty){
@@ -40,7 +40,7 @@ class Memberships {
       policy.clear();
       allPolicies.clear();
     }
-    policy == null ? policyId = policy[JsonResponseKeys.policyId] : policyId = '';
+    policy == null ? policyId = policy[JsonResponses.id] : policyId = '';
     print('\n2try'+policy.toString());
   }
 }

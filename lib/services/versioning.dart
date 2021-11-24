@@ -46,7 +46,7 @@ class ApkVersion {
     dynamic response = await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet, resource: Resources.versions, queryParameters: query);
     print(response ?? 'nothing');
     if(response != null) {
-      return response[JsonResponseKeys.versionAppUsable];
+      return response[JsonResponses.versionAppUsable];
     }
     else {
       return null;
