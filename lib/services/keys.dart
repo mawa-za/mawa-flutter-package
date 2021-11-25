@@ -1,33 +1,42 @@
 part of mawa;
 
 class JsonResponses{
-  static const String token = 'token';
-  static const String userID = 'userID';
-  static const String id = 'id';
-  static const String status = 'status';
+  static const String assignedBy = 'assignedBy';
+  static const String assignedByID = 'assignedByID';
+  static const String assignedTo = 'assignedTo';
+  static const String assignedToID = 'assignedToID';
+
+  static const String category = 'category';
+  static const String clientId = 'clientId';
+
+  static const String dateLogged = 'dateLogged';
   static const String description = 'description';
+  static const String dueDate = 'dueDate';
+  static const String duration = 'duration';
+
   static const String firstName = 'firstName';
+
+  static const String id = 'id';
+
   static const String lastName = 'lastName';
+
   static const String middleName = 'middleName';
 
-  static const String ticketStatus = 'status';
-  static const String ticketPriority = 'priority';
-  static const String ticketDateLogged = 'dateLogged';
-  static const String ticketDueDate = 'dueDate';
-  static const String ticketCategory = 'category';
-  static const String ticketDescription = 'description';
-  static const String ticketAssignedToID = 'assignedToID';
-  static const String ticketAssignedTo = 'assignedTo';
-  static const String ticketAssignedByID = 'assignedByID';
-  static const String ticketAssignedBy = 'assignedBy';
-  static const String ticketClientId = 'clientId';
+  static const String priority = 'priority';
+
+  static const String status = 'status';
+  static const String subDescription = 'subDescription';
+
+  static const String token = 'token';
+
+  static const String userID = 'userID';
+
+  // static const String = '';
 
   static const String fieldOptionCode = 'code';
   static const String fieldOptionDescription = 'description';
   static const String fieldOptionValidFrom = 'validFrom';
   static const String fieldOptionValidTo = 'validTo';
-
-  // static const String = '';
 
   static const String usersFirstName = 'firstName';
   static const String usersLastName = 'lastName';

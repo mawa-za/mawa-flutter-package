@@ -26,7 +26,7 @@ class Tickets {
       Tickets.ticket = tickets[map[JsonPayloads.InProgress]];
       ticketNo = Tickets.ticket[JsonResponses.id];
       Time.dueTime =
-          DateTime.parse(ticket[JsonResponses.ticketDueDate].toString());
+          DateTime.parse(ticket[JsonResponses.dueDate].toString());
       Time.countDownTimer.onExecute.add(StopWatchExecute.start);
       // getTicket(ticketNo);
       // Tickets(ticketID: ticketNo).ticketLogGet();
@@ -37,7 +37,7 @@ class Tickets {
     }
 
     else if (Tickets.ticket[JsonResponses.status] == JsonPayloads.InProgress &&
-        Tickets.ticket[JsonResponses.ticketAssignedToID] != User.loggedInUser[JsonResponses.usersPartner]) {
+        Tickets.ticket[JsonResponses.assignedToID] != User.loggedInUser[JsonResponses.usersPartner]) {
       isTracking = false;
       Alerts.flushbar(
           context: Tools.context,
@@ -51,14 +51,14 @@ class Tickets {
 
       ticketNo = Tickets.ticket[JsonResponses.id];
       Time.dueTime =
-          DateTime.parse(ticket[JsonResponses.ticketDueDate]);
+          DateTime.parse(ticket[JsonResponses.dueDate]);
 
       if (Tickets.ticket[JsonResponses.status] ==
           JsonPayloads.New) {
         await openTicket(ticketNo);
       }
 
-      if (Tickets.ticket[JsonResponses.ticketAssignedTo] !=
+      if (Tickets.ticket[JsonResponses.assignedTo] !=
           User.loggedInUser[JsonResponses.usersPartner]) {
         await reassignTicket(Tickets.ticketNo);
       }
@@ -125,7 +125,7 @@ class Tickets {
           {};
       if (NetworkRequests.statusCode == 200){
         Time.dueTime =
-            DateTime.parse(ticket[JsonResponses.ticketDueDate].toString());
+            DateTime.parse(ticket[JsonResponses.dueDate].toString());
         ticketNo = ticket[JsonResponses.ticketLogID].toString();
       }
 
