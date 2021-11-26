@@ -18,9 +18,9 @@ class NetworkRequests {
   static const String methodGet = 'get';
   static const String methodPost = 'post';
   static const String methodPut = 'put';
-  static String server = 'dev';
+  late String server;
   static String pot = '8181';
-  final String endpointURL = 'api-$server.mawa.co.za:$pot';
+  late final String endpointURL;
   static String path = '/mawa-api/resources/';
   late http.Response feedback;
   late final Future<String> _key;
@@ -114,7 +114,10 @@ class NetworkRequests {
     // token == null ? token = await _key: null;
     final SharedPreferences prefs = await preferences;
 
+    server = await prefs.getString(SharedPrefs.server) ?? '';
     token = await (prefs.getString(SharedPrefs.token) ?? '');
+
+    endpointURL =  'api-$server.mawa.co.za:$pot';
 
     dynamic url;
     // statusCode == null? statusCode= 100: null;
@@ -286,6 +289,13 @@ class NetworkRequests {
         required BuildContext context, String? direct,
         VoidCallback? postAuthenticate,
       }) async {
+
+    final SharedPreferences prefs = await preferences;
+
+    server = await prefs.getString(SharedPrefs.server) ?? '';
+
+    endpointURL =  'api-$server.mawa.co.za:$pot';
+
     dynamic url;
     server == 'qas'
         ? url =  Uri.https(endpointURL, path + resource,queryParameters)
