@@ -31,6 +31,14 @@ class JsonResponses{
 
   static const String userID = 'userID';
 
+  static const String parent = 'parent';
+  static const String fileName = 'fileName';
+  static const String extension = 'extension';
+  static const String createdBy = 'createdBy';
+  static const String createdAt = 'createdAt';
+  static const String attachedById = 'attachedById';
+  static const String attachedBy = 'attachedBy';
+
   // static const String = '';
 
   static const String fieldOptionCode = 'code';
@@ -145,6 +153,7 @@ static const String policySalesRepresentativeDetails = 'salesRepresentativeDetai
 }
 
 class Resources{
+  static const String attachments = 'Attachments';
   static const String otp = 'otp';
   static const String authenticate = 'authenticate';
   static const String tickets = 'tickets';
@@ -225,6 +234,10 @@ class JsonPayloads{
   static const String subDescription = 'subDescription';
   static const String leaveType = 'leaveType';
 
+static const String documentType = 'documentType';
+static const String parentType = 'parentType';
+static const String parentReference = 'parentReference';
+
 // static const String  = '';
 }
 
@@ -237,6 +250,11 @@ class QueryParameters{
   static const String partnerFunction = 'partnerFunction';
   static const String partnerFunctionEmployee = 'EMPLOYEE';
   static const String partnerFunctionOrganization = 'ORGANIZATION';
+
+  static const String documentType = 'documentType';
+  static const String parentType = 'parentType';
+  static const String parentReference = 'parentReference';
+  static const String extension = 'extension';
 
   static const String partnerNo = 'partnerNo';
   static const String transaction = 'transaction';
@@ -289,3 +307,4 @@ class SharedPrefs{
   static const trackingTicketID = 'trackingTicketID';
 
 }
+

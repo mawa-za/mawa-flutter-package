@@ -25,6 +25,7 @@ part 'screens/authenticate.dart';
 part 'screens/no_internet_connection.dart';
 part 'screens/outdated_version.dart';
 part 'screens/snapshort_static_widgets.dart';
+part 'services/attachments.dart';
 part 'services/constants.dart';
 part 'services/globals.dart';
 part 'services/internet_connect.dart';
