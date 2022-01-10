@@ -50,3 +50,4 @@ part 'services/workcenters.dart';
 part 'services/device_info.dart';
 part 'services/location.dart';
 part 'services/receipts.dart';
+part 'services/field_options.dart';
