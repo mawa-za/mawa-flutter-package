@@ -1,4 +1,8 @@
 library mawa;
+import 'package:path/path.dart' as path;
+import 'package:async/async.dart';
+import 'package:dio/dio.dart'/* as dio*/;
+import 'package:http_parser/http_parser.dart' as parser;
 
 import 'package:flutter/material.dart';
 import 'package:connectivity/connectivity.dart';
