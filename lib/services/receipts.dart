@@ -11,12 +11,13 @@ class Receipts {
 
   processReceipt(
       /*Map payment ,int paymentPeriod,*/ {dynamic reference,
-      dynamic amount}) async {
+        dynamic tenderType,dynamic amount}) async {
     Map payment = {
       'reference': '$reference',
       'amount': '$amount',
-      'terminalId': '${DeviceInfo.platformImei.toString()}',
-      'location': '${Location.address.toString()}',
+      'tenderType':'$tenderType',
+      'terminalId': '${DeviceInfo.platformImei}',
+      'location': '${Location.address}',
       'terminalType': ''//'${DeviceInfo.terminal.toString()}'
     };
 
