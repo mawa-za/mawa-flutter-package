@@ -220,10 +220,10 @@ class Tools{
     return Alert(
       context: context,
       title: 'Alert',
-      content: Text('Do you really want to logout?'),
+      content: const Text('Do you really want to logout?'),
       buttons: [
         DialogButton(
-          child: Text('Yes'),
+          child: const Text('Yes'),
           onPressed: () => Navigator.of(context)
               .pushNamedAndRemoveUntil(redirect, (route) => false),
           color: Colors.greenAccent,
@@ -337,7 +337,7 @@ class Tools{
         hintText: hint,
         filled: true,
         fillColor: Colors.grey[100],
-        border: OutlineInputBorder(
+        border: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10.0)),
         ));
   }
@@ -345,7 +345,7 @@ class Tools{
   static dropdownContainerDeco() {
     return BoxDecoration(
       color: Colors.grey[100],
-      borderRadius: BorderRadius.all(
+      borderRadius: const BorderRadius.all(
         Radius.circular(10.0),
       ),
       border: Border.all(color: Colors.grey, width: 2.0),
