@@ -24,6 +24,18 @@ class Tools{
 
   late String email;
 
+  static bool bannerShow = false;
+  static String bannerMessage = '';
+
+  static String? personCreateRole;
+
+  static const String endpointURL =
+      'https://api-dev.mawa.co.za:8181/mawa-api/resources';
+
+  // 'http://mawa-test.raretag.co.za:8080/mawa-api/resources/';
+
+  // 'mawa-test.raretag.co.za:8080/mawa-api/resources/';
+
   final _resetPasswordFormKey = GlobalKey<FormState>();
 
   final TextEditingController _newPasswordController = TextEditingController();
