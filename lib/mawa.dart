@@ -4,6 +4,8 @@ import 'package:async/async.dart';
 import 'package:dio/dio.dart'/* as dio*/;
 import 'package:http_parser/http_parser.dart' as parser;
 
+import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:connectivity/connectivity.dart';
 import 'dart:async';
