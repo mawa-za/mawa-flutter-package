@@ -59,6 +59,30 @@ class JsonResponses{
   static const String usersRolesDescription = 'description';
 
 
+  static const String loginUserId = 'userID';
+  static const String loginPassword = 'password';
+
+  static const String cashupId = 'id';
+  static const String cashupAmount = 'amount';
+  static const String cashupStatus = 'status';
+  static const String cashupAmountDeposited = 'amountDeposited';
+  static const String cashupCashierID = 'cashierID';
+  static const String cashupCashier = 'cashier';
+  static const String cashupDateCreated = 'dateCreated';
+
+  static const String addressesType = 'type';
+  static const String addressesLine1 = 'line1';
+  static const String addressesLine2 = 'line2';
+  static const String addressesLine3 = 'line3';
+  static const String addressesLine4 = 'line4';
+  static const String addressesPostalCode = 'postalcode';
+
+  static const String contactsType = 'type';
+  static const String contactsDetail = 'detail';
+
+  static const String versionAppName = 'appName';
+  static const String versionApkVersionCode = 'versionNumber';
+  static const String versionAppUsable = 'appUsable';
 
   static const String personIdType = 'idType';
   static const String personIdNumber = 'idnumber';
@@ -98,10 +122,6 @@ class JsonResponses{
   static const String leaveApproverID = 'approverID';
   static const String leaveDescription = 'description';
 
-  static const String versionAppName = 'appName';
-  static const String versionApkVersionCode = 'versionNumber';
-  static const String versionAppUsable = 'appUsable';
-
   static const String leaveProfilesType = 'type';
   static const String leaveProfilesLeaveType = 'leaveType';
   static const String leaveProfilesStatus = 'status';
@@ -116,6 +136,15 @@ class JsonResponses{
   static const String leaveTypeQuantityRemaining = 'quantityRemaining';
   static const String leaveTypeValidTo = 'validTo';
   static const String leaveTypeValidFrom = 'validFrom';
+
+  static const String receiptId = 'id';
+  static const String receiptReference = 'reference';
+  static const String receiptPeriod = 'period';
+  static const String receiptAmount = 'amount';
+  static const String receiptProcessedBy = 'processedBy';
+  static const String receiptProcessingDate = 'processingDate';
+  static const String receiptProcessingTime = 'processingTime';
+  static const String receiptCheckoutId = 'checkoutId';
 
   static const String transactionValue = 'value';
   static const String transactionDateCreated = 'date_created';
@@ -201,6 +230,7 @@ class Resources{
 }
 
 class JsonPayloads{
+
   static const String id = 'id';
   static const String filter = 'filter';
   static const String filterValue = 'x';
