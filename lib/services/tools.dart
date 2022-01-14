@@ -28,6 +28,7 @@ class Tools{
   static String bannerMessage = '';
 
   static String? personCreateRole;
+  static final flashKey = GlobalKey<FormState>();
 
   static const String endpointURL =
       'https://api-dev.mawa.co.za:8181/mawa-api/resources';
