@@ -102,7 +102,11 @@ class OTP {
             positive: false,
             popContext: false);
       } else {
-        NetworkRequests.token = NetworkRequests.otp.substring(1,NetworkRequests.otp.length);
+        NetworkRequests.token = NetworkRequests.otp;//.substring(1,NetworkRequests.otp.length);
+
+        preferences.then((SharedPreferences prefs) {
+          return (prefs.setString(SharedPrefs.token, NetworkRequests.token));
+        });
         print('\n' + NetworkRequests.otp + '\n' + NetworkRequests.token + '\n' );
         Tools().passwordResetPopup(context);
       }
