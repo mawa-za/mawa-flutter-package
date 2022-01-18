@@ -21,7 +21,7 @@ class Tools{
   static bool isTouchLocked = false;
   static String screenMessage = '';
   static late Widget body;
-
+  static late String attachmentReference;
   late String email;
 
   static bool bannerShow = false;
