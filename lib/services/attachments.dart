@@ -39,6 +39,12 @@ class Attachments{
     print('server: $server');
     print('token: $token');
 
+    Map map ={
+      JsonPayloads.parentType: parentType,
+      JsonPayloads.parentReference: parentReference,
+      JsonPayloads.documentType: documentType,
+    };
+    print(map);
     Dio dio = Dio();
     dio.options.headers['content-Type'] = 'multipart/form-data';
     // dio.options.headers['content-Type'] = 'application/json';

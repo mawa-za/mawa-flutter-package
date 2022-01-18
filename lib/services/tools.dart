@@ -11,6 +11,10 @@ class Tools{
   // static late bool isTracking;
 
   static const String close = 'Close';
+  static const String TRANSACTION = 'TRANSACTION';
+  static const String LEAVEREQUEST = 'LEAVEREQUEST';
+  static const String INVOICE = 'INVOICE';
+  static const String TICKETTRACKING = 'TICKETTRACKING';
   static const String pause = 'Pause';
   static const String stop = 'Stop';
   static const String resolve = 'Resolve';
@@ -22,6 +26,8 @@ class Tools{
   static String screenMessage = '';
   static late Widget body;
   static late String attachmentReference;
+  static late String documentType;
+  static late String parentType;
   late String email;
 
   static bool bannerShow = false;
