@@ -34,8 +34,8 @@ class Receipts {
         NetworkRequests.methodGet,
         resource: Resources.receipts,
         queryParameters: {
-          'processedBy': User.loggedInUser[JsonResponses.id],
-          'filter': filterString
+          QueryParameters.processedBy: User.loggedInUser[JsonResponses.id],
+          QueryParameters.filter: filterString
         });
   }
 
@@ -45,7 +45,7 @@ class Receipts {
     List receipts = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: Resources.receipts,
-        queryParameters: {'reference': referenceNo});
+        queryParameters: {QueryParameters.reference: referenceNo});
     print(receipts.runtimeType);
     // receipts.runtimeType == List &&
     receipts.isNotEmpty ? receiptsList = receipts : receiptsList = [];
@@ -66,11 +66,11 @@ class Receipts {
         : receipt = {};
   }
 
-  getCashupCollection() async {
+  getCashupCollection({required String processor}) async {
     cashupsList = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: Resources.cashup,
-        queryParameters: {'processor': 'me'});
+        queryParameters: {QueryParameters.processor: processor});
   }
 
   getCashup({required String cashupId}) async {

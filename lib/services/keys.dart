@@ -308,6 +308,9 @@ class QueryParameters{
   static const String organisationId = 'organisationId';
   static const String endDAte = 'endDate';
 
+  static const String processedBy = 'processedBy';
+  static const String reference = 'reference';
+  static const String processor = 'processor';
 
 }
 
