@@ -17,15 +17,75 @@ class Attachments{
     return attachments;
   }
 
-  viewAttachment({required String id, required String extension}) async {
-    attachment = await NetworkRequests().securedMawaAPI(
-      NetworkRequests.methodGet,
-      resource: Resources.attachments + '/' + id,
-      queryParameters: {
-        QueryParameters.extension: extension,
-      }
-    );
-    return attachment;
+  void showDownloadProgress(received, total) {
+    if (total != -1) {
+      print((received / total * 100).toStringAsFixed(0) + "%");
+    }
+  }
+
+  viewAttachment({required Map attachment}) async {
+
+    var tempDir = await getTemporaryDirectory();
+    String fullPath = tempDir.path + '/' + '${attachment[JsonResponses.fileName]}';
+    print('full path $fullPath');
+
+    Dio dio = Dio();
+    final SharedPreferences prefs = await preferences;
+
+    dynamic server = prefs.getString(SharedPrefs.server) ?? '';
+    dynamic token = (prefs.getString(SharedPrefs.token) ?? '');
+
+    dynamic endpointURL =  'api-$server.mawa.co.za:${NetworkRequests.pot}';
+    dynamic url = 'https://' + endpointURL + NetworkRequests.path + Resources.attachments + '/' + attachment[JsonResponses.id];
+
+
+    // dio.options.headers['content-Type'] = 'multipart/form-data';
+    // dio.options.headers['content-Type'] = 'application/json';
+    // dio.options.headers["authorization"] = "Bearer $token";
+
+
+    print(url);
+    try {
+      dio.download(url, fullPath);
+      Response response = await
+      // dio.get(url,
+          dio.download(url, fullPath,
+        queryParameters: {
+          QueryParameters.extension: attachment[JsonResponses.extension],
+        },
+        onReceiveProgress: showDownloadProgress,
+        //Received data with List<int>
+        options: Options(
+            responseType: ResponseType.bytes,
+            followRedirects: false,
+            // validateStatus: (status) {
+            //   return status! < 500;
+            // },
+          headers:  {
+              'Content-type': 'multipart/form-data',
+            // "Content-type": "application/json",
+            'Authorization': 'Bearer $token'
+          },
+        ),
+      );
+      print('${response.headers}: ${response.statusMessage}');
+      print(response.data);
+      File file = File(fullPath);
+      var raf = file.openSync(mode: FileMode.write);
+      // response.data is List<int> type
+      raf.writeFromSync(response.data);
+      await raf.close();
+    } catch (e) {
+      print(e);
+    }
+    // attachment = await NetworkRequests().securedMawaAPI(
+    //   NetworkRequests.methodGet,
+    //   resource: Resources.attachments + '/' + id,
+    //   queryParameters: {
+    //     QueryParameters.extension: extension,
+    //   }
+    // );
+    // return attachment;
   }
 
   ///Please note that this class is incomplete and therefore will not work accordingly or at all
