@@ -34,6 +34,8 @@ dev_dependencies:
   dio: ^4.0.4
   path_provider: ^2.0.4
   device_information: ^0.0.4
+  geolocator: ^7.1.1
+  geocoding: ^2.0.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
