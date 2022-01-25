@@ -25,6 +25,7 @@ import 'package:another_flushbar/flushbar.dart';
 // import 'package:device_info/device_info.dart';
 // import 'package:geolocator/geolocator.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
+import 'package:path_provider/path_provider.dart';
 
 part 'screens/alerts.dart';
 part 'screens/authenticate.dart';
