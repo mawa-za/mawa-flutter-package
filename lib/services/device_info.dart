@@ -154,7 +154,11 @@ class DeviceInfo{
       info = {};
       platformVersion = 'Failed to get platform version.';
     }
-    // dynamic _info = (info) as Map;
+    dynamic _info = info.keys;
+    for(int i = 0; i < _info.length; i++){
+      deviceData[_info[i]] = info[_info[i]];
+    }
+
     deviceData.addAll(info);
 
   }
