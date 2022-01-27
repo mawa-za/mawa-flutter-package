@@ -1,12 +1,14 @@
 part of mawa;
 
 class JsonResponses{
+  static const String amount = 'amount';
   static const String assignedBy = 'assignedBy';
   static const String assignedByID = 'assignedByID';
   static const String assignedTo = 'assignedTo';
   static const String assignedToID = 'assignedToID';
 
   static const String category = 'category';
+  static const String checkoutId = 'checkoutId';
   static const String clientId = 'clientId';
 
   static const String dateLogged = 'dateLogged';
@@ -22,7 +24,13 @@ class JsonResponses{
 
   static const String middleName = 'middleName';
 
+  static const String period = 'period';
   static const String priority = 'priority';
+  static const String processedBy = 'processedBy';
+  static const String processingDate = 'processingDate';
+  static const String processingTime = 'processingTime';
+
+  static const String reference = 'reference';
 
   static const String status = 'status';
   static const String subDescription = 'subDescription';
@@ -38,6 +46,7 @@ class JsonResponses{
   static const String createdAt = 'createdAt';
   static const String attachedById = 'attachedById';
   static const String attachedBy = 'attachedBy';
+
 
   // static const String = '';
 
@@ -136,15 +145,6 @@ class JsonResponses{
   static const String leaveTypeQuantityRemaining = 'quantityRemaining';
   static const String leaveTypeValidTo = 'validTo';
   static const String leaveTypeValidFrom = 'validFrom';
-
-  static const String receiptId = 'id';
-  static const String receiptReference = 'reference';
-  static const String receiptPeriod = 'period';
-  static const String receiptAmount = 'amount';
-  static const String receiptProcessedBy = 'processedBy';
-  static const String receiptProcessingDate = 'processingDate';
-  static const String receiptProcessingTime = 'processingTime';
-  static const String receiptCheckoutId = 'checkoutId';
 
   static const String transactionValue = 'value';
   static const String transactionDateCreated = 'date_created';
