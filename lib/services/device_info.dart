@@ -9,7 +9,7 @@ class DeviceInfo{
 
   static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
   Map<String, dynamic> _deviceData = <String, dynamic>{};
-  static dynamic deviceData;
+  static late Map deviceData;
   static String terminal = 'Undefined';
 
   // static String  = ;
@@ -154,6 +154,7 @@ class DeviceInfo{
       info = {};
       platformVersion = 'Failed to get platform version.';
     }
+    // dynamic _info = (info) as Map;
     deviceData.addAll(info);
 
   }

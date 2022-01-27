@@ -20,7 +20,7 @@ class Receipts {
       'amount': '$amount',
       'tenderType':'$tenderType',
       'terminalId': DeviceInfo.platformImei,
-      'location': Location.address,
+      'location': Location.address.toString(),
       'terminalType': DeviceInfo.terminal.toString()
     };
 
