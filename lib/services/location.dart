@@ -29,7 +29,7 @@ class Location {
     locationInfo = '${position.latitude},${position.longitude}';
     List<Placemark> placemarks = await placemarkFromCoordinates(position.latitude,position.longitude);
     print(placemarks.toString());
-    address = placemarks.first.toString();
+    address = '${placemarks.first.thoroughfare}, ${placemarks.first.subLocality}, ${placemarks.first.locality}, ${placemarks.first.subAdministrativeArea}, ${placemarks.first.administrativeArea}, ${placemarks.first.country}, ${placemarks.first.postalCode}';
   //   // List address = await Geocoder.local.findAddressesFromCoordinates(
   //   //     new Coordinates(position.latitude, position.longitude));
   //   //
