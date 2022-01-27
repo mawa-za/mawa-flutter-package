@@ -193,7 +193,7 @@ class Resources{
   static const String ticketReject = 'reject';
   static const String ticketCancel = 'cancel';
   static const String users = 'users';
-  static const String resetPassword = 'passwordReset';
+  static const String resetPassword = 'passwordreset';
   static const String forgotPassword = 'forgotPassword';
   static const String versions = 'versions';
   static const String leaves = 'leaves';
