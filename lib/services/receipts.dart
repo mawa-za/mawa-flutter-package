@@ -12,6 +12,9 @@ class Receipts {
   processReceipt(
       /*Map payment ,int paymentPeriod,*/ {dynamic reference,
         dynamic tenderType,dynamic amount}) async {
+    // DeviceInfo info =
+    DeviceInfo();
+
     Map payment = {
       'reference': '$reference',
       'amount': '$amount',
