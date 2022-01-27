@@ -23,6 +23,7 @@ class JsonResponses{
   static const String middleName = 'middleName';
 
   static const String priority = 'priority';
+  static const String period = 'period';
 
   static const String status = 'status';
   static const String subDescription = 'subDescription';
