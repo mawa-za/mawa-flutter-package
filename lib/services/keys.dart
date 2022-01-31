@@ -272,45 +272,51 @@ static const String parentReference = 'parentReference';
 }
 
 class QueryParameters{
-
-  static const String id = 'id';
   static const String versionAppName = 'appName';
-  static const String versionApkVersionCode = 'versionNumber';
   static const String versionAppUsable = 'appUsable';
-  static const String partnerFunction = 'partnerFunction';
-  static const String partnerFunctionEmployee = 'EMPLOYEE';
-  static const String partnerFunctionOrganization = 'ORGANIZATION';
-
-  static const String documentType = 'documentType';
-  static const String parentType = 'parentType';
-  static const String parentReference = 'parentReference';
-  static const String extension = 'extension';
-
-  static const String partnerNo = 'partnerNo';
-  static const String transaction = 'transaction';
-  static const String otp = 'otp';
-
-  static const String filter = 'filter';
-  static const String filterValue = 'x';
+  static const String approverId = 'approverId';
   static const String assignedTo = 'assignedTo';
   static const String assignedToID = 'assignedToID';
-  static const String clintID = 'clintID';
-  static const String status = 'status';
 
-  static const String partnerID = 'partnerID';
-  static const String partnerId = 'partnerId';
-  static const String ticketID = 'ticketID';
-  static const String approverId = 'approverId';
+  static const String clintID = 'clintID';
+
+  static const String documentType = 'documentType';
+
+  static const String endDAte = 'endDate';
+  static const String extension = 'extension';
 
   static const String field = 'field';
-  static const String value = 'value';
+  static const String filter = 'filter';
+  static const String filterValue = 'x';
+
+  static const String id = 'id';
+
+  static const String loggedById = 'loggedById';
 
   static const String organisationId = 'organisationId';
-  static const String endDAte = 'endDate';
+  static const String otp = 'otp';
 
+  static const String parentType = 'parentType';
+  static const String parentReference = 'parentReference';
+  static const String partnerFunctionEmployee = 'EMPLOYEE';
+  static const String partnerFunctionOrganization = 'ORGANIZATION';
+  static const String partnerFunction = 'partnerFunction';
+  static const String partnerID = 'partnerID';
+  static const String partnerId = 'partnerId';
+  static const String partnerNo = 'partnerNo';
   static const String processedBy = 'processedBy';
-  static const String reference = 'reference';
   static const String processor = 'processor';
+
+  static const String reference = 'reference';
+
+  static const String status = 'status';
+
+  static const String ticketID = 'ticketID';
+  static const String transaction = 'transaction';
+
+  static const String versionApkVersionCode = 'versionNumber';
+  static const String value = 'value';
+
 
 }
 
