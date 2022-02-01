@@ -194,6 +194,7 @@ class Resources{
   static const String ticketCancel = 'cancel';
   static const String users = 'users';
   static const String resetPassword = 'passwordreset';
+  static const String reset = 'reset';
   static const String forgotPassword = 'forgotPassword';
   static const String versions = 'versions';
   static const String leaves = 'leaves';
@@ -278,6 +279,7 @@ class QueryParameters{
   static const String assignedTo = 'assignedTo';
   static const String assignedToID = 'assignedToID';
 
+  static const String category = 'category';
   static const String clintID = 'clintID';
 
   static const String documentType = 'documentType';

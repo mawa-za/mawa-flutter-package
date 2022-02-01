@@ -9,50 +9,52 @@ class TicketLogs {
   static late Map ticketsLog;
   static late String ticketLogID;
 
-  Future<void> ticketLogCreate() async {
-    dynamic response = await NetworkRequests().securedMawaAPI(
+  Future<dynamic> ticketLogCreate() async {
+    dynamic response =  await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPost,
         resource: Resources.ticketsLog,
         body: {
           JsonPayloads.partnerID: User.partnerId,
           JsonPayloads.ticketID: Tickets.ticketNo,
         });
-    if (NetworkRequests.statusCode == 200) {
-      ticketLogID = response;
+    if (response.statusCode == 200) {
+      ticketLogID = NetworkRequests.decodeJson(response);
       if(Tickets.ticket[JsonResponses.status] != JsonPayloads.InProgress) {
         await Tickets.changeTicketStatus(status: Resources.inprogress);
       }
     }
+    return response.statusCode;
   }
 
   static Future<dynamic> ticketLogSearch() async {
-    dynamic response = await NetworkRequests().securedMawaAPI(
+    dynamic response =  NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: Resources.ticketsLog,
         queryParameters: {
           QueryParameters.id: Tickets.ticketNo,
-        });
+        }));
     if (NetworkRequests.statusCode == 200) {
       allTicketLogs = response;
     }
     return allTicketLogs;
   }
 
-  Future<void> ticketLogClose(status) async {
+  Future<dynamic> ticketLogClose(status) async {
     // Tickets.ticketLogID != null ?
-    await NetworkRequests().securedMawaAPI(
+    dynamic response = await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPost,
       resource: Resources.ticketsLog + '/' + ticketLogID,
     )
     // : null
         ;
-    if(NetworkRequests.statusCode == 200) {
+    if(response.statusCode == 200) {
       status == Tools.close
           ? Tickets.changeTicketStatus(status: Resources.awaitingCustomer)
           : status == Tools.pause
               ? Tickets.openTicket(Tickets.ticketNo)
               : null;
     }
+    return response.statusCode;
   }
 
   Future<dynamic> ticketLogGet() async {
@@ -61,11 +63,12 @@ class TicketLogs {
       resource: Resources.ticketsLog + '/' + ticketLogID,
     );
 
-    if (NetworkRequests.statusCode == 200) {
-      ticketsLog = await resp;
+    if (resp.statusCode == 200) {
+      ticketsLog = NetworkRequests.decodeJson(await resp);
       Time.startTime =
           DateTime.parse(await ticketsLog[JsonResponses.ticketLogStartTime]);
     }
+    return resp.statusCode;
   }
 
 
@@ -84,15 +87,15 @@ class TicketLogs {
       }
 
       if(assigndTo.contains( User.loggedInUser[JsonResponses.usersPartner]) == false){
-        await TicketLogs(ticketID: Tickets.ticketNo).ticketLogCreate();
-        await TicketLogs(ticketID: Tickets.ticketNo).ticketLogGet();
+        dynamic code = await TicketLogs(ticketID: Tickets.ticketNo).ticketLogCreate();
+        if(code == 200) await TicketLogs(ticketID: Tickets.ticketNo).ticketLogGet();
       }
       TicketLogs.ticketLogID = TicketLogs.ticketsLog[JsonResponses.ticketLogID];
       Time.startTime = DateTime.parse(TicketLogs.ticketsLog[JsonResponses.ticketLogStartTime]);
     }
     else{
-      await TicketLogs(ticketID: Tickets.ticketNo).ticketLogCreate();
-      await TicketLogs(ticketID: Tickets.ticketNo).ticketLogGet();
+      dynamic code = await TicketLogs(ticketID: Tickets.ticketNo).ticketLogCreate();
+      if(code == 200) await TicketLogs(ticketID: Tickets.ticketNo).ticketLogGet();
     }
   }
 

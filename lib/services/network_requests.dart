@@ -5,7 +5,7 @@ part of mawa;
 class NetworkRequests {
   // final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
-  NetworkRequests() {_getToken();}
+  NetworkRequests({this.responseType}) {_getToken();}
 
   Future<void> _getToken ()async {
 
@@ -14,7 +14,7 @@ class NetworkRequests {
     });
     print('key' + _key.toString());
   }
-
+  String? responseType = responseJson;
   static const String methodGet = 'get';
   static const String methodPost = 'post';
   static const String methodPut = 'put';
@@ -27,14 +27,34 @@ class NetworkRequests {
   static String token = '';
   static String otp = '';
   static int statusCode = 100;
+  static const String responseJson = 'json';
+  static const String responseBlob = 'blob';
+  static const String responseFormData = 'blob';
 
   static const int requestTime = 60;
 
-  static Map<String, String> headers({required String tokenKey}) {
-    return {
-      "Content-type": "application/json",
-      "Authorization": "Bearer $tokenKey"
-    };
+  static decodeJson(data) async{
+  dynamic response = await data;
+    if (response.statusCode == 200) {
+      try {
+        return jsonDecode(response.body);
+      }
+      catch (e) {
+        print(e.toString());
+      }
+    }
+  }
+
+   Map<String, String> headers({required String tokenKey,}) {
+    Map<String, String> headers = {/*"Authorization": "Bearer $tokenKey"*/};
+
+    headers["Authorization"] = "Bearer $tokenKey";
+
+    if (responseType == responseJson)  headers['Content-type'] = 'application/json; charset=UTF-8';
+    if (responseType == responseBlob)  headers['Content-type'] = 'application/json';
+    if (responseType == responseFormData)  headers['Content-type'] = 'multipart/form-data';
+
+    return headers;
   }
 
   Map statusMessages = {
@@ -110,7 +130,7 @@ class NetworkRequests {
   Future<dynamic> securedMawaAPI(String method,
       {required String resource,
         Map? body,
-        Map<String, dynamic>? queryParameters}) async  {
+        Map<String, dynamic>? queryParameters,}) async  {
     // token == null ? token = await _key: null;
     final SharedPreferences prefs = await preferences;
 
@@ -138,21 +158,21 @@ class NetworkRequests {
           case methodGet:
             feedback = await http.get(
               url,
-              headers: headers(tokenKey: token.toString()),
+              headers: headers(tokenKey: token,),
             );
             break;
           case methodPost:
             feedback = await http.post(
               // Uri.https(endpointURL, path + resource, queryParameters),
                 url,
-                headers: headers(tokenKey: token.toString()),
+                headers: headers(tokenKey: token),
                 body: jsonEncode(body));
             break;
           case methodPut:
             print('wow wow $token');
             feedback = await http.put(url,
                 // Uri.https(endpointURL, path + resource),
-                headers: headers(tokenKey: token.toString()),
+                headers: headers(tokenKey: token),
                 body: jsonEncode(body));
             break;
         }
@@ -164,14 +184,16 @@ class NetworkRequests {
             '\n');
         statusCode = feedback.statusCode;
         print('status code: $statusCode');
-        switch (NetworkRequests.statusCode) {
+        switch (statusCode) {
           case 200:
             {
-              try {
-                return jsonDecode(feedback.body);
-              } catch (e) {
-                print(e.toString());
-              }
+              // try {
+              //   return jsonDecode(feedback.body);
+              // } catch (e) {
+              //   print(e.toString());
+              // }
+              print('Success');
+              // return feedback;
             }
             break;
           case 401:
@@ -275,6 +297,9 @@ class NetworkRequests {
             message: 'Request Terminated During Handshake',
             positive: false);
       }
+
+      return feedback;
+
     } else {
       // Authorize(context: Tools.context).attempt();
       Navigator.pushReplacementNamed(Tools.context, Authenticate.id);
@@ -323,20 +348,23 @@ class NetworkRequests {
         case methodGet:
           feedback = await http.get(
             url,
-            headers: headers,
+            // headers: headers,
+            headers: this.headers(tokenKey: token),
 
           );
           break;
         case methodPost:
           feedback = await http.post(
               url,
-              headers: headers,
+              headers: this.headers(tokenKey: token),
+              // headers: headers,
               body: jsonEncode(payload));
           break;
         case methodPut:
           print('wow wow $token');
           feedback = await http.put(url,
-              headers: headers,
+              headers: this.headers(tokenKey: token),
+              // headers: headers,
               body: jsonEncode(payload));
           break;
       }
