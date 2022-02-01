@@ -135,7 +135,7 @@ class NetworkRequests {
     final SharedPreferences prefs = await preferences;
 
     server = await prefs.getString(SharedPrefs.server) ?? '';
-    token = await (prefs.getString(SharedPrefs.token) ?? '');
+    token = await prefs.getString(SharedPrefs.token) ?? '';
 
     endpointURL =  'api-$server.mawa.co.za:$pot';
 
@@ -198,6 +198,7 @@ class NetworkRequests {
             break;
           case 401:
             {
+              print('\npost\n');
               Navigator.pushReplacementNamed(Tools.context, Authenticate.id);
             }
             break;
@@ -300,7 +301,9 @@ class NetworkRequests {
 
       return feedback;
 
-    } else {
+    }
+    else {
+      print('\npre\n');
       // Authorize(context: Tools.context).attempt();
       Navigator.pushReplacementNamed(Tools.context, Authenticate.id);
     }

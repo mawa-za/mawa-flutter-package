@@ -43,9 +43,10 @@ class ApkVersion {
       QueryParameters.versionApkVersionCode:version,
       QueryParameters.versionAppName:appName
     };
-    dynamic response = NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet, resource: Resources.versions, queryParameters: query));
+    dynamic response = await NetworkRequests.decodeJson( NetworkRequests().securedMawaAPI(NetworkRequests.methodGet, resource: Resources.versions, queryParameters: query));
     print(response ?? 'nothing');
     // if(response != null) {
+    // print('response ${response.toString()}');
       return response[JsonResponses.versionAppUsable];
     // }
     // else {

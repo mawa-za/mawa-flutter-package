@@ -16,7 +16,7 @@ class FieldOptions {
     print('start 2');
     if (response.statusCode == 200) {
       print('start 3');
-      dynamic data = NetworkRequests.decodeJson(response);
+      dynamic data = await NetworkRequests.decodeJson(response);
       print('start 3.1');
       print(response);
       print(data);
