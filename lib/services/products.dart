@@ -14,7 +14,7 @@ class Products {
   Map<String, dynamic> policyList = {};
 
   productsList(context, category) async {
-    products =  NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+    products = await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: Resources.products,
         queryParameters: {'category': category})); //
@@ -23,7 +23,7 @@ class Products {
   }
 
   generatePoliciesMap(String key) async {
-    dynamic list =  NetworkRequests.decodeJson(await (Products().productsList(
+    dynamic list = await NetworkRequests.decodeJson(await (Products().productsList(
         Tools.context, Tools.productCategoryFuneralPolicy)));
     Map<String, String> data = {};
     if (list != null) {
@@ -59,7 +59,7 @@ class Products {
 
     final http.Response response =
         // await http.get(Uri.http(url, ''), headers: headers);
-    NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet, resource: Resources.products,queryParameters: {QueryParameters.category:category}));
+    await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet, resource: Resources.products,queryParameters: {QueryParameters.category:category}));
     int statusCode = response.statusCode;
     var data = response.body;
 

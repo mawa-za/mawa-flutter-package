@@ -9,7 +9,7 @@ class TransactionNotes {
       {required String value,
       required String type,
       required String transaction}) async {
-    return NetworkRequests.decodeJson( await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
+    return await NetworkRequests.decodeJson( await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
         resource: Resources.transactionNotes,
         body: {
           JsonPayloads.value: value,
@@ -19,12 +19,12 @@ class TransactionNotes {
   }
 
   getNote() async {
-    return NetworkRequests.decodeJson( await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
+    return await NetworkRequests.decodeJson( await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
         resource: Resources.transactionNotes + '/' + transactionNote!));
   }
 
   getTransactionNotes() async {
-    return NetworkRequests.decodeJson( await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
+    return await NetworkRequests.decodeJson( await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
         resource: Resources.transactionNotes,
         queryParameters: {QueryParameters.transaction: transaction}));
   }

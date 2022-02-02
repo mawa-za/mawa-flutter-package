@@ -11,7 +11,7 @@ class Tickets {
   static late Map ticket;
 
   static trackTicket() async {
-    List tickets = NetworkRequests.decodeJson(await Tickets.allMyTickets());
+    List tickets = await NetworkRequests.decodeJson(await Tickets.allMyTickets());
     List list = [];
     Map map = {};
     
@@ -176,7 +176,7 @@ class Tickets {
 
     print(response.length);
     if(response.statusCode == 200){
-      dynamic data = NetworkRequests.decodeJson(response);
+      dynamic data = await NetworkRequests.decodeJson(response);
       for(int i = 0; i < data.length; i++) {
         print(i);
         if(data[i][JsonResponses.status] == JsonPayloads.New || data[i][JsonResponses.status] == JsonPayloads.Open){

@@ -24,7 +24,7 @@ class Receipts {
       'terminalType': DeviceInfo.terminal.toString()
     };
 
-    return  NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
+    return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
         resource: Resources.receipts, body: payment));
   }
 
@@ -33,7 +33,7 @@ class Receipts {
     filter ? filterString = 'x' : filterString = '';
 
     receiptsList = [];
-    receiptsList =  NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+    receiptsList = await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: Resources.receipts,
         queryParameters: {
@@ -45,7 +45,7 @@ class Receipts {
   receiptHistory(String referenceNo) async {
     receiptsList = [];
     // print('referenceNo'+referenceNo);
-    List receipts =  NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+    List receipts = await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: Resources.receipts,
         queryParameters: {QueryParameters.reference: referenceNo}));
@@ -56,7 +56,7 @@ class Receipts {
   }
 
   processCashup() async {
-    return  NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
+    return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
         resource: Resources.cashup));
   }
 
@@ -72,7 +72,7 @@ class Receipts {
   }
 
   getCashupCollection({required String processor}) async {
-    cashupsList =  NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+    cashupsList = await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: Resources.cashup,
         queryParameters: {QueryParameters.processor: processor}));

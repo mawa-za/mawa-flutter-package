@@ -5,7 +5,7 @@ class WorkCenters {
 
   getWorkCenters({required String role}) async {
     role == null ? User.userLoginRole = User.userRoles[User.userRoles.keys.first]! : User.userLoginRole = role;
-    List centers = NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+    List centers = await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: Resources.workCenters,
         queryParameters: {'role': User.userLoginRole}

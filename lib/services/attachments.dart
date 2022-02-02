@@ -5,7 +5,7 @@ class Attachments{
   late List attachments;
 
   getAttachments({required String docType, required String parentType, required String parentReference}) async {
-    attachments =  NetworkRequests.decodeJson( await NetworkRequests().securedMawaAPI(
+    attachments = await NetworkRequests.decodeJson( await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodGet,
       resource: Resources.attachments,
       queryParameters: {

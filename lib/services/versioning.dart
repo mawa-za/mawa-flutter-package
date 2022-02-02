@@ -35,7 +35,7 @@ class ApkVersion {
   }
 
   getApkListInfo() async {
-    return NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet, resource: Resources.versions));
+    return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet, resource: Resources.versions));
   }
 
   checkApkValidity(/*{String versionCode}*/) async {

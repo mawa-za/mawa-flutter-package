@@ -18,7 +18,7 @@ class User{
     try {
       loggedInUser =
       // Map<dynamic, dynamic>.from(
-      NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+      await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
           NetworkRequests.methodGet,
           resource: '${Resources.users}/$username')
       )
@@ -53,18 +53,18 @@ class User{
   }
 
   changePassword({required String password}) async {
-    return NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodPut,
+    return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodPut,
         resource: Resources.resetPassword, body: {"password": password}));
   }
 
   resetPassword({required String username}) async {
-    return NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
+    return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
         resource: '${Resources.users}/$username/${Resources.reset}'));
   }
 
   getUserRoles() async {
     userRoles = {};
-    List list = NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+    List list = await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: '${Resources.users}/$username/roles'));
     if(list.isNotEmpty && list.runtimeType == Constants.list.runtimeType){

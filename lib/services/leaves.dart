@@ -13,7 +13,7 @@ class Leaves  {
     if(partnerFunctionType == QueryParameters.partnerFunctionEmployee){partner = User.loggedInUser[JsonResponses.usersPartner];}
     if(partnerFunctionType == QueryParameters.partnerFunctionOrganization){partner = User.loggedInUser[JsonResponses.usersGroupId];}
 
-    dynamic response =  NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+    dynamic response = await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: Resources.leaveProfiles,
         queryParameters: {
@@ -31,7 +31,7 @@ class Leaves  {
 
   getApprovers({required bool specificOrg}) async {
     approvers.clear();
-    approvers =  NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+    approvers = await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodGet,
       resource: Resources.leaves + '/' + Resources.leavesApprovers,
       queryParameters: specificOrg ? {QueryParameters.organisationId: User.loggedInUser[JsonResponses.usersGroupId]} :null,
@@ -64,7 +64,7 @@ class Leaves  {
           });
       if (NetworkRequests.statusCode == 200 ||
           NetworkRequests.statusCode == 201) {
-        leaveID = NetworkRequests.decodeJson(response).toString();
+        leaveID = await NetworkRequests.decodeJson(response).toString();
       } else {
         leaveID = '';
       }
@@ -80,7 +80,7 @@ class Leaves  {
         });
     print('jo\n$resp\nj');
     if(resp.statusCode == 200 /*&& resp != null*/) {
-      pendingResponse = NetworkRequests.decodeJson(resp);
+      pendingResponse = await NetworkRequests.decodeJson(resp);
     }
     else{
       pendingResponse.clear();
@@ -99,7 +99,7 @@ class Leaves  {
         });
     // /mawa-api/resources/leaves/?partnerId=PN0000000013
     if (response.statusCode == 200)  {
-      myLeaves = NetworkRequests.decodeJson(response);
+      myLeaves = await NetworkRequests.decodeJson(response);
     } else {
       myLeaves.clear();
     }
@@ -107,19 +107,19 @@ class Leaves  {
   }
 
   getLeave(String id) async{
-    return  NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+    return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodGet,
       resource: Resources.leaves + '/' + id,));
   }
 
   Future<bool> updateLeaveStatus({required String path,required String method}) async {
-    return NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+    return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
         method,
         resource: Resources.leaves + '/' + Leaves.leaveID + '/' + path)) ?? false;
   }
 
   editLeave(endDate) async {
-    return  NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodPut, resource: Resources.leaves + '/' + Leaves.leaveID + '/' + Resources.edit, queryParameters: {QueryParameters.endDAte: endDate}) ?? false);
+    return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodPut, resource: Resources.leaves + '/' + Leaves.leaveID + '/' + Resources.edit, queryParameters: {QueryParameters.endDAte: endDate}) ?? false);
 
   }
 }

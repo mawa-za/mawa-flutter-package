@@ -5,7 +5,7 @@ class Employees {
   static const String employeesResource = 'employees';
   late List employees;
   getAllEmployees() async{
-    List emps = NetworkRequests.decodeJson( await NetworkRequests().securedMawaAPI(
+    List emps = await NetworkRequests.decodeJson( await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: '$employeesResource/'));
     Map<String, String> mapUsers = {};

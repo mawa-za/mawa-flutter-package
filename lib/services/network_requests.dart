@@ -14,7 +14,7 @@ class NetworkRequests {
     });
     print('key' + _key.toString());
   }
-  String? responseType = responseJson;
+  String? responseType/* = responseJson*/;
   static const String methodGet = 'get';
   static const String methodPost = 'post';
   static const String methodPut = 'put';
@@ -47,9 +47,10 @@ class NetworkRequests {
 
    Map<String, String> headers({required String tokenKey,}) {
     Map<String, String> headers = {/*"Authorization": "Bearer $tokenKey"*/};
-
     headers["Authorization"] = "Bearer $tokenKey";
 
+    responseType ??= responseJson;
+    print('responseType $responseType');
     if (responseType == responseJson)  headers['Content-type'] = 'application/json; charset=UTF-8';
     if (responseType == responseBlob)  headers['Content-type'] = 'application/json';
     if (responseType == responseFormData)  headers['Content-type'] = 'multipart/form-data';
@@ -140,6 +141,7 @@ class NetworkRequests {
     endpointURL =  'api-$server.mawa.co.za:$pot';
 
     dynamic url;
+    dynamic header = headers(tokenKey: token,);
     // statusCode == null? statusCode= 100: null;
     // server == 'qas'
     //     ? url =  Uri.https(endpointURL, path + resource, queryParameters)
@@ -154,11 +156,12 @@ class NetworkRequests {
         print(path);
         print(resource);
         print(body ?? queryParameters);
+        print(header);
         switch (method) {
           case methodGet:
             feedback = await http.get(
               url,
-              headers: headers(tokenKey: token,),
+              headers: header,
             );
             break;
           case methodPost:

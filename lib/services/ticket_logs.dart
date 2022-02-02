@@ -27,7 +27,7 @@ class TicketLogs {
   }
 
   static Future<dynamic> ticketLogSearch() async {
-    dynamic response =  NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+    dynamic response = await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: Resources.ticketsLog,
         queryParameters: {
@@ -64,7 +64,7 @@ class TicketLogs {
     );
 
     if (resp.statusCode == 200) {
-      ticketsLog = NetworkRequests.decodeJson(await resp);
+      ticketsLog = await NetworkRequests.decodeJson(await resp);
       Time.startTime =
           DateTime.parse(await ticketsLog[JsonResponses.ticketLogStartTime]);
     }

@@ -24,7 +24,7 @@ class Persons {
   }
 
   validateSAID(id) async {
-    Map<String, dynamic> response =  NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+    Map<String, dynamic> response = await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
         await  NetworkRequests.methodGet,
         resource: 'validateSAID?idnumber=$id'));
     response != null ? status = response['valid'] : null;
@@ -33,7 +33,7 @@ class Persons {
 
   getPerson(String personId) async {
     print('person $personId');
-    return  NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
+    return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
         resource: '${Resources.persons}/$personId'));
   }
 
