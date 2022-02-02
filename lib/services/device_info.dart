@@ -150,16 +150,27 @@ class DeviceInfo{
 
       terminal = await DeviceInformation.deviceIMEINumber;
 
-    } on PlatformException {
+    } /*on PlatformException {
       info = {};
       platformVersion = 'Failed to get platform version.';
+    }*/
+    catch(e){
+      print('catch ' + e.toString());
     }
-    dynamic _info = info.keys;
+    dynamic _info ; // = info.keys ;
+    print('keys ${info.keys}');
+    print('length ${_info.length}');
+    print('_info ${_info}');
+    print('rtt '+ _info.runtimeType.toString());
+    _info.addAll(info.keys);
     for(int i = 0; i < _info.length; i++){
       deviceData[_info[i]] = info[_info[i]];
     }
+    print('terminal ' + terminal);
+    print('info ' + info.toString());
+    print('deviceData ' + deviceData.toString());
 
-    deviceData.addAll(info);
+    // deviceData.addAll(info);
 
   }
 

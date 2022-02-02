@@ -8,14 +8,15 @@ class Memberships {
   static String? policyId;
 
   membershipsSearch({String? partnerRole, String? idNumber}) async {
-    List policies = await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
+    personsPolicies.clear();
+    dynamic response = await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
         resource: Resources.policies,
         queryParameters: {
           'idnumber': idNumber ?? Persons.person[JsonResponses.personIdNumber] ?? Persons.personIdNumber,
           'partnerRole': partnerRole
         }) ?? [];
-    if(/*policies.runtimeType == List &&*/ policies.isNotEmpty){
-      personsPolicies = policies;
+    if(response.statusCode == 200){
+      personsPolicies = await NetworkRequests.decodeJson(response.body) ?? [];
     }
     else {
       personsPolicies = [];
@@ -28,12 +29,17 @@ class Memberships {
         resource: '${Resources.policies}/$policyId');
     print('try'+response.toString());
     // policy == null ? policy = {} : response != null ? response.isNotEmpty ? policy = response : policy = {}  : policy = {} ;
-    if( response != null && response.isNotEmpty){
-      if(response.runtimeType == allPolicies.runtimeType) {
-        allPolicies = response;
+    if( response.statusCode == 200){
+      dynamic body =  await NetworkRequests.decodeJson(response.body);
+      // if(response.runtimeType == allPolicies.runtimeType)
+      try
+      {
+        allPolicies = body ?? [];
       }
-      else{
-        policy = response;
+      // else
+      catch(e)
+          {
+        policy =  body ?? {};
       }
     }
     else {

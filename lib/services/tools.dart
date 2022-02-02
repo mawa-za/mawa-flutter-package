@@ -142,7 +142,7 @@ class Tools{
     FocusScope.of(context).unfocus();
 
     Alerts.flushbar(message: 'Please Wait', context: context);
-     User.username = await User().changePassword(password: _newPasswordController.value.text.toString());
+     User.username = NetworkRequests.decodeJson(await User().changePassword(password: _newPasswordController.value.text.toString()));
     NetworkRequests.statusCode == 200 || NetworkRequests.statusCode == 201
         ?  Navigator.pushReplacementNamed(context, redirect)
         : NetworkRequests.statusCode == 401

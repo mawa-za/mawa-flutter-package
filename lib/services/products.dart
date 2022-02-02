@@ -4,7 +4,7 @@ class Products {
   late String policyType;
   late String policyDescription;
   late String payout;
-  String _directory = 'product/?category=';
+  final String _directory = 'product/?category=';
   List/*<Map>*/ products = [];
   static Map<String, String> productsMap = {};
   static dynamic personsPolicies;
@@ -14,17 +14,17 @@ class Products {
   Map<String, dynamic> policyList = {};
 
   productsList(context, category) async {
-    products = await NetworkRequests().securedMawaAPI(
+    products = await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: Resources.products,
-        queryParameters: {'category': category}); //
+        queryParameters: {'category': category})); //
     print('products $products');
     return products;
   }
 
   generatePoliciesMap(String key) async {
-    dynamic list = await (Products().productsList(
-        Tools.context, Tools.productCategoryFuneralPolicy));
+    dynamic list = await NetworkRequests.decodeJson(await (Products().productsList(
+        Tools.context, Tools.productCategoryFuneralPolicy)));
     Map<String, String> data = {};
     if (list != null) {
       switch (key) {
@@ -58,7 +58,8 @@ class Products {
     };
 
     final http.Response response =
-        await http.get(Uri.http(url, ''), headers: headers);
+        // await http.get(Uri.http(url, ''), headers: headers);
+    await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet, resource: Resources.products,queryParameters: {QueryParameters.category:category}));
     int statusCode = response.statusCode;
     var data = response.body;
 

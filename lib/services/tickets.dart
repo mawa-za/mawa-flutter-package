@@ -11,7 +11,7 @@ class Tickets {
   static late Map ticket;
 
   static trackTicket() async {
-    List tickets = await Tickets.allMyTickets();
+    List tickets = await NetworkRequests.decodeJson(await Tickets.allMyTickets());
     List list = [];
     Map map = {};
     
@@ -57,22 +57,21 @@ class Tickets {
           JsonPayloads.New) {
         await openTicket(ticketNo);
       }
-
-      if (Tickets.ticket[JsonResponses.assignedTo] !=
+      else if (Tickets.ticket[JsonResponses.assignedTo] !=
           User.loggedInUser[JsonResponses.usersPartner]) {
         await reassignTicket(Tickets.ticketNo);
       }
 
-      await TicketLogs(ticketID: Tickets.ticketNo).ticketLogCreate();
-      if (NetworkRequests.statusCode == 200) {
+      dynamic status = await TicketLogs(ticketID: Tickets.ticketNo).ticketLogCreate();
+      if (status == 200) {
         Alerts.flushbar(
             context: Tools.context,
             message: 'You Have Started Working on The Ticket',
             positive: true,
             popContext: false);
 
-        await changeTicketStatus(status: Resources.inprogress);
-        if (NetworkRequests.statusCode == 200) {
+        int code = await changeTicketStatus(status: Resources.inprogress);
+        if (code == 200) {
           await TicketLogs(ticketID: ticketNo).ticketLogGet();
           Tickets.isTracking = true;
           // final SharedPreferences prefs = await preferences;
@@ -104,8 +103,8 @@ class Tickets {
   }
 
   endTracking(status) async {
-    await TicketLogs(ticketID: ticketNo).ticketLogClose(status);
-    if (NetworkRequests.statusCode == 200) {
+    dynamic response = await TicketLogs(ticketID: ticketNo).ticketLogClose(status);
+    if (response == 200) {
       // await changeTicketStatus(status: Resources.awaitingCustomer);
       isTracking = false;
 
@@ -118,12 +117,13 @@ class Tickets {
     print('getTicket');
     // ignore: unnecessary_null_comparison
     if (id != null && id != '') {
-      ticket = await NetworkRequests().securedMawaAPI(
+      dynamic response = await NetworkRequests().securedMawaAPI(
             NetworkRequests.methodGet,
             resource: Resources.tickets + '/' + id,
           ) ??
           {};
-      if (NetworkRequests.statusCode == 200){
+      if (response.statusCode == 200){
+        ticket = NetworkRequests.decodeJson(response);
         Time.dueTime =
             DateTime.parse(ticket[JsonResponses.dueDate].toString());
         ticketNo = ticket[JsonResponses.ticketLogID].toString();
@@ -142,8 +142,8 @@ class Tickets {
           JsonPayloads.assignedTo: User.partnerId
         });
 
-    if (NetworkRequests.statusCode == 200) {
-      myTickets = await response;
+    if (response.statusCode == 200) {
+      myTickets = await NetworkRequests.decodeJson(response);
     } else {
       myTickets = [];
     }
@@ -162,7 +162,7 @@ class Tickets {
 
   static getNewTickets() async {
     print('getNewTickets');
-    newTickets = [];
+    newTickets.clear();
     dynamic response = await NetworkRequests().securedMawaAPI(
             NetworkRequests.methodGet,
             resource: Resources.tickets,
@@ -175,11 +175,12 @@ class Tickets {
         [];
 
     print(response.length);
-    if(NetworkRequests.statusCode == 200){
-      for(int i = 0; i < response.length; i++) {
+    if(response.statusCode == 200){
+      dynamic data = await NetworkRequests.decodeJson(response);
+      for(int i = 0; i < data.length; i++) {
         print(i);
-        if(response[i][JsonResponses.status] == JsonPayloads.New || response[i][JsonResponses.status] == JsonPayloads.Open){
-          newTickets.add(response[i]);
+        if(data[i][JsonResponses.status] == JsonPayloads.New || data[i][JsonResponses.status] == JsonPayloads.Open){
+          newTickets.add(data[i]);
         }
       }
 
@@ -193,11 +194,11 @@ class Tickets {
 
   static openTicket(String ticketId) async {
     print('openTicket');
-    await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
+    dynamic response = await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
         resource:
             Resources.tickets + '/' + ticketId + '/' + Resources.ticketStatusOpen,
         queryParameters: {JsonPayloads.assignedTo: User.partnerId});
-    NetworkRequests.statusCode == 200
+    response.statusCode == 200
         ? Alerts.flushbar(
             context: Tools.context,
             message: 'Ticket Successfully Assigned To You',
@@ -208,10 +209,10 @@ class Tickets {
 
   static reassignTicket(String ticket) async {
     print('reassignTicket');
-    await NetworkRequests().securedMawaAPI(NetworkRequests.methodPut,
+    dynamic response = await NetworkRequests().securedMawaAPI(NetworkRequests.methodPut,
         resource: Resources.tickets + '/' + ticket,
         body: {JsonPayloads.assignedToID: User.partnerId});
-    NetworkRequests.statusCode == 200
+    response.statusCode == 200
         ? Alerts.flushbar(
             context: Tools.context,
             message: 'Ticket Successfully Assigned To You',
@@ -225,12 +226,13 @@ class Tickets {
   }) async {
     print('changeTicketStatus');
 
-    await NetworkRequests().securedMawaAPI(
+    dynamic response = await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPost,
       resource: Resources.tickets + '/' + ticketNo + '/' + status,
     );
-    if(NetworkRequests.statusCode == 200){
+    if(response.statusCode == 200){
       Alerts.flushbar(context: Tools.context, message: 'Successfully ' + status + 'ed', popContext: false, positive: true);
     }
+    return response.statusCode;
   }
 }
