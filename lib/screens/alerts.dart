@@ -80,21 +80,19 @@ class Alerts{
 
 
   openPopup(context, {message,title}) {
-    return Alert(
+    return AwesomeDialog(
         context: context,
         title: title ?? '',
-        content: Text('$message'),
-        buttons: [
-          DialogButton(child: const Text('OK', style: TextStyle(color: Colors.white),), onPressed: ()=> Navigator.of(context).pop(), color: Colors.blueGrey)
-        ]
+        body: Text('$message'),
+        btnOk: DialogButton(child: const Text('OK', style: TextStyle(color: Colors.white),), onPressed: ()=> Navigator.of(context).pop(), color: Colors.blueGrey)
     ).show();
   }
 
   popup(context, {message,title}) {
-    return Alert(
+    return AwesomeDialog(
         context: context,
         title: title ?? '',
-        content: Text('$message'),
+        body: Text('$message'),
         // buttons: [
         //   DialogButton(child: const Text('OK', style: TextStyle(color: Colors.white),), onPressed: ()=> Navigator.of(context).pop(), color: Colors.blueGrey)
         // ]
