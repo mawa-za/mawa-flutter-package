@@ -20,12 +20,13 @@ class OTP {
 
   }
 
-  otpPopup() {
+  otpPopup({String? message}) {
     Tools.isTouchLocked = false;
-    return Alert(
+    return AwesomeDialog(
         context: context,
         title: 'One Time Pin',
-        content: Column(children: [
+        body: Column(children: [
+          Text(message ?? '',textAlign: TextAlign.center, style: const TextStyle(color: Colors.redAccent),),
           Form(
             key: _tokenFormKey,
             child: TextFormField(
@@ -65,8 +66,8 @@ class OTP {
           ),
         ]
         ),
-        buttons: [
-          DialogButton(
+        btnOk: Constants.dialogCloseButton(context: context),
+        btnCancel: DialogButton(
             child: const Text('Proceed'),
             onPressed: () {
               if(_tokenFormKey.currentState!.validate()){
@@ -78,8 +79,6 @@ class OTP {
             },
             color: Colors.green,
           ),
-          Constants.dialogCloseButton(context: context),
-        ]
     ).show();
   }
 
