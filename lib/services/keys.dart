@@ -228,6 +228,8 @@ class Resources{
   static const String inprogress = 'inprogress';
   static const String awaitingCustomer = 'awaitingCustomer';
 
+  static const String sendNotifications = 'sendNotifications';
+
 }
 
 class JsonPayloads{
@@ -318,6 +320,9 @@ class QueryParameters{
 
   static const String versionApkVersionCode = 'versionNumber';
   static const String value = 'value';
+
+  static const String meesageType = 'meesageType';
+  static const String adminEmail = 'adminEmail';
 
 
 }
