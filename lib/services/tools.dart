@@ -348,6 +348,18 @@ class Tools{
         ));
   }
 
+  static textInputDecoration(String textLabel, {String? hint, String? helperTxt}) {
+    return InputDecoration(
+        helperText: helperTxt ?? '',
+        labelText: textLabel,
+        hintText: hint,
+        filled: true,
+        fillColor: Colors.grey[100],
+        border: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+        ));
+  }
+
   static dropdownContainerDeco() {
     return BoxDecoration(
       color: Colors.grey[100],
