@@ -377,4 +377,5 @@ class Tools{
     //   borderRadius: BorderRadius.all(Radius.circular(10.0)),
     // );
   }
+
 }
