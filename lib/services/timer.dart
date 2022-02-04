@@ -34,18 +34,18 @@ class Time {
 
   var route = ModalRoute.of(Tools.context);
 
-  // if(route!=null){
-  // print(route.settings.name);
-  // if(route.settings.name.toString() !=  TrackTicket.id){
-  //     // if(Tools.context.owner !=  TrackTicket()) {
-  //     if(showPopup) {
-  //       Navigator.pushNamed(Tools.context, TrackTicket.id);
-  //       Alerts().openPopup(Tools.context, message: 'You AreOut Of Time',
-  //           title: 'Ticket Is Due');
-  //       showPopup =false;
-  //     }
-  //       }
-  //     }
+  if(route!=null){
+  print(route.settings.name);
+  if(route.settings.name.toString() !=  Tickets.pageId!){
+      // if(Tools.context.owner !=  TrackTicket()) {
+      if(showPopup) {
+        Navigator.pushNamed(Tools.context, Tickets.pageId!);
+        Alerts().openPopup(Tools.context, message: 'You AreOut Of Time',
+            title: 'Ticket Is Due');
+        showPopup =false;
+      }
+        }
+      }
     },
   );
 
