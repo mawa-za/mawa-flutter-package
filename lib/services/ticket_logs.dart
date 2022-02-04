@@ -26,7 +26,7 @@ class TicketLogs {
     return response.statusCode;
   }
 
-  static Future<dynamic> ticketLogSearch() async {
+  Future<dynamic> ticketLogSearch() async {
     dynamic response =await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: Resources.ticketsLog,
@@ -77,9 +77,8 @@ class TicketLogs {
     // return resp.statusCode;
   }
 
-
-  static searchUsersLog() async {
-    await TicketLogs.ticketLogSearch();
+  Future<dynamic> searchUsersLog() async {
+    await TicketLogs(ticketID: Tickets.ticketNo).ticketLogSearch();
     if(TicketLogs.allTicketLogs.isNotEmpty){
       List assigndTo = [];
       for(int i = TicketLogs.allTicketLogs.length -1; i >= 0; i--){

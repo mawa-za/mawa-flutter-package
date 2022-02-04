@@ -34,7 +34,7 @@ class Tickets {
       // getTicket(ticketNo);
       // Tickets(ticketID: ticketNo).ticketLogGet();
       Tickets.isTracking = true;
-      await TicketLogs.searchUsersLog();
+      await TicketLogs(ticketID: ticketNo).searchUsersLog();
 
       after;      // Navigator.pushNamed(Tools.context, TrackTicket.id);
     }
