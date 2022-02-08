@@ -13,7 +13,7 @@ class ApkVersion {
     getApkInfo();
   }
 
-  getApkInfo()async {
+  Future getApkInfo()async {
     packageInfo = await PackageInfo.fromPlatform();
 
     appName = packageInfo.appName;
