@@ -228,6 +228,7 @@ class Resources{
   static const String inprogress = 'inprogress';
   static const String awaitingCustomer = 'awaitingCustomer';
 
+  static const String addresses = 'addresses';
   static const String sendNotifications = 'sendNotifications';
 
 }
