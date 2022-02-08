@@ -1,20 +1,23 @@
 part of mawa;
 
 class Tickets {
-  Tickets({required String ticketID}) {
+  Tickets({required String ticketID, page}) {
     Tickets.ticketNo = ticketID;
+    pageId = page;
   }
+  static String? pageId;
   static late String ticketNo;
   static late bool isTracking;
-  static late List newTickets;
-  static late List myTickets;
-  static late Map ticket;
+  static late List newTickets = [];
+  static List myTickets = [];
+  static late Map ticket = {};
+  static Map? changeStatusBody;
 
-  static trackTicket() async {
+  static trackTicket(dynamic after) async {
     List tickets = await NetworkRequests.decodeJson(await Tickets.allMyTickets());
     List list = [];
     Map map = {};
-    
+
     for (int i = 0; i < tickets.length; i++) {
       list.add(tickets[i][JsonResponses.status]);
       map[tickets[i][JsonResponses.status]] = i;
@@ -31,9 +34,9 @@ class Tickets {
       // getTicket(ticketNo);
       // Tickets(ticketID: ticketNo).ticketLogGet();
       Tickets.isTracking = true;
-      await TicketLogs.searchUsersLog();
+      await TicketLogs(ticketID: ticketNo).searchUsersLog();
 
-      // Navigator.pushNamed(Tools.context, TrackTicket.id);
+      after;      // Navigator.pushNamed(Tools.context, TrackTicket.id);
     }
 
     else if (Tickets.ticket[JsonResponses.status] == JsonPayloads.InProgress &&
@@ -88,7 +91,7 @@ class Tickets {
 
           Time.countDownTimer.onExecute.add(StopWatchExecute.start);
           // Navigator.push(Tools.context, MaterialPageRoute(builder: (_)=> TrackTicket()));
-          // Navigator.pushNamed(Tools.context, TrackTicket.id);
+          after; // Navigator.pushNamed(Tools.context, TrackTicket.id);
         }
       }
     }
@@ -110,6 +113,10 @@ class Tickets {
 
       Time.countDownTimer.onExecute.add(StopWatchExecute.stop);
       // Navigator.popAndPushNamed(Tools.context, DashBoard.id);
+      return true;
+    }
+    else{
+      return false;
     }
   }
 
@@ -221,6 +228,7 @@ class Tickets {
         : null;
   }
 
+  ///if the reason for changing the status is a resolution or a rejection, then a body must be supplied by initializing [changeStatusBody]
   static changeTicketStatus({
     required String status,
   }) async {
@@ -229,6 +237,7 @@ class Tickets {
     dynamic response = await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPost,
       resource: Resources.tickets + '/' + ticketNo + '/' + status,
+      body: changeStatusBody ?? {},
     );
     if(response.statusCode == 200){
       Alerts.flushbar(context: Tools.context, message: 'Successfully ' + status + 'ed', popContext: false, positive: true);

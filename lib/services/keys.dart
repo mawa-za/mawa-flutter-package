@@ -229,6 +229,7 @@ class Resources{
   static const String awaitingCustomer = 'awaitingCustomer';
 
   static const String addresses = 'addresses';
+  static const String sendNotifications = 'sendNotifications';
 
 }
 
@@ -320,6 +321,9 @@ class QueryParameters{
 
   static const String versionApkVersionCode = 'versionNumber';
   static const String value = 'value';
+
+  static const String meesageType = 'meesageType';
+  static const String adminEmail = 'adminEmail';
 
 
 }

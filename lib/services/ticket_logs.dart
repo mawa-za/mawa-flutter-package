@@ -5,8 +5,8 @@ class TicketLogs {
     Tickets.ticketNo = ticketID;
   }
 
-  static late List allTicketLogs;
-  static late Map ticketsLog;
+  static List allTicketLogs = [];
+  static Map ticketsLog = {};
   static late String ticketLogID;
 
   Future<dynamic> ticketLogCreate() async {
@@ -26,15 +26,18 @@ class TicketLogs {
     return response.statusCode;
   }
 
-  static Future<dynamic> ticketLogSearch() async {
-    dynamic response = await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+  Future<dynamic> ticketLogSearch() async {
+    dynamic response =await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: Resources.ticketsLog,
         queryParameters: {
           QueryParameters.id: Tickets.ticketNo,
-        }));
-    if (NetworkRequests.statusCode == 200) {
-      allTicketLogs = response;
+        });
+    if (response.statusCode == 200) {
+      allTicketLogs =  await NetworkRequests.decodeJson(response);
+    }
+    else{
+      allTicketLogs = [];
     }
     return allTicketLogs;
   }
@@ -48,9 +51,9 @@ class TicketLogs {
     // : null
         ;
     if(response.statusCode == 200) {
-      status == Tools.close
+      status == Tools.resolve
           ? Tickets.changeTicketStatus(status: Resources.awaitingCustomer)
-          : status == Tools.pause
+          : status == Tools.close
               ? Tickets.openTicket(Tickets.ticketNo)
               : null;
     }
@@ -68,12 +71,14 @@ class TicketLogs {
       Time.startTime =
           DateTime.parse(await ticketsLog[JsonResponses.ticketLogStartTime]);
     }
-    return resp.statusCode;
+    else{
+      ticketsLog = {};
+    }
+    // return resp.statusCode;
   }
 
-
-  static searchUsersLog() async {
-    await TicketLogs.ticketLogSearch();
+  Future<dynamic> searchUsersLog() async {
+    await TicketLogs(ticketID: Tickets.ticketNo).ticketLogSearch();
     if(TicketLogs.allTicketLogs.isNotEmpty){
       List assigndTo = [];
       for(int i = TicketLogs.allTicketLogs.length -1; i >= 0; i--){
