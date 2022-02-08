@@ -6,11 +6,12 @@ class Persons {
   late String  clientStatus;
   late bool status;
   static Map person = {};
+  static Map group = {};
   static List people = [];
   static List personRoles = [];
   static dynamic personIdentities;
   static dynamic personContacts;
-  static dynamic personAddresses;
+  List personAddresses = [];
 
   Persons(String id){
     personId = id;
@@ -53,7 +54,8 @@ class Persons {
   }
 
   getPersonDetail({required String option,}) async {
-    return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-        resource: '${Resources.persons}/${Persons.personId}/$option'));
+    dynamic response = await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
+        resource: '${Resources.persons}/${Persons.personId}/$option');
+    response.statusCode == 200 ? personAddresses =  await NetworkRequests.decodeJson(response): personAddresses = [];
   }
 }
