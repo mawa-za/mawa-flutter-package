@@ -32,14 +32,17 @@ class Receipts {
     String filterString;
     filter ? filterString = 'x' : filterString = '';
 
-    receiptsList = [];
-    receiptsList = await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+    receiptsList.clear();
+    dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: Resources.receipts,
         queryParameters: {
           QueryParameters.processedBy: User.loggedInUser[JsonResponses.id],
           QueryParameters.filter: filterString
-        }));
+        });
+    response.statusCode == 200 ?
+    receiptsList = await NetworkRequests.decodeJson(response.body)
+    : receiptsList = [];
   }
 
   receiptHistory(String referenceNo) async {
