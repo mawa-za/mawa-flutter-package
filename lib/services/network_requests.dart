@@ -301,6 +301,14 @@ class NetworkRequests {
             message: 'Request Terminated During Handshake',
             positive: false);
       }
+      // on PresentationConnectionCloseEvent catch (e) {
+      //   Tools.isTouchLocked = false;
+      //   print(e.toString());
+      //   Alerts.flushbar(
+      //       context: Tools.context,
+      //       message: 'Connection Lost During Request',
+      //       positive: false);
+      // }
 
       return feedback;
 
