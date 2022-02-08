@@ -45,7 +45,7 @@ class OTP {
               },
               decoration: const InputDecoration(
                 icon: Icon(Icons.lock_clock),
-                labelText: 'OTP Your Mail  or Messages',
+                labelText: 'OTP Your Mail or Messages',
               ),
               onEditingComplete: (){
                 Navigator.of(context).pop();
