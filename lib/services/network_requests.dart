@@ -40,6 +40,7 @@ class NetworkRequests {
         return jsonDecode(response.body);
       }
       catch (e) {
+        return null;
         print(e.toString());
       }
     }
@@ -309,7 +310,7 @@ class NetworkRequests {
       //       message: 'Connection Lost During Request',
       //       positive: false);
       // }
-
+  print('last');
       return feedback;
 
     }
