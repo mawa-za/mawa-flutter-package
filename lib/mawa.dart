@@ -1,6 +1,4 @@
 library mawa;
-import 'package:path/path.dart' as path;
-import 'package:async/async.dart';
 import 'package:dio/dio.dart'/* as dio*/;
 import 'package:http_parser/http_parser.dart' as parser;
 
@@ -9,7 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:connectivity/connectivity.dart';
 import 'dart:async';
-import 'package:flutter/services.dart';
 import 'package:flutter/painting.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -22,8 +19,6 @@ import 'package:http/http.dart' as http;
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:another_flushbar/flushbar.dart';
-// import 'package:device_info/device_info.dart';
-// import 'package:geolocator/geolocator.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:device_information/device_information.dart';
