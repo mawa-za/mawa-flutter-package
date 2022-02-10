@@ -201,6 +201,7 @@ class Resources{
   static const String fields = 'fields';
   static const String fieldOptions = 'fieldoptions';
   static const String leavesApprovers = 'leavesApprovers';
+  static const String approversHistory = 'approversHistory';
   static const String leavesToApprove = 'leavesToApprove';
   static const String leaveProfiles = 'leaveProfiles';
   static const String transactionNotes = 'transactionNotes';
