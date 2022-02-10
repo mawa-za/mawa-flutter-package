@@ -7,6 +7,7 @@ class Leaves  {
   static late List leaveTypes;
   static List approvers = [];
   static late List pendingResponse;
+  static List approverHistory = [];
 
   leaveProfile({required String partnerFunctionType}) async {
     String? partner;
@@ -38,6 +39,23 @@ class Leaves  {
     ));
 
     return approvers;
+  }
+
+  getApproversHistory({required bool pending}) async {
+    approverHistory.clear();
+    dynamic response = await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodGet,
+      resource: Resources.leaves + '/' + Resources.approversHistory,
+        queryParameters: {
+          QueryParameters.approverId:
+          User.loggedInUser[JsonResponses.usersPartner]
+        },
+    );
+    if(response.statusCode == 200) {
+      approverHistory = await NetworkRequests.decodeJson(response);
+    }
+
+    return approverHistory;
   }
 
   logLeave(
