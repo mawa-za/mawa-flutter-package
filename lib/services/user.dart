@@ -16,22 +16,50 @@ class User{
   getUserDetails (String username) async {
     loggedInUser.clear();
     try {
-      loggedInUser =
-      // Map<dynamic, dynamic>.from(
-      await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+      dynamic response = await NetworkRequests().securedMawaAPI(
           NetworkRequests.methodGet,
           resource: '${Resources.users}/$username')
-      )
       // )
           ;
-      partnerId = loggedInUser[JsonResponses.usersPartner];
-      Persons.personId = loggedInUser[JsonResponses.usersPartner];
-      groupId =  loggedInUser[JsonResponses.usersPartner];
-
+      if(response.statusCode == 200 ) {
+      loggedInUser =
+      // Map<dynamic, dynamic>.from(
+        await NetworkRequests.decodeJson(response);
+        partnerId = loggedInUser[JsonResponses.usersPartner];
+        Persons.personId = loggedInUser[JsonResponses.usersPartner];
+        groupId = loggedInUser[JsonResponses.usersPartner];
+      }
     }
     catch(e){
       loggedInUser.clear();
     }
+  }
+
+  getAllUsers() async {
+    User.users.clear();
+    dynamic listUsers = await NetworkRequests()
+        .securedMawaAPI(NetworkRequests.methodGet, resource: Resources.users);
+    Map<String, String> mapUsers = {};
+    if (listUsers != null) {
+      if (listUsers.isNotEmpty && listUsers.runtimeType == Constants.list.runtimeType) {
+        for (int i = 0; i < listUsers.length; i++) {
+          listUsers[i][JsonResponses.usersFirstName] != null &&
+              listUsers[i][JsonResponses.usersFirstName] != null
+              ? mapUsers['${listUsers[i][JsonResponses.id]}'] =
+          '${listUsers[i][JsonResponses.usersLastName] ??
+              'Surname not Supplied'}, ${listUsers[i][JsonResponses
+              .usersFirstName] ??
+              'Name not Supplied'}' //'${listUsers[i][JsonKeys.usersLastName]}, ${listUsers[i][JsonKeys.usersFirstName]}'
+              : mapUsers['${listUsers[i][JsonResponses.id]}'] =
+          'No Name Provided';
+        }
+      }
+      else{
+        mapUsers.clear();
+      }
+    }
+    User.users = mapUsers;
+    // print('opw\n$users\n name');
   }
 
   forgotPassword({required String emailAddress}) async {
