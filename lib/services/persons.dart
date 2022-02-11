@@ -11,17 +11,27 @@ class Persons {
   static List personRoles = [];
   static dynamic personIdentities;
   static dynamic personContacts;
-  List personAddresses = [];
+  List personDetail = [];
 
   Persons(String id){
     personId = id;
   }
 
-  Future personSearch({required String id, required String idType,}) async {
-    String resource =
-        '${Resources.persons}/?idnumber=$id&idtype=$idType&filter=x';
-    return await NetworkRequests.decodeJson(await NetworkRequests()
-        .securedMawaAPI(NetworkRequests.methodGet, resource: resource));
+  static Future personSearch({String? idNumber, String? idType, String? lastName, String? middleName, String? firsName}) async {
+    Persons.people.clear();
+    dynamic peopleResponse = await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
+        resource: Resources.persons,
+        queryParameters: {
+          'idnumber': idNumber,
+          'idtype': idType,
+          'firstName': firsName,
+          'middleName': middleName,
+          'lastName': lastName,
+          'filter': 'x'
+        });
+
+
+    peopleResponse.runtimeType == people.runtimeType ? people = peopleResponse: people = [];
   }
 
   validateSAID(id) async {
@@ -32,10 +42,19 @@ class Persons {
     return status;
   }
 
-  getPerson(String personId) async {
+  getPerson() async {
     print('person $personId');
-    return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-        resource: '${Resources.persons}/$personId'));
+    Persons.person.clear();
+    dynamic respond = await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
+        resource: '${Resources.persons}/$personId');
+    try{
+      person = await NetworkRequests.decodeJson(respond);
+
+    }
+    catch (e){
+      person = {};
+    }
+    return person;
   }
 
   Future<dynamic> adaNewClient(clientDetails) async {
@@ -43,9 +62,10 @@ class Persons {
         resource: Resources.persons, body: clientDetails));
   }
 
-  Future assignPersonRole({required String personID, required String personRole}) async{
+  Future assignPersonRole({required String personRole}) async{
     await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
-        resource: '${Resources.persons}/$personID/roles?role=$personRole'));
+        resource: '${Resources.persons}/$personId/roles',
+        queryParameters: {'role': personRole}));
   }
 
   addPersonDetail({required String personID, required String path, required String field, required String detail}) async{
@@ -56,6 +76,7 @@ class Persons {
   getPersonDetail({required String option,}) async {
     dynamic response = await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
         resource: '${Resources.persons}/${Persons.personId}/$option');
-    response.statusCode == 200 ? personAddresses =  await NetworkRequests.decodeJson(response): personAddresses = [];
+    response.statusCode == 200 ? personDetail =  await NetworkRequests.decodeJson(response): personDetail = [];
+  return personDetail;
   }
 }
