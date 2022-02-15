@@ -6,6 +6,8 @@ class OutdatedAPK extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Tools.context = context;
+    FocusScope.of(context).unfocus();
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(

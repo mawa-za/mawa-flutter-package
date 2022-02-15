@@ -5,6 +5,7 @@ static const String id = 'loading';
   @override
   Widget build(BuildContext context) {
     Tools.context = context;
+    FocusScope.of(context).unfocus();
     return Center(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,

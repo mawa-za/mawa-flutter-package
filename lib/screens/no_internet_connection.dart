@@ -3,6 +3,10 @@ part of mawa;
 class NoConnectionScreen extends StatefulWidget {
   static const String id = 'Connectivity';
 
+  String connectionStatus = 'Unknown';
+  final Connectivity connectivity = Connectivity();
+  StreamSubscription<ConnectivityResult>? connectivitySubscription;
+
   NoConnectionScreen({required this.redirect});
   final String redirect;
 
@@ -11,21 +15,18 @@ class NoConnectionScreen extends StatefulWidget {
 }
 
 class _NoConnectionScreenState extends State<NoConnectionScreen> {
-  String _connectionStatus = 'Unknown';
-  final Connectivity _connectivity = Connectivity();
-  StreamSubscription<ConnectivityResult>? _connectivitySubscription;
 
   @override
   void initState() {
     super.initState();
     initConnectivity();
-    _connectivitySubscription =
-        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+    widget.connectivitySubscription =
+        widget.connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
   }
 
   @override
   void dispose() {
-    _connectivitySubscription!.cancel();
+    widget.connectivitySubscription!.cancel();
     super.dispose();
   }
 
@@ -34,7 +35,7 @@ class _NoConnectionScreenState extends State<NoConnectionScreen> {
     ConnectivityResult? result;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      result = await _connectivity.checkConnectivity();
+      result = await widget.connectivity.checkConnectivity();
     } on PlatformException catch (e) {
       print(e.toString());
     }
@@ -51,6 +52,7 @@ class _NoConnectionScreenState extends State<NoConnectionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    FocusScope.of(context).unfocus();
     Tools.context = context;
     return Scaffold(
       backgroundColor: Colors.blue,
@@ -58,8 +60,8 @@ class _NoConnectionScreenState extends State<NoConnectionScreen> {
         mainAxisAlignment:  MainAxisAlignment.center,
         crossAxisAlignment:  CrossAxisAlignment.stretch,
         children: [
-          Flexible(child: Icon(Icons.network_check,size: 200.0,)),
-          Text('$_connectionStatus', textAlign: TextAlign.center,),
+          const Flexible(child: Icon(Icons.network_check,size: 200.0,)),
+          Text('${widget.connectionStatus} ', textAlign: TextAlign.center,),
         ],
 
       ),
@@ -73,10 +75,10 @@ class _NoConnectionScreenState extends State<NoConnectionScreen> {
         Navigator.popAndPushNamed(context,widget.redirect);
         break;
       case ConnectivityResult.none:
-        setState(() => _connectionStatus = 'No Network Connectivity');
+        setState(() => widget.connectionStatus = 'No Network Connectivity');
         break;
       default:
-        setState(() => _connectionStatus = 'Failed to get connectivity.');
+        setState(() => widget.connectionStatus = 'Failed to get connectivity.');
         break;
     }
   }
