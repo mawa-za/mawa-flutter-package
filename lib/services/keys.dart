@@ -104,6 +104,7 @@ class JsonResponses{
   static const String personMaritalStatus = 'maritalStatus';
   static const String personTitle = 'title';
   static const String personStatus = 'status';
+  static const String processor = 'processor';
 
   static const String ticketLogID = 'ticketLogID';
   static const String ticketLogTicketID = 'ticketID';
