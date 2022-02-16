@@ -243,7 +243,7 @@ class NetworkRequests {
               Tools.isTouchLocked = false;
               Alerts.flushbar(
                   context: Tools.context,
-                  message: 'Server Error',
+                  message: 'Something Went Wrong',
                   positive: false);
             }
             break;
@@ -303,6 +303,7 @@ class NetworkRequests {
             message: 'Request Terminated During Handshake',
             positive: false);
       }
+
       // on PresentationConnectionCloseEvent catch (e) {
       //   Tools.isTouchLocked = false;
       //   print(e.toString());
@@ -311,6 +312,14 @@ class NetworkRequests {
       //       message: 'Connection Lost During Request',
       //       positive: false);
       // }
+      catch (e) {
+        Tools.isTouchLocked = false;
+        print(e.toString());
+        Alerts.flushbar(
+            context: Tools.context,
+            message: 'Something Went Wrong',
+            positive: false);
+      }
   print('last');
       return feedback;
 
