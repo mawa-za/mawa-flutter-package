@@ -37,12 +37,16 @@ class User{
 
   getAllUsers() async {
     User.users.clear();
-    dynamic listUsers = await NetworkRequests()
+    dynamic response =
+    await NetworkRequests()
         .securedMawaAPI(NetworkRequests.methodGet, resource: Resources.users);
     Map<String, String> mapUsers = {};
-    if (listUsers != null) {
-      if (listUsers.isNotEmpty && listUsers.runtimeType == Constants.list.runtimeType) {
-        for (int i = 0; i < listUsers.length; i++) {
+
+    if(response.statusCode == 200){
+
+    dynamic listUsers = await NetworkRequests.decodeJson(response);
+        try{
+          for (int i = 0; i < listUsers.length; i++) {
           listUsers[i][JsonResponses.usersFirstName] != null &&
               listUsers[i][JsonResponses.usersFirstName] != null
               ? mapUsers['${listUsers[i][JsonResponses.id]}'] =
@@ -54,9 +58,12 @@ class User{
           'No Name Provided';
         }
       }
-      else{
+      catch(e){
         mapUsers.clear();
       }
+  }
+    else{
+    mapUsers.clear();
     }
     User.users = mapUsers;
     // print('opw\n$users\n name');
