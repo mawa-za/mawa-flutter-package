@@ -23,8 +23,8 @@ class Products {
   }
 
   generatePoliciesMap(String key) async {
-    dynamic list = await NetworkRequests.decodeJson(await (Products().productsList(
-        Tools.context, Tools.productCategoryFuneralPolicy)));
+    dynamic list = await Products().productsList(
+        Tools.context, Tools.productCategoryFuneralPolicy);
     Map<String, String> data = {};
     if (list != null) {
       switch (key) {
@@ -47,7 +47,7 @@ class Products {
       }
     }
     Products.productsMap = data;
-    // print('meva \n${Products.productsMap}');
+    print('meva \n${Products.productsMap}');
   }
 
   dynamic getProductInfo(category) async {
