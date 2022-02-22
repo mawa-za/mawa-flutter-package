@@ -10,6 +10,8 @@ class Tools{
 
   // static late bool isTracking;
 
+  static const String userTypeInternal = 'Internal';
+  static const String userTypeExternal = 'External';
   static const String close = 'Close';
   static const String TRANSACTION = 'TRANSACTION';
   static const String LEAVEREQUEST = 'LEAVEREQUEST';
