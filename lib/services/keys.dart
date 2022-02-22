@@ -38,6 +38,7 @@ class JsonResponses{
   static const String token = 'token';
 
   static const String userID = 'userID';
+  static const String userType = 'userType';
 
   static const String parent = 'parent';
   static const String fileName = 'fileName';
