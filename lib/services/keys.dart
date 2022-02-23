@@ -31,6 +31,7 @@ class JsonResponses{
   static const String processingTime = 'processingTime';
 
   static const String reference = 'reference';
+  static const String refreshToken = 'refreshToken';
 
   static const String status = 'status';
   static const String subDescription = 'subDescription';
@@ -241,6 +242,8 @@ class Resources{
   static const String endTask = 'endTask';
   static const String completeTask = 'completeTask';
 
+  static const String refreshAuthenticate = 'refreshAuthenticate';
+
 }
 
 class JsonPayloads{
@@ -342,6 +345,8 @@ class QueryParameters{
   static const String dueDate = 'dueDate';
   static const String taskLogID = 'taskLogID';
 
+  static const String userID = 'userID';
+
 
 }
 
@@ -369,6 +374,7 @@ class SharedPrefs{
   static const endTime = 'endTime';
   static const isTracking = 'isTracking';
   static const trackingTicketID = 'trackingTicketID';
+  static const refreshToken = 'refreshToken';
 
 }
 
