@@ -1,11 +1,11 @@
 part of mawa;
 
 class Tasks {
-  Tasks({required this.reference, this.taskID});
-  late String reference;
-  String? taskID;
+  Tasks({this.reference,required this.taskID});
+  late String taskID;
+  String? reference;
 
-  responseAction(dynamic response, dynamic negativeResult) async {
+  static responseAction(dynamic response, dynamic negativeResult) async {
     if (response.statusCode == 200) {
       return await NetworkRequests.decodeJson(response);
     } else {
@@ -15,7 +15,7 @@ class Tasks {
 
   //     getting all task assigned to someone
 //     GET /mawa-api/resources/tickets/getTasksAssigned?assignTo=PN0000000570
-  getAllAssignedTasks(assignTo) async {
+  static getAllAssignedTasks(assignTo) async {
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPost,
         resource: '${Resources.tickets}/${Resources.getTasksAssigned}',
@@ -88,4 +88,29 @@ class Tasks {
     );
     return await responseAction(response, '');
   }
+
+//    getting a specific task
+//  GET /mawa-api/resources/tickets/getSpecificTask?ticketTaskID=TTSK0000000003
+  getTask() async {
+    dynamic response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPut,
+        resource: '${Resources.tickets}/${Resources.getSpecificTask}',
+        body: {
+          QueryParameters.ticketTaskID: taskID,
+        });
+    return await responseAction(response, '');
+
+  }
+
+//  getting a list of tasks that belong to a ticket
+//  GET /mawa-api/resources/tickets/TN0000000007/getTasks
+  getTicketTasks() async {
+
+    dynamic response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPut,
+        resource: '${Resources.tickets}/$reference/${Resources.getTasks}',
+        );
+    return await responseAction(response, '');
+  }
+
 }

@@ -241,6 +241,8 @@ class Resources{
   static const String cancelTask = 'cancelTask';
   static const String endTask = 'endTask';
   static const String completeTask = 'completeTask';
+  static const String getSpecificTask = 'getSpecificTask';
+  static const String getTasks = 'getTasks';
 
   static const String refreshAuthenticate = 'refreshAuthenticate';
 
