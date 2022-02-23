@@ -181,6 +181,9 @@ static const String policySalesRepresentativeDetails = 'salesRepresentativeDetai
 
   // static const String = '';
 
+  static const String ticketTaskID = 'ticketTaskID';
+  static const String personAssignTo = 'personAssignTo';
+
   static const String leaveApprover = 'approver';
 }
 
