@@ -517,6 +517,22 @@ class NetworkRequests {
         popContext: false,
       );
     }
+    // on PresentationConnectionCloseEvent catch (e) {
+    //   Tools.isTouchLocked = false;
+    //   print(e.toString());
+    //   Alerts.flushbar(
+    //       context: Tools.context,
+    //       message: 'Connection Lost During Request',
+    //       positive: false);
+    // }
+    catch (e) {
+      Tools.isTouchLocked = false;
+      print(e.toString());
+      Alerts.flushbar(
+          context: Tools.context,
+          message: 'Something Went Wrong',
+          positive: false);
+    }
     return feedback;
   }
 }
