@@ -46,9 +46,9 @@ class NetworkRequests {
     }
   }
 
-   Map<String, String> headers({required String tokenKey,}) {
+   Map<String, String> headers({required String tokenKey, bool secured = true}) {
     Map<String, String> headers = {/*"Authorization": "Bearer $tokenKey"*/};
-    headers["Authorization"] = "Bearer $tokenKey";
+    secured ? headers["Authorization"] = "Bearer $tokenKey":null;
 
     responseType ??= responseJson;
     print('responseType $responseType');
@@ -374,21 +374,21 @@ class NetworkRequests {
           feedback = await http.get(
             url,
             // headers: headers,
-            headers: this.headers(tokenKey: token),
+            headers: this.headers(tokenKey: token, secured: false),
 
           );
           break;
         case methodPost:
           feedback = await http.post(
               url,
-              headers: this.headers(tokenKey: token),
+              headers: this.headers(tokenKey: token, secured: false),
               // headers: headers,
               body: jsonEncode(payload));
           break;
         case methodPut:
           print('wow wow $token');
           feedback = await http.put(url,
-              headers: this.headers(tokenKey: token),
+              headers: this.headers(tokenKey: token, secured: false),
               // headers: headers,
               body: jsonEncode(payload));
           break;
@@ -408,30 +408,33 @@ class NetworkRequests {
             dynamic data;
             Tools.isTouchLocked = false;
             data = jsonDecode(feedback.body);
-            if(resource == Resources.otp) {
-              otp = await data.toString();
-            }
-            if(resource == Resources.authenticate) {
+            // if(resource == Resources.otp) {
+            //   otp = await data.toString();
+            // }
+            // if(resource == Resources.authenticate) {
               token = await data[JsonResponses.token];
-
+              Token.refreshToken = await data[JsonResponses.refreshToken];
               preferences.then((SharedPreferences prefs) {
                 return (prefs.setString(SharedPrefs.token, token));
               });
               preferences.then((SharedPreferences prefs) {
+                return (prefs.setString(SharedPrefs.refreshToken, Token.refreshToken));
+              });
+              preferences.then((SharedPreferences prefs) {
                 return (prefs.setString(SharedPrefs.username, User.username));
               });
-              /*// final String string = (prefs.getString(SharedPreferencesKeys.token) ?? '');
-
-             // _key =
-                 prefs.setString(SharedPreferencesKeys.token, string)
-            //      .then((bool success) {
-            //   return token;
-            // })
-            ;*/
-              await User().getUserDetails(payload![JsonResponses.userID]!);
-              // Navigator.pushReplacementNamed(context, direct!);
-              postAuthenticate;
-            }
+            //   /*// final String string = (prefs.getString(SharedPreferencesKeys.token) ?? '');
+            //
+            //  // _key =
+            //      prefs.setString(SharedPreferencesKeys.token, string)
+            // //      .then((bool success) {
+            // //   return token;
+            // // })
+            // ;*/
+            //   await User().getUserDetails(payload![JsonResponses.userID]!);
+            //   // Navigator.pushReplacementNamed(context, direct!);
+            //   postAuthenticate;
+            // }
 
             print('token oyjfjdbfjd\n' + token.toString());
           }
@@ -443,7 +446,7 @@ class NetworkRequests {
                 context: Tools.context,
                 message: 'Incorrect login',
                 positive: false,
-                popContext: true);
+                popContext: false);
           }
           break;
         case 404:
@@ -453,7 +456,7 @@ class NetworkRequests {
                 context: Tools.context,
                 message: 'Server Down',
                 positive: false,
-                popContext: true);
+                popContext: false);
           }
           break;
         case 0:
@@ -463,7 +466,7 @@ class NetworkRequests {
                 context: Tools.context,
                 message: 'Network Error',
                 positive: false,
-                popContext: true);
+                popContext: false);
           }
           break;
         case 1:
@@ -473,7 +476,7 @@ class NetworkRequests {
                 context: Tools.context,
                 message: 'Network Error',
                 positive: false,
-                popContext: true);
+                popContext: false);
           }
           break;
         default:
@@ -483,7 +486,7 @@ class NetworkRequests {
               context: Tools.context,
               message: 'Login failed',
               positive: false,
-              popContext: true,);
+              popContext: false,);
           }
           break;
       }
@@ -496,7 +499,7 @@ class NetworkRequests {
         context: Tools.context,
         message: 'Request Timed Out. \nCheck Network Connection.',
         positive: false,
-        popContext: true,);
+        popContext: false,);
     } on SocketException catch (e) {
       Tools.isTouchLocked = false;
       print(e.toString());
@@ -511,8 +514,9 @@ class NetworkRequests {
         context: Tools.context,
         message: 'Request Terminated During Handshake',
         positive: false,
-        popContext: true,
+        popContext: false,
       );
     }
+    return feedback;
   }
 }
