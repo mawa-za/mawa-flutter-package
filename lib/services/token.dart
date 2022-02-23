@@ -2,14 +2,14 @@ part of mawa;
 
 class Token {
 
-  //[Monday 5:31 PM] Time Mtsi
-  //
+  static String refreshToken = '';
+
   // POST /mawa-api/resources/refreshAuthenticate
   //     Please note that you need to use refresh token to make this call as this is a secure call
   //     {
   //   "userID":"time@"
   // }
-  refreshToken(userID) async {
+  getNewToken(userID) async {
 
     final SharedPreferences prefs = await preferences;
 
