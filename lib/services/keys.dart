@@ -234,6 +234,13 @@ class Resources{
   static const String addresses = 'addresses';
   static const String sendNotifications = 'sendNotifications';
 
+  static const String getTasksAssigned = 'getTasksAssigned';
+  static const String editTask = 'editTask';
+  static const String startTask = 'startTask';
+  static const String cancelTask = 'cancelTask';
+  static const String endTask = 'endTask';
+  static const String completeTask = 'completeTask';
+
 }
 
 class JsonPayloads{
@@ -327,6 +334,13 @@ class QueryParameters{
 
   static const String meesageType = 'meesageType';
   static const String adminEmail = 'adminEmail';
+
+  static const String assignTo = 'assignTo';
+  static const String ticketTaskID = 'ticketTaskID';
+  static const String summary = 'summary';
+  static const String taskDescription = 'taskDescription';
+  static const String dueDate = 'dueDate';
+  static const String taskLogID = 'taskLogID';
 
 
 }
