@@ -33,16 +33,19 @@ class NetworkRequests {
 
   static const int requestTime = 60;
 
-  static decodeJson(data) async{
+  static decodeJson(data,{ dynamic negativeResponse}) async{
   dynamic response = await data;
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 || response.statusCode == 201) {
       try {
-        return jsonDecode(response.body);
+        return jsonDecode(response.body) ?? negativeResponse;
       }
       catch (e) {
-        return null;
         print(e.toString());
+        return negativeResponse;
       }
+    }
+    else{
+    return negativeResponse;
     }
   }
 
