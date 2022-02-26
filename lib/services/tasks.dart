@@ -17,7 +17,7 @@ class Tasks {
 //     GET /mawa-api/resources/tickets/getTasksAssigned?assignTo=PN0000000570
   static getAllAssignedTasks(assignTo) async {
     dynamic response = await NetworkRequests().securedMawaAPI(
-        NetworkRequests.methodPost,
+        NetworkRequests.methodGet,
         resource: '${Resources.tickets}/${Resources.getTasksAssigned}',
         queryParameters: {
           QueryParameters.assignTo: assignTo,
@@ -93,7 +93,7 @@ class Tasks {
 //  GET /mawa-api/resources/tickets/getSpecificTask?ticketTaskID=TTSK0000000003
   getTask() async {
     dynamic response = await NetworkRequests().securedMawaAPI(
-        NetworkRequests.methodPut,
+        NetworkRequests.methodGet,
         resource: '${Resources.tickets}/${Resources.getSpecificTask}',
         body: {
           QueryParameters.ticketTaskID: taskID,
@@ -107,7 +107,7 @@ class Tasks {
   getTicketTasks() async {
 
     dynamic response = await NetworkRequests().securedMawaAPI(
-        NetworkRequests.methodPut,
+        NetworkRequests.methodGet,
         resource: '${Resources.tickets}/$reference/${Resources.getTasks}',
         );
     return await responseAction(response, '');
