@@ -5,13 +5,13 @@ class Tasks {
   late String taskID;
   String? reference;
 
-  static responseAction(dynamic response, dynamic negativeResult) async {
-    if (response.statusCode == 200) {
-      return await NetworkRequests.decodeJson(response);
-    } else {
-      return negativeResult;
-    }
-  }
+  // static responseAction(dynamic response, dynamic negativeResult) async {
+  //   if (response.statusCode == 200) {
+  //     return await NetworkRequests.decodeJson(response);
+  //   } else {
+  //     return negativeResult;
+  //   }
+  // }
 
   //     getting all task assigned to someone
 //     GET /mawa-api/resources/tickets/getTasksAssigned?assignTo=PN0000000570
@@ -22,7 +22,7 @@ class Tasks {
         queryParameters: {
           QueryParameters.assignTo: assignTo,
         });
-    return await responseAction(response, []);
+    return await NetworkRequests.decodeJson(response, negativeResponse: []);
   }
 
 //     editing task
@@ -51,7 +51,7 @@ class Tasks {
           QueryParameters.taskDescription: description,
           QueryParameters.dueDate: dueDate,
         });
-    return await responseAction(response, '');
+    return await NetworkRequests.decodeJson(response, negativeResponse: '');
   }
 
 // Start a task log
@@ -65,7 +65,7 @@ class Tasks {
           QueryParameters.ticketTaskID: taskID,
           QueryParameters.loggedById: loggedByID,
         });
-    return await responseAction(response, '');
+    return await NetworkRequests.decodeJson(response, negativeResponse: '');
   }
 
 // Marking a task as complete
@@ -78,7 +78,7 @@ class Tasks {
 
   actionTask({required String actionResource, String? taskLogID}) async {
     Map<String, String> body = {
-      QueryParameters.ticketTaskID: taskID!,
+      QueryParameters.ticketTaskID: taskID,
     };
     taskLogID != null ? body[QueryParameters.taskLogID] = taskLogID : null;
     dynamic response = await NetworkRequests().securedMawaAPI(
@@ -86,7 +86,7 @@ class Tasks {
       resource: '${Resources.tickets}/$actionResource',
       body: body,
     );
-    return await responseAction(response, '');
+    return await NetworkRequests.decodeJson(response, negativeResponse: '');
   }
 
 //    getting a specific task
@@ -95,10 +95,10 @@ class Tasks {
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: '${Resources.tickets}/${Resources.getSpecificTask}',
-        body: {
+        queryParameters: {
           QueryParameters.ticketTaskID: taskID,
         });
-    return await responseAction(response, '');
+    return await NetworkRequests.decodeJson(response, negativeResponse: '');
 
   }
 
@@ -110,7 +110,7 @@ class Tasks {
         NetworkRequests.methodGet,
         resource: '${Resources.tickets}/$reference/${Resources.getTasks}',
         );
-    return await responseAction(response, '');
+    return await NetworkRequests.decodeJson(response, negativeResponse: '');
   }
 
 }
