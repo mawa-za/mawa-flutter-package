@@ -440,6 +440,8 @@ class NetworkRequests {
             // }
 
             print('token oyjfjdbfjd\n' + token.toString());
+            await User().getUserDetails(User.username);
+
           }
           break;
         case 401:

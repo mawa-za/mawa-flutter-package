@@ -19,12 +19,10 @@ class User{
       dynamic response = await NetworkRequests().securedMawaAPI(
           NetworkRequests.methodGet,
           resource: '${Resources.users}/$username')
-      // )
           ;
       if(response.statusCode == 200 ) {
       loggedInUser =
-      // Map<dynamic, dynamic>.from(
-        await NetworkRequests.decodeJson(response);
+        await NetworkRequests.decodeJson(response, negativeResponse: {});
         partnerId = loggedInUser[JsonResponses.usersPartner];
         Persons.personId = loggedInUser[JsonResponses.usersPartner];
         groupId = loggedInUser[JsonResponses.usersPartner];
