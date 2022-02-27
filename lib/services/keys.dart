@@ -1,6 +1,6 @@
 part of mawa;
 
-class JsonResponses{
+class JsonResponses {
   static const String amount = 'amount';
   static const String assignedBy = 'assignedBy';
   static const String assignedByID = 'assignedByID';
@@ -49,7 +49,6 @@ class JsonResponses{
   static const String attachedById = 'attachedById';
   static const String attachedBy = 'attachedBy';
 
-
   // static const String = '';
 
   static const String fieldOptionCode = 'code';
@@ -68,7 +67,6 @@ class JsonResponses{
   static const String usersGroupName = 'groupName';
 
   static const String usersRolesDescription = 'description';
-
 
   static const String loginUserId = 'userID';
   static const String loginPassword = 'password';
@@ -156,18 +154,19 @@ class JsonResponses{
   static const String transactionLoggedById = 'loggedById';
   static const String transactionLoggedBy = 'loggedBy';
 
-static const String policyCustomerId = 'customerId';
-static const String policyProductId = 'productId';
-static const String policyProductProduct = 'product';
-static const String policyDateJoined = 'dateJoined';
-static const String policyDateEffective = 'dateEffective';
-static const String policyCustomerDetails = 'customerDetails';
-static const String policySalesRepId = 'salesRepresentativeId';
-static const String policyStatus = 'status';
-static const String policyStatusReason = 'statusReason';
-static const String policyPremium = 'premium';
-static const String policyAmountDue = 'amountDue';
-static const String policySalesRepresentativeDetails = 'salesRepresentativeDetails';
+  static const String policyCustomerId = 'customerId';
+  static const String policyProductId = 'productId';
+  static const String policyProductProduct = 'product';
+  static const String policyDateJoined = 'dateJoined';
+  static const String policyDateEffective = 'dateEffective';
+  static const String policyCustomerDetails = 'customerDetails';
+  static const String policySalesRepId = 'salesRepresentativeId';
+  static const String policyStatus = 'status';
+  static const String policyStatusReason = 'statusReason';
+  static const String policyPremium = 'premium';
+  static const String policyAmountDue = 'amountDue';
+  static const String policySalesRepresentativeDetails =
+      'salesRepresentativeDetails';
 
   static const String productDescription = 'description';
   static const String productCategory = 'category';
@@ -185,9 +184,14 @@ static const String policySalesRepresentativeDetails = 'salesRepresentativeDetai
   static const String personAssignTo = 'personAssignTo';
 
   static const String leaveApprover = 'approver';
+
+  static const String type = 'type';
+  static const String summary = 'summary';
+  static const String taskDescription = 'taskDescription';
+  static const String ticketID = 'ticketID';
 }
 
-class Resources{
+class Resources {
   static const String attachments = 'Attachments';
   static const String otp = 'otp';
   static const String authenticate = 'authenticate';
@@ -248,11 +252,9 @@ class Resources{
   static const String getTasks = 'getTasks';
 
   static const String refreshAuthenticate = 'refreshAuthenticate';
-
 }
 
-class JsonPayloads{
-
+class JsonPayloads {
   static const String id = 'id';
   static const String filter = 'filter';
   static const String filterValue = 'x';
@@ -286,14 +288,14 @@ class JsonPayloads{
   static const String subDescription = 'subDescription';
   static const String leaveType = 'leaveType';
 
-static const String documentType = 'documentType';
-static const String parentType = 'parentType';
-static const String parentReference = 'parentReference';
+  static const String documentType = 'documentType';
+  static const String parentType = 'parentType';
+  static const String parentReference = 'parentReference';
 
 // static const String  = '';
 }
 
-class QueryParameters{
+class QueryParameters {
   static const String versionAppName = 'appName';
   static const String versionAppUsable = 'appUsable';
   static const String approverId = 'approverId';
@@ -351,11 +353,9 @@ class QueryParameters{
   static const String taskLogID = 'taskLogID';
 
   static const String userID = 'userID';
-
-
 }
 
-class Statuses{
+class Statuses {
   static const String pending = 'Pending';
   static const String approved = 'Approved';
   static const String cancelled = 'Cancelled';
@@ -363,14 +363,13 @@ class Statuses{
 }
 
 class StatusReasons {
-
   static const String awaitingApproval = 'Awaiting Approval';
   static const String awaitingCancelApproval = 'Awaiting Cancel Approval';
   static const String awaitingEditApproval = 'Awaiting Edit Approval';
   static const String Rejected = 'Rejected';
 }
 
-class SharedPrefs{
+class SharedPrefs {
   static const server = 'server';
   static const token = 'token';
   static const username = 'username';
@@ -380,6 +379,4 @@ class SharedPrefs{
   static const isTracking = 'isTracking';
   static const trackingTicketID = 'trackingTicketID';
   static const refreshToken = 'refreshToken';
-
 }
-
