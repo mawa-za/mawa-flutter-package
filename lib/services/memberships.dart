@@ -15,12 +15,12 @@ class Memberships {
           'idnumber': idNumber ?? Persons.person[JsonResponses.personIdNumber] ?? Persons.personIdNumber,
           'partnerRole': partnerRole
         }) ?? [];
-    if(response.statusCode == 200){
-      personsPolicies = await NetworkRequests.decodeJson(response.body) ?? [];
-    }
-    else {
-      personsPolicies = [];
-    }
+    // if(response.statusCode == 200){
+      personsPolicies = await NetworkRequests.decodeJson(response, negativeResponse: []);
+    // }
+    // else {
+    //   personsPolicies = [];
+    // }
   }
 
   membershipGet(policyId) async {
@@ -30,7 +30,7 @@ class Memberships {
     print('try'+response.toString());
     // policy == null ? policy = {} : response != null ? response.isNotEmpty ? policy = response : policy = {}  : policy = {} ;
     if( response.statusCode == 200){
-      dynamic body =  await NetworkRequests.decodeJson(response.body);
+      dynamic body =  await NetworkRequests.decodeJson(response);
       // if(response.runtimeType == allPolicies.runtimeType)
       try
       {
