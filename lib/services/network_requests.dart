@@ -411,10 +411,10 @@ class NetworkRequests {
             dynamic data;
             Tools.isTouchLocked = false;
             data = jsonDecode(feedback.body);
-            // if(resource == Resources.otp) {
-            //   otp = await data.toString();
-            // }
-            // if(resource == Resources.authenticate) {
+            if(resource == Resources.otp) {
+              otp = await data;
+            }
+            if(resource == Resources.authenticate) {
               token = await data[JsonResponses.token];
               Token.refreshToken = await data[JsonResponses.refreshToken];
               preferences.then((SharedPreferences prefs) {
@@ -437,7 +437,7 @@ class NetworkRequests {
             //   await User().getUserDetails(payload![JsonResponses.userID]!);
             //   // Navigator.pushReplacementNamed(context, direct!);
             //   postAuthenticate;
-            // }
+            }
 
             print('token oyjfjdbfjd\n' + token.toString());
             await User().getUserDetails(User.username);
