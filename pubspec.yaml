@@ -26,7 +26,7 @@ dev_dependencies:
   device_info_plus: ^3.2.1
   email_validator: ^2.0.1
   another_flushbar: ^1.10.23
-  permission_handler: ^8.1.6
+  permission_handler: ^9.0.2
   fluttertoast: ^8.0.8
 #  device_info: ^2.0.2
 #  geolocator: ^7.1.1
@@ -34,7 +34,7 @@ dev_dependencies:
   dio: ^4.0.4
   path_provider: ^2.0.4
   device_information: ^0.0.4
-  geolocator: ^7.1.1
+  geolocator: ^8.0.5
   geocoding: ^2.0.2
 
 # For information on the generic Dart part of this file, see the
