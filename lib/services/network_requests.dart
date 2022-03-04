@@ -282,6 +282,7 @@ class NetworkRequests {
         }
 
         // else if (statusCode >= 400 && statusCode < 600 && statusCode != 417) {}
+        return feedback;
 
       } on TimeoutException catch (e) {
         // Navigator.maybePop(Tools.context);
@@ -324,7 +325,6 @@ class NetworkRequests {
             positive: false);
       }
   print('last');
-      return feedback;
 
     }
     else {
