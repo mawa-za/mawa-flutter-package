@@ -189,6 +189,11 @@ class JsonResponses {
   static const String summary = 'summary';
   static const String taskDescription = 'taskDescription';
   static const String ticketID = 'ticketID';
+  static const String startTime = 'startTime';
+  static const String personAssignedBy = 'personAssignedBy';
+  static const String notes = 'notes';
+  static const String taskLogs = 'taskLogs';
+  static const String endTime = 'endTime';
 }
 
 class Resources {
@@ -353,6 +358,7 @@ class QueryParameters {
   static const String taskLogID = 'taskLogID';
 
   static const String userID = 'userID';
+  static const String note = 'note';
 }
 
 class Statuses {
