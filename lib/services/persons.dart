@@ -17,6 +17,12 @@ class Persons {
     personId = id;
   }
 
+  static String personNameFromJson(json){
+    return
+      '${json[JsonResponses
+          .personLastName] ?? ''}, ${json[JsonResponses
+          .personFirstName] ?? ''} ${json[JsonResponses.personMiddleName] ?? ''}';
+  }
   static Future personSearch({String? idNumber, String? idType, String? lastName, String? middleName, String? firsName}) async {
     Persons.people.clear();
     dynamic peopleResponse = await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,

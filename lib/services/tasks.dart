@@ -61,7 +61,7 @@ class Tasks {
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPut,
         resource: '${Resources.tickets}/${Resources.startTask}',
-        body: {
+        queryParameters: {
           QueryParameters.ticketTaskID: taskID,
           QueryParameters.loggedById: loggedByID,
         });
@@ -76,11 +76,14 @@ class Tasks {
 // PUT/mawa-api/resources/tickets/endTask?ticketTaskID=TTSK0000000006&taskLogID=TLG0000000034
 //     please note taskLogID is the log you are stopping and will be returned when getting a task
 
-  actionTask({required String actionResource, String? taskLogID}) async {
-    Map<String, String> body = {
+  actionTask({required String actionResource, String? note}) async {
+    Map<String, dynamic> body = {
       QueryParameters.ticketTaskID: taskID,
     };
-    taskLogID != null ? body[QueryParameters.taskLogID] = taskLogID : null;
+    note != null ? body[QueryParameters.note] = {
+      'value': note,
+      'type': "TICKETTASK"
+    } : null;
     dynamic response = await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPut,
       resource: '${Resources.tickets}/$actionResource',
