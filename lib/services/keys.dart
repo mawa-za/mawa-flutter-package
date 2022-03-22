@@ -385,4 +385,5 @@ class SharedPrefs {
   static const isTracking = 'isTracking';
   static const trackingTicketID = 'trackingTicketID';
   static const refreshToken = 'refreshToken';
+  static const initialRoute = 'initialRoute';
 }

@@ -329,8 +329,23 @@ class NetworkRequests {
     }
     else {
       print('\npre\n');
-      // Authorize(context: Tools.context).attempt();
-      Navigator.pushReplacementNamed(Tools.context, Authenticate.id);
+
+      dynamic init = await prefs.getString(SharedPrefs.initialRoute) ?? '';
+      if (init != null) {
+        var route = ModalRoute.of(Tools.context);
+
+        if (route != null) {
+          print(route.settings.name);
+          if (route.settings.name.toString() != init) {
+            Navigator.pushNamedAndRemoveUntil(
+                Tools.context, init, (route) => false);
+          }
+        }
+      }
+      else {
+        // Authorize(context: Tools.context).attempt();
+        Navigator.pushReplacementNamed(Tools.context, init);
+      }
     }
   }
 
@@ -350,13 +365,15 @@ class NetworkRequests {
     endpointURL =  'api-$server.mawa.co.za:$pot';
 
     dynamic url;
-    server == 'qas'
-        ? url =  Uri.https(endpointURL, path + resource,queryParameters)
-        : url = Uri.https(endpointURL, path + resource, queryParameters);
+    // server == 'qas'
+    //     ?
+    // url =  Uri.https(endpointURL, path + resource,queryParameters)
+    //     :
+    url = Uri.https(endpointURL, path + resource, queryParameters);
     Map<String, String> headers = {
       "Content-type": "application/json; charset=UTF-8"
     }; //
-    print('howl');
+    print('b\t${url.toString()}\n howl');
 
     print(endpointURL);
     print(NetworkRequests.path);
