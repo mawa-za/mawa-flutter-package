@@ -1,4 +1,5 @@
-part of mawa;
+import 'package:mawa/services/keys.dart';
+import 'package:mawa/services/network_requests.dart';
 
 class Employees {
 

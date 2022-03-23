@@ -1,5 +1,5 @@
-part of mawa;
-
+import 'package:mawa/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 class Token {
 
   static String refreshToken = '';

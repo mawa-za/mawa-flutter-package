@@ -1,4 +1,8 @@
-part of mawa;
+import 'dart:convert';
+import 'package:mawa/services/keys.dart';
+import 'package:mawa/services/network_requests.dart';
+import 'package:mawa/services/tools.dart';
+import 'package:http/http.dart' as http;
 
 class Products {
   late String policyType;

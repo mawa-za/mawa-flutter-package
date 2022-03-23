@@ -1,4 +1,10 @@
-part of mawa;
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
+import 'package:mawa/services/tools.dart';
+import 'package:flutter/material.dart';
+import 'package:connectivity/connectivity.dart';
+import 'dart:async';
+import 'dart:core';
 
 class NoConnectionScreen extends StatefulWidget {
   static const String id = 'Connectivity';

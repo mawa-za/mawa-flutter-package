@@ -1,9 +1,12 @@
-part of mawa;
+import 'package:mawa/services/keys.dart';
+import 'package:mawa/services/network_requests.dart';
 
 class Tasks {
   Tasks({this.reference,required this.taskID});
   late String taskID;
+  static late List tasks;
   String? reference;
+
 
   // static responseAction(dynamic response, dynamic negativeResult) async {
   //   if (response.statusCode == 200) {

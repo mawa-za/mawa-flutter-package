@@ -1,5 +1,13 @@
-// ignore_for_file: avoid_print
-part of mawa;
+import 'package:mawa/services.dart';
+import 'package:mawa/screens.dart';
+
+import 'package:flutter/services.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:email_validator/email_validator.dart';
 
 late final GlobalKey<NavigatorState> navKey = GlobalKey<NavigatorState>();
 
