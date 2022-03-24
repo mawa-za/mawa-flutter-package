@@ -389,10 +389,11 @@ class NetworkRequests {
     }; //
     print('b\t${url.toString()}\n howl');
 
-    print(endpointURL);
-    print(NetworkRequests.path);
-    print(resource);
+    // print(endpointURL);
+    // print(NetworkRequests.path);
+    // print(resource);
     print(payload);
+    print(this.headers(tokenKey: token, secured: false));
     print('\n');
 
     try {
@@ -447,7 +448,7 @@ class NetworkRequests {
             }
             if(resource == Resources.authenticate) {
               token = await data[JsonResponses.token];
-              Token.refreshToken = await data[JsonResponses.refreshToken];
+              Token.refreshToken = await data[JsonResponses.refreshToken] ?? '';
               preferences.then((SharedPreferences prefs) {
                 return (prefs.setString(SharedPrefs.token, token));
               });
@@ -470,7 +471,7 @@ class NetworkRequests {
             //   postAuthenticate;
             }
 
-            print('token oyjfjdbfjd\n' + token.toString());
+            print('token oyjfjdbfjd\n $token');
             await User().getUserDetails(User.username);
 
           }
