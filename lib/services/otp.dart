@@ -20,12 +20,13 @@ class OTP {
 
   }
 
-  otpPopup() {
+  otpPopup({String? message}) {
     Tools.isTouchLocked = false;
-    return Alert(
+    return AwesomeDialog(
         context: context,
         title: 'One Time Pin',
-        content: Column(children: [
+        body: Column(children: [
+          Text(message ?? '',textAlign: TextAlign.center, style: const TextStyle(color: Colors.redAccent),),
           Form(
             key: _tokenFormKey,
             child: TextFormField(
@@ -44,7 +45,7 @@ class OTP {
               },
               decoration: const InputDecoration(
                 icon: Icon(Icons.lock_clock),
-                labelText: 'OTP Your Mail  or Messages',
+                labelText: 'OTP Your Mail or Messages',
               ),
               onEditingComplete: (){
                 Navigator.of(context).pop();
@@ -65,8 +66,8 @@ class OTP {
           ),
         ]
         ),
-        buttons: [
-          DialogButton(
+        btnOk: Constants.dialogCloseButton(context: context),
+        btnCancel: DialogButton(
             child: const Text('Proceed'),
             onPressed: () {
               if(_tokenFormKey.currentState!.validate()){
@@ -78,8 +79,6 @@ class OTP {
             },
             color: Colors.green,
           ),
-          Constants.dialogCloseButton(context: context),
-        ]
     ).show();
   }
 
@@ -102,7 +101,11 @@ class OTP {
             positive: false,
             popContext: false);
       } else {
-        NetworkRequests.token = NetworkRequests.otp.substring(1,NetworkRequests.otp.length);
+        NetworkRequests.token = NetworkRequests.otp;//.substring(1,NetworkRequests.otp.length);
+
+        preferences.then((SharedPreferences prefs) {
+          return (prefs.setString(SharedPrefs.token, NetworkRequests.token));
+        });
         print('\n' + NetworkRequests.otp + '\n' + NetworkRequests.token + '\n' );
         Tools().passwordResetPopup(context);
       }

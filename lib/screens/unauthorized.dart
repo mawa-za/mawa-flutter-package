@@ -1,9 +1,9 @@
 part of mawa;
 
-class OutdatedAPK extends StatelessWidget {
-  static const id = 'Outdated APK';
-  /*final*/ String? appName;
-  /*const*/ OutdatedAPK({this.appName}/*{Key key}) : super(key: key*/);
+class Unauthorized extends StatelessWidget {
+  static const String id = 'Unauthorized';
+  String? appName;
+  Unauthorized({this.appName});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class OutdatedAPK extends StatelessWidget {
               children: const [
                 Icon(Icons.error_outline,
                   size: 20.0,),
-                Text('Sorry this version is outdated or not suitable for use. \n Please visit your app store to update iit or consult your system administrator',
+                Text('You Are Not Authorized To Utilize This Application',
                   style: TextStyle(color: Colors.black,fontSize: 20.0),
                   textAlign: TextAlign.center,
                 ),

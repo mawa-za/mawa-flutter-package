@@ -11,81 +11,106 @@ class Receipts {
 
   processReceipt(
       /*Map payment ,int paymentPeriod,*/ {dynamic reference,
-      dynamic amount}) async {
+        dynamic tenderType,dynamic amount}) async {
+    // DeviceInfo info =
+    DeviceInfo();
+
     Map payment = {
       'reference': '$reference',
       'amount': '$amount',
-      'terminalId': '${DeviceInfo.platformImei.toString()}',
-      'location': '${Location.address.toString()}',
-      'terminalType': ''//'${DeviceInfo.terminal.toString()}'
+      'tenderType':'$tenderType',
+      'terminalId': DeviceInfo.platformImei,
+      'location': Location.address.toString(),
+      'terminalType': DeviceInfo.terminal.toString()
     };
 
-    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
-        resource: Resources.receipts, body: payment);
+    return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
+        resource: Resources.receipts, body: payment));
   }
 
   userProcessedReceipts(bool filter) async {
     String filterString;
     filter ? filterString = 'x' : filterString = '';
 
-    receiptsList = [];
-    receiptsList = await NetworkRequests().securedMawaAPI(
+    receiptsList.clear();
+    collectedFunds = 0.00;
+    dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: Resources.receipts,
         queryParameters: {
-          'processedBy': User.loggedInUser[JsonResponses.id],
-          'filter': filterString
+          QueryParameters.processedBy: User.loggedInUser[JsonResponses.id],
+          QueryParameters.filter: filterString
         });
+    double funds = 0.0;
+   if( response.statusCode == 200) {
+      receiptsList = await NetworkRequests.decodeJson(response);
+      for (int index = 0; index < receiptsList.length; index++) {
+        // receiptsList.length > 0
+        //     ?
+        funds +=
+            double.parse(receiptsList[index][JsonResponses.amount])
+            // : collectedFunds = 0.0
+        ;
+      }
+   }
+   collectedFunds = funds;
+   // else{
+   //  receiptsList = [];
+   //  }
   }
 
   receiptHistory(String referenceNo) async {
     receiptsList = [];
     // print('referenceNo'+referenceNo);
-    List receipts = await NetworkRequests().securedMawaAPI(
+    List receipts = await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: Resources.receipts,
-        queryParameters: {'reference': referenceNo});
+        queryParameters: {QueryParameters.reference: referenceNo}));
     print(receipts.runtimeType);
     // receipts.runtimeType == List &&
     receipts.isNotEmpty ? receiptsList = receipts : receiptsList = [];
     print(receiptsList.length.toString() + ' long ');
   }
 
-  processCashup() {
-    return NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
-        resource: Resources.cashup);
+  processCashup() async {
+    return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
+        resource: Resources.cashup));
   }
 
   getReceipt({required String receiptId}) async {
-    receiptId != null
-        ? receipt = await NetworkRequests().securedMawaAPI(
+    // receiptId != null
+    //     ?
+    receipt = await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
                 NetworkRequests.methodGet,
-                resource: '${Resources.receipts}/$receiptId') ??
-            {}
-        : receipt = {};
+                resource: '${Resources.receipts}/$receiptId') )??
+        {}
+    ;
+        // : receipt = {};
   }
 
-  getCashupCollection() async {
-    cashupsList = await NetworkRequests().securedMawaAPI(
+  getCashupCollection({required String processor}) async {
+    cashupsList = await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: Resources.cashup,
-        queryParameters: {'processor': 'me'});
+        queryParameters: {QueryParameters.processor: processor}));
   }
 
   getCashup({required String cashupId}) async {
     dynamic response;
-    if (cashupId != null) {
-      response = await NetworkRequests().securedMawaAPI(
+    // if (cashupId != null) {
+      response =  await NetworkRequests().securedMawaAPI(
             NetworkRequests.methodGet,
             resource: '${Resources.cashup}/$cashupId',
           ) ??
           {};
-      response.runtimeType != List && response.runtimeType != String
-          ? cashup = response
+      // response.runtimeType != List && response.runtimeType != String
+      response.statusCode == 200
+          ? cashup = await NetworkRequests.decodeJson(response)??
+          {}
           : cashup = {};
-    } else {
-      cashup = {};
-    }
+    // } else {
+    //   cashup = {};
+    // }
     // cashup.runtimeType ;
   }
 }

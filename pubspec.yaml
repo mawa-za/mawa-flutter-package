@@ -1,6 +1,6 @@
 name: mawa
 description: A new Flutter project.
-version: 0.0.1
+version: 0.0.3
 homepage:
 
 environment:
@@ -22,16 +22,20 @@ dev_dependencies:
   shared_preferences: ^2.0.7
   http: ^0.13.1
   intl: ^0.17.0
-  package_info_plus: ^1.0.3
-  device_info_plus: ^2.1.0
+  package_info_plus: ^1.3.0
+  device_info_plus: ^3.2.1
   email_validator: ^2.0.1
   another_flushbar: ^1.10.23
-  permission_handler: ^8.1.6
+  permission_handler: ^9.0.2
   fluttertoast: ^8.0.8
 #  device_info: ^2.0.2
 #  geolocator: ^7.1.1
   stop_watch_timer: ^1.3.1
-
+  dio: ^4.0.4
+  path_provider: ^2.0.4
+  device_information: ^0.0.4
+  geolocator: ^8.0.5
+  geocoding: ^2.0.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

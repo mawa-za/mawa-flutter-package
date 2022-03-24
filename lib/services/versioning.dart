@@ -13,7 +13,7 @@ class ApkVersion {
     getApkInfo();
   }
 
-  getApkInfo()async {
+  Future getApkInfo()async {
     packageInfo = await PackageInfo.fromPlatform();
 
     appName = packageInfo.appName;
@@ -35,7 +35,7 @@ class ApkVersion {
   }
 
   getApkListInfo() async {
-    return NetworkRequests().securedMawaAPI(NetworkRequests.methodGet, resource: Resources.versions);
+    return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet, resource: Resources.versions));
   }
 
   checkApkValidity(/*{String versionCode}*/) async {
@@ -43,14 +43,15 @@ class ApkVersion {
       QueryParameters.versionApkVersionCode:version,
       QueryParameters.versionAppName:appName
     };
-    dynamic response = await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet, resource: Resources.versions, queryParameters: query);
+    dynamic response = await NetworkRequests.decodeJson( await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet, resource: Resources.versions, queryParameters: query));
     print(response ?? 'nothing');
-    if(response != null) {
+    // if(response.statusCode == 200) {
+    // print('response ${response.toString()}');
       return response[JsonResponses.versionAppUsable];
-    }
-    else {
-      return null;
-    }
+    // }
+    // else {
+    //   return null;
+    // }
   }
 
 

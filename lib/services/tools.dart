@@ -10,7 +10,13 @@ class Tools{
 
   // static late bool isTracking;
 
+  static const String userTypeInternal = 'Internal';
+  static const String userTypeExternal = 'External';
   static const String close = 'Close';
+  static const String TRANSACTION = 'TRANSACTION';
+  static const String LEAVEREQUEST = 'LEAVEREQUEST';
+  static const String INVOICE = 'INVOICE';
+  static const String TICKETTRACKING = 'TICKETTRACKING';
   static const String pause = 'Pause';
   static const String stop = 'Stop';
   static const String resolve = 'Resolve';
@@ -21,8 +27,23 @@ class Tools{
   static bool isTouchLocked = false;
   static String screenMessage = '';
   static late Widget body;
-
+  static late String attachmentReference;
+  static late String documentType;
+  static late String parentType;
   late String email;
+
+  static bool bannerShow = false;
+  static String bannerMessage = '';
+
+  static String? personCreateRole;
+  static final flashKey = GlobalKey<FormState>();
+
+  static const String endpointURL =
+      'https://api-dev.mawa.co.za:8181/mawa-api/resources';
+
+  // 'http://mawa-test.raretag.co.za:8080/mawa-api/resources/';
+
+  // 'mawa-test.raretag.co.za:8080/mawa-api/resources/';
 
   final _resetPasswordFormKey = GlobalKey<FormState>();
 
@@ -123,7 +144,7 @@ class Tools{
     FocusScope.of(context).unfocus();
 
     Alerts.flushbar(message: 'Please Wait', context: context);
-     User.username = await User().changePassword(password: _newPasswordController.value.text.toString());
+     User.username = NetworkRequests.decodeJson(await User().changePassword(password: _newPasswordController.value.text.toString()));
     NetworkRequests.statusCode == 200 || NetworkRequests.statusCode == 201
         ?  Navigator.pushReplacementNamed(context, redirect)
         : NetworkRequests.statusCode == 401
@@ -201,6 +222,162 @@ class Tools{
           ),
       btnCancel: Constants.dialogCloseButton(context: context),
         ).show();
+  }
+
+  static logoutPopup({required BuildContext context, required String redirect}) {
+    return Alert(
+      context: context,
+      title: 'Alert',
+      content: const Text('Do you really want to logout?'),
+      buttons: [
+        DialogButton(
+          child: const Text('Yes'),
+          onPressed: () => Navigator.of(context)
+              .pushNamedAndRemoveUntil(redirect, (route) => false),
+          color: Colors.greenAccent,
+        ),
+        Constants.dialogCloseButton(text: 'No', context: context),
+      ],
+    ).show();
+  }
+
+  // _resetPassword(/*context*/) async {
+  //   Navigator.of(context!).pop();
+  //
+  //   // AuthenticationScreen.message = 'Please Wait';
+  //   // Alerts().pleaseWaitToast();
+  //   // Alerts.mawaBanner(context: context, message: 'Please Wait');
+  //   FocusScope.of(context!).unfocus();
+  //
+  //   Alerts.flushbar.show(context!);
+  //   // AuthenticationScreen.message = await User().changePassword(password: _newPasswordController.value.text.toString());
+  //   User.userID = await User().changePassword(password: _newPasswordController.value.text.toString());
+  //   NetworkRequests.statusCode == 200 || NetworkRequests.statusCode == 201
+  //   // ? Alerts.mawaBanner(context: context, message: AuthenticationScreen.message,positive: true, popContext: true)
+  //       ?  Navigator.pushReplacement(context!, MaterialPageRoute(builder: (context) {return initiatePrintSequence();}))
+  //       : NetworkRequests.statusCode == 401
+  //       ?
+  //   //         Alerts().openPopup(context, message: 'Token Was Invalid Or Has Expired')
+  //
+  //   AuthenticationScreen.message = 'Token Invalid'
+  //   // Alerts.mawaBanner(context: context, message: 'Token Was Invalid Or Has Expired', positive: false, popContext: true)
+  //   //     : Alerts().openPopup(context, message:'Failed To Reset');
+  //       : Alerts.mawaFlushBar(context: context!, message:'Failed To Reset', positive: false, popContext: true);
+  //   // LoginScreen().createState();
+  //   // setState(() {
+  //   // });
+  //   print('done!');
+  // }
+  //
+  // passwordResetPopup(context) {
+  //   return Alert(
+  //       context: context,
+  //       title: 'Reset Password',
+  //       content: Container(
+  //         child: Form(
+  //           key: _resetPasswordFormKey,
+  //           child: Column(
+  //             children: [
+  //               TextFormField(
+  //                 controller: _newPasswordController,
+  //                 validator: (value) {
+  //                   if (value!.isEmpty) {
+  //                     return 'Enter New Password';
+  //                   }
+  //                   if (value.length < 5) {
+  //                     return 'Password Too Short';
+  //                   }
+  //                   return null;
+  //                 },
+  //                 decoration: InputDecoration(
+  //                   icon: Icon(Icons.account_circle),
+  //                   labelText: 'Enter New Password',
+  //                 ),
+  //               ),
+  //               SizedBox(height: 10.0),
+  //               TextFormField(
+  //                 validator: (value) {
+  //                   if (value!.isEmpty) {
+  //                     return 'Retype New Password';
+  //                   }
+  //                   if (value != _newPasswordController.value.text.toString()) {
+  //                     return 'Passwords Do Not Match';
+  //                   }
+  //                   return null;
+  //                 },
+  //                 decoration: InputDecoration(
+  //                   icon: Icon(Icons.account_circle),
+  //                   labelText: 'Confirm Password',
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       ),
+  //       buttons: [
+  //         DialogButton(
+  //           onPressed: () {
+  //             print(_newPasswordController.value.text.toString());
+  //             if (_resetPasswordFormKey.currentState!.validate()) {
+  //               // Navigator.of(context).pop();
+  //               _resetPassword(/*context*/);
+  //             }
+  //           },
+  //           child: Text(
+  //             'Confirm',
+  //           ),
+  //           color: Colors.green,
+  //         ),
+  //         DialogButton(
+  //           onPressed: () => Navigator.of(context).pop(),
+  //           child: Text('Cancel'),
+  //           color: Colors.orange,
+  //         )
+  //       ]).show();
+  // }
+
+//
+  static textInputDecorations(String textLabel, icon, {String? hint, String? helperTxt}) {
+    return InputDecoration(
+        helperText: helperTxt ?? '',
+        icon: Icon(icon),
+        labelText: textLabel,
+        hintText: hint,
+        filled: true,
+        fillColor: Colors.grey[100],
+        border: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+        ));
+  }
+
+  static textInputDecoration(String textLabel, {String? hint, String? helperTxt}) {
+    return InputDecoration(
+        helperText: helperTxt ?? '',
+        labelText: textLabel,
+        hintText: hint,
+        filled: true,
+        fillColor: Colors.grey[100],
+        border: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+        ));
+  }
+
+  static dropdownContainerDeco() {
+    return BoxDecoration(
+      color: Colors.grey[100],
+      borderRadius: const BorderRadius.all(
+        Radius.circular(10.0),
+      ),
+      border: Border.all(color: Colors.grey, width: 2.0),
+    );
+    // BoxDecoration(
+    //   border: Border.all(
+    //     color: Colors.grey[700],
+    //     // width: 8,
+    //   ),
+    //   color: Colors.grey[100],
+    //   borderRadius: BorderRadius.all(Radius.circular(10.0)),
+    // );
   }
 
 }
