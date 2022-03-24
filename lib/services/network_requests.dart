@@ -1,6 +1,18 @@
-// ignore_for_file: avoid_print
-part of mawa;
-
+import 'package:mawa/services/globals.dart';
+import 'package:mawa/services/keys.dart';
+import 'package:mawa/services/token.dart';
+import 'package:mawa/services/tools.dart';
+import 'package:mawa/services/user.dart';
+import 'package:mawa/screens/alerts.dart';
+import 'package:mawa/screens/authenticate.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:async';
+import 'dart:io';
+import 'dart:core';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class NetworkRequests {
   // final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
@@ -152,14 +164,15 @@ class NetworkRequests {
     //     : url = Uri.http(endpointURL, path + resource, queryParameters);
     url = Uri.https(endpointURL, path + resource, queryParameters);
     print('mawa');
+    print(url);
     print('status code: $statusCode');
     if (statusCode != 401) {
       try {
         print('\n' + token.toString() + '\n');
-        print(method);
-        print(endpointURL);
-        print(path);
-        print(resource);
+        // print(method);
+        // print(endpointURL);
+        // print(path);
+        // print(resource);
         print(body ?? queryParameters);
         print(header);
         switch (method) {
@@ -331,6 +344,7 @@ class NetworkRequests {
       print('\npre\n');
 
       dynamic init = await prefs.getString(SharedPrefs.initialRoute) ?? '';
+      print('Initial route rerouting $init');
       if (init != null) {
         var route = ModalRoute.of(Tools.context);
 
@@ -375,10 +389,11 @@ class NetworkRequests {
     }; //
     print('b\t${url.toString()}\n howl');
 
-    print(endpointURL);
-    print(NetworkRequests.path);
-    print(resource);
+    // print(endpointURL);
+    // print(NetworkRequests.path);
+    // print(resource);
     print(payload);
+    print(this.headers(tokenKey: token, secured: false));
     print('\n');
 
     try {
@@ -433,7 +448,7 @@ class NetworkRequests {
             }
             if(resource == Resources.authenticate) {
               token = await data[JsonResponses.token];
-              Token.refreshToken = await data[JsonResponses.refreshToken];
+              Token.refreshToken = await data[JsonResponses.refreshToken] ?? '';
               preferences.then((SharedPreferences prefs) {
                 return (prefs.setString(SharedPrefs.token, token));
               });
@@ -456,7 +471,7 @@ class NetworkRequests {
             //   postAuthenticate;
             }
 
-            print('token oyjfjdbfjd\n' + token.toString());
+            print('token oyjfjdbfjd\n $token');
             await User().getUserDetails(User.username);
 
           }

@@ -1,5 +1,8 @@
-part of mawa;
-
+import 'package:mawa/services/device_info.dart';
+import 'package:mawa/services/keys.dart';
+import 'package:mawa/services/location.dart';
+import 'package:mawa/services/network_requests.dart';
+import 'package:mawa/services/user.dart';
 
 class Receipts {
   static List receiptsList = [];

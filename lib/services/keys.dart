@@ -1,4 +1,3 @@
-part of mawa;
 
 class JsonResponses {
   static const String amount = 'amount';

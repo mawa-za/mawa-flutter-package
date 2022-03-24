@@ -1,4 +1,5 @@
-part of mawa;
+import 'package:mawa/services.dart';
+import 'package:mawa/screens.dart';
 
 class WorkCenters {
   static List<String> workCentersList = [];

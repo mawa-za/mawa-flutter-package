@@ -1,4 +1,9 @@
-part of mawa;
+import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter/services.dart';
+import 'dart:async';
+import 'dart:io';
+import 'package:device_information/device_information.dart';
+import 'package:mawa/services/network_requests.dart';
 
 ///TO USE THIS CLASS SUCCESSFULLY ONE WOULD TO ADD "PHONE_READ_STATE [<uses-permission android:name="android.permission.READ_PHONE_STATE" />] PERMISSION ON ANDROID MANIFEST [android/app/src/main/AndroidManifest.xml].
 
@@ -170,7 +175,7 @@ class DeviceInfo{
     print('info ' + info.toString());
     print('deviceData ' + deviceData.toString());
 
-    deviceData.addAll(Map<String,String>.from(info));
+    deviceData.addAll(Map<String,dynamic>.from(info));
 
   }
 

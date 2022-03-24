@@ -1,4 +1,6 @@
-part of mawa;
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
+
 
 ///TO USE THIS CLASS ONE MUST:
 ///   Add the following to your "gradle.properties" file:

@@ -1,4 +1,11 @@
-part of mawa;
+import 'package:stop_watch_timer/stop_watch_timer.dart';
+import 'package:mawa/services/keys.dart';
+import 'package:mawa/services/network_requests.dart';
+import 'package:mawa/services/timer.dart';
+import 'package:mawa/services/ticket_logs.dart';
+import 'package:mawa/services/tools.dart';
+import 'package:mawa/services/user.dart';
+import 'package:mawa/screens/alerts.dart';
 
 class Tickets {
   Tickets({required String ticketID, page}) {
