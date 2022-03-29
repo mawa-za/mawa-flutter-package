@@ -164,7 +164,9 @@ class NetworkRequests {
     //     : url = Uri.http(endpointURL, path + resource, queryParameters);
     url = Uri.https(endpointURL, path + resource, queryParameters);
     print('mawa');
-    print(url);
+    print('b\n${url.toString()}\n howl');
+    print('headers\n$header');
+
     print('status code: $statusCode');
     if (statusCode != 401) {
       try {
@@ -174,7 +176,7 @@ class NetworkRequests {
         // print(path);
         // print(resource);
         print(body ?? queryParameters);
-        print(header);
+        // print(header);
         switch (method) {
           case methodGet:
             feedback = await http.get(
