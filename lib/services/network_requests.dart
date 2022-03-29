@@ -17,16 +17,18 @@ import 'package:http/http.dart' as http;
 class NetworkRequests {
   // final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
-  NetworkRequests({this.responseType}) {_getToken();}
+  NetworkRequests({this.responseType}) {
+    _getToken();
+  }
 
-  Future<void> _getToken ()async {
-
+  Future<void> _getToken() async {
     _key = preferences.then((SharedPreferences prefs) {
       return (prefs.getString(SharedPrefs.token) ?? '');
     });
     print('key' + _key.toString());
   }
-  String? responseType/* = responseJson*/;
+
+  String? responseType /* = responseJson*/;
   static const String methodGet = 'get';
   static const String methodPost = 'post';
   static const String methodPut = 'put';
@@ -42,34 +44,36 @@ class NetworkRequests {
   static const String responseJson = 'json';
   static const String responseBlob = 'blob';
   static const String responseFormData = 'blob';
+  dynamic responseCaught;
 
   static const int requestTime = 60;
 
-  static decodeJson(data,{ dynamic negativeResponse}) async{
-  dynamic response = await data;
+  static decodeJson(data, {dynamic negativeResponse}) async {
+    dynamic response = await data;
     if (response.statusCode == 200 || response.statusCode == 201) {
       try {
         return jsonDecode(response.body) ?? negativeResponse;
-      }
-      catch (e) {
+      } catch (e) {
         print(e.toString());
         return negativeResponse;
       }
-    }
-    else{
-    return negativeResponse;
+    } else {
+      return negativeResponse;
     }
   }
 
-   Map<String, String> headers({required String tokenKey, bool secured = true}) {
+  Map<String, String> headers({required String tokenKey, bool secured = true}) {
     Map<String, String> headers = {/*"Authorization": "Bearer $tokenKey"*/};
-    secured ? headers["Authorization"] = "Bearer $tokenKey":null;
+    secured ? headers["Authorization"] = "Bearer $tokenKey" : null;
 
     responseType ??= responseJson;
     print('responseType $responseType');
-    if (responseType == responseJson)  headers['Content-type'] = 'application/json; charset=UTF-8';
-    if (responseType == responseBlob)  headers['Content-type'] = 'application/json';
-    if (responseType == responseFormData)  headers['Content-type'] = 'multipart/form-data';
+    if (responseType == responseJson)
+      headers['Content-type'] = 'application/json; charset=UTF-8';
+    if (responseType == responseBlob)
+      headers['Content-type'] = 'application/json';
+    if (responseType == responseFormData)
+      headers['Content-type'] = 'multipart/form-data';
 
     return headers;
   }
@@ -143,21 +147,24 @@ class NetworkRequests {
     599: 'Network connect timeout error',
   };
 
-
-  Future<dynamic> securedMawaAPI(String method,
-      {required String resource,
-        Map? body,
-        Map<String, dynamic>? queryParameters,}) async  {
+  Future<dynamic> securedMawaAPI(
+    String method, {
+    required String resource,
+    Map? body,
+    Map<String, dynamic>? queryParameters,
+  }) async {
     // token == null ? token = await _key: null;
     final SharedPreferences prefs = await preferences;
 
     server = await prefs.getString(SharedPrefs.server) ?? '';
     token = await prefs.getString(SharedPrefs.token) ?? '';
 
-    endpointURL =  'api-$server.mawa.co.za:$pot';
+    endpointURL = 'api-$server.mawa.co.za:$pot';
 
     dynamic url;
-    dynamic header = headers(tokenKey: token,);
+    dynamic header = headers(
+      tokenKey: token,
+    );
     // statusCode == null? statusCode= 100: null;
     // server == 'qas'
     //     ? url =  Uri.https(endpointURL, path + resource, queryParameters)
@@ -186,7 +193,7 @@ class NetworkRequests {
             break;
           case methodPost:
             feedback = await http.post(
-              // Uri.https(endpointURL, path + resource, queryParameters),
+                // Uri.https(endpointURL, path + resource, queryParameters),
                 url,
                 headers: headers(tokenKey: token),
                 body: jsonEncode(body));
@@ -298,31 +305,36 @@ class NetworkRequests {
 
         // else if (statusCode >= 400 && statusCode < 600 && statusCode != 417) {}
         return feedback;
-
       } on TimeoutException catch (e) {
         // Navigator.maybePop(Tools.context);
-        Tools.isTouchLocked = false;
         print(e.toString());
         Alerts.flushbar(
             context: Tools.context,
             message: 'Request Timed Out. \nCheck Network Connection.',
             positive: false);
+        responseCaught.statusCode = 491;
+        responseCaught.reasonPhrase = 'Request Timed Out';
+        return responseCaught;
       } on SocketException catch (e) {
-        Tools.isTouchLocked = false;
         print(e.toString());
         Alerts.flushbar(
             context: Tools.context,
             message: 'Encountered Network Problem',
             positive: false);
+        responseCaught.statusCode = 492;
+        responseCaught.reasonPhrase = 'Encountered Network Problem';
+        return responseCaught;
       } on HandshakeException catch (e) {
-        Tools.isTouchLocked = false;
         print(e.toString());
         Alerts.flushbar(
             context: Tools.context,
             message: 'Request Terminated During Handshake',
             positive: false);
+        responseCaught.statusCode = 493;
+        responseCaught.reasonPhrase =
+            'Could Not Establish Connection With Remote';
+        return responseCaught;
       }
-
       // on PresentationConnectionCloseEvent catch (e) {
       //   Tools.isTouchLocked = false;
       //   print(e.toString());
@@ -332,17 +344,17 @@ class NetworkRequests {
       //       positive: false);
       // }
       catch (e) {
-        Tools.isTouchLocked = false;
         print(e.toString());
         Alerts.flushbar(
             context: Tools.context,
-            message: 'Something Went Wrong',
+            message: 'Something Went Wrong 2',
             positive: false);
+        responseCaught.statusCode = 499;
+        responseCaught.reasonPhrase = 'Ran Into A Problem';
+        return responseCaught;
       }
-  print('last');
-
-    }
-    else {
+      print('last');
+    } else {
       print('\npre\n');
 
       dynamic init = await prefs.getString(SharedPrefs.initialRoute) ?? '';
@@ -357,28 +369,27 @@ class NetworkRequests {
                 Tools.context, init, (route) => false);
           }
         }
-      }
-      else {
+      } else {
         // Authorize(context: Tools.context).attempt();
         Navigator.pushReplacementNamed(Tools.context, init);
       }
     }
   }
 
-
-  Future unsecuredMawaAPI(String method,
-      {required String resource,
-        Map<String, String>? payload,
-        Map<String, dynamic>? queryParameters,
-        required BuildContext context, String? direct,
-        VoidCallback? postAuthenticate,
-      }) async {
-
+  Future unsecuredMawaAPI(
+    String method, {
+    required String resource,
+    Map<String, String>? payload,
+    Map<String, dynamic>? queryParameters,
+    required BuildContext context,
+    String? direct,
+    VoidCallback? postAuthenticate,
+  }) async {
     final SharedPreferences prefs = await preferences;
 
     server = await prefs.getString(SharedPrefs.server) ?? '';
 
-    endpointURL =  'api-$server.mawa.co.za:$pot';
+    endpointURL = 'api-$server.mawa.co.za:$pot';
 
     dynamic url;
     // server == 'qas'
@@ -412,12 +423,10 @@ class NetworkRequests {
             url,
             // headers: headers,
             headers: this.headers(tokenKey: token, secured: false),
-
           );
           break;
         case methodPost:
-          feedback = await http.post(
-              url,
+          feedback = await http.post(url,
               headers: this.headers(tokenKey: token, secured: false),
               // headers: headers,
               body: jsonEncode(payload));
@@ -445,37 +454,37 @@ class NetworkRequests {
             dynamic data;
             Tools.isTouchLocked = false;
             data = jsonDecode(feedback.body);
-            if(resource == Resources.otp) {
+            if (resource == Resources.otp) {
               otp = await data;
             }
-            if(resource == Resources.authenticate) {
+            if (resource == Resources.authenticate) {
               token = await data[JsonResponses.token];
               Token.refreshToken = await data[JsonResponses.refreshToken] ?? '';
               preferences.then((SharedPreferences prefs) {
                 return (prefs.setString(SharedPrefs.token, token));
               });
               preferences.then((SharedPreferences prefs) {
-                return (prefs.setString(SharedPrefs.refreshToken, Token.refreshToken));
+                return (prefs.setString(
+                    SharedPrefs.refreshToken, Token.refreshToken));
               });
               preferences.then((SharedPreferences prefs) {
                 return (prefs.setString(SharedPrefs.username, User.username));
               });
-            //   /*// final String string = (prefs.getString(SharedPreferencesKeys.token) ?? '');
-            //
-            //  // _key =
-            //      prefs.setString(SharedPreferencesKeys.token, string)
-            // //      .then((bool success) {
-            // //   return token;
-            // // })
-            // ;*/
-            //   await User().getUserDetails(payload![JsonResponses.userID]!);
-            //   // Navigator.pushReplacementNamed(context, direct!);
-            //   postAuthenticate;
+              //   /*// final String string = (prefs.getString(SharedPreferencesKeys.token) ?? '');
+              //
+              //  // _key =
+              //      prefs.setString(SharedPreferencesKeys.token, string)
+              // //      .then((bool success) {
+              // //   return token;
+              // // })
+              // ;*/
+              //   await User().getUserDetails(payload![JsonResponses.userID]!);
+              //   // Navigator.pushReplacementNamed(context, direct!);
+              //   postAuthenticate;
             }
 
             print('token oyjfjdbfjd\n $token');
             await User().getUserDetails(User.username);
-
           }
           break;
         case 401:
@@ -525,36 +534,49 @@ class NetworkRequests {
               context: Tools.context,
               message: 'Login failed',
               positive: false,
-              popContext: false,);
+              popContext: false,
+            );
           }
           break;
       }
       // print('yoghurt ' + token.toString());
       Tools.isTouchLocked = false;
+      return feedback;
     } on TimeoutException catch (e) {
       Tools.isTouchLocked = false;
+      // Navigator.maybePop(Tools.context);
       print(e.toString());
       Alerts.flushbar(
-        context: Tools.context,
-        message: 'Request Timed Out. \nCheck Network Connection.',
-        positive: false,
-        popContext: false,);
+          context: context,
+          message: 'Request Timed Out. \nCheck Network Connection.',
+          positive: false,
+      );
+      responseCaught.statusCode = 491;
+      responseCaught.reasonPhrase = 'Request Timed Out';
+      return responseCaught;
     } on SocketException catch (e) {
       Tools.isTouchLocked = false;
       print(e.toString());
       Alerts.flushbar(
-          context: Tools.context,
+          context: context,
           message: 'Encountered Network Problem',
-          positive: false);
+          positive: false,
+      );
+      responseCaught.statusCode = 492;
+      responseCaught.reasonPhrase = 'Encountered Network Problem';
+      return responseCaught;
     } on HandshakeException catch (e) {
       Tools.isTouchLocked = false;
       print(e.toString());
       Alerts.flushbar(
-        context: Tools.context,
-        message: 'Request Terminated During Handshake',
-        positive: false,
-        popContext: false,
+          context: context,
+          message: 'Request Terminated During Handshake',
+          positive: false,
       );
+      responseCaught.statusCode = 493;
+      responseCaught.reasonPhrase =
+          'Could Not Establish Connection With Remote';
+      return responseCaught;
     }
     // on PresentationConnectionCloseEvent catch (e) {
     //   Tools.isTouchLocked = false;
@@ -568,10 +590,13 @@ class NetworkRequests {
       Tools.isTouchLocked = false;
       print(e.toString());
       Alerts.flushbar(
-          context: Tools.context,
-          message: 'Something Went Wrong',
-          positive: false);
+          context: context,
+          message: 'Something Went Wrong 2',
+          positive: false,
+      );
+      responseCaught.statusCode = 499;
+      responseCaught.reasonPhrase = 'Ran Into A Problem';
+      return responseCaught;
     }
-    return feedback;
   }
 }
