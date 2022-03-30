@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mawa/services/tools.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class Alerts{
 
@@ -89,7 +90,16 @@ class Alerts{
         context: context,
         title: title ?? '',
         body: Text('$message'),
-        btnOk: DialogButton(child: const Text('OK', style: TextStyle(color: Colors.white),), onPressed: ()=> Navigator.of(context).pop(), color: Colors.blueGrey)
+        btnOk: DialogButton(child: const Text('OK', style: TextStyle(color: Colors.white)), onPressed: ()=> Navigator.of(context).pop(), color: Colors.blueGrey)
+    ).show();
+  }
+
+  openPop(context, {message,title}) {
+    return AwesomeDialog(
+        context: context,
+        title: title ?? '',
+        body: Text('$message'),
+        btnOk: DialogButton(child: const Text('OK', style: TextStyle(color: Colors.white),), onPressed: ()=> openAppSettings(), color: Colors.blueGrey)
     ).show();
   }
 
