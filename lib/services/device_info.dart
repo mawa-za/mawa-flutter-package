@@ -1,14 +1,18 @@
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
-import 'dart:io';
+import 'dart:io' as io;
 import 'package:device_information/device_information.dart';
-import 'package:mawa/services/network_requests.dart';
+import 'package:flutter/widgets.dart';
+import 'package:mawa/services.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:mawa/screens/alerts.dart';
+import 'package:permission_handler/permission_handler.dart' as per;
 
 ///TO USE THIS CLASS SUCCESSFULLY ONE WOULD TO ADD "PHONE_READ_STATE [<uses-permission android:name="android.permission.READ_PHONE_STATE" />] PERMISSION ON ANDROID MANIFEST [android/app/src/main/AndroidManifest.xml].
 
 class DeviceInfo{
-
   static String platformImei = 'Unknown';
   static String uniqueId = "Unknown";
 
@@ -120,8 +124,9 @@ class DeviceInfo{
   }
 
   DeviceInfo(){
-    getDeviceInfo();
-    getImei();
+    // getDeviceInfo();
+    // getImei();
+    requestDevicePermission();
   }
 
   Future<void> getImei() async {
@@ -173,22 +178,24 @@ class DeviceInfo{
     // }
     print('terminal ' + terminal);
     print('info ' + info.toString());
-    print('deviceData ' + deviceData.toString());
+    print('deviceData ' + deviceData.length.toString());
 
     deviceData.addAll(Map<String,dynamic>.from(info));
 
+    print('done!!!!');
+    print('deviceData ' + deviceData.length.toString());
   }
 
   Future<void> getDeviceInfo () async {
     // Map<String, dynamic> deviceData = <String, dynamic>{};
 
     try {
-      if (Platform.isAndroid) {
+      if (io.Platform.isAndroid) {
         // deviceData = await   deviceInfoPlugin.androidInfo;
         deviceData = _readAndroidBuildData(await deviceInfoPlugin.androidInfo);
         // terminal = deviceData['brand'].toString() + '.' + deviceData['model'].toString();
       }
-      else if (Platform.isIOS) {
+      else if (io.Platform.isIOS) {
         // deviceData = await deviceInfoPlugin.iosInfo;
         deviceData = _readIosDeviceInfo(await deviceInfoPlugin.iosInfo);
         // terminal = deviceData['name'].toString() + '.' + deviceData['model'].toString();
@@ -199,6 +206,7 @@ class DeviceInfo{
       };
     }
 
+    getImei();
     // if (!mounted) return;
 
     // setState(() {
@@ -206,4 +214,25 @@ class DeviceInfo{
     // });
   }
 
+  requestDevicePermission() async {
+
+    print('Inside Permission method');
+
+    final status = await Permission.phone.request();
+
+    if (status == PermissionStatus.granted) {
+      print('Permission granted front ');
+      getDeviceInfo();
+    } else if (status == PermissionStatus.denied) {
+      print('Permission denied');
+
+      Alerts().popup(Tools.context, title:'Permission Required',message:'Permission is required!'  );
+      //await openAppSettings();
+    } else if (status == PermissionStatus.permanentlyDenied) {
+      print('Do not ask again');
+      await openAppSettings();
+    }
+  }
+
 }
+

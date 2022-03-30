@@ -4,9 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mawa/services/tools.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class Alerts{
-
 
   static flushbar({required BuildContext context, bool? positive, required String message, bool popContext = false, bool showProgressIndicator = false}) {
 
@@ -93,14 +93,20 @@ class Alerts{
     ).show();
   }
 
-  popup(context, {message,title}) {
+  popup(context,{message,title}) {
     return AwesomeDialog(
-        context: context,
+        context:  context,
         title: title ?? '',
         body: Text('$message'),
-        // buttons: [
-        //   DialogButton(child: const Text('OK', style: TextStyle(color: Colors.white),), onPressed: ()=> Navigator.of(context).pop(), color: Colors.blueGrey)
-        // ]
+        btnOk: DialogButton(child: const Text('OK', style: TextStyle(color: Colors.white),),
+            onPressed: (){
+              openAppSettings();
+            },
+            color: Colors.blueGrey)
+
+      // buttons: [
+      //     DialogButton(child: const Text('OK', style: TextStyle(color: Colors.white),), onPressed: ()=> Navigator.of(context).pop(), color: Colors.blueGrey)
+      //   ]
     ).show();
   }
 }
