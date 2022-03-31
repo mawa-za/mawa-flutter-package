@@ -89,7 +89,16 @@ class Alerts{
         context: context,
         title: title ?? '',
         body: Text('$message'),
-        btnOk: DialogButton(child: const Text('OK', style: TextStyle(color: Colors.white),), onPressed: ()=> Navigator.of(context).pop(), color: Colors.blueGrey)
+        btnOk: DialogButton(child: const Text('OK', style: TextStyle(color: Colors.white)), onPressed: ()=> Navigator.of(context).pop(), color: Colors.blueGrey)
+    ).show();
+  }
+
+  openPop(context, {message,title}) {
+    return AwesomeDialog(
+        context: context,
+        title: title ?? '',
+        body: Text('$message'),
+        btnOk: DialogButton(child: const Text('OK', style: TextStyle(color: Colors.white),), onPressed: ()=> openAppSettings(), color: Colors.blueGrey)
     ).show();
   }
 
