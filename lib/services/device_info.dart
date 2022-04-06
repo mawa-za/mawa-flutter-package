@@ -18,7 +18,7 @@ class DeviceInfo{
 
   static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
   Map<String, dynamic> _deviceData = <String, dynamic>{};
-  late Map deviceData;
+  static late Map deviceData;
   static String terminal = 'Undefined';
 
   // static String  = ;
@@ -183,6 +183,9 @@ class DeviceInfo{
 
     deviceData.addAll(Map<String,dynamic>.from(info));
 
+    for(int i = 0; i < deviceData.length; i++){
+      print(deviceData.values.elementAt(i));
+    }
     print('done!!!!');
     print('deviceData ' + deviceData.length.toString());
   }
