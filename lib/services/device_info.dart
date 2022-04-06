@@ -18,7 +18,7 @@ class DeviceInfo{
 
   static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
   Map<String, dynamic> _deviceData = <String, dynamic>{};
-  static late Map deviceData;
+  late Map deviceData;
   static String terminal = 'Undefined';
 
   // static String  = ;
@@ -158,7 +158,8 @@ class DeviceInfo{
       info[cpuType] = await DeviceInformation.cpuName;
       info[hardware] = await DeviceInformation.hardware;
 
-      terminal = await DeviceInformation.deviceIMEINumber;
+      terminal = await DeviceInformation.deviceModel;
+      platformImei = await DeviceInformation.deviceIMEINumber;
 
     } /*on PlatformException {
       info = {};
