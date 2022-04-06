@@ -16,15 +16,15 @@ class Receipts {
       /*Map payment ,int paymentPeriod,*/ {dynamic reference,
         dynamic tenderType,dynamic amount}) async {
     // DeviceInfo info =
-    DeviceInfo();
+    DeviceInfo dev = DeviceInfo();
 
     Map payment = {
       'reference': '$reference',
       'amount': '$amount',
       'tenderType':'$tenderType',
-      'terminalId': DeviceInfo.platformImei,
+      'terminalId': dev.deviceData[DeviceInfo.imeiNo],
       'location': Location.address.toString(),
-      'terminalType': DeviceInfo.terminal.toString()
+      'terminalType': dev.deviceData[DeviceInfo.type],
     };
 
     return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
