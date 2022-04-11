@@ -1,3 +1,4 @@
+import 'package:mawa/mawa.dart';
 import 'package:mawa/services/keys.dart';
 import 'package:mawa/services/network_requests.dart';
 import 'package:mawa/services/user.dart';
@@ -94,7 +95,10 @@ class Leaves {
           });
       // if (NetworkRequests.statusCode == 200 ||
       //     NetworkRequests.statusCode == 201) {
-        return leaveID = await NetworkRequests.decodeJson(response, negativeResponse: '');
+      leaveID = await NetworkRequests.decodeJson(response, negativeResponse: '');
+      if(response.statusCode == 200 || response.statusCode == 201){
+        Notification(id: leaveID).sendNotifications(meesageType: 'LOGLEAVE', sendToAdmin: true);
+      }
       // } else {
       //   leaveID = '';
       // }

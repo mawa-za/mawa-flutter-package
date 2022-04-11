@@ -11,7 +11,7 @@ class Notification {
         resource: Resources.sendNotifications + '/' + id,
         queryParameters: {
           QueryParameters.meesageType: meesageType,
-          QueryParameters.adminEmail: sendToAdmin,
+          QueryParameters.adminEmail: '$sendToAdmin',
         });
   }
 }
