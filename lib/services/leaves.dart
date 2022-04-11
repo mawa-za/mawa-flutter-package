@@ -149,25 +149,46 @@ class Leaves {
   }
 
   Future<bool> updateLeaveStatus(
-      {required String path, required String method}) async {
-    return await NetworkRequests.decodeJson(await NetworkRequests()
-            .securedMawaAPI(
-                method,
-                resource:
-                    Resources.leaves + '/' + Leaves.leaveID + '/' + path),
-    negativeResponse: false);
+      {required String path, required String method, required String messageType}) async {
+    dynamic response = await NetworkRequests().securedMawaAPI(
+        method,
+        resource:Resources.leaves + '/' + Leaves.leaveID + '/' + path);
+
+    if(response.statusCode == 200 || response.statusCode == 201){
+      Notification(id: leaveID).sendNotifications(meesageType: messageType, sendToAdmin: true);
+    }
+    return await NetworkRequests.decodeJson(response, negativeResponse: false);
+
+    // return await NetworkRequests.decodeJson(await NetworkRequests()
+    //         .securedMawaAPI(
+    //             method,
+    //             resource:
+    //                 Resources.leaves + '/' + Leaves.leaveID + '/' + path),
+    // negativeResponse: false);
   }
 
   editLeave(endDate) async {
-    return await NetworkRequests.decodeJson(await NetworkRequests()
-            .securedMawaAPI(NetworkRequests.methodPut,
-                resource: Resources.leaves +
-                    '/' +
-                    Leaves.leaveID +
-                    '/' +
-                    Resources.edit,
-                queryParameters: {QueryParameters.endDAte: endDate}),
-         negativeResponse: false);
+    dynamic response = await NetworkRequests()
+        .securedMawaAPI(NetworkRequests.methodPut,
+        resource: Resources.leaves +
+            '/' +
+            Leaves.leaveID +
+            '/' +
+            Resources.edit,
+        queryParameters: {QueryParameters.endDAte: endDate});
+    if(response.statusCode == 200 || response.statusCode == 201){
+      Notification(id: leaveID).sendNotifications(meesageType: 'APPROVEEDITED', sendToAdmin: true);
+    }
+    return await NetworkRequests.decodeJson(response, negativeResponse: false);
+    // return await NetworkRequests.decodeJson(await NetworkRequests()
+    //         .securedMawaAPI(NetworkRequests.methodPut,
+    //             resource: Resources.leaves +
+    //                 '/' +
+    //                 Leaves.leaveID +
+    //                 '/' +
+    //                 Resources.edit,
+    //             queryParameters: {QueryParameters.endDAte: endDate}),
+    //      negativeResponse: false);
   }
 }
 // part of mawa;
