@@ -95,6 +95,17 @@ class Tasks {
     return await NetworkRequests.decodeJson(response, negativeResponse: '');
   }
 
+//  /mawa-api/resources/tickets/completeTask?ticketTaskID=TTSK0000000011
+  completeTask(String id) async {
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodPut,
+      resource: '${Resources.tickets}/${Resources.completeTask}}',
+      queryParameters: {
+        QueryParameters.ticketTaskID: id
+      },
+    );
+  }
+
 //    getting a specific task
 //  GET /mawa-api/resources/tickets/getSpecificTask?ticketTaskID=TTSK0000000003
   getTask() async {
