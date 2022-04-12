@@ -99,7 +99,7 @@ class Tasks {
   completeTask() async {
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPut,
-      resource: '${Resources.tickets}/${Resources.completeTask}}',
+      resource: '${Resources.tickets}/${Resources.completeTask}',
       queryParameters: {
         QueryParameters.ticketTaskID: taskID
       },
