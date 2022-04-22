@@ -1,5 +1,7 @@
+
 import 'package:mawa/services/keys.dart';
 import 'package:mawa/services/network_requests.dart';
+import 'package:mawa/services/notification.dart';
 
 class Tasks {
   Tasks({this.reference,required this.taskID});
@@ -97,13 +99,18 @@ class Tasks {
 
 //  /mawa-api/resources/tickets/completeTask?ticketTaskID=TTSK0000000011
   completeTask() async {
-    return await NetworkRequests().securedMawaAPI(
+    dynamic response = await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPut,
       resource: '${Resources.tickets}/${Resources.completeTask}',
       queryParameters: {
         QueryParameters.ticketTaskID: taskID
       },
     );
+    if (response.statusCode == 201 || response.statusCode == 200){
+     Notification(id: taskID).sendNotifications(meesageType: 'TICKETTASKCOMPLETED',sendToAdmin: false);
+   }
+    return response;
+
   }
 
 //    getting a specific task
