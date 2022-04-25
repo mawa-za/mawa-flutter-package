@@ -171,13 +171,14 @@ class NetworkRequests {
     //     : url = Uri.http(endpointURL, path + resource, queryParameters);
     url = Uri.https(endpointURL, path + resource, queryParameters);
     print('mawa');
+    print('status code: $statusCode');
+    print('$method ');
     print('b\n${url.toString()}\n howl');
     print('headers\n$header');
 
-    print('status code: $statusCode');
     if (statusCode != 401) {
       try {
-        print('\n' + token.toString() + '\n');
+        // print('\n' + token.toString() + '\n');
         // print(method);
         // print(endpointURL);
         // print(path);

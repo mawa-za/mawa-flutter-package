@@ -11,6 +11,7 @@ class Leaves {
   static List approvers = [];
   static late List pendingResponse;
   static List approverHistory = [];
+  static const String cancelLeave = 'CANCELLEAVE';
 
   leaveProfile({required String partnerFunctionType}) async {
     String? partner;
@@ -149,22 +150,22 @@ class Leaves {
   }
 
   Future<bool> updateLeaveStatus(
-      {required String path, required String method, required String messageType}) async {
-    dynamic response = await NetworkRequests().securedMawaAPI(
-        method,
-        resource:Resources.leaves + '/' + Leaves.leaveID + '/' + path);
-
-    if(response.statusCode == 200 || response.statusCode == 201){
-      Notification(id: leaveID).sendNotifications(meesageType: messageType, sendToAdmin: true);
+      {required String path, required String method,  String? note, String? noteType}) async {
+    Map? body;
+    note != null && noteType != null
+        ? body = {
+      QueryParameters.note:{
+        QueryParameters.value:note,
+        QueryParameters.type:noteType
+      }
     }
-    return await NetworkRequests.decodeJson(response, negativeResponse: false);
-
-    // return await NetworkRequests.decodeJson(await NetworkRequests()
-    //         .securedMawaAPI(
-    //             method,
-    //             resource:
-    //                 Resources.leaves + '/' + Leaves.leaveID + '/' + path),
-    // negativeResponse: false);
+        : null;
+    return await NetworkRequests.decodeJson(await NetworkRequests()
+        .securedMawaAPI(
+        method,
+        resource:
+        Resources.leaves + '/' + Leaves.leaveID + '/' + path, body: body),
+        negativeResponse: false);
   }
 
   editLeave(endDate) async {
