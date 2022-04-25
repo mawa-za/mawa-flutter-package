@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter/painting.dart';
@@ -36,14 +38,10 @@ class Constants {
     );
   }
 
-  static Future<bool> promptExit(BuildContext c)  async {
-
-    bool? canExit;
-
-    dynamic dlg =
+  static   promptExit(BuildContext context)  async {
 
     AwesomeDialog(
-      context: c,
+      context: context,
       dialogType: DialogType.QUESTION,
       animType: AnimType.BOTTOMSLIDE,
       title: 'Warning!',
@@ -51,22 +49,18 @@ class Constants {
       btnOk: TextButton(
         child: const Text('Yes'),
         onPressed: () {
-          canExit = true;
-          Navigator.pop(c, canExit!);
+          exit(0);
         },
       ),
       btnCancel:TextButton(
         child: const Text('No'),
         onPressed: () {
-          canExit = false;
-          Navigator.pop(c, canExit!);
+          Navigator.pop(context );
         },
       ),
 
-    );
-
-    await dlg.show();
-    return Future.value(canExit!);
+    ).show();
   }
+
 
 }
