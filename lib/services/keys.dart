@@ -358,6 +358,7 @@ class QueryParameters {
 
   static const String userID = 'userID';
   static const String note = 'note';
+  static const String type = 'type';
 }
 
 class Statuses {
