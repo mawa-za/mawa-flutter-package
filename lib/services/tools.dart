@@ -233,19 +233,27 @@ class Tools{
   }
 
   static logoutPopup({required BuildContext context, required String redirect}) {
-    return Alert(
+    return AwesomeDialog(
       context: context,
-      title: 'Alert',
-      content: const Text('Do you really want to logout?'),
-      buttons: [
-        DialogButton(
-          child: const Text('Yes'),
-          onPressed: () => Navigator.of(context)
-              .pushNamedAndRemoveUntil(redirect, (route) => false),
-          color: Colors.greenAccent,
-        ),
-        Constants.dialogCloseButton(text: 'No', context: context),
-      ],
+      dialogType: DialogType.QUESTION,
+      animType: AnimType.BOTTOMSLIDE,
+      desc: 'Do You Really Want To Logout?',
+      btnOk: TextButton(
+        child: const Text('Yes'),
+        onPressed: () {
+          // setState(() {
+          //   Tools.isTouchLocked = true;
+          // });
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil(redirect, (route) => false);
+        },
+      ),
+      btnCancel: TextButton(
+        child: const Text('No'),
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+      ),
     ).show();
   }
 
