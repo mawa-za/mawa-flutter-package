@@ -150,7 +150,7 @@ class Leaves {
   }
 
   Future<bool> updateLeaveStatus(
-      {required String path, required String method,  String? note, String? noteType}) async {
+      {required String path, String? method,  String? note, String? noteType}) async {
     Map? body;
     note != null && noteType != null
         ? body = {
@@ -162,7 +162,7 @@ class Leaves {
         : null;
     return await NetworkRequests.decodeJson(await NetworkRequests()
         .securedMawaAPI(
-        method,
+        NetworkRequests.methodPut,
         resource:
         Resources.leaves + '/' + Leaves.leaveID + '/' + path, body: body),
         negativeResponse: false);
