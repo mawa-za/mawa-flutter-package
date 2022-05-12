@@ -29,7 +29,6 @@ class Memberships {
     policy.clear();
      dynamic response = await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
         resource: '${Resources.policies}/$policyId');
-    print('try'+response.toString());
     // policy == null ? policy = {} : response != null ? response.isNotEmpty ? policy = response : policy = {}  : policy = {} ;
     if( response.statusCode == 200){
       dynamic body =  await NetworkRequests.decodeJson(response);
@@ -49,6 +48,5 @@ class Memberships {
       allPolicies.clear();
     }
     policy == null ? policyId = policy[JsonResponses.id] : policyId = '';
-    print('\n2try'+policy.toString());
   }
 }

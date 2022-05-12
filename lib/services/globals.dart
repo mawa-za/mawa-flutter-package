@@ -10,5 +10,4 @@ setLastPage(String page) async {
 
   prefs.setString(SharedPrefs.lastPage, page);
   Tools.lastPage  = page;
-  print('now ' + page);
 }

@@ -69,10 +69,8 @@ class Receipts {
         NetworkRequests.methodGet,
         resource: Resources.receipts,
         queryParameters: {QueryParameters.reference: referenceNo}));
-    print(receipts.runtimeType);
     // receipts.runtimeType == List &&
     receipts.isNotEmpty ? receiptsList = receipts : receiptsList = [];
-    print(receiptsList.length.toString() + ' long ');
   }
 
   processCashup() async {

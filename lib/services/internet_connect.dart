@@ -36,15 +36,12 @@ ConnectivityResult? result;
   try {
     result = await _connectivity.checkConnectivity();
   } on PlatformException catch (e) {
-    print('error ${e.toString()}');
   }
 
-print('loooopj $result!');
   return _updateConnectionStatus(result!);
 }
 
 Future<void> _updateConnectionStatus(ConnectivityResult result) async {
-  print('1');
 
   switch (result) {
     case ConnectivityResult.wifi:{
@@ -59,7 +56,6 @@ Future<void> _updateConnectionStatus(ConnectivityResult result) async {
       break;
 
     case ConnectivityResult.none:{
-      print('2');
     connectionStatus = result.toString();
     _showBanner();
     }

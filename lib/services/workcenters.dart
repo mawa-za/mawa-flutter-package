@@ -16,7 +16,6 @@ class WorkCenters {
       list.add(centers[i][JsonResponses.workCenter]);
     }
     workCentersList = list;
-    print('dgh  ' + workCentersList.toString());//?role=CASHIER
   }
 
 }

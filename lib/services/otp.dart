@@ -116,7 +116,6 @@ class OTP {
         preferences.then((SharedPreferences prefs) {
           return (prefs.setString(SharedPrefs.token, NetworkRequests.token));
         });
-        print('\n' + NetworkRequests.otp + '\n' + NetworkRequests.token + '\n' );
         Tools().passwordResetPopup(context);
       }
     }
