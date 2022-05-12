@@ -43,7 +43,7 @@ class _NoConnectionScreenState extends State<NoConnectionScreen> {
     try {
       result = await widget.connectivity.checkConnectivity();
     } on PlatformException catch (e) {
-      print(e.toString());
+      // print(e.toString());
     }
 
     // If the widget was removed from the tree while the asynchronous platform

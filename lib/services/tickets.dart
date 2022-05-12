@@ -32,7 +32,6 @@ class Tickets {
 
     if (list.contains(JsonPayloads.InProgress)) {
       // final Map map = list.asMap();
-      print('inprog');
       Tickets.ticket = tickets[map[JsonPayloads.InProgress]];
       ticketNo = Tickets.ticket[JsonResponses.id];
       Time.dueTime =
@@ -57,7 +56,6 @@ class Tickets {
     }
     else if (Tickets.ticket[JsonResponses.status] == JsonPayloads.New ||
         Tickets.ticket[JsonResponses.status] == JsonPayloads.Open)  {
-      print('else');
 
       ticketNo = Tickets.ticket[JsonResponses.id];
       Time.dueTime =
@@ -128,7 +126,6 @@ class Tickets {
   }
 
   static getTicket(String id) async {
-    print('getTicket');
     // ignore: unnecessary_null_comparison
     if (id != null && id != '') {
       dynamic response = await NetworkRequests().securedMawaAPI(
@@ -147,7 +144,6 @@ class Tickets {
   }
 
   static allMyTickets() async {
-    print('allMyTickets');
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: Resources.tickets,
@@ -175,7 +171,6 @@ class Tickets {
   }
 
   static getNewTickets() async {
-    print('getNewTickets');
     newTickets.clear();
     dynamic response = await NetworkRequests().securedMawaAPI(
             NetworkRequests.methodGet,
@@ -188,7 +183,6 @@ class Tickets {
             ) ??
         [];
 
-    print(response.length);
     if(response.statusCode == 200){
       dynamic data = await NetworkRequests.decodeJson(response);
       for(int i = 0; i < data.length; i++) {
@@ -202,12 +196,10 @@ class Tickets {
     else{
       newTickets = [];
     }
-    print(' gooi $newTickets');
     return newTickets;
   }
 
   static openTicket(String ticketId) async {
-    print('openTicket');
     dynamic response = await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
         resource:
             Resources.tickets + '/' + ticketId + '/' + Resources.ticketStatusOpen,
@@ -222,7 +214,6 @@ class Tickets {
   }
 
   static reassignTicket(String ticket) async {
-    print('reassignTicket');
     dynamic response = await NetworkRequests().securedMawaAPI(NetworkRequests.methodPut,
         resource: Resources.tickets + '/' + ticket,
         body: {JsonPayloads.assignedToID: User.partnerId});
@@ -239,7 +230,6 @@ class Tickets {
   static changeTicketStatus({
     required String status,
   }) async {
-    print('changeTicketStatus');
 
     dynamic response = await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPost,

@@ -160,7 +160,6 @@ class Tools{
 
     Authenticate.message = 'Token Invalid'
         : Alerts.flushbar(context: context, message:'Failed To Reset', positive: false, popContext: true);
-    print('done!');
   }
 
   passwordResetPopup(context) {
@@ -217,7 +216,6 @@ class Tools{
         ),
         btnOk: DialogButton(
             onPressed: () {
-              print(_newPasswordController.value.text.toString());
               if (_resetPasswordFormKey.currentState!.validate()) {
                 // Navigator.of(context).pop();
                 _resetPassword(/*context*/);

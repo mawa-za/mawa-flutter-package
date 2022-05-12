@@ -50,7 +50,6 @@ class Persons {
   }
 
   getPerson() async {
-    print('person $personId');
     Persons.person.clear();
     dynamic respond = await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
         resource: '${Resources.persons}/$personId');

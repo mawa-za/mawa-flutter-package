@@ -31,7 +31,6 @@ class ApkVersion {
     //   buildNumber = packageInfo.buildNumber;
     // });
 
-    print(appName + ' ' + packageName + ' ' + version + ' ' + buildNumber);
 
     apkUsable = await checkApkValidity();
   }
@@ -46,7 +45,6 @@ class ApkVersion {
       QueryParameters.versionAppName:appName
     };
     dynamic response = await NetworkRequests.decodeJson( await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet, resource: Resources.versions, queryParameters: query));
-    print(response ?? 'nothing');
     // if(response.statusCode == 200) {
     // print('response ${response.toString()}');
       return response[JsonResponses.versionAppUsable];

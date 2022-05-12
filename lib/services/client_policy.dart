@@ -10,7 +10,7 @@ class Policies {
 
   createNewPolicy(details) async {
     return await NetworkRequests.decodeJson( await NetworkRequests()
-        .securedMawaAPI(NetworkRequests.methodPost, resource: '${Resources.policies}', body: details));
+        .securedMawaAPI(NetworkRequests.methodPost, resource: '${Resources.policies} ', body: details));
   }
 
   searchClientPolicies(String idNumber) async {

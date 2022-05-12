@@ -22,7 +22,6 @@ class Products {
         NetworkRequests.methodGet,
         resource: Resources.products,
         queryParameters: {'category': category})); //
-    print('products $products');
     return products;
   }
 
@@ -51,7 +50,6 @@ class Products {
       }
     }
     Products.productsMap = data;
-    print('meva \n${Products.productsMap}');
   }
 
   dynamic getProductInfo(category) async {
@@ -68,10 +66,6 @@ class Products {
     var data = response.body;
 
     List list = jsonDecode(data);
-    print(statusCode);
-    print(data);
-    print(list.length);
-    print('sa ${policyList.keys}');
     return list;
   }
 }
