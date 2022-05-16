@@ -13,7 +13,7 @@ class NoConnectionScreen extends StatefulWidget {
   final Connectivity connectivity = Connectivity();
   StreamSubscription<ConnectivityResult>? connectivitySubscription;
 
-  NoConnectionScreen({required this.redirect});
+  NoConnectionScreen({Key? key, required this.redirect}) : super(key: key);
   final String redirect;
 
   @override
@@ -71,6 +71,15 @@ class _NoConnectionScreenState extends State<NoConnectionScreen> {
         ],
 
       ),
+    );
+  }
+
+  Widget futureBuilder() {
+    return FutureBuilder(
+        future: initConnectivity(),
+        builder: (context, snapshot){
+          return Container();
+        }
     );
   }
 
