@@ -25,6 +25,18 @@ class FieldOptions {
     return fieldOptions;
   }
 
+  addFieldOptions(String option, String code, String description) async {
+    dynamic response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPost,
+        resource: Resources.fieldOptions,
+        queryParameters: {QueryParameters.field: option},
+        body: {
+          JsonPayloads.field : option,
+          JsonPayloads.fieldOptionCode : code,
+          JsonPayloads.fieldDescription: description,
+        });
+  }
+
 }
 // part of mawa;
 //

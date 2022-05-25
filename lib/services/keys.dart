@@ -299,8 +299,17 @@ class JsonPayloads {
   static const String parentType = 'parentType';
   static const String parentReference = 'parentReference';
 
+  static const String fieldCode = 'code';
+  static const String fieldDescription = 'description';
+
+  static const String fieldOptionCode = 'code';
+  static const String fieldOptionDescription = 'description';
+
+  static const String field = 'field';
+
   static const String workCenter = 'workcenter';
   static const String position = 'position';
+
 
 // static const String  = '';
 }
