@@ -15,6 +15,40 @@ class Fields {
       return [];
     }
   }
+
+  addField() async {
+
+    dynamic response = await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPost,
+        resource: Resources.fields,
+        body: {
+          "code" : "code",
+          "description" : "description",
+        }));
+
+    // var url = Uri.https('api-dev.mawa.co.za:8181', '/mawa-api/resources/fields');
+    // var data = {
+    //   "code": code,
+    //   "description": description,
+    // };
+    //
+    // final response = await http.post(url, headers: {
+    //   'Content-Type': 'application/json',
+    //   'Accept': 'application/json',
+    //   'Authorization': 'Bearer ${NetworkRequests.token}',
+    // }, body: jsonEncode(data));
+    //
+    // var jsonResponse;
+    //
+    // if(response.statusCode == 200 || response.statusCode == 201) {
+    //   print(response.statusCode);
+    //   jsonResponse = jsonDecode(response.body);
+    //   print(jsonResponse);
+    //   print("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
+    // }
+
+  }
+
 }
 
 // part of mawa;
