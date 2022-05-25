@@ -236,6 +236,9 @@ class Resources {
 
   static const String roles = 'roles';
   static const String products = 'products';
+  static const String editPosition = 'editPosition';
+  static const String addWorkcenter = 'addWorkcenter';
+  static const String removeWokcenter = 'removeWorkCenter';
 
   static const String ticketStatusNew = 'new';
   static const String ticketStatusOpen = 'open';
@@ -304,6 +307,10 @@ class JsonPayloads {
 
   static const String field = 'field';
 
+  static const String workCenter = 'workcenter';
+  static const String position = 'position';
+
+
 // static const String  = '';
 }
 
@@ -367,6 +374,9 @@ class QueryParameters {
   static const String userID = 'userID';
   static const String note = 'note';
   static const String type = 'type';
+
+  static const String workcenter = 'workcenter';
+  static const String position = 'position';
 }
 
 class Statuses {
