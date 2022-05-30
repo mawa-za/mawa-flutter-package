@@ -313,8 +313,9 @@ class NetworkRequests {
             context: Tools.context,
             message: 'Request Timed Out. \nCheck Network Connection.',
             positive: false);
-        responseCaught.statusCode = 491;
-        responseCaught.reasonPhrase = 'Request Timed Out';
+        responseCaught = http.Response('Request Timed Out',491);
+        // responseCaught.statusCode = 491;
+        // responseCaught.reasonPhrase = 'Request Timed Out';
         return responseCaught;
       } on SocketException catch (e) {
         print(e.toString());
@@ -322,8 +323,9 @@ class NetworkRequests {
             context: Tools.context,
             message: 'Encountered Network Problem',
             positive: false);
-        responseCaught.statusCode = 492;
-        responseCaught.reasonPhrase = 'Encountered Network Problem';
+        responseCaught = http.Response('Encountered Network Problem',492);
+        // responseCaught.statusCode = 492;
+        // responseCaught.reasonPhrase = 'Encountered Network Problem';
         return responseCaught;
       } on HandshakeException catch (e) {
         print(e.toString());
@@ -331,9 +333,10 @@ class NetworkRequests {
             context: Tools.context,
             message: 'Request Terminated During Handshake',
             positive: false);
-        responseCaught.statusCode = 493;
-        responseCaught.reasonPhrase =
-            'Could Not Establish Connection With Remote';
+        responseCaught = http.Response('Could Not Establish Connection With Remote', 493);
+        // responseCaught.statusCode = 493;
+        // responseCaught.reasonPhrase =
+        //     'Could Not Establish Connection With Remote';
         return responseCaught;
       }
       // on PresentationConnectionCloseEvent catch (e) {
@@ -343,6 +346,7 @@ class NetworkRequests {
       //       context: Tools.context,
       //       message: 'Connection Lost During Request',
       //       positive: false);
+      //        responseCaught = http.Response('Connection Lost During Request', 494);
       // }
       catch (e) {
         print(e.toString());
@@ -350,8 +354,9 @@ class NetworkRequests {
             context: Tools.context,
             message: 'Something Went Wrong 2',
             positive: false);
-        responseCaught.statusCode = 499;
-        responseCaught.reasonPhrase = 'Ran Into A Problem';
+        responseCaught = http.Response('Ran Into A Problem', 499);
+        // responseCaught.statusCode = 499;
+        // responseCaught.reasonPhrase = 'Ran Into A Problem';
         return responseCaught;
       }
       print('last');
@@ -552,8 +557,9 @@ class NetworkRequests {
           message: 'Request Timed Out. \nCheck Network Connection.',
           positive: false,
       );
-      responseCaught.statusCode = 491;
-      responseCaught.reasonPhrase = 'Request Timed Out';
+      responseCaught = http.Response('Request Timed Out',491);
+      // responseCaught.statusCode = 491;
+      // responseCaught.reasonPhrase = 'Request Timed Out';
       return responseCaught;
     } on SocketException catch (e) {
       Tools.isTouchLocked = false;
@@ -563,8 +569,9 @@ class NetworkRequests {
           message: 'Encountered Network Problem',
           positive: false,
       );
-      responseCaught.statusCode = 492;
-      responseCaught.reasonPhrase = 'Encountered Network Problem';
+      responseCaught = http.Response('Encountered Network Problem', 492);
+      // responseCaught.statusCode = 492;
+      // responseCaught.reasonPhrase = 'Encountered Network Problem';
       return responseCaught;
     } on HandshakeException catch (e) {
       Tools.isTouchLocked = false;
@@ -574,9 +581,10 @@ class NetworkRequests {
           message: 'Request Terminated During Handshake',
           positive: false,
       );
-      responseCaught.statusCode = 493;
-      responseCaught.reasonPhrase =
-          'Could Not Establish Connection With Remote';
+      responseCaught = http.Response('Could Not Establish Connection With Remote',493);
+      // responseCaught.statusCode = 493;
+      // responseCaught.reasonPhrase =
+      //     'Could Not Establish Connection With Remote';
       return responseCaught;
     }
     // on PresentationConnectionCloseEvent catch (e) {
@@ -586,6 +594,7 @@ class NetworkRequests {
     //       context: Tools.context,
     //       message: 'Connection Lost During Request',
     //       positive: false);
+    //        responseCaught = http.Response('Connection Lost During Request', 494);
     // }
     catch (e) {
       Tools.isTouchLocked = false;
@@ -595,8 +604,9 @@ class NetworkRequests {
           message: 'Something Went Wrong 2',
           positive: false,
       );
-      responseCaught.statusCode = 499;
-      responseCaught.reasonPhrase = 'Ran Into A Problem';
+      responseCaught = http.Response('Ran Into A Problem', 499);
+      // responseCaught.statusCode = 499;
+      // responseCaught.reasonPhrase = 'Ran Into A Problem';
       return responseCaught;
     }
   }
