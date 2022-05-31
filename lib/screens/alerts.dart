@@ -2,7 +2,7 @@ import 'package:another_flushbar/flushbar.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mawa/services/tools.dart';
+import 'package:mawa_package/services/tools.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:permission_handler/permission_handler.dart';
 

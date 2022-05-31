@@ -1,4 +1,4 @@
-import 'package:mawa/services.dart';
+import 'package:mawa_package/services.dart';
 import 'dart:async';
 import 'package:package_info_plus/package_info_plus.dart';
 

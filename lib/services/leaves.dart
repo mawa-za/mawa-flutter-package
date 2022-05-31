@@ -1,7 +1,7 @@
-import 'package:mawa/mawa.dart';
-import 'package:mawa/services/keys.dart';
-import 'package:mawa/services/network_requests.dart';
-import 'package:mawa/services/user.dart';
+import 'package:mawa_package/mawa.dart';
+import 'package:mawa_package/services/keys.dart';
+import 'package:mawa_package/services/network_requests.dart';
+import 'package:mawa_package/services/user.dart';
 
 class Leaves {
   static late String leaveID;

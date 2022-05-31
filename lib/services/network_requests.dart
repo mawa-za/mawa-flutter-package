@@ -1,10 +1,10 @@
-import 'package:mawa/services/globals.dart';
-import 'package:mawa/services/keys.dart';
-import 'package:mawa/services/token.dart';
-import 'package:mawa/services/tools.dart';
-import 'package:mawa/services/user.dart';
-import 'package:mawa/screens/alerts.dart';
-import 'package:mawa/screens/authenticate.dart';
+import 'package:mawa_package/services/globals.dart';
+import 'package:mawa_package/services/keys.dart';
+import 'package:mawa_package/services/token.dart';
+import 'package:mawa_package/services/tools.dart';
+import 'package:mawa_package/services/user.dart';
+import 'package:mawa_package/screens/alerts.dart';
+import 'package:mawa_package/screens/authenticate.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';

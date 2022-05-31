@@ -1,6 +1,6 @@
-import 'package:mawa/services/keys.dart';
-import 'package:mawa/services/network_requests.dart';
-import 'package:mawa/services/persons.dart';
+import 'package:mawa_package/services/keys.dart';
+import 'package:mawa_package/services/network_requests.dart';
+import 'package:mawa_package/services/persons.dart';
 
 class Memberships {
   static Map<dynamic, dynamic> policy = {};

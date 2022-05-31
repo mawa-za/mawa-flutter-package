@@ -1,5 +1,5 @@
-import 'package:mawa/services/keys.dart';
-import 'package:mawa/services/network_requests.dart';
+import 'package:mawa_package/services/keys.dart';
+import 'package:mawa_package/services/network_requests.dart';
 
 class Notification {
 //  POST /mawa-api/resources/sendNotifications/LRQ0000000055?meesageType=APPROVEDLEAVE&adminEmail=true

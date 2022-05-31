@@ -1,5 +1,5 @@
-import 'package:mawa/services.dart';
-import 'package:mawa/screens.dart';
+import 'package:mawa_package/services.dart';
+import 'package:mawa_package/screens.dart';
 
 class WorkCenters {
 

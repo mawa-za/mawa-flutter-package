@@ -1,7 +1,7 @@
 
-import 'package:mawa/services/keys.dart';
-import 'package:mawa/services/network_requests.dart';
-import 'package:mawa/services/notification.dart';
+import 'package:mawa_package/services/keys.dart';
+import 'package:mawa_package/services/network_requests.dart';
+import 'package:mawa_package/services/notification.dart';
 
 class Tasks {
   Tasks({this.reference,required this.taskID});

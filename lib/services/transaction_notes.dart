@@ -1,4 +1,4 @@
-import 'package:mawa/services.dart';
+import 'package:mawa_package/services.dart';
 
 class TransactionNotes {
   TransactionNotes({this.transactionNote, this.transaction});
