@@ -1,9 +1,9 @@
 import 'package:flutter/services.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:mawa/services/tools.dart';
+import 'package:mawa_package/services/tools.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:mawa/screens/alerts.dart';
+import 'package:mawa_package/screens/alerts.dart';
 
 
 ///TO USE THIS CLASS ONE MUST:

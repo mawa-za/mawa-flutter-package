@@ -1,4 +1,4 @@
-import 'package:mawa/services.dart';
+import 'package:mawa_package/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 class Token {
 

@@ -1,12 +1,12 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mawa/services/globals.dart';
-import 'package:mawa/services/keys.dart';
-import 'package:mawa/services/network_requests.dart';
-import 'package:mawa/services/tools.dart';
-import 'package:mawa/services/user.dart';
-import 'package:mawa/screens/alerts.dart';
+import 'package:mawa_package/services/globals.dart';
+import 'package:mawa_package/services/keys.dart';
+import 'package:mawa_package/services/network_requests.dart';
+import 'package:mawa_package/services/tools.dart';
+import 'package:mawa_package/services/user.dart';
+import 'package:mawa_package/screens/alerts.dart';
 
 class Authenticate extends StatefulWidget {
   static const String id = 'Login';

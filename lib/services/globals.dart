@@ -1,5 +1,5 @@
-import 'package:mawa/services/keys.dart';
-import 'package:mawa/services/tools.dart';
+import 'package:mawa_package/services/keys.dart';
+import 'package:mawa_package/services/tools.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 late String redirect;

@@ -1,4 +1,4 @@
-import 'package:mawa/services.dart';
+import 'package:mawa_package/services.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 

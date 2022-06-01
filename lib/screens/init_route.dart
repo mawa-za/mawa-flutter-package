@@ -1,12 +1,12 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:mawa/services/constants.dart';
-import 'package:mawa/services/tools.dart';
-import 'package:mawa/services/versioning.dart';
-import 'package:mawa/screens/no_internet_connection.dart';
-import 'package:mawa/screens/outdated_version.dart';
-import 'package:mawa/screens/snapshort_static_widgets.dart';
+import 'package:mawa_package/services/constants.dart';
+import 'package:mawa_package/services/tools.dart';
+import 'package:mawa_package/services/versioning.dart';
+import 'package:mawa_package/screens/no_internet_connection.dart';
+import 'package:mawa_package/screens/outdated_version.dart';
+import 'package:mawa_package/screens/snapshort_static_widgets.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 

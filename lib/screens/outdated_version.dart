@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mawa/services/tools.dart';
+import 'package:mawa_package/services/tools.dart';
 
 class OutdatedAPK extends StatelessWidget {
   static const id = 'Outdated APK';

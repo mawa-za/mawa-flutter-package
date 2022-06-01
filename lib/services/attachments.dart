@@ -3,9 +3,9 @@ import 'package:http_parser/http_parser.dart' as parser;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
-import 'package:mawa/services/globals.dart';
-import 'package:mawa/services/keys.dart';
-import 'package:mawa/services/network_requests.dart';
+import 'package:mawa_package/services/globals.dart';
+import 'package:mawa_package/services/keys.dart';
+import 'package:mawa_package/services/network_requests.dart';
 
 class Attachments{
   dynamic attachment;
