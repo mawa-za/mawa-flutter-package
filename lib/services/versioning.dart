@@ -6,7 +6,7 @@ class ApkVersion {
   late PackageInfo packageInfo;
   late String appName;
   late String packageName;
-  late String version;
+  late String version = '1.0.4';
   late String buildNumber;
 
   static dynamic apkUsable;
@@ -52,6 +52,17 @@ class ApkVersion {
     // else {
     //   return null;
     // }
+  }
+
+  getSingleVersion() async {
+    Map<String, dynamic>? query = {
+      QueryParameters.versionApkVersionCode:version,
+    };
+
+    dynamic response = await NetworkRequests.decodeJson( await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet, resource: Resources.versions, queryParameters: query));
+    print('YYYYYYYYYYY');
+    print('$response');
+
   }
 
 
