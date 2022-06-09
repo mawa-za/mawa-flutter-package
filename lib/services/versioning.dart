@@ -54,5 +54,16 @@ class ApkVersion {
     // }
   }
 
+  getSingleVersion() async {
+    Map<String, dynamic>? query = {
+      QueryParameters.versionApkVersionCode:version,
+    };
+
+    dynamic response = await NetworkRequests.decodeJson( await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet, resource: Resources.versions, queryParameters: query));
+    print('YYYYYYYYYYY');
+    print('$response');
+
+  }
+
 
 }
