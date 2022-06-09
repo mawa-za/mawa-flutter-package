@@ -6,7 +6,7 @@ class ApkVersion {
   late PackageInfo packageInfo;
   late String appName;
   late String packageName;
-  late String version = '1.0.4';
+  late String version;
   late String buildNumber;
 
   static dynamic apkUsable;
