@@ -91,6 +91,8 @@ class JsonResponses {
   static const String versionAppName = 'appName';
   static const String versionApkVersionCode = 'versionNumber';
   static const String versionAppUsable = 'appUsable';
+  static const String versionValidFrom = 'valid_from';
+  static const String versionValidTo = 'valid_to';
 
   static const String personIdType = 'idType';
   static const String personIdNumber = 'idnumber';
