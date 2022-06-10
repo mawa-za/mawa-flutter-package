@@ -8,6 +8,7 @@ class ApkVersion {
   late String packageName;
   late String version;
   late String buildNumber;
+  static List allVersions = [];
 
   static dynamic apkUsable;
 
@@ -36,7 +37,15 @@ class ApkVersion {
   }
 
   getApkListInfo() async {
-    return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet, resource: Resources.versions));
+
+    dynamic response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: Resources.versions);
+    allVersions = await NetworkRequests.decodeJson(response, negativeResponse: []);
+    return allVersions;
+
+
+    // return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet, resource: Resources.versions));
   }
 
   checkApkValidity(/*{String versionCode}*/) async {
