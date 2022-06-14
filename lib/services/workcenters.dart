@@ -3,13 +3,16 @@ import 'package:mawa_package/screens.dart';
 
 class WorkCenters {
 
-  static Map<String, String> workcenters = {};
+  static List workcenters = [];
   static List<String> workCentersList = [];
 
   getAllWorkCenters() async{
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: Resources.workCenters);
+    workcenters = await NetworkRequests.decodeJson(response, negativeResponse: []);
+    return workcenters;
+
   }
 
   getWorkCentersByRole({required String role}) async {
