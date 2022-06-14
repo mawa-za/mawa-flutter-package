@@ -94,6 +94,10 @@ class JsonResponses {
   static const String versionValidFrom = 'valid_from';
   static const String versionValidTo = 'valid_to';
 
+  static const String workCenterId = 'id';
+  static const String workCenterDescription = 'description';
+  static const String workCenterPath = 'path';
+
   static const String personIdType = 'idType';
   static const String personIdNumber = 'idnumber';
   static const String personLastName = 'lastName';
