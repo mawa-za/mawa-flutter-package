@@ -74,5 +74,21 @@ class ApkVersion {
 
   }
 
+  addVersion({
+  required String versionNumber,
+  required String appName,
+  required String appUsability
+  }) async{
+    dynamic response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPost,
+      resource: Resources.versions,
+      body: {
+        JsonPayloads.versionNumber : versionNumber,
+        JsonPayloads.appName : appName,
+        JsonPayloads.appUsable : appUsability,
+      }
+    );
+  }
+
 
 }
