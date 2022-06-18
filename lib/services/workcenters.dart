@@ -5,6 +5,7 @@ class WorkCenters {
 
   static List workcenters = [];
   static List<String> workCentersList = [];
+  dynamic workCenId = [];
 
   getAllWorkCenters() async{
     dynamic response = await NetworkRequests().securedMawaAPI(
@@ -12,6 +13,16 @@ class WorkCenters {
         resource: Resources.workCenters);
     workcenters = await NetworkRequests.decodeJson(response, negativeResponse: []);
     return workcenters;
+
+  }
+
+  getASingleWorkCenters() async{
+    dynamic response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: '${Resources.workCenters}/${Resources.workCenterDesc}');
+    workCenId = await NetworkRequests.decodeJson(response, negativeResponse: []);
+    print('work work work');
+    return workCenId;
 
   }
 
