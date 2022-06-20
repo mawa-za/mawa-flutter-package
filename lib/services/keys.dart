@@ -232,7 +232,9 @@ class Resources {
   static const String transactionNotes = 'transactionNotes';
   static const String persons = 'persons';
   static const String workCenters = 'workcenters';
+  static const String roleWorkcenters = 'roleWorkcenters';
   static const String workCenterDesc = 'workcenterDesc';
+  static const String workCenterId = 'id';
   static const String receipts = 'receipts';
   static const String cashup = 'cashup';
   static const String policies = 'policies';
