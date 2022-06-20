@@ -2,10 +2,9 @@ import 'package:mawa_package/services/keys.dart';
 import 'package:mawa_package/services/network_requests.dart';
 
 class FieldOptions {
-  static late Map<String, String> fieldOptions;
+  static List fieldOptions = [];
 
   getFieldOptions(String option) async {
-    fieldOptions = {};
 
     dynamic response =  await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
@@ -13,16 +12,9 @@ class FieldOptions {
         queryParameters: {
           QueryParameters.field: option,
         });
-    if (response.statusCode == 200) {
-      dynamic data = await NetworkRequests.decodeJson(response);
-      for (int index = 0; index < data.length;  index++) {
-        fieldOptions['${data[index][JsonResponses.fieldOptionDescription]}'] = data[index][JsonResponses.fieldOptionCode];
-      }
-      // fieldOptions = response;
-    } else {
-      fieldOptions = {};
-    }
-    return fieldOptions;
+      fieldOptions = await NetworkRequests.decodeJson(response);
+      print('DADADADA ${fieldOptions}');
+      return fieldOptions;
   }
 
   addFieldOptions(String option, String code, String description) async {

@@ -55,6 +55,11 @@ class JsonResponses {
   static const String fieldOptionValidFrom = 'validFrom';
   static const String fieldOptionValidTo = 'validTo';
 
+  static const String fieldCode = 'code';
+  static const String fieldDescription = 'description';
+  static const String fieldValidFrom = 'validFrom';
+  static const String fieldValidTo = 'validTo';
+
   static const String usersFirstName = 'firstName';
   static const String usersLastName = 'lastName';
   static const String usersPasswordStatus = 'password_status';

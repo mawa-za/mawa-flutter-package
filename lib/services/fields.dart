@@ -2,18 +2,16 @@ import 'package:mawa_package/services/keys.dart';
 import 'package:mawa_package/services/network_requests.dart';
 
 class Fields {
-  static late List fields;
+  static List fields = [];
   getFields() async {
     dynamic response =await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodGet,
       resource: Resources.fields,
     );
 
-    if (response.statusCode == 200) {
-      return  await NetworkRequests.decodeJson(response);
-    } else {
-      return [];
-    }
+      fields = await NetworkRequests.decodeJson(response);
+      return fields;
+
   }
 
   addField(String code, String desc) async {
