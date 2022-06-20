@@ -1,3 +1,4 @@
+import 'package:mawa_package/mawa.dart';
 import 'package:mawa_package/services.dart';
 import 'dart:async';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -74,6 +75,23 @@ class ApkVersion {
 
   }
 
+  editAPKUsability({
+    String? appUsability,
+    String? appName,
+    String? versionNumber,
+  }) async {
+    dynamic response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPut,
+        resource: Resources.versions,
+     body: {
+          QueryParameters.versionAppUsable : appUsability,
+       QueryParameters.versionAppName : appName,
+       QueryParameters.versionApkVersionCode : versionNumber
+     }
+    );
+    return await NetworkRequests.decodeJson(response, negativeResponse: false);
+  }
+
   addVersion({
   required String versionNumber,
   required String appName,
@@ -90,5 +108,18 @@ class ApkVersion {
     );
   }
 
+//   versionSearch({
+//     String? versionNumber,
+//     String? appName
+// })async{
+//     List versions = await NetworkRequests.decodeJson(
+//       await NetworkRequests().securedMawaAPI(
+//           NetworkRequests.methodGet,
+//           resource: Resources.versions,
+//           queryParameters: {
+//             QueryParameters.versionApkVersionCode: versionNumber
+//           })
+//     )
+//   }
 
 }
