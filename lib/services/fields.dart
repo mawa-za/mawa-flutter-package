@@ -14,13 +14,14 @@ class Fields {
 
   }
 
-  addField(String code, String desc) async {
+  addField({
+    required String desc
+  }) async {
 
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPost,
         resource: Resources.fields,
         body: {
-          JsonPayloads.fieldCode : code,
           JsonPayloads.fieldDescription : desc,
         });
 
