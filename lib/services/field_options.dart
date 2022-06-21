@@ -3,8 +3,9 @@ import 'package:mawa_package/services/network_requests.dart';
 
 class FieldOptions {
   static List fieldOptions = [];
+  static Map singleFieldOptions = {};
 
-  getFieldOptions(String option) async {
+  getFieldOptions(String option) async {      //This method is for when
 
     dynamic response =  await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
@@ -15,6 +16,28 @@ class FieldOptions {
       fieldOptions = await NetworkRequests.decodeJson(response);
       print('DADADADA ${fieldOptions}');
       return fieldOptions;
+  }
+
+  getSingleFieldOptions(String option) async {
+    // fieldOptions = {};
+    dynamic response =  await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: Resources.fieldOptions,
+        queryParameters: {
+          QueryParameters.field: option,
+        });
+    if (response.statusCode == 200) {
+      dynamic data = await NetworkRequests.decodeJson(response);
+      print('data data data $data');
+      for (int index = 0; index < data.length;  index++) {
+        singleFieldOptions['${data[index][JsonResponses.fieldOptionDescription]}'] = data[index][JsonResponses.fieldOptionCode];
+      }
+      print('fieldOptions fieldOptions $singleFieldOptions');
+      // fieldOptions = response;
+    } else {
+      singleFieldOptions = {};
+    }
+    return singleFieldOptions;
   }
 
   addFieldOptions(String option, String code, String description) async {
