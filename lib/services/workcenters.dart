@@ -43,7 +43,15 @@ class WorkCenters {
     print('roles roles $roles');
 
     return roles;
-  }
+}
+// getWorkcenterRoles() async{
+//     dynamic response = await NetworkRequests().securedMawaAPI(
+//         NetworkRequests.methodGet,
+//         resource: '${Resources.workCenters}/${Resources.workCenterId}/${Resources.roleWorkcenters}');
+//     workcenterRoles = await NetworkRequests.decodeJson(response, negativeResponse: []);
+//     print('HHHHHHHHH $workcenterRoles');
+//     return workcenterRoles;
+//   }
 
   getWorkCentersByRole({required String role}) async {
     role == null ? User.userLoginRole = User.userRoles[User.userRoles.keys.first]! : User.userLoginRole = role;
