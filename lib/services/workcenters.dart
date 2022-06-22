@@ -6,6 +6,9 @@ class WorkCenters {
   static List workcenters = [];
   static List<String> workCentersList = [];
   dynamic workCenId = [];
+  static List workcenterRoles = [];
+  dynamic roles = [];
+
 
   getAllWorkCenters() async{
     dynamic response = await NetworkRequests().securedMawaAPI(
@@ -24,6 +27,22 @@ class WorkCenters {
     print('work work work');
     return workCenId;
 
+  }
+
+  getWorkcenterRoles(workCenId) async{
+    dynamic response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: '${Resources.workCenters}/$workCenId/${Resources.roleWorkcenters}');
+    workcenterRoles = await NetworkRequests.decodeJson(response, negativeResponse: []);
+    print('HHHHHHHHH $workcenterRoles');
+    for(int i = 0; i < workcenterRoles.length; i++) {
+        roles.add(workcenterRoles[i][JsonResponses.role]);
+
+    }
+
+    print('roles roles $roles');
+
+    return roles;
   }
 
   getWorkCentersByRole({required String role}) async {
