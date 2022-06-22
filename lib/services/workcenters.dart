@@ -7,6 +7,7 @@ class WorkCenters {
   static List<String> workCentersList = [];
   dynamic workCenId = [];
   static List workcenterRoles = [];
+  dynamic roles = [];
 
 
   getAllWorkCenters() async{
@@ -28,14 +29,29 @@ class WorkCenters {
 
   }
 
-  getWorkcenterRoles() async{
+  getWorkcenterRoles(workCenId) async{
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
-        resource: '${Resources.workCenters}/${Resources.workCenterId}/${Resources.roleWorkcenters}');
+        resource: '${Resources.workCenters}/$workCenId/${Resources.roleWorkcenters}');
     workcenterRoles = await NetworkRequests.decodeJson(response, negativeResponse: []);
     print('HHHHHHHHH $workcenterRoles');
-    return workcenterRoles;
-  }
+    for(int i = 0; i < workcenterRoles.length; i++) {
+        roles.add(workcenterRoles[i][JsonResponses.role]);
+
+    }
+
+    print('roles roles $roles');
+
+    return roles;
+}
+// getWorkcenterRoles() async{
+//     dynamic response = await NetworkRequests().securedMawaAPI(
+//         NetworkRequests.methodGet,
+//         resource: '${Resources.workCenters}/${Resources.workCenterId}/${Resources.roleWorkcenters}');
+//     workcenterRoles = await NetworkRequests.decodeJson(response, negativeResponse: []);
+//     print('HHHHHHHHH $workcenterRoles');
+//     return workcenterRoles;
+//   }
 
   getWorkCentersByRole({required String role}) async {
     role == null ? User.userLoginRole = User.userRoles[User.userRoles.keys.first]! : User.userLoginRole = role;
