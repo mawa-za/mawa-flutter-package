@@ -44,6 +44,18 @@ class WorkCenters {
 
     return roles;
 }
+
+addWorkCenter({required desc, required path}) async {
+  dynamic response = await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodPost,
+      resource: Resources.workCenters,
+  body: {
+        JsonPayloads.workCenterDesc : desc,
+    JsonPayloads.workCenterPath : path,
+  });
+}
+
+
 // getWorkcenterRoles() async{
 //     dynamic response = await NetworkRequests().securedMawaAPI(
 //         NetworkRequests.methodGet,
@@ -89,7 +101,7 @@ class WorkCenters {
   editWorkCenterRole(workCenter,position) async{
       dynamic response = await NetworkRequests().securedMawaAPI(
          NetworkRequests.methodPut,
-          resource:    Resources.roles +
+          resource: Resources.roles +
               '/' +
               User.userLoginRole +
               '/' +
