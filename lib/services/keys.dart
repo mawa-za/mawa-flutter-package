@@ -116,6 +116,12 @@ class JsonResponses {
   static const String personStatus = 'status';
   static const String processor = 'processor';
 
+  static const String employeeID = 'id';
+  static const String employeeFirstName = 'name1';
+  static const String employeeLastName = 'name2';
+
+
+
   static const String ticketLogID = 'ticketLogID';
   static const String ticketLogTicketID = 'ticketID';
   static const String ticketLogPartnerId = 'partnerID';
@@ -204,6 +210,8 @@ class JsonResponses {
   static const String notes = 'notes';
   static const String taskLogs = 'taskLogs';
   static const String endTime = 'endTime';
+
+
 }
 
 class Resources {
@@ -329,6 +337,14 @@ class JsonPayloads {
   static const String appUsable = 'appUsable';
 
 
+  static const String email = 'email';
+  static const String cellphone = 'cellphone';
+  static const String role = 'role';
+  static const String password = 'password';
+  static const String userType = 'userType';
+  static const String partner = 'partner';
+
+
 // static const String  = '';
 }
 
@@ -381,6 +397,8 @@ class QueryParameters {
 
   static const String meesageType = 'meesageType';
   static const String adminEmail = 'adminEmail';
+  static const String user = 'user';
+  static const String password = 'password';
 
   static const String assignTo = 'assignTo';
   static const String ticketTaskID = 'ticketTaskID';
