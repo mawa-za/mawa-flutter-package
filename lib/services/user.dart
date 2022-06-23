@@ -14,6 +14,7 @@ class User{
   static late String username;
   static late String password;
   static late String email;
+   static late dynamic pass;
 
   getUserDetails (String username) async {
     loggedInUser.clear();
@@ -108,6 +109,42 @@ class User{
         list[i][JsonResponses.id
         ];
       }
+    }
+  }
+
+  addUser(
+  {
+    required String id,
+    required String email,
+    required String cellphone,
+    required String partnerNum,
+    required String role,
+    required String userType,
+}) async{
+    dynamic response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPost,
+        resource: Resources.users,
+        body: {
+          JsonPayloads.id : id,
+          JsonPayloads.userType : userType,
+          JsonPayloads.email : email,
+          JsonPayloads.cellphone : cellphone,
+          JsonPayloads.partnerID : partnerNum,
+          JsonPayloads.role : role,
+        });
+    pass =  await NetworkRequests.decodeJson(response, negativeResponse: '');
+    print('ttttttttttttttttt');
+    print(pass);
+    if(response.statusCode == 200 || response.statusCode == 201){
+     dynamic p=  pass['password'];
+     dynamic i = pass['id'];
+      Notification(id: i).newUserNotification(
+          meesageType: 'NEWUSER',
+          user: true,
+          password: p);
+          print(p);
+     print(i);
+      print('USER CREATED');
     }
   }
 }
