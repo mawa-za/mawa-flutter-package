@@ -324,6 +324,9 @@ class JsonPayloads {
   static const String workCenter = 'workcenter';
   static const String position = 'position';
 
+  static const String workCenterDesc = 'description';
+  static const String workCenterPath = 'path';
+
   static const String appName = 'appName';
   static const String versionNumber = 'versionNumber';
   static const String appUsable = 'appUsable';
