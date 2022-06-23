@@ -10,6 +10,7 @@ class User{
   static Map<String,String> userRoles = {};
   static Map loggedInUser = {};
   static Map<String, String> users = {};
+  static List listUsers = [];
 
   static late String username;
   static late String password;
@@ -41,12 +42,13 @@ class User{
     dynamic response =
     await NetworkRequests()
         .securedMawaAPI(NetworkRequests.methodGet, resource: Resources.users);
+
     Map<String, String> mapUsers = {};
 
     if(response.statusCode == 200){
 
-    dynamic listUsers = await NetworkRequests.decodeJson(response);
-        try{
+     listUsers = await NetworkRequests.decodeJson(response, negativeResponse: []);
+        // try{
           for (int i = 0; i < listUsers.length; i++) {
           listUsers[i][JsonResponses.usersFirstName] != null &&
               listUsers[i][JsonResponses.usersFirstName] != null
@@ -58,15 +60,15 @@ class User{
               : mapUsers['${listUsers[i][JsonResponses.id]}'] =
           'No Name Provided';
         }
-      }
-      catch(e){
-        mapUsers.clear();
-      }
+      // }
+      // catch(e){
+      //   mapUsers.clear();
+      // }
   }
     else{
     mapUsers.clear();
     }
-    User.users = mapUsers;
+    return User.users = mapUsers;
     // print('opw\n$users\n name');
   }
 
