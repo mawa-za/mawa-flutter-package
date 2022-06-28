@@ -38,7 +38,9 @@ class Persons {
         });
 
 
-    peopleResponse.runtimeType == people.runtimeType ? people = peopleResponse: people = [];
+    // peopleResponse.runtimeType == people.runtimeType ? people = peopleResponse: people = [];
+    people =  await NetworkRequests.decodeJson(peopleResponse);
+    return people;
   }
 
   validateSAID(id) async {
