@@ -32,6 +32,7 @@ class NetworkRequests {
   static const String methodGet = 'get';
   static const String methodPost = 'post';
   static const String methodPut = 'put';
+  static const String methodDelete = 'delete';
   late String server;
   static String pot = '8181';
   late final String endpointURL;
@@ -188,6 +189,12 @@ class NetworkRequests {
         switch (method) {
           case methodGet:
             feedback = await http.get(
+              url,
+              headers: header,
+            );
+            break;
+          case methodDelete:
+            feedback = await http.delete(
               url,
               headers: header,
             );
@@ -431,6 +438,13 @@ class NetworkRequests {
             headers: this.headers(tokenKey: token, secured: false),
           );
           break;
+        case methodDelete:
+          feedback = await http.delete(
+            url,
+            // headers: headers,
+            headers: this.headers(tokenKey: token, secured: false),
+          );
+          break;
         case methodPost:
           feedback = await http.post(url,
               headers: this.headers(tokenKey: token, secured: false),
@@ -444,6 +458,7 @@ class NetworkRequests {
               // headers: headers,
               body: jsonEncode(payload));
           break;
+
       }
       print('6854486');
       statusCode = feedback.statusCode;
