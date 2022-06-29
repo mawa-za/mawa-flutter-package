@@ -8,6 +8,7 @@ class WorkCenters {
   dynamic workCenId = [];
   static List workcenterRoles = [];
   dynamic roles = [];
+  dynamic feedback = [];
 
 
   getAllWorkCenters() async{
@@ -130,4 +131,16 @@ addWorkCenter({required desc, required path}) async {
     return await NetworkRequests.decodeJson(response, negativeResponse: false);
   }
 
+  deleteWorkCenter(workcenter) async{
+    dynamic response  = await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodDelete,
+      resource: Resources.workCenters + '/' + workcenter,
+    );
+
+    feedback = await NetworkRequests.decodeJson(response, negativeResponse: []);
+    print('feedback');
+    print(feedback);
+    print('should delete' );
+    return feedback;
+  }
 }
