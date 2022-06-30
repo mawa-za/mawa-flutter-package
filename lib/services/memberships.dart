@@ -25,28 +25,29 @@ class Memberships {
     // }
   }
 
-  membershipGet(policyId) async {
+  membershipGet({String? policyId}) async {
     policy.clear();
      dynamic response = await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
         resource: '${Resources.policies}/$policyId');
-    // policy == null ? policy = {} : response != null ? response.isNotEmpty ? policy = response : policy = {}  : policy = {} ;
-    if( response.statusCode == 200){
       dynamic body =  await NetworkRequests.decodeJson(response);
-      // if(response.runtimeType == allPolicies.runtimeType)
-      try
-      {
-        allPolicies = body ?? [];
+      // if(policyId != null)
+      try{
+        policy =  body ?? {};
+        policy.isNotEmpty ? policyId = policy[JsonResponses.id] : policyId = '';
+        Persons.person = Memberships.policy[JsonResponses.policyCustomerDetails];
+        return policy;
       }
       // else
-      catch(e)
-          {
-        policy =  body ?? {};
-      }
+        catch(e){
+        print('All poli');
+        allPolicies = body ?? [];
+        return allPolicies;
     }
-    else {
-      policy.clear();
-      allPolicies.clear();
-    }
-    policy == null ? policyId = policy[JsonResponses.id] : policyId = '';
   }
+
+  createNewMembership(details) async {
+    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
+        resource: '${Resources.policies} ', body: details);
+  }
+
 }
