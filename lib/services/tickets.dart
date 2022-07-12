@@ -17,6 +17,7 @@ class Tickets {
   static late bool isTracking;
   static late List newTickets = [];
   static List myTickets = [];
+  static List allTickets = [];
   static late Map ticket = {};
   static Map? changeStatusBody;
 
@@ -135,12 +136,24 @@ class Tickets {
           {};
       if (response.statusCode == 200){
         ticket = NetworkRequests.decodeJson(response);
-        Time.dueTime =
-            DateTime.parse(ticket[JsonResponses.dueDate].toString());
+        // Time.dueTime =
+        //     DateTime.parse(ticket[JsonResponses.dueDate].toString());
         ticketNo = ticket[JsonResponses.ticketLogID].toString();
       }
 
     }
+  }
+
+  static getTicketByStatus(String status) async{
+    dynamic response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: Resources.tickets,
+        queryParameters: {
+          JsonPayloads.filter: JsonPayloads.filterValue,
+          JsonPayloads.status: status
+        });
+    allTickets = await NetworkRequests.decodeJson(response);
+    return allTickets;
   }
 
   static allMyTickets() async {
