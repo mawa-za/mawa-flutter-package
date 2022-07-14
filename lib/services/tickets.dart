@@ -226,6 +226,22 @@ class Tickets {
         : null;
   }
 
+  static viewTicket(String id) async{
+    dynamic response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: Resources.tickets + '/'+id);
+    ticket = await NetworkRequests.decodeJson(response, negativeResponse: []);
+    return ticket;
+  }
+
+  static cancelTicket(String ticketId) async{
+    dynamic response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPost,
+        resource: Resources.tickets + '/' + ticketId + '/' + 'cancel');
+   return await NetworkRequests.decodeJson(response, negativeResponse: []);
+
+  }
+
   static reassignTicket(String ticket) async {
     dynamic response = await NetworkRequests().securedMawaAPI(NetworkRequests.methodPut,
         resource: Resources.tickets + '/' + ticket,
