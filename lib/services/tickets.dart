@@ -13,13 +13,14 @@ class Tickets {
     pageId = page;
   }
   static String? pageId;
-  static late String ticketNo;
+  static late String ticketNo = '';
   static late bool isTracking;
   static late List newTickets = [];
   static List myTickets = [];
   static List allTickets = [];
   static late Map ticket = {};
   static Map? changeStatusBody;
+  static const String ticketComment = 'TICKETCOMMENT';
 
   static trackTicket(dynamic after) async {
     List tickets = await NetworkRequests.decodeJson(await Tickets.allMyTickets());
@@ -156,6 +157,14 @@ class Tickets {
     return allTickets;
   }
 
+  static viewTicket(String id) async{
+    dynamic response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: Resources.tickets + '/'+id);
+    ticket = await NetworkRequests.decodeJson(response, negativeResponse: []);
+    return ticket;
+  }
+
   static allMyTickets() async {
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
@@ -237,6 +246,31 @@ class Tickets {
             positive: true,
             popContext: false)
         : null;
+  }
+
+
+ static cancelTicket(String ticketId) async{
+   dynamic response = await NetworkRequests().securedMawaAPI(
+       NetworkRequests.methodPost,
+       resource: Resources.tickets + '/' + ticketId + '/' + 'cancel');
+   await NetworkRequests.decodeJson(response, negativeResponse: []);
+
+ }
+
+  static addComment({
+    required String id,
+    required String type,
+    required String value
+  }) async{
+    dynamic response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPost,
+        resource: Resources.transactionNotes,
+        body: {
+          JsonPayloads.transaction : id,
+          JsonPayloads.type : type,
+          JsonPayloads.value : value,
+        }
+    );
   }
 
   ///if the reason for changing the status is a resolution or a rejection, then a body must be supplied by initializing [changeStatusBody]
