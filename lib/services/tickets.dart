@@ -254,4 +254,18 @@ class Tickets {
     }
     return response.statusCode;
   }
+
+  static createTicket({required String summary, required String category, required String desc, required String priority}) async {
+    dynamic response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPost,
+        resource: Resources.tickets,
+        body: {
+          JsonPayloads.ticketDescription : desc,
+          JsonPayloads.ticketCategory : category,
+          JsonPayloads.ticketSummary : summary,
+          JsonPayloads.ticketPriority : priority,
+        });
+    print('$response');
+  }
+
 }

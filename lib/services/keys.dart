@@ -347,6 +347,11 @@ class JsonPayloads {
   static const String userType = 'userType';
   static const String partner = 'partner';
 
+  static const String ticketDescription = 'description';
+  static const String ticketCategory = 'category';
+  static const String ticketSummary = 'summary';
+  static const String ticketPriority = 'priority';
+
 
 // static const String  = '';
 }
