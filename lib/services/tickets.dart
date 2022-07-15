@@ -230,7 +230,7 @@ class Tickets {
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: Resources.tickets + '/'+id);
-    ticket = await NetworkRequests.decodeJson(response, negativeResponse: []);
+    ticket = await NetworkRequests.decodeJson(response, negativeResponse: {});
     return ticket;
   }
 
@@ -238,7 +238,7 @@ class Tickets {
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPost,
         resource: Resources.tickets + '/' + ticketId + '/' + 'cancel');
-   return await NetworkRequests.decodeJson(response, negativeResponse: []);
+   return response;
 
   }
 
