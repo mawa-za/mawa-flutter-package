@@ -449,3 +449,8 @@ class SharedPrefs {
   static const refreshToken = 'refreshToken';
   static const initialRoute = 'initialRoute';
 }
+
+class CommentTypes{
+  static const String ticketComment = 'TICKETCOMMENT';
+  static const String leaveComment = 'LEAVEMANAGEMENT';
+}
