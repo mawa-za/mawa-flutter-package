@@ -19,7 +19,7 @@ class FieldOptions {
   }
 
   getSingleFieldOptions(String option) async {
-    // fieldOptions = {};
+    singleFieldOptions = {};
     dynamic response =  await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: Resources.fieldOptions,
