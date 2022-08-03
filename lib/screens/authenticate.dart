@@ -46,12 +46,14 @@ class _AuthenticateState extends State<Authenticate> {
             "userID": User.username,
             "password": User.password},
           context: context,);
-
-      widget.postAuthenticate();//.then((){
+      if (Authenticate.response.statusCode == 200) {
+        widget.postAuthenticate();
+      } else{
+        Alerts.flushbar(context: context, message: 'Incorrect Login', positive: false);
+      }
         setState(() {
           body = authenticate();
         });
-      // });
     }
   }
 
