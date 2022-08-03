@@ -2,12 +2,19 @@
 # See https://dart.dev/tools/pub/glossary#lockfile
 packages:
   another_flushbar:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: another_flushbar
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.10.29"
+  archive:
+    dependency: transitive
+    description:
+      name: archive
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.3.1"
   args:
     dependency: transitive
     description:
@@ -23,7 +30,7 @@ packages:
     source: hosted
     version: "2.8.2"
   awesome_dialog:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: awesome_dialog
       url: "https://pub.dartlang.org"
@@ -65,7 +72,7 @@ packages:
     source: hosted
     version: "1.16.0"
   connectivity_plus:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: connectivity_plus
       url: "https://pub.dartlang.org"
@@ -106,8 +113,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.2"
+  crypto:
+    dependency: transitive
+    description:
+      name: crypto
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.2"
   cupertino_icons:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: cupertino_icons
       url: "https://pub.dartlang.org"
@@ -121,7 +135,7 @@ packages:
     source: hosted
     version: "0.7.4"
   device_info_plus:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: device_info_plus
       url: "https://pub.dartlang.org"
@@ -163,21 +177,21 @@ packages:
     source: hosted
     version: "2.1.1"
   device_information:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: device_information
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.0.4"
   dio:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: dio
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.6"
   email_validator:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: email_validator
       url: "https://pub.dartlang.org"
@@ -216,8 +230,15 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_lints:
+  flutter_launcher_icons:
     dependency: "direct dev"
+    description:
+      name: flutter_launcher_icons
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.9.3"
+  flutter_lints:
+    dependency: "direct main"
     description:
       name: flutter_lints
       url: "https://pub.dartlang.org"
@@ -234,14 +255,14 @@ packages:
     source: sdk
     version: "0.0.0"
   fluttertoast:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: fluttertoast
       url: "https://pub.dartlang.org"
     source: hosted
     version: "8.0.9"
   geocoding:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: geocoding
       url: "https://pub.dartlang.org"
@@ -255,19 +276,19 @@ packages:
     source: hosted
     version: "2.0.1"
   geolocator:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: geolocator
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "9.0.1"
+    version: "8.2.1"
   geolocator_android:
     dependency: transitive
     description:
       name: geolocator_android
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.1"
+    version: "3.2.1"
   geolocator_apple:
     dependency: transitive
     description:
@@ -297,7 +318,7 @@ packages:
     source: hosted
     version: "0.1.1"
   http:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: http
       url: "https://pub.dartlang.org"
@@ -310,8 +331,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.1"
+  image:
+    dependency: transitive
+    description:
+      name: image
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.2.0"
   intl:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: intl
       url: "https://pub.dartlang.org"
@@ -360,7 +388,7 @@ packages:
     source: hosted
     version: "0.5.0"
   package_info_plus:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: package_info_plus
       url: "https://pub.dartlang.org"
@@ -409,7 +437,7 @@ packages:
     source: hosted
     version: "1.8.1"
   path_provider:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: path_provider
       url: "https://pub.dartlang.org"
@@ -458,7 +486,7 @@ packages:
     source: hosted
     version: "2.0.6"
   permission_handler:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: permission_handler
       url: "https://pub.dartlang.org"
@@ -500,7 +528,7 @@ packages:
     source: hosted
     version: "4.2.4"
   rflutter_alert:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: rflutter_alert
       url: "https://pub.dartlang.org"
@@ -514,7 +542,7 @@ packages:
     source: hosted
     version: "0.27.4"
   shared_preferences:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: shared_preferences
       url: "https://pub.dartlang.org"
@@ -596,7 +624,7 @@ packages:
     source: hosted
     version: "1.10.0"
   stop_watch_timer:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: stop_watch_timer
       url: "https://pub.dartlang.org"
@@ -665,6 +693,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.1.0"
+  yaml:
+    dependency: transitive
+    description:
+      name: yaml
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.1.1"
 sdks:
   dart: ">=2.17.6 <3.0.0"
-  flutter: ">=2.8.0"
+  flutter: ">=3.0.0"
