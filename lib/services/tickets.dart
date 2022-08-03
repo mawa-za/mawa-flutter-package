@@ -283,6 +283,7 @@ class Tickets {
         });
     print('$response');
 
+    ticketNo = await NetworkRequests.decodeJson(response,negativeResponse: '');
     return response;
 
   }
