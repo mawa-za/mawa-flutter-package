@@ -395,8 +395,6 @@ class NetworkRequests {
     Map<String, String>? payload,
     Map<String, dynamic>? queryParameters,
     required BuildContext context,
-    String? direct,
-    VoidCallback? postAuthenticate,
   }) async {
     final SharedPreferences prefs = await preferences;
 
@@ -479,6 +477,7 @@ class NetworkRequests {
               otp = await data;
             }
             if (resource == Resources.authenticate) {
+              User.username = await data[JsonResponses.userID];
               token = await data[JsonResponses.token];
               Token.refreshToken = await data[JsonResponses.refreshToken] ?? '';
               preferences.then((SharedPreferences prefs) {
@@ -502,10 +501,10 @@ class NetworkRequests {
               //   await User().getUserDetails(payload![JsonResponses.userID]!);
               //   // Navigator.pushReplacementNamed(context, direct!);
               //   postAuthenticate;
+              await User().getUserDetails(User.username);
             }
 
             print('token oyjfjdbfjd\n $token');
-            await User().getUserDetails(User.username);
           }
           break;
         case 401:
