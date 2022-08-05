@@ -5,21 +5,8 @@ class FieldOptions {
   static List fieldOptions = [];
   static Map singleFieldOptions = {};
 
-  getFieldOptions(String option) async {      //This method is for when
+  getFieldOptions(String option) async {
 
-    dynamic response =  await NetworkRequests().securedMawaAPI(
-        NetworkRequests.methodGet,
-        resource: Resources.fieldOptions,
-        queryParameters: {
-          QueryParameters.field: option,
-        });
-      fieldOptions = await NetworkRequests.decodeJson(response);
-      print('DADADADA ${fieldOptions}');
-      return fieldOptions;
-  }
-
-  getSingleFieldOptions(String option) async {
-    singleFieldOptions = {};
     dynamic response =  await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: Resources.fieldOptions,
@@ -27,16 +14,23 @@ class FieldOptions {
           QueryParameters.field: option,
         });
     if (response.statusCode == 200) {
-      dynamic data = await NetworkRequests.decodeJson(response);
-      print('data data data $data');
-      for (int index = 0; index < data.length;  index++) {
-        singleFieldOptions['${data[index][JsonResponses.fieldOptionDescription]}'] = data[index][JsonResponses.fieldOptionCode];
-      }
-      print('fieldOptions fieldOptions $singleFieldOptions');
-      // fieldOptions = response;
+      fieldOptions = await NetworkRequests.decodeJson(response);
+      print('DADADADA ${fieldOptions}');
     } else {
-      singleFieldOptions = {};
+      fieldOptions = [];
     }
+
+      return fieldOptions;
+  }
+
+  getSingleFieldOptions(String option) async {
+    singleFieldOptions = {};
+    await getFieldOptions(option);
+
+      for (int index = 0; index < fieldOptions.length;  index++) {
+        singleFieldOptions['${fieldOptions[index][JsonResponses.fieldOptionDescription]}'] = fieldOptions[index][JsonResponses.fieldOptionCode];
+      }
+
     return singleFieldOptions;
   }
 
