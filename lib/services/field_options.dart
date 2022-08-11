@@ -13,12 +13,7 @@ class FieldOptions {
         queryParameters: {
           QueryParameters.field: option,
         });
-    if (response.statusCode == 200) {
-      fieldOptions = await NetworkRequests.decodeJson(response);
-      print('DADADADA ${fieldOptions}');
-    } else {
-      fieldOptions = [];
-    }
+      fieldOptions = await NetworkRequests.decodeJson(response, negativeResponse: []);
 
       return fieldOptions;
   }
