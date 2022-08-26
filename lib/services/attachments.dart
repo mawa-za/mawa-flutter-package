@@ -7,6 +7,7 @@ import 'package:mawa_package/services/globals.dart';
 import 'package:mawa_package/services/keys.dart';
 import 'package:mawa_package/services/network_requests.dart';
 
+
 class Attachments{
   dynamic attachment;
   late List attachments;
@@ -118,6 +119,8 @@ class Attachments{
     dio.options.headers["authorization"] = "Bearer $token";
     // response = await dio.post(url, data: data);
 
+    print('name ${file.name}');
+    print('name ${file.path}');
     dynamic endpointURL =  'api-$server.mawa.co.za:${NetworkRequests.pot}';
     dynamic url = 'https://' + endpointURL + NetworkRequests.path + Resources.attachments;
     // statusCode == null? statusCode= 100: null;
@@ -126,7 +129,9 @@ class Attachments{
     //     : url = Uri.http(endpointURL, path + resource, queryParameters);
     dynamic uri = Uri.https(endpointURL, NetworkRequests.path + Resources.attachments, /*queryParameters*/);
     var formData = FormData.fromMap({
+      // 'file': UploadFileInfo( File(file.path), file.name),
       'file': await MultipartFile.fromFile(file.path, filename: file.name, contentType:  parser.MediaType.parse('multipart/form-data')),
+      // 'file': await MultipartFile.fromFile(file.path, filename: file.name, contentType:  parser.MediaType.parse('multipart/form-data')),
       JsonPayloads.parentType: parentType,
       JsonPayloads.parentReference: parentReference,
       JsonPayloads.documentType: documentType,
@@ -136,7 +141,7 @@ class Attachments{
       //   await MultipartFile.fromFile('./text2.txt', filename: 'text2.txt'),
       // ]
     });
-    var response = await dio.post(url, data: formData);
+    var response = await dio.postUri(uri, data: formData);
     print('${response.statusCode}: ${response.statusMessage}');
     print('${response.data}');
     // FormData formData = new FormData.from({

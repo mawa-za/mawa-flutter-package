@@ -33,6 +33,8 @@ dependencies:
   device_information: ^0.0.4
   geolocator: ^8.0.5
   geocoding: ^2.0.4
+  file_picker: ^5.0.1
+  image_picker: ^0.8.5+3
 
 dev_dependencies:
   flutter_test:
