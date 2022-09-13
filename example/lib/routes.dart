@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:mawa_package/screens.dart';
 import 'package:mawa_package/services/globals.dart';
 
+import 'attachment.dart';
+
 // 0649
 Authenticate _authenticate(context) {
   return Authenticate(
@@ -22,6 +24,7 @@ Authenticate _authenticate(context) {
 }
 
 var route = {
+  Attachments.id: (context) => Attachments(),
   Authenticate.id: (context) => _authenticate(context),
   HomePage.id: (context) => HomePage(),
   InitialRoute.id: (context) => InitialRoute(
