@@ -2,10 +2,14 @@ import 'package:dio/dio.dart'/* as dio*/;
 import 'package:http_parser/http_parser.dart' as parser;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io';
+// import 'dart:html' as f show File;
+import 'package:file_picker/file_picker.dart';
+
 import 'package:path_provider/path_provider.dart';
 import 'package:mawa_package/services/globals.dart';
 import 'package:mawa_package/services/keys.dart';
 import 'package:mawa_package/services/network_requests.dart';
+
 
 class Attachments{
   dynamic attachment;
@@ -96,7 +100,7 @@ class Attachments{
   }
 
   ///Please note that this class is incomplete and therefore will not work accordingly or at all
-  uploadAttachment( file,{required String documentType, required String parentType, required String parentReference}) async {
+  uploadAttachment(var file,{required String documentType, required String parentType, required String parentReference}) async {
     print('jj');
     // token == null ? token = await _key: null;
     final SharedPreferences prefs = await preferences;
@@ -118,6 +122,8 @@ class Attachments{
     dio.options.headers["authorization"] = "Bearer $token";
     // response = await dio.post(url, data: data);
 
+    // print('name ${file.absolute}');
+    // print('name ${file.path}');
     dynamic endpointURL =  'api-$server.mawa.co.za:${NetworkRequests.pot}';
     dynamic url = 'https://' + endpointURL + NetworkRequests.path + Resources.attachments;
     // statusCode == null? statusCode= 100: null;
@@ -126,7 +132,9 @@ class Attachments{
     //     : url = Uri.http(endpointURL, path + resource, queryParameters);
     dynamic uri = Uri.https(endpointURL, NetworkRequests.path + Resources.attachments, /*queryParameters*/);
     var formData = FormData.fromMap({
+      // 'file': UploadFileInfo( File(file.path), file.name),
       'file': await MultipartFile.fromFile(file.path, filename: file.name, contentType:  parser.MediaType.parse('multipart/form-data')),
+      // 'file': await MultipartFile.fromFile(file.path, filename: file.name, contentType:  parser.MediaType.parse('multipart/form-data')),
       JsonPayloads.parentType: parentType,
       JsonPayloads.parentReference: parentReference,
       JsonPayloads.documentType: documentType,
@@ -136,7 +144,7 @@ class Attachments{
       //   await MultipartFile.fromFile('./text2.txt', filename: 'text2.txt'),
       // ]
     });
-    var response = await dio.post(url, data: formData);
+    var response = await dio.postUri(uri, data: formData);
     print('${response.statusCode}: ${response.statusMessage}');
     print('${response.data}');
     // FormData formData = new FormData.from({

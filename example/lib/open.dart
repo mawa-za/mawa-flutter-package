@@ -1,11 +1,20 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'dart:async';
+import 'package:flutter_uploader/flutter_uploader.dart';
 
-void main() {
-  runApp(App());
-  // runApp(MyApp());
-}
+import 'dart:io';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:mawa_package/dependencies.dart';
 
-class App extends StatelessWidget {
+import 'package:equatable/equatable.dart';
+
+void main() => runApp(CArdy());
+
+/// *******************************************************************
+
+class CArdy extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
