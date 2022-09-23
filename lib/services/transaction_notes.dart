@@ -9,13 +9,13 @@ class TransactionNotes {
       {required String value,
       required String type,
       required String transaction}) async {
-    return await NetworkRequests.decodeJson( await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
+    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
         resource: Resources.transactionNotes,
         body: {
           JsonPayloads.value: value,
           JsonPayloads.type: type,
           JsonPayloads.transaction: transaction,
-        }));
+        });
   }
 
   getNote() async {
