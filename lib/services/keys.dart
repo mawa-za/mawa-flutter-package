@@ -130,8 +130,8 @@ class JsonResponses {
   static const String ticketLogEndTime = 'endTime';
   static const String ticketLogNotes = 'notes';
 
-  static const String leaveLeaveRequestID = 'leaveRequestID';
-  static const String leaveRequestID = 'requestId';
+  static const String leaveRequestID = 'leaveRequestID';
+  static const String requestID = 'requestId';
   static const String leaveStartDate = 'startDate';
   static const String leaveEndDate = 'endDate';
   static const String leaveType = 'leaveType';
