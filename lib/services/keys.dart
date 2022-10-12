@@ -142,7 +142,7 @@ class JsonResponses {
   static const String leaveQuantity = 'quantity';
   static const String leaveQuantityRemaining = 'quantityRemaining';
   static const String leaveStatusReason = 'statusReason';
-  static const String leaveLoggedByID = 'loggedByID';
+  static const String leaveLoggedByID = 'id';
   static const String leaveLoggedBy = 'loggedBy';
   static const String leaveApprovedBy = 'approvedBy';
   static const String leaveApproverID = 'approverID';
@@ -377,6 +377,7 @@ class QueryParameters {
 
   static const String id = 'id';
 
+  static const String loggedByID = 'loggedByID';
   static const String loggedById = 'loggedById';
 
   static const String organisationId = 'organisationId';
