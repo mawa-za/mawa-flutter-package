@@ -150,14 +150,14 @@ class Leaves {
   }
 
   Future<bool> updateLeaveStatus(
-      {required String path, String? method,  String? note, String? noteType, String? loggedById}) async {
+      {required String path, String? method,  String? note, String? noteType}) async {
     Map? body;
     note != null && noteType != null
         ? body = {
       QueryParameters.note:{
         QueryParameters.value:note,
         QueryParameters.type:noteType,
-        QueryParameters.loggedById:loggedById
+        QueryParameters.loggedById:User.partnerId,
       }
     }
         : null;
