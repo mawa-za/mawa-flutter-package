@@ -4,7 +4,8 @@ import 'package:http/http.dart' as http;
 
 class User{
   static String? id;
-  static String? partnerId;
+  static late String tenantId;
+  static late String partnerId;
   static String? groupId;
   static String userLoginRole = '';
   static Map<String,String> userRoles = {};

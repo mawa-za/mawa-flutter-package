@@ -36,6 +36,7 @@ class JsonResponses {
   static const String subDescription = 'subDescription';
 
   static const String token = 'token';
+  static const String tenantId = 'tenantId';
 
   static const String userID = 'userID';
   static const String userType = 'userType';
@@ -448,6 +449,7 @@ class SharedPrefs {
   static const trackingTicketID = 'trackingTicketID';
   static const refreshToken = 'refreshToken';
   static const initialRoute = 'initialRoute';
+  static const tenantId = 'tenantId';
 }
 
 class CommentTypes{

@@ -34,6 +34,7 @@ class NetworkRequests {
   static const String methodPut = 'put';
   static const String methodDelete = 'delete';
   late String server;
+  late String tenantId;
   static String pot = '8181';
   late final String endpointURL;
   static String path = '/mawa-api/resources/';
@@ -159,6 +160,7 @@ class NetworkRequests {
 
     server = await prefs.getString(SharedPrefs.server) ?? '';
     token = await prefs.getString(SharedPrefs.token) ?? '';
+    tenantId = prefs.getString(SharedPrefs.tenantId) ?? '';
 
     endpointURL = 'api-$server.mawa.co.za:$pot';
 
@@ -479,6 +481,9 @@ class NetworkRequests {
             if (resource == Resources.authenticate) {
               User.username = await data[JsonResponses.userID];
               token = await data[JsonResponses.token];
+              tenantId = await data[JsonResponses.tenantId];
+              User.tenantId = await data[JsonResponses.tenantId];
+
               Token.refreshToken = await data[JsonResponses.refreshToken] ?? '';
               preferences.then((SharedPreferences prefs) {
                 return (prefs.setString(SharedPrefs.token, token));
@@ -489,6 +494,9 @@ class NetworkRequests {
               });
               preferences.then((SharedPreferences prefs) {
                 return (prefs.setString(SharedPrefs.username, User.username));
+              });
+              preferences.then((SharedPreferences prefs) {
+                return (prefs.setString(SharedPrefs.tenantId, User.tenantId));
               });
               //   /*// final String string = (prefs.getString(SharedPreferencesKeys.token) ?? '');
               //
