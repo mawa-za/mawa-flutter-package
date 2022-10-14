@@ -142,7 +142,7 @@ class JsonResponses {
   static const String leaveQuantity = 'quantity';
   static const String leaveQuantityRemaining = 'quantityRemaining';
   static const String leaveStatusReason = 'statusReason';
-  static const String leaveLoggedByID = 'id';
+  static const String leaveLoggedByID = 'loggedByID';
   static const String leaveLoggedBy = 'loggedBy';
   static const String leaveApprovedBy = 'approvedBy';
   static const String leaveApproverID = 'approverID';
