@@ -156,7 +156,8 @@ class Leaves {
         ? body = {
       QueryParameters.note:{
         QueryParameters.value:note,
-        QueryParameters.type:noteType
+        QueryParameters.type:noteType,
+        QueryParameters.id:User.partnerId,
       }
     }
         : null;
