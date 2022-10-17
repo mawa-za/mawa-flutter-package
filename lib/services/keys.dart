@@ -377,6 +377,7 @@ class QueryParameters {
 
   static const String id = 'id';
 
+  static const String loggedByID = 'loggedByID';
   static const String loggedById = 'loggedById';
 
   static const String organisationId = 'organisationId';
