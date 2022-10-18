@@ -1,4 +1,5 @@
 import 'package:mawa_package/services.dart';
+import 'package:http/http.dart' as http;
 
 class TransactionNotes {
   TransactionNotes({this.transactionNote, this.transaction});
@@ -28,7 +29,23 @@ class TransactionNotes {
         resource: Resources.transactionNotes,
         queryParameters: {QueryParameters.transaction: transaction}));
   }
+
+  createComment({required String transaction, required String type, required String comment, required String receiver}) async {
+    dynamic note = createNote(value: comment, type: type, transaction: transaction);
+    if(note.statusCode == 200 || note.statusCode == 201){
+     dynamic notify = await Notification(id: transaction).sendCommentNotification(receiver);
+     if(notify.statusCode == 200 || notify.statusCode == 201){
+       return notify;
+     }
+     else{
+       return http.Response('Comment created but notification failed',429);
+     }
+      }
+    else{
+      return note;
+    }
 }
+  }
 
 //part of mawa;
 //

@@ -281,6 +281,7 @@ class Resources {
   static const String getTasks = 'getTasks';
 
   static const String refreshAuthenticate = 'refreshAuthenticate';
+  static const String comment = 'comment';
 }
 
 class JsonPayloads {
@@ -352,6 +353,7 @@ class JsonPayloads {
   static const String ticketSummary = 'summary';
   static const String ticketPriority = 'priority';
 
+  static const String recievedBy = 'recievedBy';
 
 // static const String  = '';
 }

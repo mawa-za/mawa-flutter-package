@@ -8,11 +8,11 @@ class Notification {
   Notification({required this.id});
 
   Future sendNotifications(
-      {required String meesageType, required bool sendToAdmin}) async {
-    await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
-        resource: Resources.sendNotifications + '/' + id,
+      {required String messageType, required bool sendToAdmin}) async {
+    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
+        resource: '${Resources.sendNotifications}/$id',
         queryParameters: {
-          QueryParameters.meesageType: meesageType,
+          QueryParameters.meesageType: messageType,
           QueryParameters.adminEmail: '$sendToAdmin',
         });
   }
@@ -33,4 +33,20 @@ class Notification {
           QueryParameters.password: password
       });
  }
+
+// POST /mawa-api/resources/sendNotifications/comment
+// {
+//     "id":"NOTE0000000365",
+//     "recievedBy":"PN0000000013"
+// }
+  sendCommentNotification(String receiver) async {
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodPost,
+      resource: '${Resources.sendNotifications}/${Resources.comment}',
+      body: {
+        JsonPayloads.id:id,
+        JsonPayloads.recievedBy:receiver,
+      }
+    );
+  }
 }
