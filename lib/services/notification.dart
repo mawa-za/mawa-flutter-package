@@ -8,11 +8,11 @@ class Notification {
   Notification({required this.id});
 
   Future sendNotifications(
-      {required String messageType, required bool sendToAdmin}) async {
+      {required String meesageType, required bool sendToAdmin}) async {
     return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
         resource: '${Resources.sendNotifications}/$id',
         queryParameters: {
-          QueryParameters.meesageType: messageType,
+          QueryParameters.meesageType: meesageType,
           QueryParameters.adminEmail: '$sendToAdmin',
         });
   }
