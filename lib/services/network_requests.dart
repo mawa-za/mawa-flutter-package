@@ -510,51 +510,45 @@ class NetworkRequests {
         case 401:
           {
             Tools.isTouchLocked = false;
-            Alerts.flushbar(
-                context: Tools.context,
-                message: 'Incorrect login',
+            Alerts.toastMessage(
+                message: 'Incorrect credentials',
                 positive: false,
-                popContext: false);
+            );
           }
           break;
         case 404:
           {
             Tools.isTouchLocked = false;
-            Alerts.flushbar(
-                context: Tools.context,
+            Alerts.toastMessage(
                 message: 'Server Down',
                 positive: false,
-                popContext: false);
+                );
           }
           break;
         case 0:
           {
             Tools.isTouchLocked = false;
-            Alerts.flushbar(
-                context: Tools.context,
+            Alerts.toastMessage(
                 message: 'Network Error',
                 positive: false,
-                popContext: false);
+            );
           }
           break;
         case 1:
           {
             Tools.isTouchLocked = false;
-            Alerts.flushbar(
-                context: Tools.context,
+            Alerts.toastMessage(
                 message: 'Network Error',
                 positive: false,
-                popContext: false);
+            );
           }
           break;
         default:
           {
             Tools.isTouchLocked = false;
-            Alerts.flushbar(
-              context: Tools.context,
+            Alerts.toastMessage(
               message: 'Login failed',
               positive: false,
-              popContext: false,
             );
           }
           break;
@@ -566,8 +560,7 @@ class NetworkRequests {
       Tools.isTouchLocked = false;
       // Navigator.maybePop(Tools.context);
       print(e.toString());
-      Alerts.flushbar(
-          context: context,
+      Alerts.toastMessage(
           message: 'Request Timed Out. \nCheck Network Connection.',
           positive: false,
       );
@@ -578,8 +571,7 @@ class NetworkRequests {
     } on SocketException catch (e) {
       Tools.isTouchLocked = false;
       print(e.toString());
-      Alerts.flushbar(
-          context: context,
+      Alerts.toastMessage(
           message: 'Encountered Network Problem',
           positive: false,
       );
@@ -590,8 +582,7 @@ class NetworkRequests {
     } on HandshakeException catch (e) {
       Tools.isTouchLocked = false;
       print(e.toString());
-      Alerts.flushbar(
-          context: context,
+      Alerts.toastMessage(
           message: 'Request Terminated During Handshake',
           positive: false,
       );
@@ -613,8 +604,7 @@ class NetworkRequests {
     catch (e) {
       Tools.isTouchLocked = false;
       print(e.toString());
-      Alerts.flushbar(
-          context: context,
+      Alerts.toastMessage(
           message: 'Something Went Wrong 2',
           positive: false,
       );
