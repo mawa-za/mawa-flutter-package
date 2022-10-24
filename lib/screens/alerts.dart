@@ -140,7 +140,7 @@ class Alerts{
     );
   }
 
-  static toastMessage({bool? positive, required String message,Toast length = Toast.LENGTH_SHORT}) {
+  static toastMessage({bool? positive, required String message,Toast? length}) {
 
     Color? backgroundColor;
     Color? textColor;
@@ -164,9 +164,10 @@ class Alerts{
       backgroundColor = Colors.white;
       textColor = Colors.black;
     }
+    length == null ? length = Toast.LENGTH_SHORT: null;
 
     Fluttertoast.showToast(
-      gravity: ToastGravity.CENTER,
+      gravity: ToastGravity.TOP,
       toastLength: length,
       msg: message,
       timeInSecForIosWeb: 3,

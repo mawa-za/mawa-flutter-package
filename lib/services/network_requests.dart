@@ -244,29 +244,26 @@ class NetworkRequests {
             {
               Tools.isTouchLocked = false;
               // message(message: 'Server Is Down', textColor: Colors.redAccent, isLock: false);
-              Alerts.flushbar(
-                  context: Tools.context,
+              Alerts.toastMessage(
                   message: 'Server Down',
                   positive: false,
-                  popContext: false);
+              );
             }
             break;
           case 417:
             {
-              Alerts.flushbar(
-                  context: Tools.context,
+              Alerts.toastMessage(
                   message: NetworkRequests()
                       .statusMessages[NetworkRequests.statusCode],
                   positive: false,
-                  popContext: false);
+              );
             }
             break;
           case 405:
             {
               Tools.isTouchLocked = false;
               // message(message: 'Login failed', textColor: Colors.redAccent, isLock: false);
-              Alerts.flushbar(
-                  context: Tools.context,
+              Alerts.toastMessage(
                   message: 'Not Allowed',
                   positive: false);
             }
@@ -274,8 +271,7 @@ class NetworkRequests {
           case 500:
             {
               Tools.isTouchLocked = false;
-              Alerts.flushbar(
-                  context: Tools.context,
+              Alerts.toastMessage(
                   message: 'Something Went Wrong',
                   positive: false);
             }
@@ -283,30 +279,28 @@ class NetworkRequests {
           case 0:
             {
               Tools.isTouchLocked = false;
-              Alerts.flushbar(
-                  context: Tools.context,
+              Alerts.toastMessage(
                   message: 'Network Error',
                   positive: false,
-                  popContext: false);
+              );
             }
             break;
           case 1:
             {
               Tools.isTouchLocked = false;
-              Alerts.flushbar(
-                  context: Tools.context,
+              Alerts.toastMessage(
                   message: 'Network Error',
                   positive: false,
-                  popContext: false);
+              );
             }
             break;
           default:
             {
               Tools.isTouchLocked = false;
-              Alerts.flushbar(
-                  context: Tools.context,
+              Alerts.toastMessage(
                   message: 'Request Failed',
-                  positive: false);
+                  positive: false
+              );
             }
             break;
         }
@@ -316,8 +310,8 @@ class NetworkRequests {
       } on TimeoutException catch (e) {
         // Navigator.maybePop(Tools.context);
         print(e.toString());
-        Alerts.flushbar(
-            context: Tools.context,
+        Alerts.toastMessage(
+            // context: Tools.context,
             message: 'Request Timed Out. \nCheck Network Connection.',
             positive: false);
         responseCaught = http.Response('Request Timed Out',491);
@@ -326,8 +320,8 @@ class NetworkRequests {
         return responseCaught;
       } on SocketException catch (e) {
         print(e.toString());
-        Alerts.flushbar(
-            context: Tools.context,
+        Alerts.toastMessage(
+            // context: Tools.context,
             message: 'Encountered Network Problem',
             positive: false);
         responseCaught = http.Response('Encountered Network Problem',492);
@@ -336,8 +330,8 @@ class NetworkRequests {
         return responseCaught;
       } on HandshakeException catch (e) {
         print(e.toString());
-        Alerts.flushbar(
-            context: Tools.context,
+        Alerts.toastMessage(
+            // context: Tools.context,
             message: 'Request Terminated During Handshake',
             positive: false);
         responseCaught = http.Response('Could Not Establish Connection With Remote', 493);
@@ -357,8 +351,8 @@ class NetworkRequests {
       // }
       catch (e) {
         print(e.toString());
-        Alerts.flushbar(
-            context: Tools.context,
+        Alerts.toastMessage(
+            // context: Tools.context,
             message: 'Something Went Wrong 2',
             positive: false);
         responseCaught = http.Response('Ran Into A Problem', 499);
@@ -510,51 +504,45 @@ class NetworkRequests {
         case 401:
           {
             Tools.isTouchLocked = false;
-            Alerts.flushbar(
-                context: Tools.context,
-                message: 'Incorrect login',
+            Alerts.toastMessage(
+                message: 'Incorrect credentials',
                 positive: false,
-                popContext: false);
+            );
           }
           break;
         case 404:
           {
             Tools.isTouchLocked = false;
-            Alerts.flushbar(
-                context: Tools.context,
+            Alerts.toastMessage(
                 message: 'Server Down',
                 positive: false,
-                popContext: false);
+                );
           }
           break;
         case 0:
           {
             Tools.isTouchLocked = false;
-            Alerts.flushbar(
-                context: Tools.context,
+            Alerts.toastMessage(
                 message: 'Network Error',
                 positive: false,
-                popContext: false);
+            );
           }
           break;
         case 1:
           {
             Tools.isTouchLocked = false;
-            Alerts.flushbar(
-                context: Tools.context,
+            Alerts.toastMessage(
                 message: 'Network Error',
                 positive: false,
-                popContext: false);
+            );
           }
           break;
         default:
           {
             Tools.isTouchLocked = false;
-            Alerts.flushbar(
-              context: Tools.context,
+            Alerts.toastMessage(
               message: 'Login failed',
               positive: false,
-              popContext: false,
             );
           }
           break;
@@ -566,8 +554,7 @@ class NetworkRequests {
       Tools.isTouchLocked = false;
       // Navigator.maybePop(Tools.context);
       print(e.toString());
-      Alerts.flushbar(
-          context: context,
+      Alerts.toastMessage(
           message: 'Request Timed Out. \nCheck Network Connection.',
           positive: false,
       );
@@ -578,8 +565,7 @@ class NetworkRequests {
     } on SocketException catch (e) {
       Tools.isTouchLocked = false;
       print(e.toString());
-      Alerts.flushbar(
-          context: context,
+      Alerts.toastMessage(
           message: 'Encountered Network Problem',
           positive: false,
       );
@@ -590,8 +576,7 @@ class NetworkRequests {
     } on HandshakeException catch (e) {
       Tools.isTouchLocked = false;
       print(e.toString());
-      Alerts.flushbar(
-          context: context,
+      Alerts.toastMessage(
           message: 'Request Terminated During Handshake',
           positive: false,
       );
@@ -613,10 +598,11 @@ class NetworkRequests {
     catch (e) {
       Tools.isTouchLocked = false;
       print(e.toString());
-      Alerts.flushbar(
-          context: context,
+      Alerts.toastMessage(
+          // context: Tools.context,
           message: 'Something Went Wrong 2',
           positive: false,
+
       );
       responseCaught = http.Response('Ran Into A Problem', 499);
       // responseCaught.statusCode = 499;
