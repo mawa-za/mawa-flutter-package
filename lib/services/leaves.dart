@@ -157,7 +157,7 @@ class Leaves {
       QueryParameters.note:{
         QueryParameters.value:note,
         QueryParameters.type:noteType,
-        QueryParameters.id:User.partnerId,
+        QueryParameters.loggedById:User.partnerId,
       }
     }
         : null;
