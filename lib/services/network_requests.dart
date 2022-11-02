@@ -160,7 +160,7 @@ class NetworkRequests {
     server = await prefs.getString(SharedPrefs.server) ?? '';
     token = await prefs.getString(SharedPrefs.token) ?? '';
 
-    endpointURL = 'api-$server.mawa.co.za:$pot';
+    endpointURL = server;//'api-$server.mawa.co.za:$pot';
 
     dynamic url;
     dynamic header = headers(
@@ -394,7 +394,7 @@ class NetworkRequests {
 
     server = await prefs.getString(SharedPrefs.server) ?? '';
 
-    endpointURL = 'api-$server.mawa.co.za:$pot';
+    endpointURL = server;//'api-$server.mawa.co.za:$pot';
 
     dynamic url;
     // server == 'qas'
