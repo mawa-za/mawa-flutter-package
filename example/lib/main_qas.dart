@@ -9,5 +9,5 @@ Future<void> main() async{
   HttpOverrides.global = mawa.MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
   mawa.DeviceInfo();
-  runApp(Home(server: 'qas',));
+  runApp(Home(server: 'api-qas.mawa.co.za:8181',));
 }
