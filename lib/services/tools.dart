@@ -153,10 +153,12 @@ class Tools{
 
   _resetPassword(/*context*/) async {
     Navigator.of(context).pop();
+    final OverlayWidgets overlay = OverlayWidgets(context: context);
+    overlay.showOverlay(SnapShortStaticWidgets.snapshotWaitingIndicator());
 
     FocusScope.of(context).unfocus();
 
-    Alerts.flushbar(message: 'Please Wait', context: context);
+    // Alerts.flushbar(message: 'Please Wait', context: context);
      User.username = NetworkRequests.decodeJson(await User().changePassword(password: _newPasswordController.value.text.toString()));
     NetworkRequests.statusCode == 200 || NetworkRequests.statusCode == 201
         ?  Navigator.pushReplacementNamed(context, redirect)
@@ -165,6 +167,7 @@ class Tools{
 
     Authenticate.message = 'Token Invalid'
         : Alerts.flushbar(context: context, message:'Failed To Reset', positive: false, popContext: true);
+    overlay.dismissOverlay();
   }
 
   passwordResetPopup(context) {

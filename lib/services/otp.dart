@@ -79,23 +79,24 @@ class OTP {
           ),
         ]
         ),
-        btnOk: Constants.dialogCloseButton(context: context),
-        btnCancel: DialogButton(
-            child: const Text('Proceed'),
-            onPressed: () async {
-              if(_tokenFormKey.currentState!.validate()){
-                final OverlayWidgets overlay = OverlayWidgets(context: context);
-                overlay.showOverlay(SnapShortStaticWidgets.snapshotWaitingIndicator());
+        btnOk: DialogButton(
+          child: const Text('Proceed'),
+          onPressed: () async {
+            if(_tokenFormKey.currentState!.validate()){
+              Navigator.of(context).pop();
+              final OverlayWidgets overlay = OverlayWidgets(context: context);
+              overlay.showOverlay(SnapShortStaticWidgets.snapshotWaitingIndicator());
 
-                // Alerts.flushbar(context: Tools.context, message: 'Please Wait', showProgressIndicator: true, popContext: true);
-                // Navigator.of(context).pop();
-                // Tools().passwordResetPopup(context);
-                await validateOTP();
-                overlay.dismissOverlay();
-              }
-            },
-            color: Colors.green,
-          ),
+              // Alerts.flushbar(context: Tools.context, message: 'Please Wait', showProgressIndicator: true, popContext: true);
+              // Navigator.of(context).pop();
+              // Tools().passwordResetPopup(context);
+              await validateOTP();
+              overlay.dismissOverlay();
+            }
+          },
+          color: Colors.green,
+        ),
+        btnCancel: Constants.dialogCloseButton(context: context),
     ).show();
   }
 
