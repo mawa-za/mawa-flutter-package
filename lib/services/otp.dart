@@ -22,14 +22,26 @@ class OTP {
   // const String = '';
   final _tokenFormKey = GlobalKey<FormState>();
 
-  postOTPRequest(){
-    NetworkRequests.statusCode == 200 || NetworkRequests.statusCode == 201 && NetworkRequests.otp != _userDoesntExist
-        ? otpPopup()
-        : Alerts.flushbar(
-        context: Tools.context,
-        message: _userDoesntExist,
-        positive: false,
-        popContext: false);
+  postOTPRequest(request) async {
+    String message = await NetworkRequests.decodeJson(request, negativeResponse: '');
+    if(request.statusCode == 200 || request.statusCode == 201) {
+      if(message != _userDoesntExist) {
+        otpPopup();
+      }
+      else{
+        Tools().forgotPasswordPopup();
+        Alerts.toastMessage(
+            message: 'Email Not Associated With Any User',
+            positive: false,);
+      }
+    }
+    else{
+      Tools().forgotPasswordPopup();
+      Alerts.toastMessage(
+          message: 'Something went wrong',
+          positive: false,
+      );
+    }
 
   }
 
@@ -60,10 +72,18 @@ class OTP {
                 icon: Icon(Icons.lock_clock),
                 labelText: 'OTP Your Mail or Messages',
               ),
-              onEditingComplete: (){
-                Navigator.of(context).pop();
-                // validateOTP();
-                Tools().forgotPasswordPopup();
+              onEditingComplete: () async {
+                if(_tokenFormKey.currentState!.validate()){
+                  Navigator.of(context).pop();
+                  final OverlayWidgets overlay = OverlayWidgets(context: context);
+                  overlay.showOverlay(SnapShortStaticWidgets.snapshotWaitingIndicator());
+
+                  // Alerts.flushbar(context: Tools.context, message: 'Please Wait', showProgressIndicator: true, popContext: true);
+                  // Navigator.of(context).pop();
+                  // Tools().passwordResetPopup(context);
+                  await validateOTP();
+                  overlay.dismissOverlay();
+                }
               },
             ),
           ),
@@ -80,7 +100,6 @@ class OTP {
         ]
         ),
         btnOk: DialogButton(
-          child: const Text('Proceed'),
           onPressed: () async {
             if(_tokenFormKey.currentState!.validate()){
               Navigator.of(context).pop();
@@ -95,6 +114,7 @@ class OTP {
             }
           },
           color: Colors.green,
+          child: const Text('Proceed'),
         ),
         btnCancel: Constants.dialogCloseButton(context: context),
     ).show();
@@ -107,17 +127,17 @@ class OTP {
         context: context);
     if (NetworkRequests.statusCode == 200) {
       if (NetworkRequests.otp == _invalid) {
-        Alerts.flushbar(
-            context: Tools.context,
+        otpPopup();
+        Alerts.toastMessage(
             message: 'OTP Invalid',
             positive: false,
-            popContext: false);
+        );
       } else if (NetworkRequests.otp == _expired) {
-        Alerts.flushbar(
-            context: Tools.context,
+        otpPopup();
+        Alerts.toastMessage(
             message: 'OTP Has Expired',
             positive: false,
-            popContext: false);
+        );
       } else {
         NetworkRequests.token = NetworkRequests.otp;//.substring(1,NetworkRequests.otp.length);
 

@@ -91,8 +91,8 @@ class User{
   }
 
   changePassword({required String password}) async {
-    return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodPut,
-        resource: Resources.resetPassword, body: {"password": password}));
+    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPut,
+        resource: Resources.resetPassword, body: {"password": password});
   }
 
   resetPassword({required String username}) async {
