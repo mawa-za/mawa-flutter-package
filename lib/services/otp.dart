@@ -10,6 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../screens/overlay_widgets.dart';
+import '../screens/snapshort_static_widgets.dart';
+
 class OTP {
   OTP(this.context);
   final BuildContext context;
@@ -76,19 +79,24 @@ class OTP {
           ),
         ]
         ),
-        btnOk: Constants.dialogCloseButton(context: context),
-        btnCancel: DialogButton(
-            child: const Text('Proceed'),
-            onPressed: () {
-              if(_tokenFormKey.currentState!.validate()){
-                Alerts.flushbar(context: Tools.context, message: 'Please Wait', showProgressIndicator: true, popContext: true);
-                // Navigator.of(context).pop();
-                // Tools().passwordResetPopup(context);
-                validateOTP();
-              }
-            },
-            color: Colors.green,
-          ),
+        btnOk: DialogButton(
+          child: const Text('Proceed'),
+          onPressed: () async {
+            if(_tokenFormKey.currentState!.validate()){
+              Navigator.of(context).pop();
+              final OverlayWidgets overlay = OverlayWidgets(context: context);
+              overlay.showOverlay(SnapShortStaticWidgets.snapshotWaitingIndicator());
+
+              // Alerts.flushbar(context: Tools.context, message: 'Please Wait', showProgressIndicator: true, popContext: true);
+              // Navigator.of(context).pop();
+              // Tools().passwordResetPopup(context);
+              await validateOTP();
+              overlay.dismissOverlay();
+            }
+          },
+          color: Colors.green,
+        ),
+        btnCancel: Constants.dialogCloseButton(context: context),
     ).show();
   }
 

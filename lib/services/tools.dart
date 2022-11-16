@@ -63,17 +63,22 @@ class Tools{
 
   submitEmail() async {
     Navigator.of(context).pop();
-    Alerts.flushbar(context: context, message: 'Please Wait');
+
+    final OverlayWidgets overlay = OverlayWidgets(context: context);
+    overlay.showOverlay(SnapShortStaticWidgets.snapshotWaitingIndicator());
+
+    // Alerts.flushbar(context: context, message: 'Please Wait');
     await NetworkRequests().unsecuredMawaAPI(NetworkRequests.methodPost,
         resource: Resources.otp, payload: {JsonPayloads.partnerEmail: email}, context: context);
     Tools.isTouchLocked = true;
-    Authenticate.message = 'Please Wait';
+    // Authenticate.message = 'Please Wait';
     OTP(context).postOTPRequest();
     // NetworkRequests.statusCode == 200 || NetworkRequests.statusCode == 201 && NetworkRequests.token != OTP.userDoesntExist
     //     ? tokenPopup()
     //     : forgotPasswordPopup( message: 'Email Not Associated With Any User');
     Tools.isTouchLocked = false;
     Authenticate.message = '';
+    overlay.dismissOverlay();
   }
 
   forgotPasswordPopup({String? message}) {
@@ -148,10 +153,12 @@ class Tools{
 
   _resetPassword(/*context*/) async {
     Navigator.of(context).pop();
+    final OverlayWidgets overlay = OverlayWidgets(context: context);
+    overlay.showOverlay(SnapShortStaticWidgets.snapshotWaitingIndicator());
 
     FocusScope.of(context).unfocus();
 
-    Alerts.flushbar(message: 'Please Wait', context: context);
+    // Alerts.flushbar(message: 'Please Wait', context: context);
      User.username = NetworkRequests.decodeJson(await User().changePassword(password: _newPasswordController.value.text.toString()));
     NetworkRequests.statusCode == 200 || NetworkRequests.statusCode == 201
         ?  Navigator.pushReplacementNamed(context, redirect)
@@ -160,6 +167,7 @@ class Tools{
 
     Authenticate.message = 'Token Invalid'
         : Alerts.flushbar(context: context, message:'Failed To Reset', positive: false, popContext: true);
+    overlay.dismissOverlay();
   }
 
   passwordResetPopup(context) {
