@@ -147,7 +147,7 @@ class Tasks {
   }) async {
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPost,
-        resource: '${Resources.tickets}/$reference/${Resources.createTask}',
+        resource: '${Resources.tickets}/${reference ?? taskID}/${Resources.createTask}',
         body: {
           JsonPayloads.assignedBy: assignedBy,
           JsonPayloads.summary: summary,
