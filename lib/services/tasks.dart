@@ -1,14 +1,12 @@
-
 import 'package:mawa_package/services/keys.dart';
 import 'package:mawa_package/services/network_requests.dart';
 import 'package:mawa_package/services/notification.dart';
 
 class Tasks {
-  Tasks({this.reference,required this.taskID});
+  Tasks({this.reference, required this.taskID});
   late String taskID;
   static late List tasks;
   String? reference;
-
 
   // static responseAction(dynamic response, dynamic negativeResult) async {
   //   if (response.statusCode == 200) {
@@ -85,10 +83,9 @@ class Tasks {
     Map<String, dynamic> body = {
       QueryParameters.ticketTaskID: taskID,
     };
-    note != null ? body[QueryParameters.note] = {
-      'value': note,
-      'type': "TICKETTASK"
-    } : null;
+    note != null
+        ? body[QueryParameters.note] = {'value': note, 'type': "TICKETTASK"}
+        : null;
     dynamic response = await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPut,
       resource: '${Resources.tickets}/$actionResource',
@@ -102,15 +99,13 @@ class Tasks {
     dynamic response = await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPut,
       resource: '${Resources.tickets}/${Resources.completeTask}',
-      queryParameters: {
-        QueryParameters.ticketTaskID: taskID
-      },
+      queryParameters: {QueryParameters.ticketTaskID: taskID},
     );
-    if (response.statusCode == 201 || response.statusCode == 200){
-     Notification(id: taskID).sendNotifications(meesageType: 'TICKETTASKCOMPLETED',sendToAdmin: false);
-   }
+    if (response.statusCode == 201 || response.statusCode == 200) {
+      Notification(id: taskID).sendNotifications(
+          meesageType: 'TICKETTASKCOMPLETED', sendToAdmin: false);
+    }
     return response;
-
   }
 
 //    getting a specific task
@@ -123,18 +118,44 @@ class Tasks {
           QueryParameters.ticketTaskID: taskID,
         });
     return await NetworkRequests.decodeJson(response, negativeResponse: '');
-
   }
 
 //  getting a list of tasks that belong to a ticket
 //  GET /mawa-api/resources/tickets/TN0000000007/getTasks
   getTicketTasks() async {
-
     dynamic response = await NetworkRequests().securedMawaAPI(
-        NetworkRequests.methodGet,
-        resource: '${Resources.tickets}/$reference/${Resources.getTasks}',
-        );
+      NetworkRequests.methodGet,
+      resource: '${Resources.tickets}/$reference/${Resources.getTasks}',
+    );
     return await NetworkRequests.decodeJson(response, negativeResponse: '');
   }
 
+// /mawa-api/resources/tickets/TN0000000228/createTask'
+// {
+// "assignedBy" : "PN0000000490",
+// "summary" :"Log In",
+// "taskDescription" : "Can't log in",
+// "assignedTo" : "PN0000000490",
+// "dueDate" : "2022/11/08"
+// }
+  createTask({
+    required String assignedTo,
+    required String assignedBy,
+    required String summary,
+    required String description,
+    required String dueDate,
+  }) async {
+    dynamic response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPost,
+        resource: '${Resources.tickets}/${reference ?? taskID}/${Resources.createTask}',
+        body: {
+          JsonPayloads.assignedBy: assignedBy,
+          JsonPayloads.summary: summary,
+          JsonPayloads.taskDescription: description,
+          JsonPayloads.assignedTo: assignedTo,
+          JsonPayloads.dueDate: dueDate
+        });
+
+    return response;
+  }
 }
