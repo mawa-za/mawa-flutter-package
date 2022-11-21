@@ -11,7 +11,6 @@ class TransactionNotes {
   final String? transaction;
   final String? transactionNote;
   String? note;
-  static String ole = '';
   // bool email = false;
   // bool sms = false;
   // List<String> items = ["email", "sms", "both"];
