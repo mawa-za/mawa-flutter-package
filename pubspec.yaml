@@ -33,6 +33,7 @@ dependencies:
   device_information: ^0.0.4
   geolocator: ^8.0.5
   geocoding: ^2.0.4
+  dropdown_search: 2.0.1
 
 dev_dependencies:
   flutter_test:
