@@ -1,10 +1,27 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:dropdown_search/dropdown_search.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:mawa_package/services.dart';
 import 'package:http/http.dart' as http;
+import 'notification.dart' as nt;
 
 class TransactionNotes {
   TransactionNotes({this.transactionNote, this.transaction});
   final String? transaction;
   final String? transactionNote;
+  String? note;
+  // bool email = false;
+  // bool sms = false;
+  // List<String> items = ["email", "sms", "both"];
+  // String selectedVal = '';
+  // bool notifType = false;
+  dynamic cont;
+  bool email = false;
+  bool sms = false;
+  List<String> items = ["email", "sms", "both"];
+  String selectedVal = '';
+  bool notifType = false;
 
   static createNote(
       {required String value,
@@ -20,32 +37,184 @@ class TransactionNotes {
   }
 
   getNote() async {
-    return await NetworkRequests.decodeJson( await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-        resource: Resources.transactionNotes + '/' + transactionNote!));
+    return await NetworkRequests.decodeJson(await NetworkRequests()
+        .securedMawaAPI(NetworkRequests.methodGet,
+            resource: Resources.transactionNotes + '/' + transactionNote!));
   }
 
   getTransactionNotes() async {
-    return await NetworkRequests.decodeJson( await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-        resource: Resources.transactionNotes,
-        queryParameters: {QueryParameters.transaction: transaction}));
+    return await NetworkRequests.decodeJson(await NetworkRequests()
+        .securedMawaAPI(NetworkRequests.methodGet,
+            resource: Resources.transactionNotes,
+            queryParameters: {QueryParameters.transaction: transaction}));
   }
 
-  static createComment({required String transaction, required String type, required String comment, required String receiver}) async {
-    dynamic note = createNote(value: comment, type: type, transaction: transaction);
-    if(note.statusCode == 200 || note.statusCode == 201){
-     dynamic notify = await Notification(id: transaction).sendCommentNotification(receiver);
-     if(notify.statusCode == 200 || notify.statusCode == 201){
-       return notify;
-     }
-     else{
-       return http.Response('Comment created but notification failed',429);
-     }
+  static createComment(
+      {required String transaction,
+      required String type,
+      required String comment,
+      required String receiver}) async {
+    dynamic note =
+        createNote(value: comment, type: type, transaction: transaction);
+    if (note.statusCode == 200 || note.statusCode == 201) {
+      dynamic notify =
+          await nt.Notification(id: transaction).sendCommentNotification(receiver);
+      if (notify.statusCode == 200 || notify.statusCode == 201) {
+        return notify;
+      } else {
+        return http.Response('Comment created but notification failed', 429);
       }
-    else{
+    } else {
       return note;
     }
-}
   }
+
+  notePopup(BuildContext context) async  {
+    final formKey = GlobalKey<FormState>();
+    String? note;
+    // notType = items[2];
+
+
+    dynamic dlg = AwesomeDialog(
+      context: context,
+      dialogType: DialogType.QUESTION,
+      dismissOnTouchOutside: false,
+      animType: AnimType.BOTTOMSLIDE,
+      title: 'Information!',
+      body: Form(
+        key: formKey,
+        child: TextFormField(
+          decoration: Constants.textInputDecorations(
+              'Provide A Comment', Icons.palette),
+          validator: (value) {
+            if (value!.isEmpty) {
+              return 'Please enter some text';
+            }
+            return null;
+          },
+          onChanged: (n) {
+            note = n;
+          },
+          onEditingComplete: () {},
+        ),
+      ),
+      btnOk: TextButton(
+        child: const Text('Submit'),
+        onPressed: () {
+          if (formKey.currentState!.validate()) {
+            Navigator.of(context).pop();
+
+          }
+        },
+      ),
+      btnCancel: TextButton(
+        child: const Text('Cancel'),
+        onPressed: () {
+          note = null;
+          Navigator.of(context).pop();
+        },
+      ),
+    );
+
+    await dlg.show();
+    if (note != null ) {
+      this.note = note;
+      return true; //Future.value(note?? '');
+    } else {
+      return false;
+    }
+  }
+
+  commentPopup(BuildContext context) async {
+    final formKey = GlobalKey<FormState>();
+    // String? note;
+    dynamic dlg = AwesomeDialog(
+      context: context,
+      dialogType: DialogType.QUESTION,
+      dismissOnTouchOutside: false,
+      animType: AnimType.BOTTOMSLIDE,
+      title: 'Information!',
+      body: Form(
+          key: formKey,
+          child: Column(
+              children: [
+                TextFormField(
+                  keyboardType: TextInputType.text,
+                  decoration:
+                  Constants.textInputDecorations('Provide A Comment', Icons.palette),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
+                  onChanged: (n) {
+                    note = n;
+                  },
+                  onEditingComplete: () {},
+                ),
+                DropdownSearch<String>(
+                  mode: Mode.MENU,
+                  selectedItem: selectedVal,
+                  showSelectedItems: true,
+                  showSearchBox: true,
+                  items: items,
+                  label: "Notification type",
+                  hint: "Select notification type",
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please select';
+                    }
+                    return null;
+                  },
+                  onChanged: (value) {
+                    if (value == 'email') {
+                      notifType = true;
+                      email = true;
+                      sms = false;
+                    } else if (value == 'sms') {
+                      notifType = true;
+                      email = false;
+                      sms = true;
+                    } else {
+                      notifType = true;
+                      email = true;
+                      sms = false;
+                    }
+                  },
+                ),
+              ])
+      ),
+      btnOk: TextButton(
+        child: const Text('Submit'),
+        onPressed: () async {
+          if (formKey.currentState!.validate()) {
+            Navigator.of(context).pop();
+            // await commentPopup(context);
+          }
+        },
+      ),
+      btnCancel: TextButton(
+        child: const Text('Cancel'),
+        onPressed: () {
+          note = null;
+          Navigator.of(context).pop();
+        },
+      ),
+    );
+    await dlg.show();
+    if(note != null){
+      this.note = note;
+      return true; //Future.value(note?? '');
+    }
+    else{
+      return false;
+    }
+  }
+
+
+
+}
 
 //part of mawa;
 //
