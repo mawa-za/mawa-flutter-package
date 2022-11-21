@@ -11,12 +11,18 @@ class TransactionNotes {
   final String? transaction;
   final String? transactionNote;
   String? note;
+  static String ole = '';
   // bool email = false;
   // bool sms = false;
   // List<String> items = ["email", "sms", "both"];
   // String selectedVal = '';
   // bool notifType = false;
   dynamic cont;
+  bool email = false;
+  bool sms = false;
+  List<String> items = ["email", "sms", "both"];
+  String selectedVal = '';
+  bool notifType = false;
 
   static createNote(
       {required String value,
@@ -116,6 +122,93 @@ class TransactionNotes {
       this.note = note;
       return true; //Future.value(note?? '');
     } else {
+      return false;
+    }
+  }
+
+  commentPopup(BuildContext context) async {
+    final formKey = GlobalKey<FormState>();
+    // String? note;
+    dynamic dlg = AwesomeDialog(
+      context: context,
+      dialogType: DialogType.QUESTION,
+      dismissOnTouchOutside: false,
+      animType: AnimType.BOTTOMSLIDE,
+      title: 'Information!',
+      body: Form(
+          key: formKey,
+          child: Column(
+              children: [
+                TextFormField(
+                  keyboardType: TextInputType.text,
+                  decoration:
+                  Constants.textInputDecorations('Provide A Comment', Icons.palette),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
+                  onChanged: (n) {
+                    note = n;
+                  },
+                  onEditingComplete: () {},
+                ),
+                DropdownSearch<String>(
+                  mode: Mode.MENU,
+                  selectedItem: selectedVal,
+                  showSelectedItems: true,
+                  showSearchBox: true,
+                  items: items,
+                  label: "Notification type",
+                  hint: "Select notification type",
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please select';
+                    }
+                    return null;
+                  },
+                  onChanged: (value) {
+                    if (value == 'email') {
+                      notifType = true;
+                      email = true;
+                      sms = false;
+                    } else if (value == 'sms') {
+                      notifType = true;
+                      email = false;
+                      sms = true;
+                    } else {
+                      notifType = true;
+                      email = true;
+                      sms = false;
+                    }
+                  },
+                ),
+              ])
+      ),
+      btnOk: TextButton(
+        child: const Text('Submit'),
+        onPressed: () async {
+          if (formKey.currentState!.validate()) {
+            Navigator.of(context).pop();
+            // await commentPopup(context);
+          }
+        },
+      ),
+      btnCancel: TextButton(
+        child: const Text('Cancel'),
+        onPressed: () {
+          note = null;
+          Navigator.of(context).pop();
+        },
+      ),
+    );
+    await dlg.show();
+    if(note != null){
+      this.note = note;
+      return true; //Future.value(note?? '');
+    }
+    else{
       return false;
     }
   }
