@@ -431,6 +431,16 @@ class QueryParameters {
 
   static const String workcenter = 'workcenter';
   static const String position = 'position';
+
+
+  static const String New = 'new';
+  static const String inprogress = 'inprogress';
+  static const String open = 'open';
+  static const String cancelled = 'cancelled';
+  static const String resolved = 'resolved';
+  static const String completed = 'completed';
+
+  // static const String  = '';
 }
 
 class Statuses {
