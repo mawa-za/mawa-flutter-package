@@ -195,6 +195,7 @@ class JsonResponses {
   static const String position = 'position';
 
   // static const String = '';
+  static const String note = 'note';
 
   static const String ticketTaskID = 'ticketTaskID';
   static const String personAssignTo = 'personAssignTo';
