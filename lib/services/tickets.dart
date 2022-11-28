@@ -146,14 +146,21 @@ class Tickets {
     }
   }
 
-  static getTicketByStatus(String status) async{
-    dynamic response = await NetworkRequests().securedMawaAPI(
-        NetworkRequests.methodGet,
+  static getTicketByStatus(String status) async {
+    dynamic response;
+    response = await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
         resource: Resources.tickets,
         queryParameters: {
           JsonPayloads.filter: JsonPayloads.filterValue,
           JsonPayloads.status: status
-        });
+        }) ??
+        {};
+    if (status == '') {
+      response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: Resources.tickets,
+      );
+    }
     allTickets = await NetworkRequests.decodeJson(response);
     return allTickets;
   }
