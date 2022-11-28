@@ -19,6 +19,8 @@ class Tickets {
   static List myTickets = [];
   static List allTickets = [];
   static late Map ticket = {};
+  static List allOrganizations = [];
+  static Map organizationName = {};
   static Map? changeStatusBody;
 
   static trackTicket(dynamic after) async {
@@ -130,9 +132,9 @@ class Tickets {
     // ignore: unnecessary_null_comparison
     if (id != null && id != '') {
       dynamic response = await NetworkRequests().securedMawaAPI(
-            NetworkRequests.methodGet,
-            resource: Resources.tickets + '/' + id,
-          ) ??
+        NetworkRequests.methodGet,
+        resource: Resources.tickets + '/' + id,
+      ) ??
           {};
       if (response.statusCode == 200){
         ticket = NetworkRequests.decodeJson(response);
@@ -186,14 +188,14 @@ class Tickets {
   static getNewTickets() async {
     newTickets.clear();
     dynamic response = await NetworkRequests().securedMawaAPI(
-            NetworkRequests.methodGet,
-            resource: Resources.tickets,
-            // queryParameters: {
-            //   JsonPayloadKeys.filter: JsonPayloadKeys.filterValue,
-            //   // JsonPayloadKeys.status: MapKeys.ticketStatusNew,
-            //   JsonPayloadKeys.clintID: User.groupId,
-            // }
-            ) ??
+      NetworkRequests.methodGet,
+      resource: Resources.tickets,
+      // queryParameters: {
+      //   JsonPayloadKeys.filter: JsonPayloadKeys.filterValue,
+      //   // JsonPayloadKeys.status: MapKeys.ticketStatusNew,
+      //   JsonPayloadKeys.clintID: User.groupId,
+      // }
+    ) ??
         [];
 
     if(response.statusCode == 200){
@@ -215,14 +217,14 @@ class Tickets {
   static openTicket(String ticketId) async {
     dynamic response = await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
         resource:
-            Resources.tickets + '/' + ticketId + '/' + Resources.ticketStatusOpen,
+        Resources.tickets + '/' + ticketId + '/' + Resources.ticketStatusOpen,
         queryParameters: {JsonPayloads.assignedTo: User.partnerId});
     response.statusCode == 200
         ? Alerts.flushbar(
-            context: Tools.context,
-            message: 'Ticket Successfully Assigned To You',
-            positive: true,
-            popContext: false)
+        context: Tools.context,
+        message: 'Ticket Successfully Assigned To You',
+        positive: true,
+        popContext: false)
         : null;
   }
 
@@ -238,7 +240,7 @@ class Tickets {
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPost,
         resource: Resources.tickets + '/' + ticketId + '/' + 'cancel');
-   return response;
+    return response;
 
   }
 
@@ -248,10 +250,10 @@ class Tickets {
         body: {JsonPayloads.assignedToID: User.partnerId});
     response.statusCode == 200
         ? Alerts.flushbar(
-            context: Tools.context,
-            message: 'Ticket Successfully Assigned To You',
-            positive: true,
-            popContext: false)
+        context: Tools.context,
+        message: 'Ticket Successfully Assigned To You',
+        positive: true,
+        popContext: false)
         : null;
   }
 
@@ -271,21 +273,66 @@ class Tickets {
     return response.statusCode;
   }
 
-  static createTicket({required String summary, required String category, required String desc, required String priority}) async {
+  // static createTicket({required String summary, required String category, required String desc, required String priority}) async {
+  //   dynamic response = await NetworkRequests().securedMawaAPI(
+  //       NetworkRequests.methodPost,
+  //       resource: Resources.tickets,
+  //       body: {
+  //         JsonPayloads.ticketDescription : desc,
+  //         JsonPayloads.ticketCategory : category,
+  //         JsonPayloads.ticketSummary : summary,
+  //         JsonPayloads.ticketPriority : priority,
+  //       });
+  //   print('$response');
+  //
+  //   ticketNo = await NetworkRequests.decodeJson(response,negativeResponse: '');
+  //   return response;
+  //
+  // }
+
+  static createTicket({required String organizationId, required String subDescription, required String category, required String priority, required String assigneeNumber, required String description}) async {
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPost,
         resource: Resources.tickets,
         body: {
-          JsonPayloads.ticketDescription : desc,
+          JsonPayloads.clintID : organizationId,
+          JsonPayloads.ticketSummary : subDescription,
           JsonPayloads.ticketCategory : category,
-          JsonPayloads.ticketSummary : summary,
           JsonPayloads.ticketPriority : priority,
+          JsonPayloads.id : assigneeNumber,
+          JsonPayloads.description : description,
         });
     print('$response');
 
-    ticketNo = await NetworkRequests.decodeJson(response,negativeResponse: '');
+    if(response.statusCode == 200 || response.statusCode == 201){
+      ticketNo = await NetworkRequests.decodeJson(response,negativeResponse: '');
+    }
+
     return response;
 
   }
+
+  static getAllOrganization() async{
+    allOrganizations.clear();
+    dynamic response = await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodGet,
+      resource: Resources.organization,
+    );
+
+    allOrganizations = await NetworkRequests.decodeJson(response,negativeResponse: '');
+    return response ;
+
+  }
+
+  static getAllTickets()async{
+    dynamic response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: Resources.tickets
+    );
+
+    allTickets = await  NetworkRequests.decodeJson(response,negativeResponse: '');
+    return response ;
+  }
+
 
 }

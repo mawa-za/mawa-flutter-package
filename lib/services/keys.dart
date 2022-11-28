@@ -285,6 +285,8 @@ class Resources {
   static const String comment = 'comment';
 
   static const String createTask = 'createTask';
+
+  static const String organization = 'Organization';
 }
 
 class JsonPayloads {
@@ -353,7 +355,7 @@ class JsonPayloads {
 
   static const String ticketDescription = 'description';
   static const String ticketCategory = 'category';
-  static const String ticketSummary = 'summary';
+  static const String ticketSummary = 'subDescription';
   static const String ticketPriority = 'priority';
 
   static const String recievedBy = 'recievedBy';
@@ -441,7 +443,7 @@ class QueryParameters {
   static const String resolved = 'resolved';
   static const String completed = 'completed';
 
-  // static const String  = '';
+// static const String  = '';
 }
 
 class Statuses {
@@ -474,4 +476,9 @@ class SharedPrefs {
 class CommentTypes{
   static const String ticketComment = 'TICKETCOMMENT';
   static const String leaveComment = 'LEAVEMANAGEMENT';
+}
+
+class FieldOptionTypes{
+  static const String fieldOptionCategory = 'CATEGORY';
+  static const String fieldOptionPriority = 'PRIORITY';
 }
