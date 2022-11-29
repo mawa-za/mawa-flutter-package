@@ -1,12 +1,14 @@
 import 'package:mawa_package/services/keys.dart';
 import 'package:mawa_package/services/network_requests.dart';
 import 'package:mawa_package/services/notification.dart';
+import 'package:mawa_package/services/tickets.dart';
 
 class Tasks {
   Tasks({this.reference, required this.taskID});
   late String taskID;
   static late List tasks;
   String? reference;
+  static List ticketTasks = [];
 
   // static responseAction(dynamic response, dynamic negativeResult) async {
   //   if (response.statusCode == 200) {
@@ -123,11 +125,17 @@ class Tasks {
 //  getting a list of tasks that belong to a ticket
 //  GET /mawa-api/resources/tickets/TN0000000007/getTasks
   getTicketTasks() async {
+    reference = Tickets.ticketNo;
     dynamic response = await NetworkRequests().securedMawaAPI(
-      NetworkRequests.methodGet,
-      resource: '${Resources.tickets}/$reference/${Resources.getTasks}',
-    );
-    return await NetworkRequests.decodeJson(response, negativeResponse: '');
+        NetworkRequests.methodGet,
+        resource: '${Resources.tickets}/$reference/${Resources.getTasks}');
+
+    if (response.statusCode == 200) {
+      ticketTasks = await NetworkRequests.decodeJson(response);
+    } else {
+      ticketTasks = [];
+    }
+    return ticketTasks;
   }
 
 // /mawa-api/resources/tickets/TN0000000228/createTask'
