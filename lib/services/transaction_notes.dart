@@ -49,16 +49,18 @@ class TransactionNotes {
             queryParameters: {QueryParameters.transaction: transaction}));
   }
 
-  static createComment(
-      {required String transaction,
-      required String type,
-      required String comment,
-      required String receiver}) async {
+  static createComment({
+    required String transaction, 
+    required String type,
+    required String comment,
+    required List<String> receiver,
+    required bool email, 
+    required bool sms}) async {
     dynamic note =
         createNote(value: comment, type: type, transaction: transaction);
     if (note.statusCode == 200 || note.statusCode == 201) {
       dynamic notify =
-          await nt.Notification(id: transaction).sendCommentNotification(receiver);
+          await nt.Notification(id: transaction).sendCommentNotification(receiver, email: email, sms: sms);
       if (notify.statusCode == 200 || notify.statusCode == 201) {
         return notify;
       } else {

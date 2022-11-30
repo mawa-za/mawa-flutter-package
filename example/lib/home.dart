@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:example/Dashboard.dart';
+import 'Dashboard.dart';
 import 'package:flutter/material.dart';
 // import 'package:connectivity_plus/connectivity_plus.dart';
 // import 'package:mawa_package/dependencies.dart';
