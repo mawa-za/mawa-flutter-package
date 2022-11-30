@@ -34,17 +34,22 @@ class Notification {
       });
  }
 
-// POST /mawa-api/resources/sendNotifications/comment
-// {
-//     "id":"NOTE0000000365",
-//     "recievedBy":"PN0000000013"
-// }
-  sendCommentNotification(String receiver) async {
+// POST /mawa-api/resources/sendNotifications/comment{
+//     "id":"NOTE0000000335",
+//     "email":true,
+//     "sms":true,
+//
+//     "recievedBy":["PN0000000013","PN0000000003"
+//     ]
+//     }
+  sendCommentNotification(List<String> receiver, {required bool email, required bool sms}) async {
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPost,
       resource: '${Resources.sendNotifications}/${Resources.comment}',
       body: {
         JsonPayloads.id:id,
+        JsonPayloads.email:email,
+        JsonPayloads.sms:sms,
         JsonPayloads.recievedBy:receiver,
       }
     );

@@ -1,4 +1,4 @@
-import 'package:example/Dashboard.dart';
+import 'Dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:mawa_package/screens.dart';
 import 'package:mawa_package/services/globals.dart';

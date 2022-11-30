@@ -365,6 +365,8 @@ class JsonPayloads {
   static const String assignedBy = 'assignedBy';
   static const String summary = 'summary';
 
+  static const String sms = 'sms';
+
 // static const String  = '';
 }
 

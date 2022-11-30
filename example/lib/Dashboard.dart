@@ -1,4 +1,4 @@
-import 'package:example/open.dart';
+import 'open.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mawa_package/mawa.dart';
