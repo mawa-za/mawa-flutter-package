@@ -131,17 +131,13 @@ class Tickets {
   static getTicket(String id) async {
     // ignore: unnecessary_null_comparison
     if (id != null && id != '') {
-      dynamic response = await NetworkRequests().securedMawaAPI(
+      ticket = await NetworkRequests.decodeJson(NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: Resources.tickets + '/' + id,
-      ) ??
+      )) ??
           {};
-      if (response.statusCode == 200){
-        ticket = NetworkRequests.decodeJson(response);
-        // Time.dueTime =
-        //     DateTime.parse(ticket[JsonResponses.dueDate].toString());
-        ticketNo = ticket[JsonResponses.ticketLogID].toString();
-      }
+
+        ticketNo = ticket[JsonResponses.id].toString();
 
     }
   }
