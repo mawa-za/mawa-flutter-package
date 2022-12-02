@@ -64,6 +64,7 @@ class JsonResponses {
   static const String usersLastName = 'lastName';
   static const String usersPasswordStatus = 'password_status';
   static const String usersPartner = 'partner';
+  static const String userPartner = 'userPartner';
   static const String usersCellphone = 'cellphone';
   static const String usersEmail = 'email';
   static const String usersStatus = 'status';
@@ -287,6 +288,7 @@ class Resources {
   static const String createTask = 'createTask';
 
   static const String organization = 'Organization';
+  static const String OrganizationUsers = 'OrganizationUsers';
 }
 
 class JsonPayloads {
@@ -444,6 +446,8 @@ class QueryParameters {
   static const String cancelled = 'cancelled';
   static const String resolved = 'resolved';
   static const String completed = 'completed';
+
+  static const String organizationId = 'organizationId';
 
 // static const String  = '';
 }
