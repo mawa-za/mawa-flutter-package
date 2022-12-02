@@ -11,11 +11,12 @@ class User{
   static Map loggedInUser = {};
   static Map<String, String> users = {};
   static List listUsers = [];
+  static List assignees = [];
 
   static late String username;
   static late String password;
   static late String email;
-   static late dynamic pass;
+  static late dynamic pass;
 
   getUserDetails (String username) async {
     loggedInUser.clear();
@@ -23,9 +24,9 @@ class User{
       dynamic response = await NetworkRequests().securedMawaAPI(
           NetworkRequests.methodGet,
           resource: '${Resources.users}/$username')
-          ;
+      ;
       if(response.statusCode == 200 ) {
-      loggedInUser =
+        loggedInUser =
         await NetworkRequests.decodeJson(response, negativeResponse: {});
         partnerId = loggedInUser[JsonResponses.usersPartner];
         Persons.personId = loggedInUser[JsonResponses.usersPartner];
@@ -47,26 +48,26 @@ class User{
 
     if(response.statusCode == 200){
 
-     listUsers = await NetworkRequests.decodeJson(response, negativeResponse: []);
-        // try{
-          for (int i = 0; i < listUsers.length; i++) {
-          listUsers[i][JsonResponses.usersFirstName] != null &&
-              listUsers[i][JsonResponses.usersFirstName] != null
-              ? mapUsers['${listUsers[i][JsonResponses.id]}'] =
-          '${listUsers[i][JsonResponses.usersLastName] ??
-              'Surname not Supplied'}, ${listUsers[i][JsonResponses
-              .usersFirstName] ??
-              'Name not Supplied'}' //'${listUsers[i][JsonKeys.usersLastName]}, ${listUsers[i][JsonKeys.usersFirstName]}'
-              : mapUsers['${listUsers[i][JsonResponses.id]}'] =
-          'No Name Provided';
-        }
+      listUsers = await NetworkRequests.decodeJson(response, negativeResponse: []);
+      // try{
+      for (int i = 0; i < listUsers.length; i++) {
+        listUsers[i][JsonResponses.usersFirstName] != null &&
+            listUsers[i][JsonResponses.usersFirstName] != null
+            ? mapUsers['${listUsers[i][JsonResponses.id]}'] =
+        '${listUsers[i][JsonResponses.usersLastName] ??
+            'Surname not Supplied'}, ${listUsers[i][JsonResponses
+            .usersFirstName] ??
+            'Name not Supplied'}' //'${listUsers[i][JsonKeys.usersLastName]}, ${listUsers[i][JsonKeys.usersFirstName]}'
+            : mapUsers['${listUsers[i][JsonResponses.id]}'] =
+        'No Name Provided';
+      }
       // }
       // catch(e){
       //   mapUsers.clear();
       // }
-  }
+    }
     else{
-    mapUsers.clear();
+      mapUsers.clear();
     }
     return User.users = mapUsers;
     // print('opw\n$users\n name');
@@ -115,14 +116,14 @@ class User{
   }
 
   addUser(
-  {
-    required String id,
-    required String email,
-    required String cellphone,
-    required String partnerNum,
-    required String role,
-    required String userType,
-}) async{
+      {
+        required String id,
+        required String email,
+        required String cellphone,
+        required String partnerNum,
+        required String role,
+        required String userType,
+      }) async{
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPost,
         resource: Resources.users,
@@ -138,15 +139,29 @@ class User{
     print('ttttttttttttttttt');
     print(pass);
     if(response.statusCode == 200 || response.statusCode == 201){
-     dynamic p=  pass['password'];
-     dynamic i = pass['id'];
+      dynamic p=  pass['password'];
+      dynamic i = pass['id'];
       Notification(id: i).newUserNotification(
           meesageType: 'NEWUSER',
           user: true,
           password: p);
-          print(p);
-     print(i);
+      print(p);
+      print(i);
       print('USER CREATED');
     }
   }
+
+  getUsersByOrganisation() async {
+    assignees = await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: Resources.users + '/' + Resources.OrganizationUsers,
+        queryParameters: {
+          QueryParameters.organizationId:
+          User.loggedInUser[JsonResponses.usersGroupId]
+        }
+    ),negativeResponse: []);
+
+    return assignees;
+  }
+
 }
