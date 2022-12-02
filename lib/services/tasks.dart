@@ -125,15 +125,10 @@ class Tasks {
 //  getting a list of tasks that belong to a ticket
 //  GET /mawa-api/resources/tickets/TN0000000007/getTasks
   getTicketTasks() async {
-    dynamic response = await NetworkRequests().securedMawaAPI(
+    ticketTasks = await NetworkRequests.decodeJson( await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
-        resource: '${Resources.tickets}/$reference/${Resources.getTasks}');
+        resource: '${Resources.tickets}/$reference/${Resources.getTasks}'), negativeResponse: []);
 
-    if (response.statusCode == 200) {
-      ticketTasks = await NetworkRequests.decodeJson(response);
-    } else {
-      ticketTasks = [];
-    }
     return ticketTasks;
   }
 
