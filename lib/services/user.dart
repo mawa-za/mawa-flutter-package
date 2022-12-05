@@ -9,7 +9,7 @@ class User{
   static String userLoginRole = '';
   static Map<String,String> userRoles = {};
   static Map loggedInUser = {};
-  static Map<String, String> users = {};
+  static Map user = {};
   static List listUsers = [];
   static List assignees = [];
 
@@ -18,7 +18,7 @@ class User{
   static late String email;
   static late dynamic pass;
 
-  getUserDetails (String username) async {
+  getUserDetails (String username, {bool getPerson = false}) async {
     loggedInUser.clear();
     try {
       dynamic response = await NetworkRequests().securedMawaAPI(
@@ -26,20 +26,31 @@ class User{
           resource: '${Resources.users}/$username')
       ;
       if(response.statusCode == 200 ) {
-        loggedInUser =
-        await NetworkRequests.decodeJson(response, negativeResponse: {});
-        partnerId = loggedInUser[JsonResponses.usersPartner];
-        Persons.personId = loggedInUser[JsonResponses.usersPartner];
-        groupId = loggedInUser[JsonResponses.usersPartner];
+        print('\nj\n code ${response.statusCode}\nj\n');
+        user.clear();
+        print('clear');
+        dynamic data = await NetworkRequests.decodeJson(response, negativeResponse: {});
+        print('dara ${data.runtimeType}');
+        user.addAll(data);
+        print('\nj\n user ${user}\nj\n');
+        partnerId = user[JsonResponses.usersPartner];
+        Persons.personId = user[JsonResponses.usersPartner];
+        print('\nj\n per id ${Persons.personId}\nj\n');
+        groupId = user[JsonResponses.usersPartner];
+        print('\nj\n gr id ${groupId}\nj\n');
+        if(getPerson) {
+          await Persons(Persons.personId).getPerson();
+        }
       }
     }
     catch(e){
-      loggedInUser.clear();
+      user.clear();
     }
+    return user;
   }
 
   getAllUsers() async {
-    User.users.clear();
+    User.user.clear();
     dynamic response =
     await NetworkRequests()
         .securedMawaAPI(NetworkRequests.methodGet, resource: Resources.users);
@@ -69,7 +80,7 @@ class User{
     else{
       mapUsers.clear();
     }
-    return User.users = mapUsers;
+    return User.user = mapUsers;
     // print('opw\n$users\n name');
   }
 

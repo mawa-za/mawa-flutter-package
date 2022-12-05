@@ -495,7 +495,7 @@ class NetworkRequests {
               //   await User().getUserDetails(payload![JsonResponses.userID]!);
               //   // Navigator.pushReplacementNamed(context, direct!);
               //   postAuthenticate;
-              await User().getUserDetails(User.username);
+              User.loggedInUser = await User().getUserDetails(User.username);
             }
 
             print('token oyjfjdbfjd\n $token');
