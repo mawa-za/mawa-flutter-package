@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:mawa_package/screens/user_overview.dart';
+
 import 'Dashboard.dart';
 import 'package:flutter/material.dart';
 // import 'package:connectivity_plus/connectivity_plus.dart';
@@ -58,7 +60,7 @@ class Home extends StatelessWidget {
     preferences.then((SharedPreferences prefs) {
       return (prefs.setString(SharedPrefs.server, server));
     });
-  redirect =  HomePage.id;
+  redirect =  UserOverview.id;
     // DeviceInfo();
 
     return MaterialApp(

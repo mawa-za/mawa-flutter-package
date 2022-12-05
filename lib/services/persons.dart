@@ -56,7 +56,7 @@ class Persons {
     dynamic respond = await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
         resource: '${Resources.persons}/$personId');
     try{
-      person = await NetworkRequests.decodeJson(respond);
+      person = await NetworkRequests.decodeJson(respond, negativeResponse: {});
 
     }
     catch (e){
