@@ -43,7 +43,7 @@ class TransactionNotes {
   }
 
   getTransactionNotes() async {
-    return await NetworkRequests.decodeJson(await NetworkRequests()
+    return await NetworkRequests.decodeJson( await NetworkRequests()
         .securedMawaAPI(NetworkRequests.methodGet,
             resource: Resources.transactionNotes,
             queryParameters: {QueryParameters.transaction: transaction}));
@@ -56,11 +56,11 @@ class TransactionNotes {
     required List<String> receiver,
     required bool email, 
     required bool sms}) async {
-    dynamic note =
-        createNote(value: comment, type: type, transaction: transaction);
+    dynamic note = await createNote(value: comment, type: type, transaction: transaction);
     if (note.statusCode == 200 || note.statusCode == 201) {
+      dynamic noteId = await NetworkRequests.decodeJson(note);
       dynamic notify =
-          await nt.Notification(id: transaction).sendCommentNotification(receiver, email: email, sms: sms);
+          await nt.Notification(id: noteId).sendCommentNotification(receiver, email: email, sms: sms);
       if (notify.statusCode == 200 || notify.statusCode == 201) {
         return notify;
       } else {

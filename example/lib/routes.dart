@@ -1,3 +1,5 @@
+import 'package:mawa_package/screens/user_overview.dart';
+
 import 'Dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:mawa_package/screens.dart';
@@ -23,7 +25,7 @@ Authenticate _authenticate(context) {
 
 var route = {
   Authenticate.id: (context) => _authenticate(context),
-  HomePage.id: (context) => HomePage(),
+  HomePage.id: (context) => const HomePage(),
   InitialRoute.id: (context) => InitialRoute(
         className: _authenticate(context),
       ),
@@ -36,4 +38,5 @@ var route = {
   Unauthorized.id: (context) => Unauthorized(
         appName: 'Effortless Tracker',
       ),
+  UserOverview.id: (context) => UserOverview(widget: Container(), user: 'ME')
 };
