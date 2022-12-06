@@ -22,6 +22,7 @@ class Tickets {
   static List allOrganizations = [];
   static Map organizationName = {};
   static Map? changeStatusBody;
+  static bool tcktInprogress = false;
 
   static trackTicket(dynamic after) async {
     List tickets = await NetworkRequests.decodeJson(await Tickets.allMyTickets());
@@ -339,5 +340,11 @@ class Tickets {
     return response ;
   }
 
+  static markTicketInprogress(String ticketNo) async {
+    await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPost,
+        resource: Resources.tickets + '/' + ticketNo + '/' + Resources.inprogress,
+    ),negativeResponse: false);
+  }
 
 }
