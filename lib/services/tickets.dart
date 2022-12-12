@@ -22,6 +22,7 @@ class Tickets {
   static List allOrganizations = [];
   static Map organizationName = {};
   static Map? changeStatusBody;
+  static bool tcktInprogress = false;
 
   static trackTicket(dynamic after) async {
     List tickets = await NetworkRequests.decodeJson(await Tickets.allMyTickets());
@@ -338,6 +339,5 @@ class Tickets {
     allTickets = await  NetworkRequests.decodeJson(response,negativeResponse: '');
     return response ;
   }
-
 
 }

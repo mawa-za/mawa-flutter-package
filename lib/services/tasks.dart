@@ -126,8 +126,8 @@ class Tasks {
 //  GET /mawa-api/resources/tickets/TN0000000007/getTasks
   getTicketTasks() async {
     ticketTasks = await NetworkRequests.decodeJson( await NetworkRequests().securedMawaAPI(
-        NetworkRequests.methodGet,
-        resource: '${Resources.tickets}/$reference/${Resources.getTasks}'), negativeResponse: []);
+            NetworkRequests.methodGet,
+            resource: '${Resources.tickets}/$reference/${Resources.getTasks}'), negativeResponse: []);
 
     return ticketTasks;
   }
@@ -160,5 +160,15 @@ class Tasks {
 
     return response;
   }
-}
 
+  reassignTask(String assignTo) async {
+    await NetworkRequests.decodeJson(
+        await NetworkRequests().securedMawaAPI(NetworkRequests.methodPut,
+            resource: Resources.tickets + '/' + Resources.editTask,
+            body: {
+              JsonPayloads.ticketTaskID: taskID,
+              JsonPayloads.assignedTo: assignTo
+            }),
+        negativeResponse: false);
+  }
+}
