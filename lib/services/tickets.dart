@@ -340,11 +340,4 @@ class Tickets {
     return response ;
   }
 
-  static markTicketInprogress(String ticketNo) async {
-    await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
-        NetworkRequests.methodPost,
-        resource: Resources.tickets + '/' + ticketNo + '/' + Resources.inprogress,
-    ),negativeResponse: false);
-  }
-
 }
