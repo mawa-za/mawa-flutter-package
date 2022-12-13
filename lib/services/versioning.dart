@@ -1,7 +1,4 @@
-import 'package:mawa_package/mawa.dart';
-import 'package:mawa_package/services.dart';
-import 'dart:async';
-import 'package:package_info_plus/package_info_plus.dart';
+part of 'package:mawa_package/mawa_package.dart';
 
 class ApkVersion {
   late PackageInfo packageInfo;

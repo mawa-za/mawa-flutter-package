@@ -1,17 +1,4 @@
-import 'package:mawa_package/services/constants.dart';
-import 'package:mawa_package/services/globals.dart';
-import 'package:mawa_package/services/keys.dart';
-import 'package:mawa_package/services/network_requests.dart';
-import 'package:mawa_package/services/tools.dart';
-import 'package:mawa_package/screens/alerts.dart';
-import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import '../screens/overlay_widgets.dart';
-import '../screens/snapshort_static_widgets.dart';
+part of 'package:mawa_package/mawa_package.dart';
 
 class OTP {
   OTP(this.context);

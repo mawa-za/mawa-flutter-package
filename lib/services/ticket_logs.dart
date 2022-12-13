@@ -1,5 +1,4 @@
-import 'dart:async';
-import '../services.dart';
+part of 'package:mawa_package/mawa_package.dart';
 
 class TicketLogs {
   TicketLogs({required String ticketID}) {

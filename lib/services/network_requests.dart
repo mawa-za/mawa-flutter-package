@@ -1,18 +1,4 @@
-import 'package:mawa_package/services/globals.dart';
-import 'package:mawa_package/services/keys.dart';
-import 'package:mawa_package/services/token.dart';
-import 'package:mawa_package/services/tools.dart';
-import 'package:mawa_package/services/user.dart';
-import 'package:mawa_package/screens/alerts.dart';
-import 'package:mawa_package/screens/authenticate.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:async';
-import 'dart:io';
-import 'dart:core';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+part of 'package:mawa_package/mawa_package.dart';
 
 class NetworkRequests {
   // final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();

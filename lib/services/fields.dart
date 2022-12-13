@@ -1,5 +1,4 @@
-import 'package:mawa_package/services/keys.dart';
-import 'package:mawa_package/services/network_requests.dart';
+part of 'package:mawa_package/mawa_package.dart';
 
 class Fields {
   static List fields = [];

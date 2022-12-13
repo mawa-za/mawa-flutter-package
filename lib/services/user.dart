@@ -1,6 +1,4 @@
-import 'package:mawa_package/services.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+part of 'package:mawa_package/mawa_package.dart';
 
 class User{
   static String? id;
