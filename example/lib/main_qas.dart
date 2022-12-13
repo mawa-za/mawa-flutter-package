@@ -1,13 +1,15 @@
 import 'dart:io';
-import 'package:mawa_package/mawa.dart' as mawa;
 import 'package:flutter/material.dart';
+import 'package:mawa_package/mawa_package.dart';
 
+import 'Dashboard.dart';
 import 'home.dart';
 
 Future<void> main() async{
 
-  HttpOverrides.global = mawa.MyHttpOverrides();
+  HttpOverrides.global = MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
-  mawa.DeviceInfo();
-  runApp(Home(server: 'api-qas.mawa.co.za:8181',));
+  DeviceInfo();
+  Mawa(server: 'api-dev.mawa.co.za:8181', initialScreenID: HomePage.id, loginScreenID: Authenticate.id);
+  runApp(Home());
 }

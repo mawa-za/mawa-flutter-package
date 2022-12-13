@@ -1,13 +1,4 @@
-import 'package:mawa_package/services.dart';
-import 'package:mawa_package/screens.dart';
-
-import 'package:flutter/services.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:email_validator/email_validator.dart';
+part of 'package:mawa_package/mawa_package.dart';
 
 late final GlobalKey<NavigatorState> navKey = GlobalKey<NavigatorState>();
 

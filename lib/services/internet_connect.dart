@@ -1,10 +1,5 @@
-import 'package:flutter/services.dart';
-import 'package:flutter/material.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
-import 'dart:async';
-import 'dart:io';
-import 'package:flutter/foundation.dart';
-import 'dart:core';
+part of 'package:mawa_package/mawa_package.dart';
+
 class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {

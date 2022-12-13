@@ -1,11 +1,4 @@
-import 'dart:io';
-
-import 'package:flutter/material.dart';
-import 'dart:async';
-import 'package:flutter/painting.dart';
-import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:flutter/cupertino.dart';
+part of 'package:mawa_package/mawa_package.dart';
 
 class Constants {
 

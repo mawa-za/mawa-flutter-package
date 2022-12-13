@@ -1,6 +1,4 @@
-import 'package:mawa_package/services/keys.dart';
-import 'package:mawa_package/services/tools.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+part of 'package:mawa_package/mawa_package.dart';
 
 late String redirect;
 final Future<SharedPreferences> preferences = SharedPreferences.getInstance();

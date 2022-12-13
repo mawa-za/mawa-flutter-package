@@ -1,19 +1,12 @@
 import 'dart:async';
-
-import 'package:mawa_package/screens/user_overview.dart';
-
-import 'Dashboard.dart';
 import 'package:flutter/material.dart';
-// import 'package:connectivity_plus/connectivity_plus.dart';
-// import 'package:mawa_package/dependencies.dart';
-// import 'package:mawa_package/services.dart' as mawa;
+import 'package:mawa_package/dependencies.dart';
 import 'package:mawa_package/mawa_package.dart';
 import 'routes.dart';
 
 class Home extends StatelessWidget {
-  Home({Key? key, required this.server}) : super(key: key);
+  Home({Key? key,}) : super(key: key);
 
-  final String server;
   late String initialRoute;
 
   final Connectivity _connectivity = Connectivity();
@@ -54,12 +47,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     initialRoute = InitialRoute.id;
-    preferences.then((SharedPreferences prefs) {
-      return (prefs.setString(SharedPrefs.initialRoute, initialRoute));
-    });
-    preferences.then((SharedPreferences prefs) {
-      return (prefs.setString(SharedPrefs.server, server));
-    });
+
   redirect =  UserOverview.id;
     // DeviceInfo();
 

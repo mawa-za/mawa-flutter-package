@@ -1,8 +1,4 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:flutter/material.dart';
-import 'package:mawa_package/mawa.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+part of 'package:mawa_package/mawa_package.dart';
 
 class UserOverview extends StatefulWidget {
   static const String id = 'User overview';

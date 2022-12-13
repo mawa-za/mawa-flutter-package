@@ -1,7 +1,4 @@
-import 'package:mawa_package/services/keys.dart';
-import 'package:mawa_package/services/network_requests.dart';
-
-import 'notification.dart';
+part of 'package:mawa_package/mawa_package.dart';
 
 class Employees {
 

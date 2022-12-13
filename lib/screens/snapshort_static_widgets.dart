@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:mawa_package/services/tools.dart';
+part of 'package:mawa_package/mawa_package.dart';
 
 class SnapshotWaitingIndicator extends StatelessWidget {
   static const String id = 'loading';

@@ -1,10 +1,4 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:dropdown_search/dropdown_search.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:mawa_package/services.dart';
-import 'package:http/http.dart' as http;
-import 'notification.dart' as nt;
+part of 'package:mawa_package/mawa_package.dart';
 
 class TransactionNotes {
   TransactionNotes({this.transactionNote, this.transaction});
@@ -60,7 +54,7 @@ class TransactionNotes {
     if (note.statusCode == 200 || note.statusCode == 201) {
       dynamic noteId = await NetworkRequests.decodeJson(note);
       dynamic notify =
-          await nt.Notification(id: noteId).sendCommentNotification(receiver, email: email, sms: sms);
+          await Notification(id: noteId).sendCommentNotification(receiver, email: email, sms: sms);
       if (notify.statusCode == 200 || notify.statusCode == 201) {
         return notify;
       } else {

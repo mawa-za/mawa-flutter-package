@@ -1,7 +1,5 @@
-import 'open.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mawa_package/mawa.dart';
+import 'package:mawa_package/mawa_package.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

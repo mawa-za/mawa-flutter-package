@@ -1,15 +1,4 @@
-import 'package:device_info_plus/device_info_plus.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'dart:async';
-import 'dart:io' as io;
-import 'package:device_information/device_information.dart';
-import 'package:flutter/widgets.dart';
-import 'package:mawa_package/services.dart';
-import 'package:mawa_package/services/tools.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:mawa_package/screens/alerts.dart';
-import 'package:permission_handler/permission_handler.dart' as per;
+part of 'package:mawa_package/mawa_package.dart';
 
 ///TO USE THIS CLASS SUCCESSFULLY ONE WOULD TO ADD "PHONE_READ_STATE [<uses-permission android:name="android.permission.READ_PHONE_STATE" />] PERMISSION ON ANDROID MANIFEST [android/app/src/main/AndroidManifest.xml].
 

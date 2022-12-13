@@ -1,11 +1,4 @@
-import 'package:dio/dio.dart'/* as dio*/;
-import 'package:http_parser/http_parser.dart' as parser;
-import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:io';
-import 'package:path_provider/path_provider.dart';
-import 'package:mawa_package/services/globals.dart';
-import 'package:mawa_package/services/keys.dart';
-import 'package:mawa_package/services/network_requests.dart';
+part of 'package:mawa_package/mawa_package.dart';
 
 class Attachments{
   dynamic attachment;

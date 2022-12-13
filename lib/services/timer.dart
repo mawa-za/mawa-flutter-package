@@ -1,11 +1,4 @@
-import 'package:mawa_package/services.dart';
-import 'package:mawa_package/screens.dart';
-import 'package:flutter/material.dart';
-import 'dart:async';
-import 'package:flutter/painting.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:stop_watch_timer/stop_watch_timer.dart';
+part of 'package:mawa_package/mawa_package.dart';
 
 class Time {
   static late bool showPopup;

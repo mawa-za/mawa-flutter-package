@@ -1,3 +1,4 @@
+part of 'package:mawa_package/mawa_package.dart';
 
 class JsonResponses {
   static const String amount = 'amount';
@@ -479,6 +480,7 @@ class SharedPrefs {
   static const trackingTicketID = 'trackingTicketID';
   static const refreshToken = 'refreshToken';
   static const initialRoute = 'initialRoute';
+  static const loginScreenID = 'loginScreenID';
 }
 
 class CommentTypes{

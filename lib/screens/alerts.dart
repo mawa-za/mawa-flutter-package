@@ -1,11 +1,4 @@
-import 'package:another_flushbar/flushbar.dart';
-import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:mawa_package/services/tools.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:permission_handler/permission_handler.dart';
+part of 'package:mawa_package/mawa_package.dart';
 
 class Alerts{
 
@@ -182,7 +175,7 @@ class Alerts{
         context: context,
         title: title ?? '',
         body: Text('$message'),
-        btnOk: DialogButton(child: const Text('OK', style: TextStyle(color: Colors.white)), onPressed: ()=> Navigator.of(context).pop(), color: Colors.blueGrey)
+        btnOk: DialogButton(onPressed: ()=> Navigator.of(context).pop(), color: Colors.blueGrey, child: const Text('OK', style: TextStyle(color: Colors.white)))
     ).show();
   }
 
@@ -191,7 +184,7 @@ class Alerts{
         context: context,
         title: title ?? '',
         body: Text('$message'),
-        btnOk: DialogButton(child: const Text('OK', style: TextStyle(color: Colors.white),), onPressed: ()=> openAppSettings(), color: Colors.blueGrey)
+        btnOk: DialogButton(onPressed: ()=> openAppSettings(), color: Colors.blueGrey, child: const Text('OK', style: TextStyle(color: Colors.white),))
     ).show();
   }
 
@@ -200,11 +193,10 @@ class Alerts{
         context:  context,
         title: title ?? '',
         body: Text('$message'),
-        btnOk: DialogButton(child: const Text('OK', style: TextStyle(color: Colors.white),),
-            onPressed: (){
+        btnOk: DialogButton(onPressed: (){
               openAppSettings();
             },
-            color: Colors.blueGrey)
+            color: Colors.blueGrey, child: const Text('OK', style: TextStyle(color: Colors.white),))
 
       // buttons: [
       //     DialogButton(child: const Text('OK', style: TextStyle(color: Colors.white),), onPressed: ()=> Navigator.of(context).pop(), color: Colors.blueGrey)
