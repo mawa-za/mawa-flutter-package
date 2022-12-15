@@ -9,6 +9,7 @@ class Leaves {
   static late List pendingResponse;
   static List approverHistory = [];
   static const String cancelLeave = 'CANCELLEAVE';
+  static List approverHistoryByStatus = [];
 
   leaveProfile({required String partnerFunctionType}) async {
     String? partner;
@@ -188,6 +189,26 @@ class Leaves {
     //                 Resources.edit,
     //             queryParameters: {QueryParameters.endDAte: endDate}),
     //      negativeResponse: false);
+  }
+
+  static getApprovalHistoryByStatus(String status) async {
+    dynamic response;
+    if(status == ''){
+      response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: Resources.leaves + '/' + Resources.approversHistory,
+      );
+    }else
+    {
+      response = await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
+          resource: Resources.leaves + '/' + Resources.approversHistory,
+          queryParameters: {
+            QueryParameters.approverId: User.partnerId,
+            QueryParameters.status: status
+          });
+    }
+    approverHistoryByStatus = await NetworkRequests.decodeJson(response, negativeResponse: []);
+    return approverHistoryByStatus;
   }
 }
 // part of mawa;
