@@ -3,7 +3,7 @@ part of 'package:mawa_package/mawa_package.dart';
 class WorkCenters {
 
   static List workcenters = [];
-  static List<String> workCentersList = [];
+  static List workCentersList = [];
   dynamic workCenId = [];
   static List workcenterRoles = [];
   dynamic roles = [];
