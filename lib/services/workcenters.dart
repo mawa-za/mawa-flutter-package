@@ -53,6 +53,7 @@ addWorkCenter({required desc, required path}) async {
         JsonPayloads.workCenterDesc : desc,
     JsonPayloads.workCenterPath : path,
   });
+  return response;
 }
 
 
@@ -78,6 +79,7 @@ addWorkCenter({required desc, required path}) async {
     }
     workCentersList = list;
     print('dgh  ' + workCentersList.toString());//?role=CASHIER
+    return workCentersList;
   }
 
   addWorkCenterToRole({
