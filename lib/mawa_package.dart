@@ -32,6 +32,7 @@ part 'package:mawa_package/screens/init_route.dart';
 part 'package:mawa_package/screens/no_internet_connection.dart';
 part 'package:mawa_package/screens/outdated_version.dart';
 part 'package:mawa_package/screens/overlay_widgets.dart';
+part 'package:mawa_package/screens/page_not_found.dart';
 part 'package:mawa_package/screens/snapshort_static_widgets.dart';
 part 'package:mawa_package/screens/unauthorized.dart';
 part 'package:mawa_package/screens/user_overview.dart';
