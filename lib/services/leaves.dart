@@ -95,11 +95,19 @@ class Leaves {
       //     NetworkRequests.statusCode == 201) {
       leaveID = await NetworkRequests.decodeJson(response, negativeResponse: '');
       if(response.statusCode == 200 || response.statusCode == 201){
-        Notification(id: leaveID).sendNotifications(meesageType: 'LOGLEAVE', sendToAdmin: true);
+        dynamic notification = await Notification(id: leaveID).sendNotifications(meesageType: 'LOGLEAVE', sendToAdmin: true);
+
+        if(notification.statusCode == 200 || notification.statusCode == 201){
+
+        }
+        else{
+          Alerts.toastMessage(message: 'Leave rquest created but notification failed');
+        }
       }
       // } else {
       //   leaveID = '';
       // }
+      return response;
     }
   }
 

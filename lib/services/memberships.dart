@@ -21,6 +21,7 @@ class Memberships {
     // else {
     //   personsPolicies = [];
     // }
+    return personsPolicies;
   }
 
   membershipGet({String? policyId}) async {

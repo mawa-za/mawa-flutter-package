@@ -46,6 +46,7 @@ class Products {
       }
     }
     Products.productsMap = data;
+    return productsMap;
   }
 
   dynamic getProductInfo(category) async {

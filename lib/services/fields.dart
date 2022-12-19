@@ -44,7 +44,7 @@ class Fields {
     //   print(jsonResponse);
     //   print("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
     // }
-
+    return await NetworkRequests.decodeJson(response);
   }
 
 }

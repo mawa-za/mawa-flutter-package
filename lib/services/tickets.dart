@@ -134,6 +134,7 @@ class Tickets {
         ticketNo = ticket[JsonResponses.id].toString();
 
     }
+    return ticket;
   }
 
    static getTicketByStatus(String status) async {
@@ -225,6 +226,7 @@ class Tickets {
         positive: true,
         popContext: false)
         : null;
+    return response;
   }
 
   static viewTicket(String id) async{
@@ -254,6 +256,7 @@ class Tickets {
         positive: true,
         popContext: false)
         : null;
+    return response;
   }
 
   ///if the reason for changing the status is a resolution or a rejection, then a body must be supplied by initializing [changeStatusBody]
