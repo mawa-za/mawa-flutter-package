@@ -66,7 +66,7 @@ addWorkCenter({required desc, required path}) async {
 //     return workcenterRoles;
 //   }
 
-  getWorkCentersByRole({required String role}) async {
+  getWorkCentersByRole({required String role, bool descOnly = false}) async {
     role == null ? User.userLoginRole = User.userRoles[User.userRoles.keys.first]! : User.userLoginRole = role;
     List centers = await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
@@ -74,10 +74,15 @@ addWorkCenter({required desc, required path}) async {
         queryParameters: {'role': User.userLoginRole}
     ));
     List<String> list = [];
-    for (int i = 0; i < centers.length; i++) {
-      list.add(centers[i][JsonResponses.workCenter]);
+    if(descOnly){
+      for (int i = 0; i < centers.length; i++) {
+        list.add(centers[i][JsonResponses.workcenterDescription]);
+      }
+      workCentersList = list;
     }
-    workCentersList = list;
+    else{
+      workCentersList = centers;
+    }
     print('dgh  ' + workCentersList.toString());//?role=CASHIER
     return workCentersList;
   }
