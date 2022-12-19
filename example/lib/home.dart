@@ -55,6 +55,15 @@ class Home extends StatelessWidget {
       routes: route,
       // home: HomePage(),
       initialRoute: initialRoute,
+      onUnknownRoute: (settings) {
+        return MaterialPageRoute<void>(
+          settings: settings,
+          builder: (BuildContext context) {
+            // Navigator.pop(context);
+            return const PageNotFound();
+          },
+        );
+      },
       theme: ThemeData(
         primarySwatch: Colors.pink,
         visualDensity: VisualDensity.adaptivePlatformDensity,
