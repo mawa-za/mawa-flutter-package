@@ -110,17 +110,23 @@ class User{
         resource: '${Resources.users}/$username/${Resources.reset}'));
   }
 
-  getUserRoles() async {
+  getUserRoles(bool sort) async {
     userRoles = {};
     List list = await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: '${Resources.users}/$username/roles'));
-    if(list.isNotEmpty && list.runtimeType == Constants.list.runtimeType){
-      for (int i = 0; i < list.length; i++) {
-        userRoles[list[i][JsonResponses.usersRolesDescription]] =
-        list[i][JsonResponses.id
-        ];
+    if(sort) {
+      if (list.isNotEmpty && list.runtimeType == Constants.list.runtimeType) {
+        for (int i = 0; i < list.length; i++) {
+          userRoles[list[i][JsonResponses.usersRolesDescription]] =
+          list[i][JsonResponses.id
+          ];
+        }
       }
+      return userRoles;
+    }
+    else{
+      return list;
     }
   }
 
@@ -158,6 +164,7 @@ class User{
       print(i);
       print('USER CREATED');
     }
+    return response;
   }
 
   getUsersByOrganisation() async {
