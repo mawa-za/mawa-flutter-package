@@ -159,13 +159,11 @@ class Tasks {
   }
 
   reassignTask(String assignTo) async {
-    await NetworkRequests.decodeJson(
-        await NetworkRequests().securedMawaAPI(NetworkRequests.methodPut,
+        return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPut,
             resource: Resources.tickets + '/' + Resources.editTask,
             body: {
               JsonPayloads.ticketTaskID: taskID,
               JsonPayloads.assignedTo: assignTo
-            }),
-        negativeResponse: false);
+            });
   }
 }

@@ -56,6 +56,7 @@ class Receipts {
    // else{
    //  receiptsList = [];
    //  }
+    return receiptsList;
   }
 
   receiptHistory(String referenceNo) async {
@@ -67,6 +68,7 @@ class Receipts {
         queryParameters: {QueryParameters.reference: referenceNo}));
     // receipts.runtimeType == List &&
     receipts.isNotEmpty ? receiptsList = receipts : receiptsList = [];
+    return receiptsList;
   }
 
   processCashup() async {
@@ -83,6 +85,7 @@ class Receipts {
         {}
     ;
         // : receipt = {};
+    return receipt;
   }
 
   getCashupCollection({required String processor}) async {
@@ -90,6 +93,7 @@ class Receipts {
         NetworkRequests.methodGet,
         resource: Resources.cashup,
         queryParameters: {QueryParameters.processor: processor}));
+    return cashupsList;
   }
 
   getCashup({required String cashupId}) async {
@@ -109,6 +113,7 @@ class Receipts {
     //   cashup = {};
     // }
     // cashup.runtimeType ;
+    return cashup;
   }
 }
 

@@ -36,6 +36,7 @@ class FieldOptions {
           JsonPayloads.field : option,
           JsonPayloads.fieldDescription: description,
         });
+    return await NetworkRequests.decodeJson(response);
   }
 
 }

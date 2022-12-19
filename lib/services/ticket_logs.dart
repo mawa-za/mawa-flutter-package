@@ -75,6 +75,7 @@ class TicketLogs {
       ticketsLog = {};
     }
     // return resp.statusCode;
+    return ticketsLog;
   }
 
   Future<dynamic> searchUsersLog() async {

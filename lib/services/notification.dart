@@ -23,7 +23,7 @@ class Notification {
         required bool user,
         required dynamic password
 }) async{
-    await NetworkRequests().securedMawaAPI(
+    return await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPost,
         resource: Resources.sendNotifications + '/' + id,
       queryParameters: {

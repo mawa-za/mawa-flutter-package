@@ -128,6 +128,7 @@ class User{
     else{
       return list;
     }
+    return userRoles;
   }
 
   addUser(
