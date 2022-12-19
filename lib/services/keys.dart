@@ -103,6 +103,7 @@ class JsonResponses {
 
   static const String workCenterId = 'id';
   static const String workCenterDescription = 'description';
+  static const String workcenterDescription = 'workcenterDescription';
   static const String workCenterPath = 'path';
 
   static const String personIdType = 'idType';
@@ -481,6 +482,7 @@ class SharedPrefs {
   static const refreshToken = 'refreshToken';
   static const initialRoute = 'initialRoute';
   static const loginScreenID = 'loginScreenID';
+  static const loginRole = 'loginRole';
 }
 
 class CommentTypes{
