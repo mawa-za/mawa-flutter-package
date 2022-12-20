@@ -161,7 +161,7 @@ class Alerts{
 
     Fluttertoast.showToast(
       gravity: ToastGravity.TOP,
-      toastLength: length,
+      toastLength: Toast.LENGTH_LONG,
       msg: message,
       timeInSecForIosWeb: 3,
       backgroundColor: backgroundColor,
