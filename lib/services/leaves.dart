@@ -9,6 +9,7 @@ class Leaves {
   static late List pendingResponse;
   static List approverHistory = [];
   static const String cancelLeave = 'CANCELLEAVE';
+  static List approverHistoryByStatus = [];
 
   leaveProfile({required String partnerFunctionType}) async {
     String? partner;
@@ -53,21 +54,29 @@ class Leaves {
     return approvers;
   }
 
-  getApproversHistory({required bool pending}) async {
-    approverHistory.clear();
-    dynamic response = await NetworkRequests().securedMawaAPI(
-      NetworkRequests.methodGet,
-      resource: Resources.leaves + '/' + Resources.approversHistory,
-      queryParameters: {
-        QueryParameters.approverId:
-            User.loggedInUser[JsonResponses.usersPartner]
-      },
-    );
-    // if (response.statusCode == 200) {
-      approverHistory = await NetworkRequests.decodeJson(response, negativeResponse: [],);
-    // }
-
-    return approverHistory;
+  getApproversHistory({required String status}) async {
+    approverHistoryByStatus.clear();
+    dynamic response;
+    if(status == ''){
+      response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: Resources.leaves + '/' + Resources.approversHistory,
+        queryParameters: {
+          QueryParameters.approverId: User.partnerId,
+          QueryParameters.status: status
+        }
+      );
+    }else
+    {
+      response = await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
+          resource: Resources.leaves + '/' + Resources.approversHistory,
+          queryParameters: {
+            QueryParameters.approverId: User.partnerId,
+            QueryParameters.status: status
+          });
+    }
+    approverHistoryByStatus = await NetworkRequests.decodeJson(response, negativeResponse: []);
+    return approverHistoryByStatus;
   }
 
   logLeave(
@@ -197,6 +206,7 @@ class Leaves {
     //             queryParameters: {QueryParameters.endDAte: endDate}),
     //      negativeResponse: false);
   }
+
 }
 // part of mawa;
 //
