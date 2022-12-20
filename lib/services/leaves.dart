@@ -54,21 +54,24 @@ class Leaves {
     return approvers;
   }
 
-  getApproversHistory({required bool pending}) async {
-    approverHistory.clear();
-    dynamic response = await NetworkRequests().securedMawaAPI(
-      NetworkRequests.methodGet,
-      resource: Resources.leaves + '/' + Resources.approversHistory,
-      queryParameters: {
-        QueryParameters.approverId:
-            User.loggedInUser[JsonResponses.usersPartner]
-      },
-    );
-    // if (response.statusCode == 200) {
-      approverHistory = await NetworkRequests.decodeJson(response, negativeResponse: [],);
-    // }
-
-    return approverHistory;
+  getApproversHistory(String status) async {
+    dynamic response;
+    if(status == ''){
+      response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: Resources.leaves + '/' + Resources.approversHistory,
+      );
+    }else
+    {
+      response = await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
+          resource: Resources.leaves + '/' + Resources.approversHistory,
+          queryParameters: {
+            QueryParameters.approverId: User.partnerId,
+            QueryParameters.status: status
+          });
+    }
+    approverHistoryByStatus = await NetworkRequests.decodeJson(response, negativeResponse: []);
+    return approverHistoryByStatus;
   }
 
   logLeave(
@@ -191,25 +194,6 @@ class Leaves {
     //      negativeResponse: false);
   }
 
-  static getApprovalHistoryByStatus(String status) async {
-    dynamic response;
-    if(status == ''){
-      response = await NetworkRequests().securedMawaAPI(
-        NetworkRequests.methodGet,
-        resource: Resources.leaves + '/' + Resources.approversHistory,
-      );
-    }else
-    {
-      response = await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-          resource: Resources.leaves + '/' + Resources.approversHistory,
-          queryParameters: {
-            QueryParameters.approverId: User.partnerId,
-            QueryParameters.status: status
-          });
-    }
-    approverHistoryByStatus = await NetworkRequests.decodeJson(response, negativeResponse: []);
-    return approverHistoryByStatus;
-  }
 }
 // part of mawa;
 //
