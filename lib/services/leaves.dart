@@ -54,13 +54,17 @@ class Leaves {
     return approvers;
   }
 
-  getApproversHistory({String status =''}) async {
+  getApproversHistory({required String status}) async {
     approverHistoryByStatus.clear();
     dynamic response;
     if(status == ''){
       response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: Resources.leaves + '/' + Resources.approversHistory,
+        queryParameters: {
+          QueryParameters.approverId: User.partnerId,
+          QueryParameters.status: status
+        }
       );
     }else
     {
