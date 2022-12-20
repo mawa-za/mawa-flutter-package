@@ -28,8 +28,11 @@ part 'package:mawa_package/mawa.dart';
 
 part 'package:mawa_package/screens/alerts.dart';
 part 'package:mawa_package/screens/authenticate.dart';
+part 'package:mawa_package/screens/change_password.dart';
+part 'package:mawa_package/screens/forgot_password.dart';
 part 'package:mawa_package/screens/init_route.dart';
 part 'package:mawa_package/screens/no_internet_connection.dart';
+part 'package:mawa_package/screens/otp.dart';
 part 'package:mawa_package/screens/outdated_version.dart';
 part 'package:mawa_package/screens/overlay_widgets.dart';
 part 'package:mawa_package/screens/page_not_found.dart';

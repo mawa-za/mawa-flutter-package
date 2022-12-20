@@ -3,16 +3,24 @@ part of 'package:mawa_package/mawa_package.dart';
 class OTP {
   OTP(this.context);
   final BuildContext context;
-  final String _userDoesntExist = 'User does not exist';
-  final String _invalid = 'INVALID';
-  final String _expired = 'EXPIRED';
+  final String userDoesntExist = 'User does not exist';
+  final String invalid = 'INVALID';
+  final String expired = 'EXPIRED';
   // const String = '';
   final _tokenFormKey = GlobalKey<FormState>();
+
+  requestOTP(String email) async{
+    return await NetworkRequests().unsecuredMawaAPI(
+        NetworkRequests.methodPost,
+        resource: Resources.otp,
+        payload: {JsonPayloads.partnerEmail: email},
+        context: context);
+  }
 
   postOTPRequest(request) async {
     String message = await NetworkRequests.decodeJson(request, negativeResponse: '');
     if(request.statusCode == 200 || request.statusCode == 201) {
-      if(message != _userDoesntExist) {
+      if(message != userDoesntExist) {
         otpPopup();
       }
       else{
@@ -68,7 +76,7 @@ class OTP {
                   // Alerts.flushbar(context: Tools.context, message: 'Please Wait', showProgressIndicator: true, popContext: true);
                   // Navigator.of(context).pop();
                   // Tools().passwordResetPopup(context);
-                  await validateOTP();
+                  await validateOTP(NetworkRequests.otp);
                   overlay.dismissOverlay();
                 }
               },
@@ -96,7 +104,7 @@ class OTP {
               // Alerts.flushbar(context: Tools.context, message: 'Please Wait', showProgressIndicator: true, popContext: true);
               // Navigator.of(context).pop();
               // Tools().passwordResetPopup(context);
-              await validateOTP();
+              await validateOTP(NetworkRequests.otp);
               overlay.dismissOverlay();
             }
           },
@@ -107,32 +115,10 @@ class OTP {
     ).show();
   }
 
-  validateOTP() async {
-    await NetworkRequests().unsecuredMawaAPI(NetworkRequests.methodGet,
+  validateOTP(String pin) async {
+    return await NetworkRequests().unsecuredMawaAPI(NetworkRequests.methodGet,
         resource: Resources.otp,
-        queryParameters: {QueryParameters.otp: NetworkRequests.otp},
+        queryParameters: {QueryParameters.otp: pin ?? NetworkRequests.otp},
         context: context);
-    if (NetworkRequests.statusCode == 200) {
-      if (NetworkRequests.otp == _invalid) {
-        otpPopup();
-        Alerts.toastMessage(
-            message: 'OTP Invalid',
-            positive: false,
-        );
-      } else if (NetworkRequests.otp == _expired) {
-        otpPopup();
-        Alerts.toastMessage(
-            message: 'OTP Has Expired',
-            positive: false,
-        );
-      } else {
-        NetworkRequests.token = NetworkRequests.otp;//.substring(1,NetworkRequests.otp.length);
-
-        preferences.then((SharedPreferences prefs) {
-          return (prefs.setString(SharedPrefs.token, NetworkRequests.token));
-        });
-        Tools().passwordResetPopup(context);
-      }
-    }
   }
 }
