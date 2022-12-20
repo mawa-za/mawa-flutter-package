@@ -54,7 +54,8 @@ class Leaves {
     return approvers;
   }
 
-  getApproversHistory(String status) async {
+  getApproversHistory({String status =''}) async {
+    approverHistoryByStatus.clear();
     dynamic response;
     if(status == ''){
       response = await NetworkRequests().securedMawaAPI(
