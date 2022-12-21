@@ -60,7 +60,7 @@ class Home extends StatelessWidget {
           settings: settings,
           builder: (BuildContext context) {
             // Navigator.pop(context);
-            return const PageNotFound();
+            return PageNotFound();
           },
         );
       },

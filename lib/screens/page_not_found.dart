@@ -1,15 +1,19 @@
 part of 'package:mawa_package/mawa_package.dart';
 
 class PageNotFound extends StatelessWidget {
-  const PageNotFound({Key? key}) : super(key: key);
+  static const String id = 'Page not found';
+  PageNotFound({Key? key, this.appBar, this.drawer}) : super(key: key);
+  AppBar? appBar;
+  Drawer? drawer;
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: AppBar(
-        title: const Text('Page not found'),
+      appBar: appBar ?? AppBar(
+        title: Text(id),
       ),
+      drawer: drawer ?? const Drawer(),
       body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
