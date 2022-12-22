@@ -10,6 +10,7 @@ class Leaves {
   static List approverHistory = [];
   static const String cancelLeave = 'CANCELLEAVE';
   static List approverHistoryByStatus = [];
+  static Map leave = {};
 
   leaveProfile({required String partnerFunctionType}) async {
     String? partner;
@@ -156,11 +157,12 @@ class Leaves {
   }
 
   getLeave(String id) async {
-    return await NetworkRequests.decodeJson(
+    leave = await NetworkRequests.decodeJson(
         await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodGet,
       resource: Resources.leaves + '/' + id,
     ), negativeResponse: {});
+    return leave;
   }
 
   Future<bool> updateLeaveStatus(
