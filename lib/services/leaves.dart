@@ -11,6 +11,7 @@ class Leaves {
   static const String cancelLeave = 'CANCELLEAVE';
   static List approverHistoryByStatus = [];
   static Map leave = {};
+  static late String loggedById;
 
   leaveProfile({required String partnerFunctionType}) async {
     String? partner;
