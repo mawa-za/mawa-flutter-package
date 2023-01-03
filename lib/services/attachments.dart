@@ -3,6 +3,7 @@ part of 'package:mawa_package/mawa_package.dart';
 class Attachments{
   dynamic attachment;
   late List attachments;
+  List leaveAttachments = [];
 
   getAttachments({required String docType, required String parentType, required String parentReference}) async {
     attachments = await NetworkRequests.decodeJson( await NetworkRequests().securedMawaAPI(
@@ -194,6 +195,18 @@ class Attachments{
     // );
 
     return response;
+  }
+
+  getLeaveAttachments({required String parentType, required String parentReference}) async {
+    leaveAttachments = await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodGet,
+      resource: Resources.attachments,
+      queryParameters: {
+        QueryParameters.parentType:parentType,
+        QueryParameters.parentReference:parentReference,
+      },
+    ),negativeResponse: []);
+    return leaveAttachments;
   }
 
 }
