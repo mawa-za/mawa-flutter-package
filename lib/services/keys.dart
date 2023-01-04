@@ -122,6 +122,7 @@ class JsonResponses {
   static const String employeeID = 'id';
   static const String employeeFirstName = 'name1';
   static const String employeeLastName = 'name2';
+  static const String employeeIdNumber = 'idNumber';
 
 
 
