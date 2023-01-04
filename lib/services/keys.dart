@@ -219,7 +219,7 @@ class JsonResponses {
 }
 
 class Resources {
-  static const String attachments = 'Attachments';
+  static const String attachments = 'attachments';
   static const String otp = 'otp';
   static const String authenticate = 'authenticate';
   static const String tickets = 'tickets';

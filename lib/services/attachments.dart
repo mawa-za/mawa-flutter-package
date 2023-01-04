@@ -198,15 +198,14 @@ class Attachments{
   }
 
   getLeaveAttachments({required String parentType, required String parentReference}) async {
-    leaveAttachments = await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+    return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodGet,
       resource: Resources.attachments,
       queryParameters: {
         QueryParameters.parentType:parentType,
         QueryParameters.parentReference:parentReference,
       },
-    ),negativeResponse: []);
-    return leaveAttachments;
+    ));
   }
 
 }
