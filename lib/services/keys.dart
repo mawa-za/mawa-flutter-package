@@ -215,6 +215,8 @@ class JsonResponses {
   static const String taskLogs = 'taskLogs';
   static const String endTime = 'endTime';
 
+  static const String product = 'product';
+
 
 }
 
