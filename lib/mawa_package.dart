@@ -43,6 +43,7 @@ part 'package:mawa_package/screens/user_overview.dart';
 part 'package:mawa_package/services/attachments.dart';
 part 'package:mawa_package/services/client_policy.dart';
 part 'package:mawa_package/services/constants.dart';
+part 'package:mawa_package/services/customers.dart';
 part 'package:mawa_package/services/device_info.dart';
 part 'package:mawa_package/services/employees.dart';
 part 'package:mawa_package/services/field_options.dart';
