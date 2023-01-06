@@ -218,6 +218,12 @@ class JsonResponses {
 
   static const String product = 'product';
 
+  static const String tombstoneDependents = 'tombstoneDependents';
+
+  static const String claimant = 'claimant';
+  static const String deceased = 'deceased';
+  static const String submissionDate = 'submissionDate';
+  static const String idNumber = 'idNumber';
 
 }
 
@@ -295,6 +301,11 @@ class Resources {
 
   static const String organization = 'Organization';
   static const String OrganizationUsers = 'OrganizationUsers';
+
+  static const String dependents = 'dependents';
+  static const String claims = 'claims';
+  static const String product = 'product';
+
 }
 
 class JsonPayloads {
@@ -456,6 +467,8 @@ class QueryParameters {
   static const String completed = 'completed';
 
   static const String organizationId = 'organizationId';
+
+  static const String policy = 'policy';
 
 // static const String  = '';
 }
