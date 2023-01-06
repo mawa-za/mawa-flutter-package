@@ -18,10 +18,16 @@ class Persons {
   }
 
   static String personNameFromJson(json){
-    return
-      '${json[JsonResponses
-          .personLastName] ?? ''}, ${json[JsonResponses
-          .personFirstName] ?? ''} ${json[JsonResponses.personMiddleName] ?? ''}';
+    if(json != null){
+      return
+        '${json[JsonResponses
+            .personLastName] ?? ''}, ${json[JsonResponses
+            .personFirstName] ?? ''} ${json[JsonResponses.personMiddleName] ??
+            ''}';
+    }
+    else{
+      return '';
+    }
   }
   static Future personSearch({String? idNumber, String? idType, String? lastName, String? middleName, String? firsName}) async {
     Persons.people.clear();
