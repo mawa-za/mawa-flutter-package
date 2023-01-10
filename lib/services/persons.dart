@@ -29,6 +29,7 @@ class Persons {
       return '';
     }
   }
+
   static Future personSearch({String? idNumber, String? idType, String? lastName, String? middleName, String? firsName}) async {
     Persons.people.clear();
     dynamic peopleResponse = await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
@@ -68,6 +69,11 @@ class Persons {
       person = {};
     }
     return person;
+  }
+
+  static getOrganizations() async {
+    return await NetworkRequests.decodeJson( await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
+        resource: Resources.organization), negativeResponse: []);
   }
 
   Future<dynamic> adaNewClient(clientDetails) async {

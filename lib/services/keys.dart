@@ -224,6 +224,10 @@ class JsonResponses {
   static const String deceased = 'deceased';
   static const String submissionDate = 'submissionDate';
   static const String idNumber = 'idNumber';
+  static const String name2 = 'name2';
+  static const String birthDate = 'birthDate';
+  static const String validFrom = 'validFrom';
+  static const String validTo = 'validTo';
 
 }
 
