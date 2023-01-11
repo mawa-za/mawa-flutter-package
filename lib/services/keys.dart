@@ -264,6 +264,12 @@ class Resources {
   static const String receipts = 'receipts';
   static const String cashup = 'cashup';
   static const String policies = 'policies';
+  //My Keys
+  static const String voucherValue = 'vouchers';
+  static const String identity = 'identities';
+  static const String contactValue = 'contacts';
+
+  //End
 
   static const String approve = 'Approve';
   static const String approveCancellation = 'ApproveCancellation';
@@ -413,12 +419,18 @@ class QueryParameters {
   static const String field = 'field';
   static const String filter = 'filter';
   static const String filterValue = 'x';
+  static const String userType = 'userType';
 
   static const String id = 'id';
 
   static const String loggedByID = 'loggedByID';
   static const String loggedById = 'loggedById';
+  //my keys
+  static const String personIdNumber = 'idnumber';
+  static const String partnerRole = 'partnerRole';
 
+  //static const String partnerRoleValue = 'POLICY_HOLDER';
+  //end
   static const String organisationId = 'organisationId';
   static const String otp = 'otp';
 
