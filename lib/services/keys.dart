@@ -309,6 +309,9 @@ class Resources {
   static const String dependents = 'dependents';
   static const String claims = 'claims';
   static const String product = 'product';
+  static const String decline = 'decline';
+  static const String claimApprove = 'approve';
+  static const String claimCancel = 'cancel';
 
 }
 
@@ -473,6 +476,7 @@ class QueryParameters {
   static const String organizationId = 'organizationId';
 
   static const String policy = 'policy';
+  static const String approver = 'approver';
 
 // static const String  = '';
 }
