@@ -220,6 +220,28 @@ class NetworkRequests {
               // return feedback;
             }
             break;
+          case 201:
+            {
+              // try {
+              //   return jsonDecode(feedback.body);
+              // } catch (e) {
+              //   print(e.toString());
+              // }
+              print('Success');
+              // return feedback;
+            }
+            break;
+          case 202:
+            {
+              // try {
+              //   return jsonDecode(feedback.body);
+              // } catch (e) {
+              //   print(e.toString());
+              // }
+              print('Success');
+              // return feedback;
+            }
+            break;
           case 401:
             {
               print('\npost\n');
@@ -339,7 +361,7 @@ class NetworkRequests {
         print(e.toString());
         Alerts.toastMessage(
             // context: Tools.context,
-            message: 'Something Went Wrong 2',
+            message: 'Ran Into A Problem',
             positive: false);
         responseCaught = http.Response('Ran Into A Problem', 499);
         // responseCaught.statusCode = 499;

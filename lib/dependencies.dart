@@ -10,6 +10,8 @@ export 'package:awesome_dialog/awesome_dialog.dart';
 export 'package:another_flushbar/flushbar_helper.dart';
 export 'package:another_flushbar/flushbar_route.dart';
 export 'package:device_information/device_information.dart';
+export 'package:dropdown_search/dropdown_search.dart';
+
 
 // export 'package:dio/adapter.dart';
 // export 'package:dio/adapter_browser.dart';

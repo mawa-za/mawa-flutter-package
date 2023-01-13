@@ -14,7 +14,7 @@ class Products {
 
   Map<String, dynamic> policyList = {};
 
-  productsList(context, category) async {
+  productsList(category) async {
     products = await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: Resources.products,
@@ -23,8 +23,7 @@ class Products {
   }
 
   generatePoliciesMap(String key) async {
-    dynamic list = await Products().productsList(
-        Tools.context, Tools.productCategoryFuneralPolicy);
+    dynamic list = await Products().productsList(Tools.productCategoryFuneralPolicy);
     Map<String, String> data = {};
     if (list != null) {
       switch (key) {

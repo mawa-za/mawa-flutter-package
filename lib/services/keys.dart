@@ -232,6 +232,7 @@ class JsonResponses {
   static const String claimant = 'claimant';
   static const String deceased = 'deceased';
   static const String submissionDate = 'submissionDate';
+  static const String idnumber = 'idnumber';
   static const String idNumber = 'idNumber';
   static const String name2 = 'name2';
   static const String birthDate = 'birthDate';
@@ -499,6 +500,11 @@ class QueryParameters {
 
   static const String policy = 'policy';
   static const String approver = 'approver';
+
+  static const String salesArea = 'salesArea';
+  static const String product = 'product';
+  static const String customer = 'customer';
+  static const String salesRepresentative = 'salesRepresentative';
 
 // static const String  = '';
 }
