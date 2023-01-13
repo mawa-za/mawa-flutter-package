@@ -8,9 +8,11 @@ class Tickets {
   static String? pageId;
   static late String ticketNo;
   static late bool isTracking;
+  static List tickets = [];
   static late List newTickets = [];
   static List myTickets = [];
   static List allTickets = [];
+  static List Ticketsearch = [];
   static late Map ticket = {};
   static List allOrganizations = [];
   static Map organizationName = {};
@@ -325,6 +327,20 @@ class Tickets {
     return response ;
 
   }
+  static getMyTickects(String usertype) async{
+    dynamic response = await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodGet,
+      resource: Resources.tickets,
+      queryParameters: {
+        QueryParameters.filter: QueryParameters.filterValue,
+        QueryParameters.userType:usertype,
+        },
+    );
+    tickets = await NetworkRequests.decodeJson(response, negativeResponse: []);
+    return tickets;
+  }
+
+
 
   static getAllTickets()async{
     dynamic response = await NetworkRequests().securedMawaAPI(

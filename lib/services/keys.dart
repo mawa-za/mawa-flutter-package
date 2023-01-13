@@ -84,16 +84,23 @@ class JsonResponses {
   static const String cashupCashierID = 'cashierID';
   static const String cashupCashier = 'cashier';
   static const String cashupDateCreated = 'dateCreated';
+  static const String dateCreatedvoucher = 'dateCreated';
 
   static const String addressesType = 'type';
   static const String addressesLine1 = 'line1';
   static const String addressesLine2 = 'line2';
   static const String addressesLine3 = 'line3';
   static const String addressesLine4 = 'line4';
-  static const String addressesPostalCode = 'postalcode';
+  static const String addressesPostalCode = 'postalCode';
+  static const String addressesTypeDescription = 'typeDescription';
+  static const String addressline3Description = 'line3Description';
+  static const String adressline4Description = 'line4Description';
+
 
   static const String contactsType = 'type';
+  static const String contactTypeDescription = 'typeDescription';
   static const String contactsDetail = 'detail';
+
 
   static const String versionAppName = 'appName';
   static const String versionApkVersionCode = 'versionNumber';
@@ -123,6 +130,8 @@ class JsonResponses {
   static const String employeeFirstName = 'name1';
   static const String employeeLastName = 'name2';
   static const String employeeIdNumber = 'idNumber';
+
+  static const String identityTypeDescription  = 'typeDescription';
 
 
 
@@ -265,6 +274,12 @@ class Resources {
   static const String receipts = 'receipts';
   static const String cashup = 'cashup';
   static const String policies = 'policies';
+  //My Keys
+  static const String voucherValue = 'vouchers';
+  static const String identity = 'identities';
+  static const String contactValue = 'contacts';
+
+  //End
 
   static const String approve = 'Approve';
   static const String approveCancellation = 'ApproveCancellation';
@@ -288,6 +303,7 @@ class Resources {
   static const String awaitingCustomer = 'awaitingCustomer';
 
   static const String addresses = 'addresses';
+
   static const String sendNotifications = 'sendNotifications';
 
   static const String getTasksAssigned = 'getTasksAssigned';
@@ -310,6 +326,9 @@ class Resources {
   static const String dependents = 'dependents';
   static const String claims = 'claims';
   static const String product = 'product';
+  static const String decline = 'decline';
+  static const String claimApprove = 'approve';
+  static const String claimCancel = 'cancel';
 
 }
 
@@ -414,12 +433,18 @@ class QueryParameters {
   static const String field = 'field';
   static const String filter = 'filter';
   static const String filterValue = 'x';
+  static const String userType = 'userType';
 
   static const String id = 'id';
 
   static const String loggedByID = 'loggedByID';
   static const String loggedById = 'loggedById';
+  //my keys
+  static const String personIdNumber = 'idnumber';
+  static const String partnerRole = 'partnerRole';
 
+  //static const String partnerRoleValue = 'POLICY_HOLDER';
+  //end
   static const String organisationId = 'organisationId';
   static const String otp = 'otp';
 
@@ -474,6 +499,7 @@ class QueryParameters {
   static const String organizationId = 'organizationId';
 
   static const String policy = 'policy';
+  static const String approver = 'approver';
 
   static const String salesArea = 'salesArea';
   static const String product = 'product';

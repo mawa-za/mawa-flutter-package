@@ -6,6 +6,7 @@ class Products {
   late String payout;
   final String _directory = 'product/?category=';
   List/*<Map>*/ products = [];
+  List allProducts = [];
   static Map<String, String> productsMap = {};
   static dynamic personsPolicies;
   static dynamic personsTombstones;
@@ -63,5 +64,14 @@ class Products {
 
     List list = jsonDecode(data);
     return list;
+  }
+
+  getAllProducts() async {
+    allProducts = await NetworkRequests.decodeJson(
+        await NetworkRequests().securedMawaAPI(
+          NetworkRequests.methodGet,
+          resource: Resources.products,
+        ), negativeResponse: {});
+    return allProducts;
   }
 }
