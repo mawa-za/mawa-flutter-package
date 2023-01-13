@@ -84,16 +84,23 @@ class JsonResponses {
   static const String cashupCashierID = 'cashierID';
   static const String cashupCashier = 'cashier';
   static const String cashupDateCreated = 'dateCreated';
+  static const String dateCreatedvoucher = 'dateCreated';
 
   static const String addressesType = 'type';
   static const String addressesLine1 = 'line1';
   static const String addressesLine2 = 'line2';
   static const String addressesLine3 = 'line3';
   static const String addressesLine4 = 'line4';
-  static const String addressesPostalCode = 'postalcode';
+  static const String addressesPostalCode = 'postalCode';
+  static const String addressesTypeDescription = 'typeDescription';
+  static const String addressline3Description = 'line3Description';
+  static const String adressline4Description = 'line4Description';
+
 
   static const String contactsType = 'type';
+  static const String contactTypeDescription = 'typeDescription';
   static const String contactsDetail = 'detail';
+
 
   static const String versionAppName = 'appName';
   static const String versionApkVersionCode = 'versionNumber';
@@ -123,6 +130,8 @@ class JsonResponses {
   static const String employeeFirstName = 'name1';
   static const String employeeLastName = 'name2';
   static const String employeeIdNumber = 'idNumber';
+
+  static const String identityTypeDescription  = 'typeDescription';
 
 
 
@@ -293,6 +302,7 @@ class Resources {
   static const String awaitingCustomer = 'awaitingCustomer';
 
   static const String addresses = 'addresses';
+
   static const String sendNotifications = 'sendNotifications';
 
   static const String getTasksAssigned = 'getTasksAssigned';

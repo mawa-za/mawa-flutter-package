@@ -4,14 +4,14 @@ part of 'package:mawa_package/mawa_package.dart';
 //Class start here
 class Customers {
   static List customer = [];
-  static List customerDetails = [];
+  static Map customerDetails = {};
   static List memberships =[];
   static List vouchers =[];
   static List partnerRoles =[];
   static List identities = [];
   static List attachments =[];
   static List contacts =[];
-  static List addressess =[];
+  static List addresses =[];
 
 
 
@@ -33,7 +33,7 @@ class Customers {
         resource: '${Resources.persons}/$customerId',
         ),
 
-        negativeResponse: []);
+        negativeResponse: {});
 
     return customerDetails;
   }
@@ -119,27 +119,15 @@ class Customers {
 
   //Get Addresses
   getAddress(String partnerId) async {
-    addressess = await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+    addresses = await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodGet,
       resource: '${Resources.persons}/$partnerId/${Resources.addresses}',
     ),
 
         negativeResponse: []);
 
-    return addressess;
+    return addresses;
   }
-  // Get
 
-  // getMembership() async {
-  //   customerDetails = await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
-  //       // NetworkRequests.methodGet,
-  //       // resource: '${Resources.customers}/'),
-  //       // queryParameters: {
-  //       //   QueryParameters.filter,
-  //       // },
-  //       // negativeResponse: []);
-  //
-  //   //return customerDetails;
-  // }
 
 }
