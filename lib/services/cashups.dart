@@ -4,7 +4,7 @@ class Cashups{
 
   static List cashupsList = [];
   static Map cashup = {};
-  
+
   getCashupCollection({required String processor}) async {
     cashupsList = await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
@@ -14,23 +14,16 @@ class Cashups{
   }
 
   getCashup({required String cashupId}) async {
-    dynamic response;
-    // if (cashupId != null) {
-    response =  await NetworkRequests().securedMawaAPI(
-      NetworkRequests.methodGet,
-      resource: '${Resources.cashup}/$cashupId',
-    ) ??
-        {};
-    // response.runtimeType != List && response.runtimeType != String
-    response.statusCode == 200
-        ? cashup = await NetworkRequests.decodeJson(response)??
-        {}
-        : cashup = {};
-    // } else {
-    //   cashup = {};
-    // }
-    // cashup.runtimeType ;
-    return cashup;
+    dynamic response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: '${Resources.cashup}/${cashupId ?? ''}');
+    if(cashupId == ''){
+      cashupsList = await NetworkRequests.decodeJson(response, negativeResponse: []);
+      return cashupsList;
+    }else{
+      cashup = await NetworkRequests.decodeJson(response, negativeResponse: {});
+      return cashup;
+    }
   }
 
   processCashup() async {
