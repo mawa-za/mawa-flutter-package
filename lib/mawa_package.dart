@@ -41,6 +41,7 @@ part 'package:mawa_package/screens/unauthorized.dart';
 part 'package:mawa_package/screens/user_overview.dart';
 
 part 'package:mawa_package/services/attachments.dart';
+part 'package:mawa_package/services/cashups.dart';
 part 'package:mawa_package/services/claims.dart';
 part 'package:mawa_package/services/client_policy.dart';
 part 'package:mawa_package/services/constants.dart';

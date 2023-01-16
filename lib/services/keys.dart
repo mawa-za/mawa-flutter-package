@@ -506,6 +506,12 @@ class QueryParameters {
   static const String customer = 'customer';
   static const String salesRepresentative = 'salesRepresentative';
 
+  static const String amount = 'amount';
+  static const String location = 'location';
+  static const String terminalType = 'terminalType';
+  static const String terminalId = 'terminalId';
+  static const String tenderType = 'tenderType';
+
 // static const String  = '';
 }
 
