@@ -62,6 +62,7 @@ part 'package:mawa_package/services/otp.dart';
 part 'package:mawa_package/services/persons.dart';
 part 'package:mawa_package/services/products.dart';
 part 'package:mawa_package/services/receipts.dart';
+part 'package:mawa_package/services/strings.dart';
 part 'package:mawa_package/services/tasks.dart';
 part 'package:mawa_package/services/tickets.dart';
 part 'package:mawa_package/services/ticket_logs.dart';
