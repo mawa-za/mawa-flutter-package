@@ -239,6 +239,8 @@ class JsonResponses {
   static const String validFrom = 'validFrom';
   static const String validTo = 'validTo';
 
+  static const String dateCreated = 'dateCreated';
+
 }
 
 class Resources {
