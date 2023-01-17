@@ -241,6 +241,10 @@ class JsonResponses {
 
   static const String dateCreated = 'dateCreated';
 
+  static const String location = 'location';
+  static const String terminalType = 'terminalType';
+  static const String terminalId = 'terminalId';
+
 }
 
 class Resources {
