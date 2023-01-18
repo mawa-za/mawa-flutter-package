@@ -6,11 +6,40 @@ class Employees {
 
   static List  employees = [];
   String password = "";
+  static late String personId;
+  static late String personIdNumber;
+  late String  clientStatus;
+  late bool status;
+  static Map person = {};
+  static Map employee = {};
+  static Map group = {};
+  static List people = [];
+  static List personRoles = [];
+  static dynamic personIdentities;
+  static dynamic personContacts;
+  static String? employeeID;
+  List personDetail = [];
+  Persons(String id){
+    personId = id;
+  }
+
+  static String personNameFromJson(json){
+    if(json != null){
+      return
+        '${json[JsonResponses
+            .personLastName] ?? ''}, ${json[JsonResponses
+            .personFirstName] ?? ''} ${json[JsonResponses.personMiddleName] ??
+            ''}';
+    }
+    else{
+      return '';
+    }
+  }
   getAllEmployees() async{
     // List emps
     employees = await NetworkRequests.decodeJson( await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
-        resource: '$employeesResource/'));
+        resource: '$employeesResource'));
     Map<String, String> mapUsers = {};
     if (employees != null) {
       for (int i = 0; i < employees.length; i++) {
@@ -28,11 +57,84 @@ class Employees {
 
     return employees;
   }
-
   getEmployee(String employeeId) async {
-    return NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-        resource: '$employeesResource/$employeeId'));
+    employee = await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodGet,
+      resource: '${Resources.persons}/$employeeId',
+    ),
+
+        negativeResponse: {});
+
+    return employee;
   }
+
+  // getEmployee(String employeeId) async {
+  //   return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
+  //       resource: '${Resources.persons}/$employeeId'));
+  // }
+
+  getEmployeeRoles(String partnerNumber) async {
+    return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
+        resource: '${Resources.persons}/$partnerNumber/${Resources.roles}'));
+
+  }
+
+  getEmployeeIdentities(String partnerNumber) async {
+    return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
+        resource: '${Resources.persons}/$partnerNumber/${Resources.identities}'));
+  }
+
+  getEmployeeContacts(String partnerNumber) async {
+    return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
+        resource: '${Resources.persons}/$partnerNumber/${Resources.contacts}'));
+  }
+  getEmployeeAddresses(String partnerNumber) async {
+    return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
+        resource: '${Resources.persons}/$partnerNumber/${Resources.addresses}'));
+  }
+  getEmployeeDetails(String partnerNumber) async {
+    return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
+        resource: '${Resources.persons}/$partnerNumber'));
+    // /${Resources.employeeId}'
+  }
+  getEmployeeLeaveProfile(String partnerFunction,String partnerNo) async {
+    return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
+        resource: Resources.leaveProfiles,
+    queryParameters: {
+      QueryParameters.partnerNo:partnerNo,
+      QueryParameters.partnerFunction:'EMPLOYEE',
+    }));
+
+  }
+
+  // editEmployeeDetails(String partnerNumber) async {
+  //   return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodPut,
+  //       resource: '${Resources.persons}/$partnerNumber'));
+  // }
+  getEmployeeEmploymentDetails(String partnerNumber) async {
+    return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
+        resource: '${Resources.employment}/$partnerNumber'));
+  }
+  addEmployeeRole(String partnerNumber,String role) async {
+    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
+        resource: '${Resources.persons}/$partnerNumber/${Resources.roles}',
+      body: {
+      JsonPayloads.role: role,
+      }
+    );
+
+  }
+  addEmployeeContacts(String partnerNumber, String type, String detail) async {
+    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
+        resource: '${Resources.persons}/$partnerNumber/${Resources.contacts}',
+        body: {
+          JsonPayloads.type: type,
+          JsonPayloads.detail: detail,
+        }
+    );
+
+  }
+
 
 
 
