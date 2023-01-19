@@ -35,15 +35,15 @@ class Claims{
     return claims;
   }
 
-  declineClaim(String claimNo)async{
-    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
-        resource: Resources.claims + claimNo + Resources.decline,
-        body: {
-          JsonPayloads.value:'',
-          JsonPayloads.value:''
-        }
-    );
-  }
+  // declineClaim(String claimNo, String value, String type)async{
+  //   return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
+  //       resource: Resources.claims + claimNo + Resources.claimDecline,
+  //       body: {
+  //         JsonPayloads.value: value,
+  //         JsonPayloads.value:''
+  //       }
+  //   );
+  // }
 
   approveClaim(String claimNo,String partnerNo)async{
     return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
