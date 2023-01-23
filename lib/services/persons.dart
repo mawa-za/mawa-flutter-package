@@ -116,7 +116,7 @@ class Persons {
   //Add Identity
   addIdentity(
       {required String? path,
-      required String? idType,
+      required dynamic idType,
       required String? idNumber}) async {
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPost,
@@ -131,13 +131,13 @@ class Persons {
   addContact(
       {required String? path,
       required String? contactType,
-      required String? detail}) async {
+      required dynamic detail}) async {
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPost,
         resource: '${Resources.persons}/$personId/$path',
         body: {
           JsonPayloads.type: contactType,
-          JsonPayloads.idNumber: detail,
+          JsonPayloads.cellNumber: detail,
         });
   }
 
@@ -147,8 +147,8 @@ class Persons {
       required String? addressType,
       required String? houseno,
       required String? streetName,
-      required String? suburb,
-      required String? city,
+      required dynamic suburb,
+      required dynamic city,
       required String? postalCode}) async {
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPost,

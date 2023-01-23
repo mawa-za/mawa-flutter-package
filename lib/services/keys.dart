@@ -432,10 +432,10 @@ class JsonPayloads {
   static const String idNumber = 'idnumber';
   static const String personIdNumber = 'idNumber';
   static const String idType = 'idType';
-  static const String addressline1 = 'addressline1';
-  static const String addressline2 = 'addressline2';
-  static const String addressline3 = 'addressline3';
-  static const String addressline4 = 'addressline4';
+  static const String addressline1 = 'line1';
+  static const String addressline2 = 'line2';
+  static const String addressline3 = 'line3';
+  static const String addressline4 = 'line4';
   static const String birthDate = 'birthDate';
   static const String postalCode = 'postalCode';
   static const String cellNumber = 'detail';
