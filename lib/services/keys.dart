@@ -244,6 +244,11 @@ class JsonResponses {
   static const String terminalType = 'terminalType';
   static const String terminalId = 'terminalId';
 
+  static const String attribute = 'attribute';
+  static const String value = 'value';
+
+  static const String priceType = 'priceType';
+  static const String priceTypeDescription = 'priceTypeDescription';
 
 }
 
@@ -340,6 +345,8 @@ class Resources {
   static const String claimCancel = 'cancel';
   static const String claimDecline = 'decline';
 
+  static const String attributes = 'attributes';
+  static const String pricing = 'pricings';
 
 }
 
@@ -423,6 +430,12 @@ class JsonPayloads {
   static const String sms = 'sms';
 
   static const String ticketTaskID = 'ticketTaskID';
+
+  static const String validTo = 'validTo';
+  static const String attribute = 'attribute';
+  static const String validFrom = 'validFrom';
+  static const String priceType = 'priceType';
+  static const String priceTypeDescription = 'priceTypeDescription';
 
 // static const String  = '';
 }
