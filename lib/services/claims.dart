@@ -8,17 +8,17 @@ class Claims{
   getClaim()async{
     return await NetworkRequests.decodeJson( await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
         resource: Resources.claims,
-      queryParameters: {
-      QueryParameters.policy:id
-      }
+        queryParameters: {
+          QueryParameters.policy:id
+        }
     ));
   }
 
-   getAllClaims()async{
-     claims.clear();
-     dynamic response = await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
+  getAllClaims()async{
+    claims.clear();
+    dynamic response = await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
         resource: Resources.claims);
-     claims = await NetworkRequests.decodeJson(response, negativeResponse: []);
+    claims = await NetworkRequests.decodeJson(response, negativeResponse: []);
 
     return claims;
   }
@@ -48,9 +48,9 @@ class Claims{
   approveClaim(String claimNo,String partnerNo)async{
     return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
         resource: Resources.claims + claimNo + Resources.claimApprove,
-      queryParameters: {
-      QueryParameters.approver:partnerNo,
-      }
+        queryParameters: {
+          QueryParameters.approver:partnerNo,
+        }
     );
   }
 
@@ -62,6 +62,25 @@ class Claims{
           JsonPayloads.type:noteType
         }
     );
+  }
+
+  getSpecificClaim(String claimNo)async{
+    return await NetworkRequests.decodeJson( await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
+      resource: Resources.claims + '/' + claimNo,
+
+    ), negativeResponse: {});
+
+  }
+
+  getClaimVouchers(String claimNo) async {
+    return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
+        resource: Resources.vouchers,
+        queryParameters: {
+          QueryParameters.filter: QueryParameters.filterValue,
+          QueryParameters.transactionLink: claimNo
+        }
+
+    ), negativeResponse: []);
   }
 
 }
