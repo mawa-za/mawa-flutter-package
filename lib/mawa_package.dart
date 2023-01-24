@@ -73,3 +73,4 @@ part 'package:mawa_package/services/transaction_notes.dart';
 part 'package:mawa_package/services/user.dart';
 part 'package:mawa_package/services/versioning.dart';
 part 'package:mawa_package/services/workcenters.dart';
+part 'package:mawa_package/services/vouchers.dart';
