@@ -102,7 +102,7 @@ class Employees {
         resource: Resources.leaveProfiles,
     queryParameters: {
       QueryParameters.partnerNo:partnerNo,
-      QueryParameters.partnerFunction:'EMPLOYEE',
+      QueryParameters.partnerFunction:partnerFunction,
     }));
 
   }
@@ -118,8 +118,8 @@ class Employees {
   addEmployeeRole(String partnerNumber,String role) async {
     return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
         resource: '${Resources.persons}/$partnerNumber/${Resources.roles}',
-      body: {
-      JsonPayloads.role: role,
+      queryParameters: {
+      QueryParameters.role: role,
       }
     );
 
@@ -135,6 +135,55 @@ class Employees {
 
   }
 
+  addEmployeeIdentity(String partnerNumber, String idType, String idNumber) async {
+    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
+        resource: '${Resources.persons}/$partnerNumber/${Resources.identities}',
+        body: {
+          JsonPayloads.idType: idType,
+          JsonPayloads.idNumber: idNumber,
+        }
+    );
+
+  }
+
+  // addEmployeeAddress(String partnerNumber, String addressline1, String addressline2, String addressline3, String addressline4, String postalCode) async {
+  //   return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
+  //       resource: '${Resources.persons}/$partnerNumber/${Resources.addresses}',
+  //       body: {
+  //         JsonPayloads.addressline1: addressline1,
+  //         JsonPayloads.addressline2: addressline2,
+  //         JsonPayloads.addressline3: addressline3,
+  //         JsonPayloads.addressline4: addressline4,
+  //         JsonPayloads.postalCode: postalCode,
+  //       }
+  //   );
+  //
+  // }
+
+
+  static createEmployee(
+      {required String? firstName,
+        String? middleName,
+        required String? lastName,
+        required dynamic gender,
+        required dynamic title,
+        required dynamic maritalStatus,
+        required dynamic birthdate,
+        String? postalCode}) async {
+    dynamic response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPost,
+        resource: Resources.persons,
+        body: {
+          JsonPayloads.firstName: firstName,
+          JsonPayloads.middleName: middleName,
+          JsonPayloads.lastName: lastName,
+          JsonPayloads.gender: gender,
+          JsonPayloads.title: title,
+          JsonPayloads.maritalStatus: maritalStatus,
+          JsonPayloads.birthDate: birthdate
+        });
+    return response;
+  }
 
 
 
