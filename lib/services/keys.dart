@@ -244,6 +244,8 @@ class JsonResponses {
   static const String terminalType = 'terminalType';
   static const String terminalId = 'terminalId';
 
+  static const String amountDeposited = 'amountDeposited';
+
   static const String attribute = 'attribute';
   static const String value = 'value';
 
@@ -346,6 +348,8 @@ class Resources {
   static const String claimApprove = 'approve';
   static const String claimCancel = 'cancel';
   static const String claimDecline = 'decline';
+
+  static const String deposits = 'deposits';
 
   static const String attributes = 'attributes';
   static const String pricing = 'pricings';
@@ -555,6 +559,9 @@ class QueryParameters {
   static const String terminalId = 'terminalId';
   static const String tenderType = 'tenderType';
   static const String role = 'role';
+
+  static const String cashupId = 'cashupId';
+  static const String checkoutId = 'checkoutId';
 
 // static const String  = '';
 }
