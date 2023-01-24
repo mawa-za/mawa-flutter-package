@@ -253,6 +253,8 @@ class JsonResponses {
 }
 
 class Resources {
+
+  static const String validateSAID = 'validateSAID';
   static const String attachments = 'attachments';
   static const String otp = 'otp';
   static const String customers = 'customers';
@@ -431,11 +433,29 @@ class JsonPayloads {
 
   static const String ticketTaskID = 'ticketTaskID';
 
+  static const String firstName = 'firstName';
+  static const String  middleName = 'middleName';
+  static const String lastName = 'lastName';
+  static const String idNumber = 'idnumber';
+  static const String personIdNumber = 'idNumber';
+  static const String idType = 'idType';
+  static const String addressline1 = 'line1';
+  static const String addressline2 = 'line2';
+  static const String addressline3 = 'line3';
+  static const String addressline4 = 'line4';
+  static const String birthDate = 'birthDate';
+  static const String postalCode = 'postalCode';
+  static const String cellNumber = 'detail';
+  static const String gender = 'gender';
+  static const String title = 'title';
+  static const String maritalStatus = 'maritalStatus';
+
   static const String validTo = 'validTo';
   static const String attribute = 'attribute';
   static const String validFrom = 'validFrom';
   static const String priceType = 'priceType';
   static const String priceTypeDescription = 'priceTypeDescription';
+
 
 // static const String  = '';
 }
@@ -534,6 +554,7 @@ class QueryParameters {
   static const String terminalType = 'terminalType';
   static const String terminalId = 'terminalId';
   static const String tenderType = 'tenderType';
+  static const String role = 'role';
 
 // static const String  = '';
 }
@@ -575,4 +596,12 @@ class CommentTypes{
 class FieldOptionTypes{
   static const String fieldOptionCategory = 'CATEGORY';
   static const String fieldOptionPriority = 'PRIORITY';
+  static const String fieldOptionIdType = 'idType';
+  static const String fieldOptionGender = 'GENDER';
+  static const String fieldOptionTitle = 'TITLE';
+  static const String fieldOptionMaritalStatus = 'MARITALSTATUS';
+  static const String fieldOptionSuburb = 'suburb';
+  static const String fieldOptionTown = 'TOWN';
+  static const String fieldOptionContactType= 'CONTACTTYPE';
+
 }
