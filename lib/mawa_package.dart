@@ -46,6 +46,7 @@ part 'package:mawa_package/services/claims.dart';
 part 'package:mawa_package/services/client_policy.dart';
 part 'package:mawa_package/services/constants.dart';
 part 'package:mawa_package/services/customers.dart';
+part 'package:mawa_package/services/deposits.dart';
 part 'package:mawa_package/services/device_info.dart';
 part 'package:mawa_package/services/employees.dart';
 part 'package:mawa_package/services/field_options.dart';
