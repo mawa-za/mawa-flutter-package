@@ -84,7 +84,6 @@ class JsonResponses {
   static const String cashupCashierID = 'cashierID';
   static const String cashupCashier = 'cashier';
   static const String cashupDateCreated = 'dateCreated';
-  static const String dateCreatedvoucher = 'dateCreated';
 
   static const String addressesType = 'type';
   static const String addressesLine1 = 'line1';
@@ -240,6 +239,7 @@ class JsonResponses {
   static const String branch = 'branch';
   static const String department = 'department';
 
+
   static const String location = 'location';
   static const String terminalType = 'terminalType';
   static const String terminalId = 'terminalId';
@@ -251,6 +251,9 @@ class JsonResponses {
 
   static const String priceType = 'priceType';
   static const String priceTypeDescription = 'priceTypeDescription';
+  static const String declineReason = 'declineReason';
+  static const String policy = 'policy';
+  static const String policyHolder = 'policyHolder';
 
 }
 
@@ -353,6 +356,8 @@ class Resources {
 
   static const String attributes = 'attributes';
   static const String pricing = 'pricings';
+  static const String refer = 'refer';
+  static const String vouchers = 'vouchers';
 
 }
 
@@ -459,6 +464,7 @@ class JsonPayloads {
   static const String validFrom = 'validFrom';
   static const String priceType = 'priceType';
   static const String priceTypeDescription = 'priceTypeDescription';
+  static const String notes = 'notes';
 
 
 // static const String  = '';
@@ -558,6 +564,7 @@ class QueryParameters {
   static const String terminalType = 'terminalType';
   static const String terminalId = 'terminalId';
   static const String tenderType = 'tenderType';
+  static const String transactionLink = 'transactionLink';
   static const String role = 'role';
 
   static const String cashupId = 'cashupId';

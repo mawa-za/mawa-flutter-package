@@ -72,15 +72,16 @@ class Claims{
 
   }
 
-  getClaimVouchers(String claimNo) async {
-    return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-        resource: Resources.vouchers,
-        queryParameters: {
-          QueryParameters.filter: QueryParameters.filterValue,
-          QueryParameters.transactionLink: claimNo
+  disputeClaim(String claimNo)async{
+    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
+        resource: Resources.claims + '/' + claimNo + '/' + Resources.refer,
+        body: {
+            JsonPayloads.notes:[
+              {JsonPayloads.value:"ID Copy was supplied",JsonPayloads.type:"CLAIMDISPUTE"},
+              {JsonPayloads.value:"Death certification was supplied",JsonPayloads.type:"CLAIMDISPUTE"}
+            ]
         }
-
-    ), negativeResponse: []);
+    );
   }
 
 }
