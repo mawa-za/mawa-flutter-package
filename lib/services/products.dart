@@ -1,7 +1,7 @@
 part of 'package:mawa_package/mawa_package.dart';
 
 class Products {
-  static String? productId;
+  static late String productId = '';
   late String policyType;
   late String policyDescription;
   late String payout;
@@ -179,6 +179,29 @@ class Products {
 
 
       return response;
+    }
+  }
+
+  AddProduct(
+      {required productCategory,
+        required productDescription ,
+        required quantity,
+      }) async {
+    {
+      dynamic response = await NetworkRequests().securedMawaAPI(
+          NetworkRequests.methodPost,
+          resource: Resources.products,
+          body: {
+            JsonPayloads.productCategory: productCategory,
+            JsonPayloads.productDescription: productDescription,
+            JsonPayloads.quantity: quantity,
+          });
+      productId = await NetworkRequests.decodeJson(response, negativeResponse: '');
+
+
+      print('TTTHHHHH ${productId}');
+
+      return productId;
     }
   }
 }
