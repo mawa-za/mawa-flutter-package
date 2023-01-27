@@ -107,6 +107,22 @@ class Products {
     return pricing;
   }
 
+  editProduct({required String id, required category,required description,required categoryDescription,required quantity,required validFrom}) async{
+    dynamic response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPut,
+        resource: '${Resources.products}/$id',
+        body:
+        {
+          JsonPayloads.productDescription: description,
+          JsonPayloads.productCategory: category,
+          JsonPayloads.categoryDescription: categoryDescription,
+          JsonPayloads.quantity: quantity,
+          JsonPayloads.validTo: validFrom,
+        });
+
+    return  response;
+  }
+
   editProductAttributes({required String id,required attribute,required value,required validFrom,  required validTo}) async{
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPut,
