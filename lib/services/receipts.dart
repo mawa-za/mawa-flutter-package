@@ -11,20 +11,26 @@ class Receipts {
       dynamic tenderType,
       dynamic amount}) async {
     // DeviceInfo info =
-    DeviceInfo();
-
+    await DeviceInfo();
+    String? terminalType, terminalID, location;
+    if(DeviceInfo.deviceData !=null) {
+      terminalID = '${DeviceInfo.deviceData![DeviceInfo.imeiNo] ?? ''}';
+      terminalType = '${DeviceInfo.deviceData![DeviceInfo.modelName] ?? ''}';
+    }
+    location = Location.address;
     Map payment = {
       QueryParameters.reference: '$reference',
       QueryParameters.amount: '$amount',
       QueryParameters.tenderType: '$tenderType',
-      QueryParameters.terminalId: DeviceInfo.deviceData[DeviceInfo.imeiNo],
-      QueryParameters.location: Location.address.toString(),
-      QueryParameters.terminalType: DeviceInfo.deviceData[DeviceInfo.modelName],
+      QueryParameters.terminalId:  terminalID,
+      QueryParameters.location: location,
+      QueryParameters.terminalType: terminalType,
     };
 
-    return await NetworkRequests.decodeJson(await NetworkRequests()
-        .securedMawaAPI(NetworkRequests.methodPost,
-            resource: Resources.receipts, body: payment));
+    return await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPost,
+        resource: Resources.receipts,
+        body: payment);
   }
 
   userProcessedReceipts(bool filter) async {

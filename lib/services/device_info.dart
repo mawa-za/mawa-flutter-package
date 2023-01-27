@@ -8,7 +8,7 @@ class DeviceInfo{
 
   static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
   Map<String, dynamic> _deviceData = <String, dynamic>{};
-  static late Map deviceData;
+  static Map? deviceData;
   static String terminal = 'Undefined';
 
   // static String  = ;
@@ -167,17 +167,18 @@ class DeviceInfo{
     // for(int i = 0; i < _info.length; i++){
     //   deviceData[_info[i]] = info[_info[i]];
     // }
-    print('terminal ' + terminal);
-    print('info ' + info.toString());
-    print('deviceData ' + deviceData.length.toString());
+    /**/
+    // print('terminal ' + terminal);
+    // print('info ' + info.toString());
+    // print('deviceData ' + deviceData!.length.toString());
 
-    deviceData.addAll(Map<String,dynamic>.from(info));
+    deviceData!.addAll(Map<String,dynamic>.from(info));
 
-    for(int i = 0; i < deviceData.length; i++){
-      print(deviceData.values.elementAt(i));
+    for(int i = 0; i < deviceData!.length; i++){
+      print(deviceData!.values.elementAt(i));
     }
-    print('done!!!!');
-    print('deviceData ' + deviceData.length.toString());
+    // print('done!!!!');
+    // print('deviceData ' + deviceData!.length.toString());
   }
 
   Future<void> getDeviceInfo () async {

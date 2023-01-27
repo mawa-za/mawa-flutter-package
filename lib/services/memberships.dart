@@ -1,7 +1,7 @@
 part of 'package:mawa_package/mawa_package.dart';
 
 class Memberships {
-  static Map<dynamic, dynamic> policy = {};
+  static dynamic policy;
   static List<dynamic> allPolicies = [];
   static List personsPolicies = [];
 
@@ -25,9 +25,9 @@ class Memberships {
   }
 
   membershipGet({String? policyId}) async {
-    policy.clear();
+    // policy.clear();
      dynamic response = await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-        resource: '${Resources.policies}/$policyId');
+        resource: '${Resources.policies}/${policyId ?? ''}');
       dynamic body =  await NetworkRequests.decodeJson(response);
       // if(policyId != null)
       try{
