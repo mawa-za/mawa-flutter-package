@@ -465,6 +465,7 @@ class JsonPayloads {
   static const String priceType = 'priceType';
   static const String priceTypeDescription = 'priceTypeDescription';
   static const String notes = 'notes';
+  static const String declineReason = 'declineReason';
 
 
 // static const String  = '';

@@ -35,21 +35,23 @@ class Claims{
     return claims;
   }
 
-  // declineClaim(String claimNo, String value, String type)async{
-  //   return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
-  //       resource: Resources.claims + claimNo + Resources.claimDecline,
-  //       body: {
-  //         JsonPayloads.value: value,
-  //         JsonPayloads.value:''
-  //       }
-  //   );
-  // }
-
-  approveClaim(String claimNo,String partnerNo)async{
+  declineClaim(String claimNo, dynamic value)async{
     return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
-        resource: Resources.claims + claimNo + Resources.claimApprove,
+        resource: '${Resources.claims}/$claimNo/${Resources.claimDecline}',
+        body: {
+          JsonPayloads.declineReason: [
+            {JsonPayloads.value: value}
+          ]
+
+        }
+    );
+  }
+
+  approveClaim(String claimNo)async{
+    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
+        resource: '${Resources.claims}/$claimNo/${Resources.claimApprove}',
         queryParameters: {
-          QueryParameters.approver:partnerNo,
+          QueryParameters.approver:User.loggedInUser[JsonResponses.usersPartner],
         }
     );
   }
@@ -72,14 +74,13 @@ class Claims{
 
   }
 
-  disputeClaim(String claimNo)async{
+  disputeClaim(String claimNo, String value)async{
     return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
         resource: Resources.claims + '/' + claimNo + '/' + Resources.refer,
         body: {
-            JsonPayloads.notes:[
-              {JsonPayloads.value:"ID Copy was supplied",JsonPayloads.type:"CLAIMDISPUTE"},
-              {JsonPayloads.value:"Death certification was supplied",JsonPayloads.type:"CLAIMDISPUTE"}
-            ]
+          JsonPayloads.notes:[
+            {JsonPayloads.value:value,JsonPayloads.type:"CLAIMDISPUTE"},
+          ]
         }
     );
   }
