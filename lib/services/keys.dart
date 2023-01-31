@@ -255,6 +255,7 @@ class JsonResponses {
   static const String policy = 'policy';
   static const String policyHolder = 'policyHolder';
 
+  static const String categoryDescription = 'categoryDescription';
 }
 
 class Resources {
@@ -482,6 +483,8 @@ class JsonPayloads {
   static const String branchCode = 'branchCode';
   static const String accountType = 'accountType';
   static const String accountNumber = 'accountNumber';
+
+  static const String categoryDescription = 'categoryDescription';
 
 // static const String  = '';
 }
