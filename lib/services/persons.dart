@@ -27,10 +27,10 @@ class Persons {
 
   static Future personSearch(
       {String? idNumber,
-      String? idType,
-      String? lastName,
-      String? middleName,
-      String? firsName}) async {
+        String? idType,
+        String? lastName,
+        String? middleName,
+        String? firsName}) async {
     Persons.people.clear();
     dynamic peopleResponse = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
@@ -78,9 +78,9 @@ class Persons {
   }
 
   Future<dynamic> adaNewClient(clientDetails) async {
-    return await NetworkRequests.decodeJson(await NetworkRequests()
+    return await NetworkRequests()
         .securedMawaAPI(NetworkRequests.methodPost,
-            resource: Resources.persons, body: clientDetails));
+        resource: Resources.persons, body: clientDetails);
   }
 
   Future assignPersonRole({required String personRole}) async {
@@ -92,9 +92,9 @@ class Persons {
 
   addPersonDetail(
       {required String personID,
-      required String path,
-      required String field,
-      required String detail}) async {
+        required String path,
+        required String field,
+        required String detail}) async {
     await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPost,
         resource: '${Resources.persons}/$personID/$path',
@@ -116,8 +116,8 @@ class Persons {
   //Add Identity
   addIdentity(
       {required String? path,
-      required dynamic idType,
-      required String? idNumber}) async {
+        required dynamic idType,
+        required String? idNumber}) async {
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPost,
         resource: '${Resources.persons}/$personId/$path',
@@ -130,8 +130,8 @@ class Persons {
   //add Contacts
   addContact(
       {required String? path,
-      required String? contactType,
-      required dynamic detail}) async {
+        required String? contactType,
+        required dynamic detail}) async {
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPost,
         resource: '${Resources.persons}/$personId/$path',
@@ -144,12 +144,12 @@ class Persons {
   //Add addresses
   addAdress(
       {required String? path,
-      required String? addressType,
-      required String? houseno,
-      required String? streetName,
-      required dynamic suburb,
-      required dynamic city,
-      required String? postalCode}) async {
+        required String? addressType,
+        required String? houseno,
+        required String? streetName,
+        required dynamic suburb,
+        required dynamic city,
+        required String? postalCode}) async {
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPost,
         resource: '${Resources.persons}/$personId/$path',
