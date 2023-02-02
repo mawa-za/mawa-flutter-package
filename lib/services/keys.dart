@@ -360,6 +360,9 @@ class Resources {
   static const String refer = 'refer';
   static const String vouchers = 'vouchers';
 
+  static const String submit = 'submit';
+  static const String submitted = 'submitted';
+
 }
 
 class JsonPayloads {
@@ -471,6 +474,15 @@ class JsonPayloads {
   static const String productCategory = 'category';
   static const String productDescription = 'description';
   static const String quantity = 'quantity';
+
+  static const String deceasedId = 'deceasedId';
+  static const String claimantId = 'claimantId';
+  static const String bankAccount = 'bankAccount';
+  static const String bankName = 'bankName';
+  static const String branchName = 'branchName';
+  static const String branchCode = 'branchCode';
+  static const String accountType = 'accountType';
+  static const String accountNumber = 'accountNumber';
 
   static const String categoryDescription = 'categoryDescription';
 
