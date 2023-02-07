@@ -20,7 +20,7 @@ class Home extends StatelessWidget {
     // initConnectivity();
 
     NetworkRequests()
-        .securedMawaAPI(NetworkRequests.methodGet, resource: Resources.users);
+        .securedMawaAPI(NetworkRequests.methodGet, resource: Resources.user);
     _connectivitySubscription =
         _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
   }

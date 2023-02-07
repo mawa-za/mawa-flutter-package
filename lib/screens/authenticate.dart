@@ -34,7 +34,7 @@ class _AuthenticateState extends State<Authenticate> {
       Authenticate.response = await NetworkRequests().unsecuredMawaAPI(NetworkRequests.methodPost,
           resource: Resources.authenticate,
           payload: {
-            "userID": User.username,
+            "username": User.username,
             "password": User.password},
           context: context,);
       if (Authenticate.response.statusCode == 200) {

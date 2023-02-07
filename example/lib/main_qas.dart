@@ -10,6 +10,6 @@ Future<void> main() async{
   HttpOverrides.global = MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
   DeviceInfo();
-  Mawa(server: 'api-dev.mawa.co.za:8181', initialScreenID: HomePage.id, loginScreenID: Authenticate.id);
+  Mawa(server: 'qas.api.app.mawa.co.za', initialScreenID: HomePage.id, loginScreenID: Authenticate.id);
   runApp(Home());
 }
