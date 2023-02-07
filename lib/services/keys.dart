@@ -38,7 +38,7 @@ class JsonResponses {
 
   static const String token = 'token';
 
-  static const String userID = 'userID';
+  static const String username = 'username';
   static const String userType = 'userType';
 
   static const String parent = 'parent';
@@ -272,7 +272,7 @@ class Resources {
   static const String ticketResolve = 'resolved';
   static const String ticketReject = 'reject';
   static const String ticketCancel = 'cancel';
-  static const String users = 'users';
+  static const String user = 'user';
   static const String resetPassword = 'passwordreset';
   static const String reset = 'reset';
   static const String forgotPassword = 'forgotPassword';

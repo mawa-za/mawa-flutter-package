@@ -11,6 +11,7 @@ class User{
   static List listUsers = [];
   static List assignees = [];
 
+  static late List list = [];
   static late String username;
   static late String password;
   static late String email;
@@ -21,7 +22,7 @@ class User{
     try {
       dynamic response = await NetworkRequests().securedMawaAPI(
           NetworkRequests.methodGet,
-          resource: '${Resources.users}/$username')
+          resource: '${Resources.user}/$username')
       ;
       if(response.statusCode == 200 ) {
         print('\nj\n code ${response.statusCode}\nj\n');
@@ -31,14 +32,15 @@ class User{
         print('dara ${data.runtimeType}');
         user.addAll(data);
         print('\nj\n user ${user}\nj\n');
-        partnerId = user[JsonResponses.usersPartner];
-        Persons.personId = user[JsonResponses.usersPartner];
+        // partnerId = user[JsonResponses.usersPartner];
+        partnerId = user[JsonResponses.username];
+        // Persons.personId = user[JsonResponses.usersPartner];
         print('\nj\n per id ${Persons.personId}\nj\n');
-        groupId = user[JsonResponses.usersPartner];
+        // groupId = user[JsonResponses.usersPartner];
         print('\nj\n gr id ${groupId}\nj\n');
-        if(getPerson) {
-          await Persons(Persons.personId).getPerson();
-        }
+        // if(getPerson) {
+        //   await Persons(Persons.personId).getPerson();
+        // }
       }
     }
     catch(e){
@@ -51,7 +53,7 @@ class User{
     User.user.clear();
     dynamic response =
     await NetworkRequests()
-        .securedMawaAPI(NetworkRequests.methodGet, resource: Resources.users);
+        .securedMawaAPI(NetworkRequests.methodGet, resource: Resources.user);
 
     Map<String, String> mapUsers = {};
 
@@ -107,28 +109,29 @@ class User{
 
   resetPassword({required String username}) async {
     return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
-        resource: '${Resources.users}/$username/${Resources.reset}'));
+        resource: '${Resources.user}/$username/${Resources.reset}'));
   }
 
-  getUserRoles(bool sort) async {
+  getUserRoles() async {
     userRoles = {};
-    List list = await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+    // List
+    list = await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
-        resource: '${Resources.users}/$username/roles'));
-    if(sort) {
-      if (list.isNotEmpty && list.runtimeType == Constants.list.runtimeType) {
-        for (int i = 0; i < list.length; i++) {
-          userRoles[list[i][JsonResponses.usersRolesDescription]] =
-          list[i][JsonResponses.id
-          ];
-        }
-      }
-      return userRoles;
-    }
-    else{
-      return list;
-    }
-    return userRoles;
+        resource: '${Resources.user}/$username/role'));
+    // if(sort) {
+    //   if (list.isNotEmpty && list.runtimeType == Constants.list.runtimeType) {
+    //     for (int i = 0; i < list.length; i++) {
+    //       userRoles[list[i][JsonResponses.usersRolesDescription]] =
+    //       list[i][JsonResponses.id
+    //       ];
+    //     }
+    //   }
+    //   return userRoles;
+    // }
+    // else{
+    //   return list;
+    // }
+    return list;
   }
 
   addUser(
@@ -142,7 +145,7 @@ class User{
       }) async{
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPost,
-        resource: Resources.users,
+        resource: Resources.user,
         body: {
           JsonPayloads.id : id,
           JsonPayloads.userType : userType,
@@ -171,7 +174,7 @@ class User{
   getUsersByOrganisation() async {
     assignees = await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
-        resource: Resources.users + '/' + Resources.OrganizationUsers,
+        resource: Resources.user + '/' + Resources.OrganizationUsers,
         queryParameters: {
           QueryParameters.organizationId:
           User.loggedInUser[JsonResponses.usersGroupId]
