@@ -24,4 +24,13 @@ class PurchaseOrder{
         });
   }
 
+  getSpurchaseOrder(String purchaseOrderID) async {
+    return await NetworkRequests.decodeJson(
+        await NetworkRequests().securedMawaAPI(
+          NetworkRequests.methodGet,
+          resource: Resources.purchaseOrder + '/' + purchaseOrderID,
+        ),
+        negativeResponse: {});
+  }
+
 }

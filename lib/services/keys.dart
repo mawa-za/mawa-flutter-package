@@ -365,7 +365,7 @@ class Resources {
 
   //KEYS FOR THE NEW BACKEND
 
-  static const String purchaseOrder = 'purchaseOrder';
+  static const String purchaseOrder = 'purchase-order';
 
 }
 
