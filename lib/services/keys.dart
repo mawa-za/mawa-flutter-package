@@ -363,6 +363,10 @@ class Resources {
   static const String submit = 'submit';
   static const String submitted = 'submitted';
 
+  //KEYS FOR THE NEW BACKEND
+
+  static const String purchaseOrder = 'purchaseOrder';
+
 }
 
 class JsonPayloads {
@@ -485,6 +489,13 @@ class JsonPayloads {
   static const String accountNumber = 'accountNumber';
 
   static const String categoryDescription = 'categoryDescription';
+
+  //KEYS FOR THE NEW BACKEND
+  static const String customer = 'customer';
+  static const String items = 'items';
+  static const String product = 'product';
+  static const String unit = 'items';
+
 
 // static const String  = '';
 }
