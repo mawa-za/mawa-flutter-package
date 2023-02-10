@@ -77,3 +77,4 @@ part 'package:mawa_package/services/workcenters.dart';
 part 'package:mawa_package/services/vouchers.dart';
 part 'package:mawa_package/services/purchase_order.dart';
 part 'package:mawa_package/services/sale_order.dart';
+part 'package:mawa_package/services/invoice.dart';
