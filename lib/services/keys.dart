@@ -367,8 +367,7 @@ class Resources {
 
   static const String purchaseOrder = 'purchase-order';
   static const String salesOrder = 'sales-order';
-  static const String field = 'field';
-  static const String option = 'option';
+  static const String invoice = 'invoice';
 
 }
 

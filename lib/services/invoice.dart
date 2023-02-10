@@ -10,7 +10,7 @@ class Invoice{
   }) async{
     await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPost,
-        resource: Resources.purchaseOrder,
+        resource: Resources.invoice,
         body: {
           JsonPayloads.customer: customer,
           JsonPayloads.dueDate: dueDate,
