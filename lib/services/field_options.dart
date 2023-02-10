@@ -39,6 +39,18 @@ class FieldOptions {
     return await NetworkRequests.decodeJson(response);
   }
 
+  //NEW METHODS FOR THE NEW BACKEND
+
+  getFieldoptions(String field) async {
+    dynamic response = await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodGet,
+      resource: '${Resources.field}/$field/${Resources.option}',
+    );
+    fieldOptions = await NetworkRequests.decodeJson(response, negativeResponse: []);
+
+    return fieldOptions;
+  }
+
 }
 // part of mawa;
 //
