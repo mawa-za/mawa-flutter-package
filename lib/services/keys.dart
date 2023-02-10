@@ -366,6 +366,7 @@ class Resources {
   //KEYS FOR THE NEW BACKEND
 
   static const String purchaseOrder = 'purchase-order';
+  static const String salesOrder = 'sales-order';
 
 }
 
@@ -495,6 +496,8 @@ class JsonPayloads {
   static const String items = 'items';
   static const String product = 'product';
   static const String unit = 'items';
+  static const String unitPrice = 'unitPrice';
+  static const String deliveryDate = 'deliveryDate';
 
 
 // static const String  = '';
