@@ -33,5 +33,14 @@ class SalesOrder {
         negativeResponse: {});
   }
 
+  getAllSalesOrders() async {
+    return await NetworkRequests.decodeJson(
+        await NetworkRequests().securedMawaAPI(
+          NetworkRequests.methodGet,
+          resource: Resources.salesOrder,
+        ),
+        negativeResponse: {});
+  }
+
 
 }
