@@ -24,4 +24,22 @@ class Invoice{
         });
   }
 
+  getInvoice(String id) async {
+    return await NetworkRequests.decodeJson(
+        await NetworkRequests().securedMawaAPI(
+          NetworkRequests.methodGet,
+          resource: '${Resources.invoice}/$id',
+        ),
+        negativeResponse: {});
+  }
+
+  getInvoices() async {
+    return await NetworkRequests.decodeJson(
+        await NetworkRequests().securedMawaAPI(
+          NetworkRequests.methodGet,
+          resource: Resources.invoice,
+        ),
+        negativeResponse: []);
+  }
+
 }
