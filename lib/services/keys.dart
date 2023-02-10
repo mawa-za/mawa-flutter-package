@@ -498,6 +498,7 @@ class JsonPayloads {
   static const String unit = 'items';
   static const String unitPrice = 'unitPrice';
   static const String deliveryDate = 'deliveryDate';
+  static const String supplier = 'supplier';
 
 
 // static const String  = '';

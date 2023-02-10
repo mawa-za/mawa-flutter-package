@@ -3,8 +3,8 @@ part of 'package:mawa_package/mawa_package.dart';
 class PurchaseOrder{
 
   static createPurchaseOrder({
-    String ? dueDate,
-    String ? customer,
+    String ? deliveryDate,
+    String ? supplier,
     String ? product,
     String ? quantity,
   }) async{
@@ -12,8 +12,8 @@ class PurchaseOrder{
         NetworkRequests.methodPost,
         resource: Resources.purchaseOrder,
         body: {
-          JsonPayloads.customer: customer,
-          JsonPayloads.dueDate: dueDate,
+          JsonPayloads.supplier: supplier,
+          JsonPayloads.deliveryDate: deliveryDate,
           JsonPayloads.items:[
             {
               JsonPayloads.product: product,
@@ -24,11 +24,11 @@ class PurchaseOrder{
         });
   }
 
-  getSpurchaseOrder(String purchaseOrderID) async {
+  getPurchaseOrder(String purchaseOrderID) async {
     return await NetworkRequests.decodeJson(
         await NetworkRequests().securedMawaAPI(
           NetworkRequests.methodGet,
-          resource: Resources.purchaseOrder + '/' + purchaseOrderID,
+          resource: '${Resources.purchaseOrder}/$purchaseOrderID',
         ),
         negativeResponse: {});
   }
