@@ -13,7 +13,7 @@ class WorkCenters {
   getAllWorkCenters() async{
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
-        resource: Resources.workCenters);
+        resource: Resources.workcenter);
     workcenters = await NetworkRequests.decodeJson(response, negativeResponse: []);
     return workcenters;
 
@@ -22,7 +22,7 @@ class WorkCenters {
   getASingleWorkCenters() async{
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
-        resource: '${Resources.workCenters}/${Resources.workCenterDesc}');
+        resource: '${Resources.workcenter}/${Resources.workCenterDesc}');
     workCenId = await NetworkRequests.decodeJson(response, negativeResponse: []);
     print('work work work');
     return workCenId;
@@ -32,7 +32,7 @@ class WorkCenters {
   getWorkcenterRoles(workCenId) async{
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
-        resource: '${Resources.workCenters}/$workCenId/${Resources.roleWorkcenters}');
+        resource: '${Resources.workcenter}/$workCenId/${Resources.roleWorkcenters}');
     workcenterRoles = await NetworkRequests.decodeJson(response, negativeResponse: []);
     print('HHHHHHHHH $workcenterRoles');
     for(int i = 0; i < workcenterRoles.length; i++) {
@@ -48,7 +48,7 @@ class WorkCenters {
 addWorkCenter({required desc, required path}) async {
   dynamic response = await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPost,
-      resource: Resources.workCenters,
+      resource: Resources.workcenter,
   body: {
         JsonPayloads.workCenterDesc : desc,
     JsonPayloads.workCenterPath : path,
@@ -70,7 +70,7 @@ addWorkCenter({required desc, required path}) async {
     role == null ? User.userLoginRole = User.userRoles[User.userRoles.keys.first]! : User.userLoginRole = role;
     List centers = await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
-        resource: Resources.workCenters,
+        resource: Resources.workcenter,
         queryParameters: {'role': User.userLoginRole}
     ));
     List<String> list = [];
@@ -140,7 +140,7 @@ addWorkCenter({required desc, required path}) async {
   deleteWorkCenter(workcenter) async{
     dynamic response  = await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodDelete,
-      resource: Resources.workCenters + '/' + workcenter,
+      resource: Resources.workcenter + '/' + workcenter,
     );
 
     feedback = await NetworkRequests.decodeJson(response, negativeResponse: []);
