@@ -286,7 +286,7 @@ class Resources {
   static const String leaveProfiles = 'leaveProfiles';
   static const String transactionNotes = 'transactionNotes';
   static const String persons = 'persons';
-  static const String workCenters = 'workcenters';
+  static const String workcenter = 'workcenter';
   static const String roleWorkcenters = 'roleWorkcenters';
   static const String workCenterDesc = 'workcenterDesc';
   static const String workCenterId = 'id';
