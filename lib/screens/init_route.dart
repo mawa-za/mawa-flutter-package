@@ -34,9 +34,9 @@ class _InitialRouteState extends State<InitialRoute> {
   }
 
   future() async {
-    // initConnectivity();
-    // _connectivitySubscription =
-    //     _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+    initConnectivity();
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
     await ApkVersion().getApkInfo();
   }
 
