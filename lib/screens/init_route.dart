@@ -34,9 +34,9 @@ class _InitialRouteState extends State<InitialRoute> {
   }
 
   future() async {
-    initConnectivity();
-    _connectivitySubscription =
-        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+    // initConnectivity();
+    // _connectivitySubscription =
+    //     _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
     await ApkVersion().getApkInfo();
   }
 
@@ -47,7 +47,7 @@ class _InitialRouteState extends State<InitialRoute> {
     super.initState();
   }
 
-  @override
+  // @override
   Future<void> _updateConnectionStatus(ConnectivityResult result) async {
     switch (result) {
       case ConnectivityResult.wifi:
