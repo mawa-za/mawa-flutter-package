@@ -108,15 +108,54 @@ class Claims {
   }
 
   static submitClaim(String claimNo) async {
-    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
-        resource: '${Resources.claims}/$claimNo/${Resources.submit}',
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodPost,
+      resource: '${Resources.claims}/$claimNo/${Resources.submit}',
     );
   }
 
   static submitDocuments(String claimNo) async {
-    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodPost,
       resource: '${Resources.claims}/$claimNo/${Resources.submitted}',
     );
   }
 
+  //ENDPOINTS FOR THE NEW BACKEND
+
+  getClaims() async {
+    await NetworkRequests.decodeJson(
+        await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
+            resource: Resources.claim),
+        negativeResponse: {});
+  }
+
+  getClaimById(String id) async {
+    await NetworkRequests.decodeJson(
+        await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
+            resource: '${Resources.claim}/$id'),
+        negativeResponse: {});
+  }
+
+  createClaim({
+    required String claimant,
+    required String deceased,
+    required String member,
+    required String membership,
+    required String type,
+    required String deathDate,
+    required String burialDate,
+  }) async {
+    await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
+        resource: Resources.claim,
+        body: {
+          JsonPayloads.claimant: claimant,
+          JsonPayloads.deceased: deceased,
+          JsonPayloads.member: member,
+          JsonPayloads.membership: membership,
+          JsonPayloads.type: type,
+          JsonPayloads.deathDate: deathDate,
+          JsonPayloads.burialDate: burialDate
+        });
+  }
 }

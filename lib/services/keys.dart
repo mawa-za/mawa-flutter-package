@@ -256,6 +256,10 @@ class JsonResponses {
   static const String policyHolder = 'policyHolder';
 
   static const String categoryDescription = 'categoryDescription';
+
+  //KEYS FOR THE NEW BACKEND
+
+  static const String number = 'number';
 }
 
 class Resources {
@@ -370,6 +374,7 @@ class Resources {
   static const String invoice = 'invoice';
   static const String field = 'field';
   static const String option = 'option';
+  static const String claim = 'claim';
 
 }
 
@@ -502,6 +507,14 @@ class JsonPayloads {
   static const String unitPrice = 'unitPrice';
   static const String deliveryDate = 'deliveryDate';
   static const String supplier = 'supplier';
+  static const String claimant = 'claimant';
+  static const String deceased = 'deceased';
+  static const String member = 'member';
+  static const String membership = 'membership';
+  static const String deathDate = 'deathDate';
+  static const String burialDate = 'burialDate';
+
+
 
 
 // static const String  = '';
