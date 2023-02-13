@@ -375,6 +375,7 @@ class Resources {
   static const String field = 'field';
   static const String option = 'option';
   static const String claim = 'claim';
+  static const String membership = 'membership';
 
 }
 

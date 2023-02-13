@@ -49,4 +49,11 @@ class Memberships {
         resource: '${Resources.policies} ', body: details);
   }
 
+  //METHODS FOR THE NEW BACKEND
+
+  getMembership(String id) async {
+    return await NetworkRequests.decodeJson( await NetworkRequests()
+        .securedMawaAPI(NetworkRequests.methodGet, resource: '${Resources.membership}/$id'));
+  }
+
 }
