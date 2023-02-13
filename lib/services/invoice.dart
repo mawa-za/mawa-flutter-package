@@ -5,8 +5,7 @@ class Invoice{
   static createInvoice({
     String ? customer,
     String ? dueDate,
-    String ? product,
-    String ? quantity,
+    required List<Map<dynamic,String>> item
   }) async{
     await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPost,
@@ -14,12 +13,7 @@ class Invoice{
         body: {
           JsonPayloads.customer: customer,
           JsonPayloads.dueDate: dueDate,
-          JsonPayloads.items:[
-            {
-              JsonPayloads.product: product,
-              JsonPayloads.quantity: quantity,
-            }
-          ],
+          JsonPayloads.items:item
 
         });
   }
