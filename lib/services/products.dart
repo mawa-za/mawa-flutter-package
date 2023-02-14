@@ -22,7 +22,7 @@ class Products {
   productsList(category) async {
     products = await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
-        resource: Resources.products,
+        resource: Resources.product,
         queryParameters: {'category': category})); //
     return products;
   }

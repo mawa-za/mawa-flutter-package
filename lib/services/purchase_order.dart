@@ -5,8 +5,8 @@ class PurchaseOrder{
   static createPurchaseOrder({
     String ? deliveryDate,
     String ? supplier,
-    String ? product,
-    String ? quantity,
+    required List<Map<dynamic,String>> item
+
   }) async{
     await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPost,
@@ -14,12 +14,8 @@ class PurchaseOrder{
         body: {
           JsonPayloads.supplier: supplier,
           JsonPayloads.deliveryDate: deliveryDate,
-          JsonPayloads.items:[
-            {
-              JsonPayloads.product: product,
-              JsonPayloads.quantity: quantity,
-            }
-          ],
+          JsonPayloads.items:item
+        ,
 
         });
   }
