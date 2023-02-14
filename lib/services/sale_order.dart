@@ -4,23 +4,14 @@ class SalesOrder {
 
   static createSaleOrder(
       {String? deliveryDate,
-      String? customer,
-      String? product,
-      String? quantity,
-      String? unitPrice,
-      required List items}) async {
+        String? customer,
+        required List<Map<dynamic,String>> item}) async {
     await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
         resource: Resources.salesOrder,
         body: {
           JsonPayloads.customer: customer,
           JsonPayloads.deliveryDate: deliveryDate,
-          JsonPayloads.items: [
-            {
-              JsonPayloads.product: product,
-              JsonPayloads.quantity: quantity,
-              JsonPayloads.unitPrice: unitPrice
-            }
-          ],
+          JsonPayloads.items: item
         });
   }
 
