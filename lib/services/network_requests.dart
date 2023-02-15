@@ -53,7 +53,9 @@ class NetworkRequests {
 
     String env =  server.substring(0, server.indexOf('.'));
 
-    Map<String, String> headers = {"X-TenantID":env};
+    // Map<String, String> headers = {"X-TenantID":env};
+
+    Map<String, String> headers = {"X-TenantID":getTenant()};
     // {/*"Authorization": "Bearer $tokenKey"*/};
     secured ? headers["Authorization"] = "Bearer $tokenKey" : null;
 
@@ -67,6 +69,17 @@ class NetworkRequests {
       headers['Content-type'] = 'multipart/form-data';
 
     return headers;
+  }
+
+  String getTenant(){
+    if (kIsWeb) {
+      // running on the web!
+      var base = Uri.base.origin;
+      return base.split('//').last;
+    } else {
+      return "";
+      // NOT running on the web! You can check for additional platforms here.
+    }
   }
 
   Map statusMessages = {
