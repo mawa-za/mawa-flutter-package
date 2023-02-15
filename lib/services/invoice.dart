@@ -7,7 +7,8 @@ class Invoice{
     String ? dueDate,
     required List<Map<dynamic,String>> item
   }) async{
-    await NetworkRequests().securedMawaAPI(
+
+    dynamic response=await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPost,
         resource: Resources.invoice,
         body: {
@@ -16,6 +17,8 @@ class Invoice{
           JsonPayloads.items:item
 
         });
+    return response;
+
   }
 
   getInvoice(String id) async {
