@@ -123,21 +123,23 @@ class Claims {
 
   //ENDPOINTS FOR THE NEW BACKEND
 
-  getClaims() async {
-    await NetworkRequests.decodeJson(
-        await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-            resource: Resources.claim),
-        negativeResponse: {});
+  static getClaims() async {
+    claims.clear();
+    dynamic response = await NetworkRequests()
+        .securedMawaAPI(NetworkRequests.methodGet, resource: Resources.claim);
+    claims = await NetworkRequests.decodeJson(response, negativeResponse: []);
+
+    return claims;
   }
 
-  getClaimById(String id) async {
+  static getClaimById(String id) async {
     await NetworkRequests.decodeJson(
         await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
             resource: '${Resources.claim}/$id'),
         negativeResponse: {});
   }
 
-  createClaim({
+  static createClaim({
     required String claimant,
     required String deceased,
     required String member,
