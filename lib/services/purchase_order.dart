@@ -1,23 +1,25 @@
 part of 'package:mawa_package/mawa_package.dart';
 
-class PurchaseOrder{
-
-  static createPurchaseOrder({
-    String ? deliveryDate,
-    String ? supplier,
-    required List<Map<dynamic,String>> item
-
-  }) async{
-    await NetworkRequests().securedMawaAPI(
-        NetworkRequests.methodPost,
+class PurchaseOrder {
+  static createPurchaseOrder(
+      {String? deliveryDate,
+      String? supplier,
+      required List<Map<dynamic, String>> item}) async {
+    dynamic response= await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
         resource: Resources.purchaseOrder,
         body: {
           JsonPayloads.supplier: supplier,
           JsonPayloads.deliveryDate: deliveryDate,
-          JsonPayloads.items:item
-        ,
-
+          JsonPayloads.items: item,
         });
+    return response;
+  }
+
+  static getAllPurchaseOrders() async {
+    return await NetworkRequests.decodeJson(
+        await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
+            resource: Resources.purchaseOrder),
+        negativeResponse: []);
   }
 
   getPurchaseOrder(String purchaseOrderID) async {
@@ -28,5 +30,4 @@ class PurchaseOrder{
         ),
         negativeResponse: {});
   }
-
 }
