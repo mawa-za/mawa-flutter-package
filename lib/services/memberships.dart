@@ -56,4 +56,9 @@ class Memberships {
         .securedMawaAPI(NetworkRequests.methodGet, resource: '${Resources.membership}/$id'));
   }
 
+  getDependents(String membershipId) async {
+    return await NetworkRequests.decodeJson(await NetworkRequests()
+        .securedMawaAPI(NetworkRequests.methodGet, resource: '${Resources.membership}/$membershipId/${Resources.dependent}'));
+  }
+
 }

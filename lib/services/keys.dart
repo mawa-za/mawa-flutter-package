@@ -380,6 +380,7 @@ class Resources {
   static const String option = 'option';
   static const String claim = 'claim';
   static const String membership = 'membership';
+  static const String dependent = 'dependent';
 
 }
 
