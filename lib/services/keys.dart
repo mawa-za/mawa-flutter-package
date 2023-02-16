@@ -261,6 +261,7 @@ class JsonResponses {
 
   static const String number = 'number';
   static const String code = 'code';
+
   static const String procurementType = 'type';
 
 }
