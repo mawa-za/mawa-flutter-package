@@ -4,14 +4,15 @@ class FieldOptions {
   static List fieldOptions = [];
   static Map singleFieldOptions = {};
 
-  getFieldOptions(String option) async {
+  getFieldOptions(String field) async {
 
     dynamic response =  await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
-        resource: Resources.fieldOptions,
-        queryParameters: {
-          QueryParameters.field: option,
-        });
+      resource: '${Resources.field}/$field/${Resources.option}',
+        // queryParameters: {
+        //   QueryParameters.field: option,
+        // }
+        );
       fieldOptions = await NetworkRequests.decodeJson(response, negativeResponse: []);
 
       return fieldOptions;

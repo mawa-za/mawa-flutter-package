@@ -260,6 +260,7 @@ class JsonResponses {
   //KEYS FOR THE NEW BACKEND
 
   static const String number = 'number';
+  static const String code = 'code';
 }
 
 class Resources {
@@ -514,6 +515,10 @@ class JsonPayloads {
   static const String membership = 'membership';
   static const String deathDate = 'deathDate';
   static const String burialDate = 'burialDate';
+  static const String code = 'code';
+  static const String category = 'category';
+  static const String baseUnitOfMeasure = 'baseUnitOfMeasure';
+  static const String sellingPrice = 'sellingPrice';
 
 
 
