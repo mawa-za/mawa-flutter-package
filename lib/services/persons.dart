@@ -164,4 +164,23 @@ class Persons {
   }
 
 
+  //NEW METHODS FOR THE NEW BACKEND
+
+  static Future getPersonByIdNum(
+      {String? idNumber}) async {
+    Persons.people.clear();
+    dynamic peopleResponse = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: Resources.persons,
+        queryParameters: {
+          'idnumber': idNumber,
+          'filter': 'X'
+        });
+
+    // peopleResponse.runtimeType == people.runtimeType ? people = peopleResponse: people = [];
+    people = await NetworkRequests.decodeJson(peopleResponse);
+    return people;
+  }
+
+
 }
