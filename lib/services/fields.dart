@@ -2,13 +2,15 @@ part of 'package:mawa_package/mawa_package.dart';
 
 class Fields {
   static List fields = [];
+  static Map singleField = {};
+
   getFields() async {
     dynamic response =await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodGet,
-      resource: Resources.fields,
+      resource: Resources.field,
     );
-
-      fields = await NetworkRequests.decodeJson(response);
+    print('HERE');
+      fields = await NetworkRequests.decodeJson(response, negativeResponse: []);
       return fields;
 
   }
@@ -47,6 +49,19 @@ class Fields {
     return await NetworkRequests.decodeJson(response);
   }
 
+  getSingleField() async {
+    fields = await NetworkRequests.decodeJson(
+        await NetworkRequests().securedMawaAPI(
+          NetworkRequests.methodGet,
+          resource: Resources.field,
+        ), negativeResponse: {});
+
+    for (int index = 0; index < fields.length;  index++) {
+      singleField['${fields[index][JsonResponses.fieldOptionDescription]}'] = fields[index][JsonResponses.fieldOptionCode];
+    }
+    return singleField;
+
+  }
 }
 
 // part of mawa;
