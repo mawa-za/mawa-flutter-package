@@ -312,6 +312,7 @@ class Resources {
   static const String edit = 'Edit';
 
   static const String roles = 'roles';
+  static const String role = 'role';
   static const String products = 'products';
   static const String editPosition = 'editPosition';
   static const String addWorkcenter = 'addWorkcenter';
