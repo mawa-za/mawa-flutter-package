@@ -1,7 +1,7 @@
 part of 'package:mawa_package/mawa_package.dart';
 
 class InitialRoute extends StatefulWidget {
-  static const String id = 'Init Route';
+  static const String id = '/';
   var className;
   InitialRoute({this.className});
   @override
