@@ -184,4 +184,13 @@ class User{
     return assignees;
   }
 
+  isLoggedIn() async{
+    final SharedPreferences prefs = await preferences;
+    return prefs.getBool(SharedPrefs.isLoggedIn) ?? false;
+  }
+
+  setLoggedIn({required bool loggedIn}) async{
+    final SharedPreferences prefs = await preferences;
+    prefs.setBool(SharedPrefs.isLoggedIn, loggedIn);
+  }
 }
