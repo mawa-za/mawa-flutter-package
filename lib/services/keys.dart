@@ -661,6 +661,7 @@ class SharedPrefs {
   static const initialRoute = 'initialRoute';
   static const loginScreenID = 'loginScreenID';
   static const loginRole = 'loginRole';
+  static const isLoggedIn = 'isLoggedIn';
 }
 
 class CommentTypes{
