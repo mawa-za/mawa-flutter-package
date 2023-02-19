@@ -244,7 +244,7 @@ class Tools{
   static logoutPopup({required BuildContext context, required String redirect}) {
     return AwesomeDialog(
       context: context,
-      dialogType: DialogType.QUESTION,
+      dialogType: DialogType.question,
       animType: AnimType.BOTTOMSLIDE,
       desc: 'Do You Really Want To Logout?',
       btnOk: TextButton(

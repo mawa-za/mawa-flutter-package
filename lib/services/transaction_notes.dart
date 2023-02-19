@@ -73,7 +73,7 @@ class TransactionNotes {
 
     dynamic dlg = AwesomeDialog(
       context: context,
-      dialogType: DialogType.QUESTION,
+      dialogType: DialogType.question,
       dismissOnTouchOutside: false,
       animType: AnimType.BOTTOMSLIDE,
       title: 'Information!',
@@ -126,7 +126,7 @@ class TransactionNotes {
     // String? note;
     dynamic dlg = AwesomeDialog(
       context: context,
-      dialogType: DialogType.QUESTION,
+      dialogType: DialogType.question,
       dismissOnTouchOutside: false,
       animType: AnimType.BOTTOMSLIDE,
       title: 'Information!',
@@ -150,13 +150,8 @@ class TransactionNotes {
                   onEditingComplete: () {},
                 ),
                 DropdownSearch<String>(
-                  mode: Mode.MENU,
                   selectedItem: selectedVal,
-                  showSelectedItems: true,
-                  showSearchBox: true,
                   items: items,
-                  label: "Notification type",
-                  hint: "Select notification type",
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'Please select';
