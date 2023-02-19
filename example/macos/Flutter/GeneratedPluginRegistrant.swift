@@ -5,10 +5,10 @@
 import FlutterMacOS
 import Foundation
 
-import connectivity_plus
-import device_info_plus
+import connectivity_plus_macos
+import device_info_plus_macos
 import geolocator_apple
-import package_info_plus
+import package_info_plus_macos
 import path_provider_macos
 import shared_preferences_macos
 
