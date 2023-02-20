@@ -79,3 +79,4 @@ part 'package:mawa_package/services/purchase_order.dart';
 part 'package:mawa_package/services/sale_order.dart';
 part 'package:mawa_package/services/invoice.dart';
 part 'package:mawa_package/services/role.dart';
+part 'package:mawa_package/services/partners.dart';
