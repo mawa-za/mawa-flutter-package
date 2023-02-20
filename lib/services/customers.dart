@@ -150,13 +150,13 @@ class Customers {
   //Create customer
   static createCustomer(
       {required String? firstName,
-      String? middleName,
-      required String? lastName,
-      required dynamic gender,
-      required dynamic title,
-      required dynamic maritalStatus,
-      required dynamic birthdate,
-      String? postalCode}) async {
+        String? middleName,
+        required String? lastName,
+        dynamic gender,
+        dynamic title,
+        dynamic maritalStatus,
+        dynamic birthdate,
+        String? postalCode}) async {
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPost,
         resource: Resources.persons,
@@ -172,7 +172,8 @@ class Customers {
     return response;
   }
 
-  // assignRole({required String? role, required String? partnerId}) async {
+
+// assignRole({required String? role, required String? partnerId}) async {
   //   dynamic response = await NetworkRequests().securedMawaAPI(
   //       NetworkRequests.methodPost,
   //       resource: '${Resources.persons}/$partnerId/${Resources.roles}',

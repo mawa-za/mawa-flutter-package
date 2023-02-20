@@ -50,7 +50,13 @@ class NetworkRequests {
   }
 
   Map<String, String> headers({required String tokenKey, bool secured = true}) {
-    Map<String, String> headers = {/*"Authorization": "Bearer $tokenKey"*/};
+
+    String env =  server.substring(0, server.indexOf('.'));
+
+    // Map<String, String> headers = {"X-TenantID":env};
+
+    Map<String, String> headers = {"X-TenantID":getTenant()};
+    // {/*"Authorization": "Bearer $tokenKey"*/};
     secured ? headers["Authorization"] = "Bearer $tokenKey" : null;
 
     responseType ??= responseJson;
@@ -63,6 +69,17 @@ class NetworkRequests {
       headers['Content-type'] = 'multipart/form-data';
 
     return headers;
+  }
+
+  String getTenant(){
+    if (kIsWeb) {
+      // running on the web!
+      var base = Uri.base.origin;
+      return base.split('//').last;
+    } else {
+      return "";
+      // NOT running on the web! You can check for additional platforms here.
+    }
   }
 
   Map statusMessages = {
@@ -146,7 +163,8 @@ class NetworkRequests {
     server = await prefs.getString(SharedPrefs.server) ?? '';
     token = await prefs.getString(SharedPrefs.token) ?? '';
 
-    endpointURL = server;//'api-$server.mawa.co.za:$pot';
+    endpointURL ='https://$server/';
+        // server;//'api-$server.mawa.co.za:$pot';
 
     dynamic url;
     dynamic header = headers(
@@ -156,7 +174,8 @@ class NetworkRequests {
     // server == 'qas'
     //     ? url =  Uri.https(endpointURL, path + resource, queryParameters)
     //     : url = Uri.http(endpointURL, path + resource, queryParameters);
-    url = Uri.https(endpointURL, path + resource, queryParameters);
+    url =Uri.parse(endpointURL+resource);
+    // url = Uri.https(endpointURL, path + resource, queryParameters);
     print('mawa');
     print('status code: $statusCode');
     print('$method ');
@@ -402,14 +421,16 @@ class NetworkRequests {
 
     server = await prefs.getString(SharedPrefs.server) ?? '';
 
-    endpointURL = server;//'api-$server.mawa.co.za:$pot';
+    endpointURL = 'https://$server/';
+    // endpointURL = server;//'api-$server.mawa.co.za:$pot';
 
     dynamic url;
     // server == 'qas'
     //     ?
     // url =  Uri.https(endpointURL, path + resource,queryParameters)
     //     :
-    url = Uri.https(endpointURL, path + resource, queryParameters);
+    // url = Uri.https(endpointURL, path + resource, queryParameters);
+    url =Uri.parse(endpointURL+resource);
     Map<String, String> headers = {
       "Content-type": "application/json; charset=UTF-8"
     }; //
@@ -479,7 +500,7 @@ class NetworkRequests {
               otp = await data;
             }
             if (resource == Resources.authenticate) {
-              User.username = await data[JsonResponses.userID];
+              // User.username = await data[JsonResponses.username];
               token = await data[JsonResponses.token];
               Token.refreshToken = await data[JsonResponses.refreshToken] ?? '';
               preferences.then((SharedPreferences prefs) {

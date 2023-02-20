@@ -15,6 +15,12 @@ class Policies {
     return await NetworkRequests.decodeJson( await NetworkRequests()
         .securedMawaAPI(NetworkRequests.methodGet, resource: '${Resources.policies}/$idNumber'));
   }
+
+  getDependents(String policyId) async {
+    return await NetworkRequests.decodeJson( await NetworkRequests()
+        .securedMawaAPI(NetworkRequests.methodGet, resource: '${Resources.policies}/$policyId/${Resources.dependents}'));
+  }
+
 }
 
 // part of mawa;
