@@ -382,6 +382,8 @@ class Resources {
   static const String claim = 'claim';
   static const String membership = 'membership';
   static const String dependent = 'dependent';
+  static const String partners = 'partners';
+
 
 }
 
