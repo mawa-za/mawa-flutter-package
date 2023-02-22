@@ -182,5 +182,13 @@ class Persons {
     return people;
   }
 
+  static getPersonById(String id) async{
+    await NetworkRequests.decodeJson( await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: '${Resources.persons}/$id',
+       )
+    );
+  }
+
 
 }
