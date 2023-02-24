@@ -384,6 +384,9 @@ class Resources {
   static const String dependent = 'dependent';
   static const String partners = 'partners';
 
+  static const String quotation = 'quotation';
+  static const String items = 'items';
+
 
 }
 
@@ -526,6 +529,13 @@ class JsonPayloads {
   static const String category = 'category';
   static const String baseUnitOfMeasure = 'baseUnitOfMeasure';
   static const String sellingPrice = 'sellingPrice';
+
+  static const String customerId = 'customerId';
+  static const String expiryDate = 'expiryDate';
+  static const String productId = 'productId';
+  static const String ean = 'ean';
+  static const String uom = 'uom';
+  static const String lineTotal = 'lineTotal';
 
 
 
