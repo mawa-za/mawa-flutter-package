@@ -26,6 +26,7 @@ class NetworkRequests {
   late http.Response feedback;
   late final Future<String> _key;
   static String token = '';
+  static String tenantID = '';
   static String otp = '';
   static int statusCode = 100;
   static const String responseJson = 'json';
@@ -71,7 +72,7 @@ class NetworkRequests {
     return headers;
   }
 
-  String getTenant(){
+  getTenant() async {
     if (kIsWeb) {
       // running on the web!
       var base = Uri.base.origin;
@@ -81,6 +82,14 @@ class NetworkRequests {
       // NOT running on the web! You can check for additional platforms here.
     }
   }
+
+  // tenant(){
+  //   final SharedPreferences prefs = await preferences;
+  //
+  //   tenantID = await prefs.getString(SharedPrefs.tenantID) ?? '';
+  //   print('running $tenantID ${tenantID.runtimeType}');
+  //   return tenantID;
+  // }
 
   Map statusMessages = {
     200: 'OK',
@@ -162,6 +171,7 @@ class NetworkRequests {
 
     server = await prefs.getString(SharedPrefs.server) ?? '';
     token = await prefs.getString(SharedPrefs.token) ?? '';
+    tenantID = await prefs.getString(SharedPrefs.tenantID) ?? '';
 
     endpointURL ='https://$server/';
         // server;//'api-$server.mawa.co.za:$pot';
@@ -414,12 +424,12 @@ class NetworkRequests {
     String method, {
     required String resource,
     Map<String, String>? payload,
-    Map<String, dynamic>? queryParameters,
-    required BuildContext context,
+    Map<String, dynamic>? queryParameters, BuildContext? context,
   }) async {
     final SharedPreferences prefs = await preferences;
 
     server = await prefs.getString(SharedPrefs.server) ?? '';
+    tenantID = await prefs.getString(SharedPrefs.tenantID) ?? '';
 
     endpointURL = 'https://$server/';
     // endpointURL = server;//'api-$server.mawa.co.za:$pot';
