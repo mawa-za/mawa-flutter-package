@@ -537,6 +537,8 @@ class JsonPayloads {
   static const String uom = 'uom';
   static const String lineTotal = 'lineTotal';
 
+  static const String username = 'username';
+
 
 
 
@@ -674,6 +676,7 @@ class SharedPrefs {
   static const loginScreenID = 'loginScreenID';
   static const loginRole = 'loginRole';
   static const isLoggedIn = 'isLoggedIn';
+  static const tenantID = 'tenantID';
 }
 
 class CommentTypes{
