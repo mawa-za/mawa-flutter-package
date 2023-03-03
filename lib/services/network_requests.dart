@@ -72,7 +72,7 @@ class NetworkRequests {
     return headers;
   }
 
-  getTenant() async {
+  String getTenant() {
     if (kIsWeb) {
       // running on the web!
       var base = Uri.base.origin;
