@@ -5,10 +5,10 @@ class Mawa{
   final String server;
   final String loginScreenID;
   final String initialScreenID;
-  final String tenantID;
+  String? tenantID;
   final Future<SharedPreferences> preferences = SharedPreferences.getInstance();
 
-  Mawa({required this.server, required this.loginScreenID, required this.initialScreenID, required this.tenantID}){
+  Mawa({required this.server, required this.loginScreenID, required this.initialScreenID, this.tenantID}){
 
     preferences.then((SharedPreferences prefs) {
       return (prefs.setString(SharedPrefs.server, server));
@@ -20,7 +20,7 @@ class Mawa{
       return (prefs.setString(SharedPrefs.initialRoute, initialScreenID));
     });
     preferences.then((SharedPreferences prefs) {
-      return (prefs.setString(SharedPrefs.tenantID, tenantID));
+      return (prefs.setString(SharedPrefs.tenantID, tenantID!));
     });
   }
 
