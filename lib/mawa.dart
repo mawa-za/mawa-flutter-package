@@ -20,7 +20,7 @@ class Mawa{
       return (prefs.setString(SharedPrefs.initialRoute, initialScreenID));
     });
     preferences.then((SharedPreferences prefs) {
-      return (prefs.setString(SharedPrefs.tenantID, tenantID!));
+      return (prefs.setString(SharedPrefs.tenantID, tenantID ?? ''));
     });
   }
 
