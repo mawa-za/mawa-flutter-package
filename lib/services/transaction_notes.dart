@@ -191,7 +191,7 @@ class TransactionNotes {
         },
       ),
       btnCancel: TextButton(
-        child: const Text('Cancel'),
+        child: const Text('Cancel '),
         onPressed: () {
           note = null;
           Navigator.of(context).pop();

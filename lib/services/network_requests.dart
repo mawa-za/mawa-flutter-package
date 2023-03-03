@@ -411,6 +411,7 @@ class NetworkRequests {
   }
 
   Future unsecuredMawaAPI(
+
     String method, {
     required String resource,
     Map<String, String>? payload,
