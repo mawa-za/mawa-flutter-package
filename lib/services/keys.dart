@@ -382,6 +382,11 @@ class Resources {
   static const String claim = 'claim';
   static const String membership = 'membership';
   static const String dependent = 'dependent';
+  static const String partners = 'partners';
+
+  static const String quotation = 'quotation';
+  static const String items = 'items';
+
 
 }
 
@@ -525,6 +530,15 @@ class JsonPayloads {
   static const String baseUnitOfMeasure = 'baseUnitOfMeasure';
   static const String sellingPrice = 'sellingPrice';
 
+  static const String customerId = 'customerId';
+  static const String expiryDate = 'expiryDate';
+  static const String productId = 'productId';
+  static const String ean = 'ean';
+  static const String uom = 'uom';
+  static const String lineTotal = 'lineTotal';
+
+  static const String username = 'username';
+
 
 
 
@@ -662,6 +676,7 @@ class SharedPrefs {
   static const loginScreenID = 'loginScreenID';
   static const loginRole = 'loginRole';
   static const isLoggedIn = 'isLoggedIn';
+  static const tenantID = 'tenantID';
 }
 
 class CommentTypes{
