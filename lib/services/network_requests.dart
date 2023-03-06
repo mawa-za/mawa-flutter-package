@@ -428,10 +428,13 @@ class NetworkRequests {
     BuildContext? context,
   }) async {
     final SharedPreferences prefs = await preferences;
-
     server = await prefs.getString(SharedPrefs.server) ?? '';
-    tenantID = await prefs.getString(SharedPrefs.tenantID) ?? '';
-
+    if (kIsWeb) {
+      var base = Uri.base.origin;
+      tenantID = base.split('//').last;
+    } else {
+      tenantID = await prefs.getString(SharedPrefs.tenantID) ?? '';
+    }
     endpointURL = 'https://$server/';
     // endpointURL = server;//'api-$server.mawa.co.za:$pot';
 
