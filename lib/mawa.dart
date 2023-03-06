@@ -1,7 +1,6 @@
 part of 'package:mawa_package/mawa_package.dart';
 
 class Mawa{
-
   final String server;
   final Future<SharedPreferences> preferences = SharedPreferences.getInstance();
 

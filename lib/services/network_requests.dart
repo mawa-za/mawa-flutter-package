@@ -15,6 +15,7 @@ class NetworkRequests {
   }
 
   String? responseType /* = responseJson*/;
+
   static const String methodGet = 'get';
   static const String methodPost = 'post';
   static const String methodPut = 'put';
@@ -51,12 +52,11 @@ class NetworkRequests {
   }
 
   Map<String, String> headers({required String tokenKey, bool secured = true}) {
-
-    String env =  server.substring(0, server.indexOf('.'));
+    String env = server.substring(0, server.indexOf('.'));
 
     // Map<String, String> headers = {"X-TenantID":env};
 
-    Map<String, String> headers = {"X-TenantID":getTenant()};
+    Map<String, String> headers = {"X-TenantID": tenantID};
     // {/*"Authorization": "Bearer $tokenKey"*/};
     secured ? headers["Authorization"] = "Bearer $tokenKey" : null;
 
@@ -171,10 +171,15 @@ class NetworkRequests {
 
     server = await prefs.getString(SharedPrefs.server) ?? '';
     token = await prefs.getString(SharedPrefs.token) ?? '';
-    tenantID = await prefs.getString(SharedPrefs.tenantID) ?? '';
 
-    endpointURL ='https://$server/';
-        // server;//'api-$server.mawa.co.za:$pot';
+    if (kIsWeb) {
+      var base = Uri.base.origin;
+      tenantID = base.split('//').last;
+    } else {
+      tenantID = await prefs.getString(SharedPrefs.tenantID) ?? '';
+    }
+    endpointURL = 'https://$server/';
+    // server;//'api-$server.mawa.co.za:$pot';
 
     dynamic url;
     dynamic header = headers(
@@ -184,7 +189,7 @@ class NetworkRequests {
     // server == 'qas'
     //     ? url =  Uri.https(endpointURL, path + resource, queryParameters)
     //     : url = Uri.http(endpointURL, path + resource, queryParameters);
-    url =Uri.parse(endpointURL+resource);
+    url = Uri.parse(endpointURL + resource);
     // url = Uri.https(endpointURL, path + resource, queryParameters);
     print('mawa');
     print('status code: $statusCode');
@@ -282,17 +287,17 @@ class NetworkRequests {
               Tools.isTouchLocked = false;
               // message(message: 'Server Is Down', textColor: Colors.redAccent, isLock: false);
               Alerts.toastMessage(
-                  message: 'Server Down',
-                  positive: false,
+                message: 'Server Down',
+                positive: false,
               );
             }
             break;
           case 417:
             {
               Alerts.toastMessage(
-                  message: NetworkRequests()
-                      .statusMessages[NetworkRequests.statusCode],
-                  positive: false,
+                message: NetworkRequests()
+                    .statusMessages[NetworkRequests.statusCode],
+                positive: false,
               );
             }
             break;
@@ -300,25 +305,22 @@ class NetworkRequests {
             {
               Tools.isTouchLocked = false;
               // message(message: 'Login failed', textColor: Colors.redAccent, isLock: false);
-              Alerts.toastMessage(
-                  message: 'Not Allowed',
-                  positive: false);
+              Alerts.toastMessage(message: 'Not Allowed', positive: false);
             }
             break;
           case 500:
             {
               Tools.isTouchLocked = false;
               Alerts.toastMessage(
-                  message: 'Something Went Wrong',
-                  positive: false);
+                  message: 'Something Went Wrong', positive: false);
             }
             break;
           case 0:
             {
               Tools.isTouchLocked = false;
               Alerts.toastMessage(
-                  message: 'Network Error',
-                  positive: false,
+                message: 'Network Error',
+                positive: false,
               );
             }
             break;
@@ -326,18 +328,15 @@ class NetworkRequests {
             {
               Tools.isTouchLocked = false;
               Alerts.toastMessage(
-                  message: 'Network Error',
-                  positive: false,
+                message: 'Network Error',
+                positive: false,
               );
             }
             break;
           default:
             {
               Tools.isTouchLocked = false;
-              Alerts.toastMessage(
-                  message: 'Request Failed',
-                  positive: false
-              );
+              Alerts.toastMessage(message: 'Request Failed', positive: false);
             }
             break;
         }
@@ -351,7 +350,7 @@ class NetworkRequests {
             // context: Tools.context,
             message: 'Request Timed Out. \nCheck Network Connection.',
             positive: false);
-        responseCaught = http.Response('Request Timed Out',491);
+        responseCaught = http.Response('Request Timed Out', 491);
         // responseCaught.statusCode = 491;
         // responseCaught.reasonPhrase = 'Request Timed Out';
         return responseCaught;
@@ -361,7 +360,7 @@ class NetworkRequests {
             // context: Tools.context,
             message: 'Encountered Network Problem',
             positive: false);
-        responseCaught = http.Response('Encountered Network Problem',492);
+        responseCaught = http.Response('Encountered Network Problem', 492);
         // responseCaught.statusCode = 492;
         // responseCaught.reasonPhrase = 'Encountered Network Problem';
         return responseCaught;
@@ -371,7 +370,8 @@ class NetworkRequests {
             // context: Tools.context,
             message: 'Request Terminated During Handshake',
             positive: false);
-        responseCaught = http.Response('Could Not Establish Connection With Remote', 493);
+        responseCaught =
+            http.Response('Could Not Establish Connection With Remote', 493);
         // responseCaught.statusCode = 493;
         // responseCaught.reasonPhrase =
         //     'Could Not Establish Connection With Remote';
@@ -421,11 +421,11 @@ class NetworkRequests {
   }
 
   Future unsecuredMawaAPI(
-
     String method, {
     required String resource,
     Map<String, String>? payload,
-    Map<String, dynamic>? queryParameters, BuildContext? context,
+    Map<String, dynamic>? queryParameters,
+    BuildContext? context,
   }) async {
     final SharedPreferences prefs = await preferences;
 
@@ -441,7 +441,7 @@ class NetworkRequests {
     // url =  Uri.https(endpointURL, path + resource,queryParameters)
     //     :
     // url = Uri.https(endpointURL, path + resource, queryParameters);
-    url =Uri.parse(endpointURL+resource);
+    url = Uri.parse(endpointURL + resource);
     Map<String, String> headers = {
       "Content-type": "application/json; charset=UTF-8"
     }; //
@@ -490,7 +490,6 @@ class NetworkRequests {
               // headers: headers,
               body: jsonEncode(payload));
           break;
-
       }
       print('6854486');
       statusCode = feedback.statusCode;
@@ -545,8 +544,8 @@ class NetworkRequests {
           {
             Tools.isTouchLocked = false;
             Alerts.toastMessage(
-                message: 'Incorrect credentials',
-                positive: false,
+              message: 'Incorrect credentials',
+              positive: false,
             );
           }
           break;
@@ -554,17 +553,17 @@ class NetworkRequests {
           {
             Tools.isTouchLocked = false;
             Alerts.toastMessage(
-                message: 'Server Down',
-                positive: false,
-                );
+              message: 'Server Down',
+              positive: false,
+            );
           }
           break;
         case 0:
           {
             Tools.isTouchLocked = false;
             Alerts.toastMessage(
-                message: 'Network Error',
-                positive: false,
+              message: 'Network Error',
+              positive: false,
             );
           }
           break;
@@ -572,8 +571,8 @@ class NetworkRequests {
           {
             Tools.isTouchLocked = false;
             Alerts.toastMessage(
-                message: 'Network Error',
-                positive: false,
+              message: 'Network Error',
+              positive: false,
             );
           }
           break;
@@ -595,10 +594,10 @@ class NetworkRequests {
       // Navigator.maybePop(Tools.context);
       print(e.toString());
       Alerts.toastMessage(
-          message: 'Request Timed Out. \nCheck Network Connection.',
-          positive: false,
+        message: 'Request Timed Out. \nCheck Network Connection.',
+        positive: false,
       );
-      responseCaught = http.Response('Request Timed Out',491);
+      responseCaught = http.Response('Request Timed Out', 491);
       // responseCaught.statusCode = 491;
       // responseCaught.reasonPhrase = 'Request Timed Out';
       return responseCaught;
@@ -606,8 +605,8 @@ class NetworkRequests {
       Tools.isTouchLocked = false;
       print(e.toString());
       Alerts.toastMessage(
-          message: 'Encountered Network Problem',
-          positive: false,
+        message: 'Encountered Network Problem',
+        positive: false,
       );
       responseCaught = http.Response('Encountered Network Problem', 492);
       // responseCaught.statusCode = 492;
@@ -617,10 +616,11 @@ class NetworkRequests {
       Tools.isTouchLocked = false;
       print(e.toString());
       Alerts.toastMessage(
-          message: 'Request Terminated During Handshake',
-          positive: false,
+        message: 'Request Terminated During Handshake',
+        positive: false,
       );
-      responseCaught = http.Response('Could Not Establish Connection With Remote',493);
+      responseCaught =
+          http.Response('Could Not Establish Connection With Remote', 493);
       // responseCaught.statusCode = 493;
       // responseCaught.reasonPhrase =
       //     'Could Not Establish Connection With Remote';
@@ -639,10 +639,9 @@ class NetworkRequests {
       Tools.isTouchLocked = false;
       print(e.toString());
       Alerts.toastMessage(
-          // context: Tools.context,
-          message: 'Something Went Wrong 2',
-          positive: false,
-
+        // context: Tools.context,
+        message: 'Something Went Wrong 2',
+        positive: false,
       );
       responseCaught = http.Response('Ran Into A Problem', 499);
       // responseCaught.statusCode = 499;
