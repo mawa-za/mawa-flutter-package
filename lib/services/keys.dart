@@ -1,6 +1,8 @@
 part of 'package:mawa_package/mawa_package.dart';
 
 class JsonResponses {
+
+
   static const String amount = 'amount';
   static const String assignedBy = 'assignedBy';
   static const String assignedByID = 'assignedByID';
@@ -263,6 +265,11 @@ class JsonResponses {
   static const String code = 'code';
 
   static const String procurementType = 'type';
+  static const String supplierId = 'supplierId';
+  static const String quantity = 'quantity';
+  static const String uom = 'uom';
+  static const String unitPrice = 'unitPrice';
+  static const String lineTotal = 'lineTotal';
 
 }
 

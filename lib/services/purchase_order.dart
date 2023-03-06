@@ -4,12 +4,14 @@ class PurchaseOrder {
   static createPurchaseOrder(
       {String? deliveryDate,
       String? supplier,
+      String? expiryDate,
       required List<Map<dynamic, String>> item}) async {
     dynamic response= await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
         resource: Resources.purchaseOrder,
         body: {
           JsonPayloads.supplier: supplier,
           JsonPayloads.deliveryDate: deliveryDate,
+          JsonPayloads.expiryDate: expiryDate,
           JsonPayloads.items: item,
         });
 
@@ -28,6 +30,14 @@ class PurchaseOrder {
         await NetworkRequests().securedMawaAPI(
           NetworkRequests.methodGet,
           resource: '${Resources.purchaseOrder}/$purchaseOrderID',
+        ),
+        negativeResponse: {});
+  }
+  getPurchaseOrderItems(String purchaseOrderID, String attribute) async {
+    return await NetworkRequests.decodeJson(
+        await NetworkRequests().securedMawaAPI(
+          NetworkRequests.methodGet,
+          resource: '${Resources.purchaseOrder}/$purchaseOrderID/$attribute',
         ),
         negativeResponse: {});
   }
