@@ -52,9 +52,7 @@ class NetworkRequests {
   }
 
   Map<String, String> headers({required String tokenKey, bool secured = true}) {
-    String env = server.substring(0, server.indexOf('.'));
-
-    // Map<String, String> headers = {"X-TenantID":env};
+    print('running $tenantID ${tenantID.runtimeType}');
 
     Map<String, String> headers = {"X-TenantID": tenantID};
     // {/*"Authorization": "Bearer $tokenKey"*/};
@@ -429,6 +427,7 @@ class NetworkRequests {
   }) async {
     final SharedPreferences prefs = await preferences;
     server = await prefs.getString(SharedPrefs.server) ?? '';
+
     if (kIsWeb) {
       var base = Uri.base.origin;
       tenantID = base.split('//').last;
@@ -439,15 +438,7 @@ class NetworkRequests {
     // endpointURL = server;//'api-$server.mawa.co.za:$pot';
 
     dynamic url;
-    // server == 'qas'
-    //     ?
-    // url =  Uri.https(endpointURL, path + resource,queryParameters)
-    //     :
-    // url = Uri.https(endpointURL, path + resource, queryParameters);
     url = Uri.parse(endpointURL + resource);
-    Map<String, String> headers = {
-      "Content-type": "application/json; charset=UTF-8"
-    }; //
     print('b\t${url.toString()}\n howl');
 
     // print(endpointURL);
