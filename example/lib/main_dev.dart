@@ -16,10 +16,7 @@ Future<void> main() async{
   String url = 'dev.api.app.mawa.co.za';
   String tenantID = head.contains('localhost')? url.substring(0,url.indexOf('.')): head;
   Mawa(
-    server: url,
-    initialScreenID: HomePage.id,
-    loginScreenID: Authenticate.id,
-    tenantID: tenantID,
+    server: url
   );
   runApp(Home());
 }
