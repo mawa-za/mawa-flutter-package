@@ -99,7 +99,7 @@ class Quotation{
 
   getQuote()async{
     return await NetworkRequests.decodeJson( await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-      resource: '${Resources.quotation}/$id',
+      resource: id == '' ? Resources.quotation : '${Resources.quotation}/$id',
     ),
       negativeResponse: {},
     );

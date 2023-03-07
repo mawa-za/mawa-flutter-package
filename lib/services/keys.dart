@@ -271,6 +271,19 @@ class JsonResponses {
   static const String unitPrice = 'unitPrice';
   static const String lineTotal = 'lineTotal';
 
+  static const String deliveryDate = 'deliveryDate';
+  static const String expiryDate = 'expiryDate';
+
+
+
+  static const String totalExcVat = 'totalExcVat';
+  static const String totalIncVat = 'totalIncVat';
+  static const String discountAmount = 'discountAmount';
+  static const String discountPercentage = 'discountPercentage';
+  static const String VATAmount = 'VATAmount';
+  static const String VATPercentage = 'VATPercentage';
+  static const String items = 'items';
+
 }
 
 class Resources {
@@ -394,6 +407,7 @@ class Resources {
   static const String quotation = 'quotation';
   static const String items = 'items';
 
+  static const String calculate_pricing = 'calculate-pricing';
 
 }
 
