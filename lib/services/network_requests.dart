@@ -161,7 +161,7 @@ class NetworkRequests {
   Future<dynamic> securedMawaAPI(
     String method, {
     required String resource,
-    Map? body,
+    dynamic body,
     Map<String, dynamic>? queryParameters,
   }) async {
     // token == null ? token = await _key: null;
