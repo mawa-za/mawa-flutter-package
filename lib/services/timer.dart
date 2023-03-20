@@ -1,4 +1,4 @@
-part of mawa;
+part of 'package:mawa_package/mawa_package.dart';
 
 class Time {
   static late bool showPopup;
@@ -35,7 +35,7 @@ class Time {
   var route = ModalRoute.of(Tools.context);
 
   if(route!=null){
-  print(route.settings.name);
+  // print(route.settings.name);
   if(route.settings.name.toString() !=  Tickets.pageId!){
       // if(Tools.context.owner !=  TrackTicket()) {
       if(showPopup) {
@@ -58,11 +58,11 @@ class Time {
       // presetMillisecond: StopWatchTimer.getMilliSecFromSecond(3),
       presetMillisecond: StopWatchTimer.getMilliSecFromSecond(
           dueTime!.difference(DateTime.now()).inSeconds),
-      onChange: (value) => print('onChange $value'),
-      onChangeRawSecond: (value) => print('onChangeRawSecond $value'),
-      onChangeRawMinute: (value) => print('onChangeRawMinute $value'),
+      // onChange: (value) => print('onChange $value'),
+      // onChangeRawSecond: (value) => print('onChangeRawSecond $value'),
+      // onChangeRawMinute: (value) => print('onChangeRawMinute $value'),
       onEnded: () {
-        print('onEnded');
+        // print('onEnded');
       },
     );
   }

@@ -1,6 +1,4 @@
-
-// ignore_for_file: avoid_print
-part of mawa;
+part of 'package:mawa_package/mawa_package.dart';
 
 late String redirect;
 final Future<SharedPreferences> preferences = SharedPreferences.getInstance();
@@ -10,5 +8,4 @@ setLastPage(String page) async {
 
   prefs.setString(SharedPrefs.lastPage, page);
   Tools.lastPage  = page;
-  print('now ' + page);
 }

@@ -1,18 +1,6 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
-
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+This is a flutter package for Mawa back end REST API calls.
+It has classes and methods for most(if not  all) of mawa REST calls.
+This package is specific to Mawa flutter applications, it is tailor made only for that and as such it is not advisable to use this package for anything other than the mentioned use.
 
 ## Features
 
@@ -20,17 +8,27 @@ TODO: List what your package can do. Maybe include images, gifs, or videos.
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+To ensure correct functioning and usage of this package, packages included on this package should be included of the project this package is being used on
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+When using this package your main function should look like this:
+[
+import 'dart:io';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:mawa_package/mawa_package.dart' as mawa;
+import 'home.dart';
 
-```dart
-const like = 'sample';
-```
+
+void main() {
+    HttpOverrides.global = new mawa.MyHttpOverrides();
+    WidgetsFlutterBinding.ensureInitialized();
+    mawa.ApkVersion();  // Optional
+    mawa.DeviceInfo();  // Optional
+    runApp(MawaPay(server: 'dev',));
+}
+]
 
 ## Additional information
 

@@ -1,4 +1,4 @@
-part of mawa;
+part of 'package:mawa_package/mawa_package.dart';
 
 class TicketLogs {
   TicketLogs({required String ticketID}) {
@@ -75,6 +75,7 @@ class TicketLogs {
       ticketsLog = {};
     }
     // return resp.statusCode;
+    return ticketsLog;
   }
 
   Future<dynamic> searchUsersLog() async {

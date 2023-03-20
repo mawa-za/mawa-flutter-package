@@ -1,6 +1,8 @@
-part of mawa;
+part of 'package:mawa_package/mawa_package.dart';
 
 class JsonResponses {
+
+
   static const String amount = 'amount';
   static const String assignedBy = 'assignedBy';
   static const String assignedByID = 'assignedByID';
@@ -38,7 +40,7 @@ class JsonResponses {
 
   static const String token = 'token';
 
-  static const String userID = 'userID';
+  static const String username = 'username';
   static const String userType = 'userType';
 
   static const String parent = 'parent';
@@ -56,10 +58,16 @@ class JsonResponses {
   static const String fieldOptionValidFrom = 'validFrom';
   static const String fieldOptionValidTo = 'validTo';
 
+  static const String fieldCode = 'code';
+  static const String fieldDescription = 'description';
+  static const String fieldValidFrom = 'validFrom';
+  static const String fieldValidTo = 'validTo';
+
   static const String usersFirstName = 'firstName';
   static const String usersLastName = 'lastName';
   static const String usersPasswordStatus = 'password_status';
   static const String usersPartner = 'partner';
+  static const String userPartner = 'userPartner';
   static const String usersCellphone = 'cellphone';
   static const String usersEmail = 'email';
   static const String usersStatus = 'status';
@@ -84,14 +92,26 @@ class JsonResponses {
   static const String addressesLine2 = 'line2';
   static const String addressesLine3 = 'line3';
   static const String addressesLine4 = 'line4';
-  static const String addressesPostalCode = 'postalcode';
+  static const String addressesPostalCode = 'postalCode';
+  static const String addressesTypeDescription = 'typeDescription';
+  static const String addressline3Description = 'line3Description';
+  static const String adressline4Description = 'line4Description';
+  static const String addressPostalCode = 'postalcode';
 
   static const String contactsType = 'type';
+  static const String contactTypeDescription = 'typeDescription';
   static const String contactsDetail = 'detail';
 
   static const String versionAppName = 'appName';
   static const String versionApkVersionCode = 'versionNumber';
   static const String versionAppUsable = 'appUsable';
+  static const String versionValidFrom = 'valid_from';
+  static const String versionValidTo = 'valid_to';
+
+  static const String workCenterId = 'id';
+  static const String workCenterDescription = 'description';
+  static const String workcenterDescription = 'workcenterDescription';
+  static const String workCenterPath = 'path';
 
   static const String personIdType = 'idType';
   static const String personIdNumber = 'idnumber';
@@ -106,6 +126,13 @@ class JsonResponses {
   static const String personStatus = 'status';
   static const String processor = 'processor';
 
+  static const String employeeID = 'id';
+  static const String employeeFirstName = 'name1';
+  static const String employeeLastName = 'name2';
+  static const String employeeIdNumber = 'idNumber';
+
+  static const String identityTypeDescription  = 'typeDescription';
+
   static const String ticketLogID = 'ticketLogID';
   static const String ticketLogTicketID = 'ticketID';
   static const String ticketLogPartnerId = 'partnerID';
@@ -114,8 +141,8 @@ class JsonResponses {
   static const String ticketLogEndTime = 'endTime';
   static const String ticketLogNotes = 'notes';
 
-  static const String leaveLeaveRequestID = 'leaveRequestID';
-  static const String leaveRequestID = 'requestId';
+  static const String leaveRequestID = 'leaveRequestID';
+  static const String requestID = 'requestId';
   static const String leaveStartDate = 'startDate';
   static const String leaveEndDate = 'endDate';
   static const String leaveType = 'leaveType';
@@ -179,6 +206,7 @@ class JsonResponses {
   static const String position = 'position';
 
   // static const String = '';
+  static const String note = 'note';
 
   static const String ticketTaskID = 'ticketTaskID';
   static const String personAssignTo = 'personAssignTo';
@@ -194,11 +222,76 @@ class JsonResponses {
   static const String notes = 'notes';
   static const String taskLogs = 'taskLogs';
   static const String endTime = 'endTime';
+
+  static const String product = 'product';
+
+  static const String tombstoneDependents = 'tombstoneDependents';
+
+  static const String claimant = 'claimant';
+  static const String deceased = 'deceased';
+  static const String submissionDate = 'submissionDate';
+  static const String idnumber = 'idnumber';
+  static const String idNumber = 'idNumber';
+  static const String name2 = 'name2';
+  static const String birthDate = 'birthDate';
+  static const String validFrom = 'validFrom';
+  static const String validTo = 'validTo';
+
+  static const String dateCreated = 'dateCreated';
+  static const String branch = 'branch';
+  static const String department = 'department';
+
+
+  static const String location = 'location';
+  static const String terminalType = 'terminalType';
+  static const String terminalId = 'terminalId';
+
+  static const String amountDeposited = 'amountDeposited';
+
+  static const String attribute = 'attribute';
+  static const String value = 'value';
+
+  static const String priceType = 'priceType';
+  static const String priceTypeDescription = 'priceTypeDescription';
+  static const String declineReason = 'declineReason';
+  static const String policy = 'policy';
+  static const String policyHolder = 'policyHolder';
+
+  static const String categoryDescription = 'categoryDescription';
+
+  //KEYS FOR THE NEW BACKEND
+
+  static const String number = 'number';
+  static const String code = 'code';
+
+  static const String procurementType = 'type';
+  static const String supplierId = 'supplierId';
+  static const String quantity = 'quantity';
+  static const String uom = 'uom';
+  static const String unitPrice = 'unitPrice';
+  static const String lineTotal = 'lineTotal';
+
+  static const String deliveryDate = 'deliveryDate';
+  static const String expiryDate = 'expiryDate';
+
+
+
+  static const String totalExcVat = 'totalExcVat';
+  static const String totalIncVat = 'totalIncVat';
+  static const String discountAmount = 'discountAmount';
+  static const String discountPercentage = 'discountPercentage';
+  static const String VATAmount = 'VATAmount';
+  static const String VATPercentage = 'VATPercentage';
+  static const String items = 'items';
+
 }
 
 class Resources {
-  static const String attachments = 'Attachments';
+
+  static const String validateSAID = 'validateSAID';
+  static const String attachments = 'attachments';
   static const String otp = 'otp';
+  static const String customers = 'customers';
   static const String authenticate = 'authenticate';
   static const String tickets = 'tickets';
   static const String ticketsLog = 'ticketsLog';
@@ -207,7 +300,7 @@ class Resources {
   static const String ticketResolve = 'resolved';
   static const String ticketReject = 'reject';
   static const String ticketCancel = 'cancel';
-  static const String users = 'users';
+  static const String user = 'user';
   static const String resetPassword = 'passwordreset';
   static const String reset = 'reset';
   static const String forgotPassword = 'forgotPassword';
@@ -221,10 +314,17 @@ class Resources {
   static const String leaveProfiles = 'leaveProfiles';
   static const String transactionNotes = 'transactionNotes';
   static const String persons = 'persons';
-  static const String workCenters = 'workcenters';
+  static const String workcenter = 'workcenter';
+  static const String roleWorkcenters = 'roleWorkcenters';
+  static const String workCenterDesc = 'workcenterDesc';
+  static const String workCenterId = 'id';
   static const String receipts = 'receipts';
   static const String cashup = 'cashup';
   static const String policies = 'policies';
+
+  static const String voucherValue = 'vouchers';
+  static const String identity = 'identities';
+  static const String contactValue = 'contacts';
 
   static const String approve = 'Approve';
   static const String approveCancellation = 'ApproveCancellation';
@@ -236,7 +336,11 @@ class Resources {
   static const String edit = 'Edit';
 
   static const String roles = 'roles';
+  static const String role = 'role';
   static const String products = 'products';
+  static const String editPosition = 'editPosition';
+  static const String addWorkcenter = 'addWorkcenter';
+  static const String removeWokcenter = 'removeWorkCenter';
 
   static const String ticketStatusNew = 'new';
   static const String ticketStatusOpen = 'open';
@@ -257,6 +361,54 @@ class Resources {
   static const String getTasks = 'getTasks';
 
   static const String refreshAuthenticate = 'refreshAuthenticate';
+  static const String comment = 'comment';
+
+  static const String createTask = 'createTask';
+
+  static const String organization = 'Organization';
+  static const String OrganizationUsers = 'OrganizationUsers';
+
+  static const String dependents = 'dependents';
+  static const String claims = 'claims';
+  static const String product = 'product';
+  static const String identities = 'identities';
+  static const String contacts = 'contacts';
+  static const String employeeId = 'employeeId';
+  static const String startDate = 'startDate';
+  static const String branch = 'branch';
+  static const String employment = 'employment';
+
+  static const String claimApprove = 'approve';
+  static const String claimCancel = 'cancel';
+  static const String claimDecline = 'decline';
+
+  static const String deposits = 'deposits';
+
+  static const String attributes = 'attributes';
+  static const String pricing = 'pricings';
+  static const String refer = 'refer';
+  static const String vouchers = 'vouchers';
+
+  static const String submit = 'submit';
+  static const String submitted = 'submitted';
+
+  //KEYS FOR THE NEW BACKEND
+
+  static const String purchaseOrder = 'purchase-order';
+  static const String salesOrder = 'sales-order';
+  static const String invoice = 'invoice';
+  static const String field = 'field';
+  static const String option = 'option';
+  static const String claim = 'claim';
+  static const String membership = 'membership';
+  static const String dependent = 'dependent';
+  static const String partners = 'partners';
+
+  static const String quotation = 'quotation';
+  static const String items = 'items';
+
+  static const String calculate_pricing = 'calculate-pricing';
+
 }
 
 class JsonPayloads {
@@ -297,6 +449,120 @@ class JsonPayloads {
   static const String parentType = 'parentType';
   static const String parentReference = 'parentReference';
 
+  static const String fieldCode = 'code';
+  static const String fieldDescription = 'description';
+
+  static const String fieldOptionCode = 'code';
+  static const String fieldOptionDescription = 'description';
+
+  static const String field = 'field';
+
+  static const String workCenter = 'workcenter';
+  static const String position = 'position';
+
+  static const String workCenterDesc = 'description';
+  static const String workCenterPath = 'path';
+
+  static const String appName = 'appName';
+  static const String versionNumber = 'versionNumber';
+  static const String appUsable = 'appUsable';
+
+
+  static const String email = 'email';
+  static const String detail = 'detail';
+  static const String cellphone = 'cellphone';
+  static const String role = 'role';
+  static const String password = 'password';
+  static const String userType = 'userType';
+  static const String partner = 'partner';
+
+  static const String ticketDescription = 'description';
+  static const String ticketCategory = 'category';
+  static const String ticketSummary = 'subDescription';
+  static const String ticketPriority = 'priority';
+
+  static const String recievedBy = 'recievedBy';
+
+  static const String taskDescription = 'taskDescription';
+  static const String dueDate = 'dueDate';
+  static const String assignedBy = 'assignedBy';
+  static const String summary = 'summary';
+
+  static const String sms = 'sms';
+
+  static const String ticketTaskID = 'ticketTaskID';
+
+  static const String firstName = 'firstName';
+  static const String  middleName = 'middleName';
+  static const String lastName = 'lastName';
+  static const String idNumber = 'idnumber';
+  static const String personIdNumber = 'idNumber';
+  static const String idType = 'idType';
+  static const String addressline1 = 'line1';
+  static const String addressline2 = 'line2';
+  static const String addressline3 = 'line3';
+  static const String addressline4 = 'line4';
+  static const String birthDate = 'birthDate';
+  static const String postalCode = 'postalCode';
+  static const String cellNumber = 'detail';
+  static const String gender = 'gender';
+  static const String title = 'title';
+  static const String maritalStatus = 'maritalStatus';
+
+  static const String validTo = 'validTo';
+  static const String attribute = 'attribute';
+  static const String validFrom = 'validFrom';
+  static const String priceType = 'priceType';
+  static const String priceTypeDescription = 'priceTypeDescription';
+  static const String notes = 'notes';
+  static const String declineReason = 'declineReason';
+
+  static const String productCategory = 'category';
+  static const String productDescription = 'description';
+  static const String quantity = 'quantity';
+
+  static const String deceasedId = 'deceasedId';
+  static const String claimantId = 'claimantId';
+  static const String bankAccount = 'bankAccount';
+  static const String bankName = 'bankName';
+  static const String branchName = 'branchName';
+  static const String branchCode = 'branchCode';
+  static const String accountType = 'accountType';
+  static const String accountNumber = 'accountNumber';
+
+  static const String categoryDescription = 'categoryDescription';
+
+  //KEYS FOR THE NEW BACKEND
+  static const String customer = 'customer';
+  static const String items = 'items';
+  static const String product = 'product';
+  static const String unit = 'items';
+  static const String unitPrice = 'unitPrice';
+  static const String deliveryDate = 'deliveryDate';
+  static const String supplier = 'supplier';
+  static const String claimant = 'claimant';
+  static const String deceased = 'deceased';
+  static const String member = 'member';
+  static const String membership = 'membership';
+  static const String deathDate = 'deathDate';
+  static const String burialDate = 'burialDate';
+  static const String code = 'code';
+  static const String category = 'category';
+  static const String baseUnitOfMeasure = 'baseUnitOfMeasure';
+  static const String sellingPrice = 'sellingPrice';
+
+  static const String customerId = 'customerId';
+  static const String expiryDate = 'expiryDate';
+  static const String productId = 'productId';
+  static const String ean = 'ean';
+  static const String uom = 'uom';
+  static const String lineTotal = 'lineTotal';
+
+  static const String username = 'username';
+
+
+
+
 // static const String  = '';
 }
 
@@ -318,10 +584,15 @@ class QueryParameters {
   static const String field = 'field';
   static const String filter = 'filter';
   static const String filterValue = 'x';
+  static const String userType = 'userType';
 
   static const String id = 'id';
 
+  static const String loggedByID = 'loggedByID';
   static const String loggedById = 'loggedById';
+
+  static const String personIdNumber = 'idnumber';
+  static const String partnerRole = 'partnerRole';
 
   static const String organisationId = 'organisationId';
   static const String otp = 'otp';
@@ -349,6 +620,8 @@ class QueryParameters {
 
   static const String meesageType = 'meesageType';
   static const String adminEmail = 'adminEmail';
+  static const String user = 'user';
+  static const String password = 'password';
 
   static const String assignTo = 'assignTo';
   static const String ticketTaskID = 'ticketTaskID';
@@ -359,6 +632,41 @@ class QueryParameters {
 
   static const String userID = 'userID';
   static const String note = 'note';
+  static const String type = 'type';
+
+  static const String workcenter = 'workcenter';
+  static const String position = 'position';
+
+
+  static const String New = 'new';
+  static const String inprogress = 'inprogress';
+  static const String open = 'open';
+  static const String cancelled = 'cancelled';
+  static const String resolved = 'resolved';
+  static const String completed = 'completed';
+
+  static const String organizationId = 'organizationId';
+
+  static const String policy = 'policy';
+  static const String approver = 'approver';
+
+  static const String salesArea = 'salesArea';
+  static const String product = 'product';
+  static const String customer = 'customer';
+  static const String salesRepresentative = 'salesRepresentative';
+
+  static const String amount = 'amount';
+  static const String location = 'location';
+  static const String terminalType = 'terminalType';
+  static const String terminalId = 'terminalId';
+  static const String tenderType = 'tenderType';
+  static const String transactionLink = 'transactionLink';
+  static const String role = 'role';
+
+  static const String cashupId = 'cashupId';
+  static const String checkoutId = 'checkoutId';
+
+// static const String  = '';
 }
 
 class Statuses {
@@ -386,4 +694,26 @@ class SharedPrefs {
   static const trackingTicketID = 'trackingTicketID';
   static const refreshToken = 'refreshToken';
   static const initialRoute = 'initialRoute';
+  static const loginScreenID = 'loginScreenID';
+  static const loginRole = 'loginRole';
+  static const isLoggedIn = 'isLoggedIn';
+  static const tenantID = 'tenantID';
+}
+
+class CommentTypes{
+  static const String ticketComment = 'TICKETCOMMENT';
+  static const String leaveComment = 'LEAVEMANAGEMENT';
+}
+
+class FieldOptionTypes{
+  static const String fieldOptionCategory = 'CATEGORY';
+  static const String fieldOptionPriority = 'PRIORITY';
+  static const String fieldOptionIdType = 'idType';
+  static const String fieldOptionGender = 'GENDER';
+  static const String fieldOptionTitle = 'TITLE';
+  static const String fieldOptionMaritalStatus = 'MARITALSTATUS';
+  static const String fieldOptionSuburb = 'suburb';
+  static const String fieldOptionTown = 'TOWN';
+  static const String fieldOptionContactType= 'CONTACTTYPE';
+
 }

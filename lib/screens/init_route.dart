@@ -1,7 +1,7 @@
-part of mawa;
+part of 'package:mawa_package/mawa_package.dart';
 
 class InitialRoute extends StatefulWidget {
-  static const String id = 'Init Route';
+  static const String id = '/';
   var className;
   InitialRoute({this.className});
   @override
@@ -14,7 +14,27 @@ class _InitialRouteState extends State<InitialRoute> {
   final Connectivity _connectivity = Connectivity();
   late StreamSubscription<ConnectivityResult> _connectivitySubscription;
 
+  Future<void> initConnectivity() async {
+    ConnectivityResult? result;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      result = await _connectivity.checkConnectivity();
+    } on PlatformException catch (e) {
+      // print(e.toString());
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) {
+      return Future.value(null);
+    }
+
+    return _updateConnectionStatus(result!);
+  }
+
   future() async {
+    initConnectivity();
     _connectivitySubscription =
         _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
     await ApkVersion().getApkInfo();
@@ -27,7 +47,7 @@ class _InitialRouteState extends State<InitialRoute> {
     super.initState();
   }
 
-  @override
+  // @override
   Future<void> _updateConnectionStatus(ConnectivityResult result) async {
     switch (result) {
       case ConnectivityResult.wifi:

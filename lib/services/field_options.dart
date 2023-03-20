@@ -1,37 +1,54 @@
-part of mawa;
+part of 'package:mawa_package/mawa_package.dart';
 
 class FieldOptions {
-  static late Map<String, String> fieldOptions;
+  static List fieldOptions = [];
+  static Map singleFieldOptions = {};
 
-  getFieldOptions(String option) async {
-    fieldOptions = {};
-    print('start 1');
+  getFieldOptions(String field) async {
 
     dynamic response =  await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
-        resource: Resources.fieldOptions,
-        queryParameters: {
-          QueryParameters.field: option,
-        });
-    print('start 2');
-    if (response.statusCode == 200) {
-      print('start 3');
-      dynamic data = await NetworkRequests.decodeJson(response);
-      print('start 3.1');
-      print(response);
-      print(data);
-      for (int index = 0; index < data.length;  index++) {
-        print('start 3.1.$index a');
-        fieldOptions['${data[index][JsonResponses.fieldOptionDescription]}'] = data[index][JsonResponses.fieldOptionCode];
-        print('start 3.1.$index b');
+      resource: '${Resources.field}/$field/${Resources.option}',
+        // queryParameters: {
+        //   QueryParameters.field: option,
+        // }
+        );
+      fieldOptions = await NetworkRequests.decodeJson(response, negativeResponse: []);
+
+      return fieldOptions;
+  }
+
+  getSingleFieldOptions(String option) async {
+    singleFieldOptions = {};
+    await getFieldOptions(option);
+
+      for (int index = 0; index < fieldOptions.length;  index++) {
+        singleFieldOptions['${fieldOptions[index][JsonResponses.fieldOptionDescription]}'] = fieldOptions[index][JsonResponses.fieldOptionCode];
       }
-      print('start 4');
-      // fieldOptions = response;
-    } else {
-      print('start 5');
-      fieldOptions = {};
-    }
-    print('hooooop \n$fieldOptions');
+
+    return singleFieldOptions;
+  }
+
+  addFieldOption({required option,required description}) async {
+    dynamic response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPost,
+        resource: Resources.fieldOptions,
+        body: {
+          JsonPayloads.field : option,
+          JsonPayloads.fieldDescription: description,
+        });
+    return await NetworkRequests.decodeJson(response);
+  }
+
+  //NEW METHODS FOR THE NEW BACKEND
+
+  getFieldoptions(String field) async {
+    dynamic response = await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodGet,
+      resource: '${Resources.field}/$field/${Resources.option}',
+    );
+    fieldOptions = await NetworkRequests.decodeJson(response, negativeResponse: []);
+
     return fieldOptions;
   }
 

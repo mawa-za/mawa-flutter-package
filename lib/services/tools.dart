@@ -1,5 +1,4 @@
-// ignore_for_file: avoid_print
-part of mawa;
+part of 'package:mawa_package/mawa_package.dart';
 
 late final GlobalKey<NavigatorState> navKey = GlobalKey<NavigatorState>();
 
@@ -54,18 +53,23 @@ class Tools{
   final _tokenFormKey = GlobalKey<FormState>();
 
   submitEmail() async {
-    Navigator.of(context).pop();
-    Alerts.flushbar(context: context, message: 'Please Wait');
-    await NetworkRequests().unsecuredMawaAPI(NetworkRequests.methodPost,
+    FocusScope.of(context).unfocus();
+
+    final OverlayWidgets overlay = OverlayWidgets(context: context);
+    overlay.showOverlay(SnapShortStaticWidgets.snapshotWaitingIndicator());
+
+    // Alerts.flushbar(context: context, message: 'Please Wait');
+    dynamic request = await NetworkRequests().unsecuredMawaAPI(NetworkRequests.methodPost,
         resource: Resources.otp, payload: {JsonPayloads.partnerEmail: email}, context: context);
     Tools.isTouchLocked = true;
-    Authenticate.message = 'Please Wait';
-    OTP(context).postOTPRequest();
+    // Authenticate.message = 'Please Wait';
+    OTP(context).postOTPRequest(request);
     // NetworkRequests.statusCode == 200 || NetworkRequests.statusCode == 201 && NetworkRequests.token != OTP.userDoesntExist
     //     ? tokenPopup()
     //     : forgotPasswordPopup( message: 'Email Not Associated With Any User');
     Tools.isTouchLocked = false;
     Authenticate.message = '';
+    overlay.dismissOverlay();
   }
 
   forgotPasswordPopup({String? message}) {
@@ -82,9 +86,12 @@ class Tools{
                 autofocus: true,
                 textInputAction: TextInputAction.send,
                 onChanged: (value) {
+                  value = value.trim();
                   email = value;
                 },
                 validator: (value) {
+                  value = value?.trim();
+                  print('*$value*\n*$email*');
                   if (value!.isEmpty) {
                     return 'Enter Email Address';
                   }
@@ -97,10 +104,13 @@ class Tools{
                   icon: Icon(Icons.account_circle),
                   labelText: 'Enter Your Email Address',
                 ),
-                onEditingComplete:  () => _forgotPasswordFormKey.currentState!.validate()
-                    ? submitEmail()
-                    : null,
-              ),
+                onEditingComplete:  () {
+                     if(_forgotPasswordFormKey.currentState!.validate()) {
+                       Navigator.of(context).pop();
+                       submitEmail();
+                     }
+                    }
+                    ),
             ),
             TextButton(
                 onPressed: () {
@@ -114,11 +124,14 @@ class Tools{
           ],
         ),
         btnOk: DialogButton(
-            child: const Text('Proceed'),
-            onPressed: () => _forgotPasswordFormKey.currentState!.validate()
-                ? submitEmail()
-                : null,
+          onPressed: () {
+            if(_forgotPasswordFormKey.currentState!.validate()) {
+              Navigator.of(context).pop();
+              submitEmail();
+            }
+            },
             color: Colors.green,
+          child: const Text('Proceed'),
           ),
         btnCancel: Constants.dialogCloseButton(context: context),
         ).show();
@@ -139,20 +152,22 @@ class Tools{
   static final Widget exit = GestureDetector(child: const Icon(Icons.exit_to_app), onTap: () => Navigator.popAndPushNamed(context, Authenticate.id),);
 
   _resetPassword(/*context*/) async {
-    Navigator.of(context).pop();
+    final OverlayWidgets overlay = OverlayWidgets(context: context);
+    overlay.showOverlay(SnapShortStaticWidgets.snapshotWaitingIndicator());
 
     FocusScope.of(context).unfocus();
 
-    Alerts.flushbar(message: 'Please Wait', context: context);
-     User.username = NetworkRequests.decodeJson(await User().changePassword(password: _newPasswordController.value.text.toString()));
-    NetworkRequests.statusCode == 200 || NetworkRequests.statusCode == 201
-        ?  Navigator.pushReplacementNamed(context, redirect)
-        : NetworkRequests.statusCode == 401
+    // Alerts.flushbar(message: 'Please Wait', context: context);
+    dynamic request = await User().changePassword(password: _newPasswordController.value.text.toString());
+     User.username = await NetworkRequests.decodeJson(request);
+    request.statusCode == 200 || request.statusCode == 201
+        ?  Navigator.pushReplacementNamed(context, InitialRoute.id)
+        : request.statusCode == 401
         ?
 
     Authenticate.message = 'Token Invalid'
         : Alerts.flushbar(context: context, message:'Failed To Reset', positive: false, popContext: true);
-    print('done!');
+    overlay.dismissOverlay();
   }
 
   passwordResetPopup(context) {
@@ -165,6 +180,8 @@ class Tools{
             children: [
               TextFormField(
                 autofocus: true,
+                keyboardType: TextInputType.visiblePassword,
+                obscureText: true,
                 textInputAction: TextInputAction.next,
                 controller: _newPasswordController,
                 validator: (value) {
@@ -183,7 +200,8 @@ class Tools{
               ),
               const SizedBox(height: 10.0),
               TextFormField(
-                textInputAction: TextInputAction.send,
+                keyboardType: TextInputType.visiblePassword,
+                obscureText: true, textInputAction: TextInputAction.send,
                 validator: (value) {
                   if (value!.isEmpty) {
                     return 'Retype New Password';
@@ -199,7 +217,7 @@ class Tools{
                 ),
                 onEditingComplete: (){
                   if (_resetPasswordFormKey.currentState!.validate()) {
-                    // Navigator.of(context).pop();
+                    Navigator.of(context).pop();
                     _resetPassword(/*context*/);
                   }
                 },
@@ -209,35 +227,42 @@ class Tools{
         ),
         btnOk: DialogButton(
             onPressed: () {
-              print(_newPasswordController.value.text.toString());
               if (_resetPasswordFormKey.currentState!.validate()) {
-                // Navigator.of(context).pop();
+                Navigator.of(context).pop();
                 _resetPassword(/*context*/);
               }
             },
+            color: Colors.green,
             child: const Text(
               'Confirm',
             ),
-            color: Colors.green,
           ),
       btnCancel: Constants.dialogCloseButton(context: context),
         ).show();
   }
 
   static logoutPopup({required BuildContext context, required String redirect}) {
-    return Alert(
+    return AwesomeDialog(
       context: context,
-      title: 'Alert',
-      content: const Text('Do you really want to logout?'),
-      buttons: [
-        DialogButton(
-          child: const Text('Yes'),
-          onPressed: () => Navigator.of(context)
-              .pushNamedAndRemoveUntil(redirect, (route) => false),
-          color: Colors.greenAccent,
-        ),
-        Constants.dialogCloseButton(text: 'No', context: context),
-      ],
+      dialogType: DialogType.QUESTION,
+      animType: AnimType.BOTTOMSLIDE,
+      desc: 'Do You Really Want To Logout?',
+      btnOk: TextButton(
+        child: const Text('Yes'),
+        onPressed: () {
+          // setState(() {
+          //   Tools.isTouchLocked = true;
+          // });
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil(redirect, (route) => false);
+        },
+      ),
+      btnCancel: TextButton(
+        child: const Text('No'),
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+      ),
     ).show();
   }
 

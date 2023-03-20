@@ -1,4 +1,4 @@
-part of mawa;
+part of 'package:mawa_package/mawa_package.dart';
 
 class NoConnectionScreen extends StatefulWidget {
   static const String id = 'Connectivity';
@@ -7,7 +7,7 @@ class NoConnectionScreen extends StatefulWidget {
   final Connectivity connectivity = Connectivity();
   StreamSubscription<ConnectivityResult>? connectivitySubscription;
 
-  NoConnectionScreen({required this.redirect});
+  NoConnectionScreen({Key? key, required this.redirect}) : super(key: key);
   final String redirect;
 
   @override
@@ -37,7 +37,7 @@ class _NoConnectionScreenState extends State<NoConnectionScreen> {
     try {
       result = await widget.connectivity.checkConnectivity();
     } on PlatformException catch (e) {
-      print(e.toString());
+      // print(e.toString());
     }
 
     // If the widget was removed from the tree while the asynchronous platform
@@ -65,6 +65,15 @@ class _NoConnectionScreenState extends State<NoConnectionScreen> {
         ],
 
       ),
+    );
+  }
+
+  Widget futureBuilder() {
+    return FutureBuilder(
+        future: initConnectivity(),
+        builder: (context, snapshot){
+          return Container();
+        }
     );
   }
 

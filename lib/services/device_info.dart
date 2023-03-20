@@ -1,15 +1,14 @@
-part of mawa;
+part of 'package:mawa_package/mawa_package.dart';
 
 ///TO USE THIS CLASS SUCCESSFULLY ONE WOULD TO ADD "PHONE_READ_STATE [<uses-permission android:name="android.permission.READ_PHONE_STATE" />] PERMISSION ON ANDROID MANIFEST [android/app/src/main/AndroidManifest.xml].
 
 class DeviceInfo{
-
   static String platformImei = 'Unknown';
   static String uniqueId = "Unknown";
 
   static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
   Map<String, dynamic> _deviceData = <String, dynamic>{};
-  static late Map deviceData;
+  static Map? deviceData;
   static String terminal = 'Undefined';
 
   // static String  = ;
@@ -92,8 +91,8 @@ class DeviceInfo{
       tags: build.tags,
       type: build.type,
       isPhysicalDevice: build.isPhysicalDevice,
-      androidId: build.androidId,
-      systemFeatures: build.systemFeatures,
+      // androidId: build.androidId,
+      // systemFeatures: build.systemFeatures,
     };
   }
 
@@ -115,8 +114,9 @@ class DeviceInfo{
   }
 
   DeviceInfo(){
-    getDeviceInfo();
-    getImei();
+    // getDeviceInfo();
+    // getImei();
+    requestDevicePermission();
   }
 
   Future<void> getImei() async {
@@ -148,7 +148,8 @@ class DeviceInfo{
       info[cpuType] = await DeviceInformation.cpuName;
       info[hardware] = await DeviceInformation.hardware;
 
-      terminal = await DeviceInformation.deviceIMEINumber;
+      terminal = await DeviceInformation.deviceModel;
+      platformImei = await DeviceInformation.deviceIMEINumber;
 
     } /*on PlatformException {
       info = {};
@@ -166,24 +167,30 @@ class DeviceInfo{
     // for(int i = 0; i < _info.length; i++){
     //   deviceData[_info[i]] = info[_info[i]];
     // }
-    print('terminal ' + terminal);
-    print('info ' + info.toString());
-    print('deviceData ' + deviceData.toString());
+    /**/
+    // print('terminal ' + terminal);
+    // print('info ' + info.toString());
+    // print('deviceData ' + deviceData!.length.toString());
 
-    deviceData.addAll(Map<String,String>.from(info));
+    deviceData!.addAll(Map<String,dynamic>.from(info));
 
+    for(int i = 0; i < deviceData!.length; i++){
+      print(deviceData!.values.elementAt(i));
+    }
+    // print('done!!!!');
+    // print('deviceData ' + deviceData!.length.toString());
   }
 
   Future<void> getDeviceInfo () async {
     // Map<String, dynamic> deviceData = <String, dynamic>{};
 
     try {
-      if (Platform.isAndroid) {
+      if (io.Platform.isAndroid) {
         // deviceData = await   deviceInfoPlugin.androidInfo;
         deviceData = _readAndroidBuildData(await deviceInfoPlugin.androidInfo);
         // terminal = deviceData['brand'].toString() + '.' + deviceData['model'].toString();
       }
-      else if (Platform.isIOS) {
+      else if (io.Platform.isIOS) {
         // deviceData = await deviceInfoPlugin.iosInfo;
         deviceData = _readIosDeviceInfo(await deviceInfoPlugin.iosInfo);
         // terminal = deviceData['name'].toString() + '.' + deviceData['model'].toString();
@@ -194,6 +201,7 @@ class DeviceInfo{
       };
     }
 
+    getImei();
     // if (!mounted) return;
 
     // setState(() {
@@ -201,4 +209,25 @@ class DeviceInfo{
     // });
   }
 
+  requestDevicePermission() async {
+
+    print('Inside Permission method');
+
+    final status = await Permission.phone.request();
+
+    if (status == PermissionStatus.granted) {
+      print('Permission granted front ');
+      getDeviceInfo();
+    } else if (status == PermissionStatus.denied) {
+      print('Permission denied');
+
+      Alerts().popup(Tools.context, title:'Permission Required',message:'Permission is required!'  );
+      //await openAppSettings();
+    } else if (status == PermissionStatus.permanentlyDenied) {
+      print('Do not ask again');
+      await openAppSettings();
+    }
+  }
+
 }
+

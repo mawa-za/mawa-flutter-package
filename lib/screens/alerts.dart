@@ -1,7 +1,6 @@
-part of mawa;
+part of 'package:mawa_package/mawa_package.dart';
 
 class Alerts{
-
 
   static flushbar({required BuildContext context, bool? positive, required String message, bool popContext = false, bool showProgressIndicator = false}) {
 
@@ -44,6 +43,7 @@ class Alerts{
       onTap: (_) => Navigator.of(Tools.context).pop(),
     ).show(context);
   }
+
   static Future<bool> exitPrompt(BuildContext context)  async {
 
     bool? canExit;
@@ -78,24 +78,129 @@ class Alerts{
     return Future.value(canExit!);
   }
 
+  ///MIGHT NOT WORK
+  static toast({required BuildContext context,IconData? iconData,bool? positive, required String message,}) {
+    FToast ftoast = FToast();
+    Duration? duration;
+    Color? backgroundColor;
+    Color? textColor;
+
+
+    if (positive == null){
+      duration = const Duration(seconds: 3);
+      backgroundColor = Colors.white;
+      textColor = Colors.black;
+
+    }
+    else if(positive){
+      duration = const Duration(seconds: 5);
+      backgroundColor = Colors.green[100]!;
+      textColor = Colors.green;
+      iconData = Icons.check;
+    }
+    else if(!positive) {
+      duration = const Duration(seconds: 10);
+      backgroundColor = Colors.red[100]!;
+      textColor = Colors.red;
+      iconData = Icons.cancel_outlined;
+    }
+    else{
+      duration = const Duration(seconds: 3);
+      backgroundColor = Colors.white;
+      textColor = Colors.black;
+    }
+
+    ftoast.showToast(
+      child:  Container(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(25.0),
+            color: backgroundColor,
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(iconData),
+              const SizedBox(
+                width: 12.0,
+              ),
+              Text(message, style: TextStyle(color: textColor),),
+            ],
+          ),
+        ),
+      gravity: ToastGravity.CENTER,
+      toastDuration: duration,
+    );
+  }
+
+  static toastMessage({bool? positive, required String message,Toast? length}) {
+
+    Color? backgroundColor;
+    Color? textColor;
+
+
+    if (positive == null){
+      backgroundColor = Colors.white;
+      textColor = Colors.black;
+
+    }
+    else if(positive){
+      backgroundColor = Colors.green[100]!;
+      textColor = Colors.green;
+    }
+    else if(!positive) {
+      backgroundColor = Colors.red[100]!;
+      textColor = Colors.red;
+      length = Toast.LENGTH_LONG;
+    }
+    else{
+      backgroundColor = Colors.white;
+      textColor = Colors.black;
+    }
+    length == null ? length = Toast.LENGTH_SHORT: null;
+
+    Fluttertoast.showToast(
+      gravity: ToastGravity.TOP,
+      toastLength: Toast.LENGTH_LONG,
+      msg: message,
+      timeInSecForIosWeb: 3,
+      backgroundColor: backgroundColor,
+      textColor: textColor,
+    );
+  }
+
 
   openPopup(context, {message,title}) {
     return AwesomeDialog(
         context: context,
         title: title ?? '',
         body: Text('$message'),
-        btnOk: DialogButton(child: const Text('OK', style: TextStyle(color: Colors.white),), onPressed: ()=> Navigator.of(context).pop(), color: Colors.blueGrey)
+        btnOk: DialogButton(onPressed: ()=> Navigator.of(context).pop(), color: Colors.blueGrey, child: const Text('OK', style: TextStyle(color: Colors.white)))
     ).show();
   }
 
-  popup(context, {message,title}) {
+  openPop(context, {message,title}) {
     return AwesomeDialog(
         context: context,
         title: title ?? '',
         body: Text('$message'),
-        // buttons: [
-        //   DialogButton(child: const Text('OK', style: TextStyle(color: Colors.white),), onPressed: ()=> Navigator.of(context).pop(), color: Colors.blueGrey)
-        // ]
+        btnOk: DialogButton(onPressed: ()=> openAppSettings(), color: Colors.blueGrey, child: const Text('OK', style: TextStyle(color: Colors.white),))
+    ).show();
+  }
+
+  popup(context,{message,title}) {
+    return AwesomeDialog(
+        context:  context,
+        title: title ?? '',
+        body: Text('$message'),
+        btnOk: DialogButton(onPressed: (){
+              openAppSettings();
+            },
+            color: Colors.blueGrey, child: const Text('OK', style: TextStyle(color: Colors.white),))
+
+      // buttons: [
+      //     DialogButton(child: const Text('OK', style: TextStyle(color: Colors.white),), onPressed: ()=> Navigator.of(context).pop(), color: Colors.blueGrey)
+      //   ]
     ).show();
   }
 }

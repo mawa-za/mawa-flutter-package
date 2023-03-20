@@ -1,7 +1,7 @@
-part of mawa;
+part of 'package:mawa_package/mawa_package.dart';
 
 class SnapshotWaitingIndicator extends StatelessWidget {
-static const String id = 'loading';
+  static const String id = 'loading';
   @override
   Widget build(BuildContext context) {
     Tools.context = context;
@@ -14,7 +14,7 @@ static const String id = 'loading';
           CircularProgressIndicator(),
           Text(
             'Please Wait',
-              style: TextStyle(color: Colors.black),
+            style: TextStyle(color: Colors.black),
           ),
         ],
       ),
@@ -23,7 +23,7 @@ static const String id = 'loading';
 }
 
 class SnapshotError extends StatelessWidget {
-static const String id = 'error';
+  static const String id = 'error';
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -34,7 +34,7 @@ static const String id = 'error';
           CircularProgressIndicator(),
           Text(
             'Please Wait',
-              style: TextStyle(color: Colors.black),
+            style: TextStyle(color: Colors.black),
           ),
         ],
       ),
@@ -53,8 +53,8 @@ class SnapShortStaticWidgets {
   static const String defaultErrorImage = "assets/images/error_404.jpg";
   static const String defaultFont = "Pantone";
 
-  static Widget snapshotWaitingIndicator({String? text,BuildContext? context}) {
-
+  static Widget snapshotWaitingIndicator(
+      {String? text, BuildContext? context}) {
     // final mediaQuery = MediaQuery.of(context!);
     const TextStyle style = TextStyle(color: Colors.black);
 

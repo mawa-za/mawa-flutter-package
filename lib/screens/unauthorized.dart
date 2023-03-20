@@ -1,4 +1,4 @@
-part of mawa;
+part of 'package:mawa_package/mawa_package.dart';
 
 class Unauthorized extends StatelessWidget {
   static const String id = 'Unauthorized';

@@ -1,7 +1,7 @@
-part of mawa;
+part of 'package:mawa_package/mawa_package.dart';
 
 class Memberships {
-  static Map<dynamic, dynamic> policy = {};
+  static dynamic policy;
   static List<dynamic> allPolicies = [];
   static List personsPolicies = [];
 
@@ -21,32 +21,44 @@ class Memberships {
     // else {
     //   personsPolicies = [];
     // }
+    return personsPolicies;
   }
 
-  membershipGet(policyId) async {
-    policy.clear();
+  membershipGet({String? policyId}) async {
+    // policy.clear();
      dynamic response = await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-        resource: '${Resources.policies}/$policyId');
-    print('try'+response.toString());
-    // policy == null ? policy = {} : response != null ? response.isNotEmpty ? policy = response : policy = {}  : policy = {} ;
-    if( response.statusCode == 200){
+        resource: '${Resources.policies}/${policyId ?? ''}');
       dynamic body =  await NetworkRequests.decodeJson(response);
-      // if(response.runtimeType == allPolicies.runtimeType)
-      try
-      {
-        allPolicies = body ?? [];
+      // if(policyId != null)
+      try{
+        policy =  body ?? {};
+        policy.isNotEmpty ? policyId = policy[JsonResponses.id] : policyId = '';
+        Persons.person = Memberships.policy[JsonResponses.policyCustomerDetails];
+        return policy;
       }
       // else
-      catch(e)
-          {
-        policy =  body ?? {};
-      }
+        catch(e){
+        print('All poli');
+        allPolicies = body ?? [];
+        return allPolicies;
     }
-    else {
-      policy.clear();
-      allPolicies.clear();
-    }
-    policy == null ? policyId = policy[JsonResponses.id] : policyId = '';
-    print('\n2try'+policy.toString());
   }
+
+  createNewMembership(details) async {
+    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
+        resource: '${Resources.policies} ', body: details);
+  }
+
+  //METHODS FOR THE NEW BACKEND
+
+  getMembership(String id) async {
+    return await NetworkRequests.decodeJson( await NetworkRequests()
+        .securedMawaAPI(NetworkRequests.methodGet, resource: '${Resources.membership}/$id'));
+  }
+
+  getDependents(String membershipId) async {
+    return await NetworkRequests.decodeJson(await NetworkRequests()
+        .securedMawaAPI(NetworkRequests.methodGet, resource: '${Resources.membership}/$membershipId/${Resources.dependent}'));
+  }
+
 }

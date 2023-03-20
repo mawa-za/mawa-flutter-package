@@ -1,22 +1,42 @@
-part of mawa;
+part of 'package:mawa_package/mawa_package.dart';
 
 class OTP {
   OTP(this.context);
   final BuildContext context;
-  final String _userDoesntExist = 'User does not exist';
-  final String _invalid = 'INVALID';
-  final String _expired = 'EXPIRED';
+  final String userDoesntExist = 'User does not exist';
+  final String invalid = 'INVALID';
+  final String expired = 'EXPIRED';
   // const String = '';
   final _tokenFormKey = GlobalKey<FormState>();
 
-  postOTPRequest(){
-    NetworkRequests.statusCode == 200 || NetworkRequests.statusCode == 201 && NetworkRequests.otp != _userDoesntExist
-        ? otpPopup()
-        : Alerts.flushbar(
-        context: Tools.context,
-        message: _userDoesntExist,
-        positive: false,
-        popContext: false);
+  requestOTP(String email) async{
+    return await NetworkRequests().unsecuredMawaAPI(
+        NetworkRequests.methodPost,
+        resource: Resources.otp,
+        payload: {JsonPayloads.partnerEmail: email},
+        context: context);
+  }
+
+  postOTPRequest(request) async {
+    String message = await NetworkRequests.decodeJson(request, negativeResponse: '');
+    if(request.statusCode == 200 || request.statusCode == 201) {
+      if(message != userDoesntExist) {
+        otpPopup();
+      }
+      else{
+        Tools().forgotPasswordPopup();
+        Alerts.toastMessage(
+            message: 'Email Not Associated With Any User',
+            positive: false,);
+      }
+    }
+    else{
+      Tools().forgotPasswordPopup();
+      Alerts.toastMessage(
+          message: 'Something went wrong',
+          positive: false,
+      );
+    }
 
   }
 
@@ -47,10 +67,18 @@ class OTP {
                 icon: Icon(Icons.lock_clock),
                 labelText: 'OTP Your Mail or Messages',
               ),
-              onEditingComplete: (){
-                Navigator.of(context).pop();
-                // validateOTP();
-                Tools().forgotPasswordPopup();
+              onEditingComplete: () async {
+                if(_tokenFormKey.currentState!.validate()){
+                  Navigator.of(context).pop();
+                  final OverlayWidgets overlay = OverlayWidgets(context: context);
+                  overlay.showOverlay(SnapShortStaticWidgets.snapshotWaitingIndicator());
+
+                  // Alerts.flushbar(context: Tools.context, message: 'Please Wait', showProgressIndicator: true, popContext: true);
+                  // Navigator.of(context).pop();
+                  // Tools().passwordResetPopup(context);
+                  await validateOTP(NetworkRequests.otp);
+                  overlay.dismissOverlay();
+                }
               },
             ),
           ),
@@ -66,49 +94,31 @@ class OTP {
           ),
         ]
         ),
-        btnOk: Constants.dialogCloseButton(context: context),
-        btnCancel: DialogButton(
-            child: const Text('Proceed'),
-            onPressed: () {
-              if(_tokenFormKey.currentState!.validate()){
-                Alerts.flushbar(context: Tools.context, message: 'Please Wait', showProgressIndicator: true, popContext: true);
-                // Navigator.of(context).pop();
-                // Tools().passwordResetPopup(context);
-                validateOTP();
-              }
-            },
-            color: Colors.green,
-          ),
+        btnOk: DialogButton(
+          onPressed: () async {
+            if(_tokenFormKey.currentState!.validate()){
+              Navigator.of(context).pop();
+              final OverlayWidgets overlay = OverlayWidgets(context: context);
+              overlay.showOverlay(SnapShortStaticWidgets.snapshotWaitingIndicator());
+
+              // Alerts.flushbar(context: Tools.context, message: 'Please Wait', showProgressIndicator: true, popContext: true);
+              // Navigator.of(context).pop();
+              // Tools().passwordResetPopup(context);
+              await validateOTP(NetworkRequests.otp);
+              overlay.dismissOverlay();
+            }
+          },
+          color: Colors.green,
+          child: const Text('Proceed'),
+        ),
+        btnCancel: Constants.dialogCloseButton(context: context),
     ).show();
   }
 
-  validateOTP() async {
-    await NetworkRequests().unsecuredMawaAPI(NetworkRequests.methodGet,
+  validateOTP(String pin) async {
+    return await NetworkRequests().unsecuredMawaAPI(NetworkRequests.methodGet,
         resource: Resources.otp,
-        queryParameters: {QueryParameters.otp: NetworkRequests.otp},
+        queryParameters: {QueryParameters.otp: pin ?? NetworkRequests.otp},
         context: context);
-    if (NetworkRequests.statusCode == 200) {
-      if (NetworkRequests.otp == _invalid) {
-        Alerts.flushbar(
-            context: Tools.context,
-            message: 'OTP Invalid',
-            positive: false,
-            popContext: false);
-      } else if (NetworkRequests.otp == _expired) {
-        Alerts.flushbar(
-            context: Tools.context,
-            message: 'OTP Has Expired',
-            positive: false,
-            popContext: false);
-      } else {
-        NetworkRequests.token = NetworkRequests.otp;//.substring(1,NetworkRequests.otp.length);
-
-        preferences.then((SharedPreferences prefs) {
-          return (prefs.setString(SharedPrefs.token, NetworkRequests.token));
-        });
-        print('\n' + NetworkRequests.otp + '\n' + NetworkRequests.token + '\n' );
-        Tools().passwordResetPopup(context);
-      }
-    }
   }
 }

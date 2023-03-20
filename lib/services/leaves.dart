@@ -1,4 +1,4 @@
-part of mawa;
+part of 'package:mawa_package/mawa_package.dart';
 
 class Leaves {
   static late String leaveID;
@@ -8,6 +8,10 @@ class Leaves {
   static List approvers = [];
   static late List pendingResponse;
   static List approverHistory = [];
+  static const String cancelLeave = 'CANCELLEAVE';
+  static List approverHistoryByStatus = [];
+  static Map leave = {};
+  static late String loggedById;
 
   leaveProfile({required String partnerFunctionType}) async {
     String? partner;
@@ -52,21 +56,29 @@ class Leaves {
     return approvers;
   }
 
-  getApproversHistory({required bool pending}) async {
-    approverHistory.clear();
-    dynamic response = await NetworkRequests().securedMawaAPI(
-      NetworkRequests.methodGet,
-      resource: Resources.leaves + '/' + Resources.approversHistory,
-      queryParameters: {
-        QueryParameters.approverId:
-            User.loggedInUser[JsonResponses.usersPartner]
-      },
-    );
-    // if (response.statusCode == 200) {
-      approverHistory = await NetworkRequests.decodeJson(response, negativeResponse: [],);
-    // }
-
-    return approverHistory;
+  getApproversHistory({required String status}) async {
+    approverHistoryByStatus.clear();
+    dynamic response;
+    if(status == ''){
+      response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: Resources.leaves + '/' + Resources.approversHistory,
+        queryParameters: {
+          QueryParameters.approverId: User.partnerId,
+          QueryParameters.status: status
+        }
+      );
+    }else
+    {
+      response = await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
+          resource: Resources.leaves + '/' + Resources.approversHistory,
+          queryParameters: {
+            QueryParameters.approverId: User.partnerId,
+            QueryParameters.status: status
+          });
+    }
+    approverHistoryByStatus = await NetworkRequests.decodeJson(response, negativeResponse: []);
+    return approverHistoryByStatus;
   }
 
   logLeave(
@@ -92,10 +104,21 @@ class Leaves {
           });
       // if (NetworkRequests.statusCode == 200 ||
       //     NetworkRequests.statusCode == 201) {
-        return leaveID = await NetworkRequests.decodeJson(response, negativeResponse: '');
+      leaveID = await NetworkRequests.decodeJson(response, negativeResponse: '');
+      if(response.statusCode == 200 || response.statusCode == 201){
+        dynamic notification = await Notification(id: leaveID).sendNotifications(meesageType: 'LOGLEAVE', sendToAdmin: true);
+
+        if(notification.statusCode == 200 || notification.statusCode == 201){
+
+        }
+        else{
+          Alerts.toastMessage(message: 'Leave rquest created but notification failed');
+        }
+      }
       // } else {
       //   leaveID = '';
       // }
+      return response;
     }
   }
 
@@ -135,34 +158,58 @@ class Leaves {
   }
 
   getLeave(String id) async {
-    return await NetworkRequests.decodeJson(
+    leave = await NetworkRequests.decodeJson(
         await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodGet,
       resource: Resources.leaves + '/' + id,
     ), negativeResponse: {});
+    return leave;
   }
 
   Future<bool> updateLeaveStatus(
-      {required String path, required String method}) async {
+      {required String path, String? method,  String? note, String? noteType}) async {
+    Map? body;
+    note != null && noteType != null
+        ? body = {
+      QueryParameters.note:{
+        QueryParameters.value:note,
+        QueryParameters.type:noteType,
+        QueryParameters.loggedById:User.partnerId,
+      }
+    }
+        : null;
     return await NetworkRequests.decodeJson(await NetworkRequests()
-            .securedMawaAPI(
-                method,
-                resource:
-                    Resources.leaves + '/' + Leaves.leaveID + '/' + path),
-    negativeResponse: false);
+        .securedMawaAPI(
+        NetworkRequests.methodPut,
+        resource:
+        Resources.leaves + '/' + Leaves.leaveID + '/' + path, body: body),
+        negativeResponse: false);
   }
 
   editLeave(endDate) async {
-    return await NetworkRequests.decodeJson(await NetworkRequests()
-            .securedMawaAPI(NetworkRequests.methodPut,
-                resource: Resources.leaves +
-                    '/' +
-                    Leaves.leaveID +
-                    '/' +
-                    Resources.edit,
-                queryParameters: {QueryParameters.endDAte: endDate}),
-         negativeResponse: false);
+    dynamic response = await NetworkRequests()
+        .securedMawaAPI(NetworkRequests.methodPut,
+        resource: Resources.leaves +
+            '/' +
+            Leaves.leaveID +
+            '/' +
+            Resources.edit,
+        queryParameters: {QueryParameters.endDAte: endDate});
+    if(response.statusCode == 200 || response.statusCode == 201){
+      Notification(id: leaveID).sendNotifications(meesageType: 'APPROVEEDITED', sendToAdmin: true);
+    }
+    return await NetworkRequests.decodeJson(response, negativeResponse: false);
+    // return await NetworkRequests.decodeJson(await NetworkRequests()
+    //         .securedMawaAPI(NetworkRequests.methodPut,
+    //             resource: Resources.leaves +
+    //                 '/' +
+    //                 Leaves.leaveID +
+    //                 '/' +
+    //                 Resources.edit,
+    //             queryParameters: {QueryParameters.endDAte: endDate}),
+    //      negativeResponse: false);
   }
+
 }
 // part of mawa;
 //
