@@ -52,7 +52,7 @@ class Quotation{
 //     }
 //   ]
 // }
-  createQuote({
+  static createQuote({
     required String customerID,
     required String deliveryDate,
     required List items,
