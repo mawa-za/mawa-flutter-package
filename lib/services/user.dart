@@ -49,17 +49,17 @@ class User{
     return user;
   }
 
-  getAllUsers() async {
+  static getAllUsers() async {
     User.user.clear();
-    dynamic response =
-    await NetworkRequests()
-        .securedMawaAPI(NetworkRequests.methodGet, resource: Resources.user);
+    listUsers = await NetworkRequests.decodeJson(await NetworkRequests()
+        .securedMawaAPI(NetworkRequests.methodGet, resource: Resources.user), negativeResponse: []);
+    return listUsers;
+  }
 
+  mapAllUsers() async{
+    await User.getAllUsers();
     Map<String, String> mapUsers = {};
 
-    if(response.statusCode == 200){
-
-      listUsers = await NetworkRequests.decodeJson(response, negativeResponse: []);
       // try{
       for (int i = 0; i < listUsers.length; i++) {
         listUsers[i][JsonResponses.usersFirstName] != null &&
@@ -76,10 +76,6 @@ class User{
       // catch(e){
       //   mapUsers.clear();
       // }
-    }
-    else{
-      mapUsers.clear();
-    }
     return User.user = mapUsers;
     // print('opw\n$users\n name');
   }
