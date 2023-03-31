@@ -283,6 +283,7 @@ class JsonResponses {
   static const String VATAmount = 'VATAmount';
   static const String VATPercentage = 'VATPercentage';
   static const String items = 'items';
+  static const String defaultFunction = 'defaultFunction';
 
 }
 
