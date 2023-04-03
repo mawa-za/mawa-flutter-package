@@ -81,7 +81,7 @@ class Products {
           NetworkRequests.methodGet,
           resource: Resources.product,
         ),
-        negativeResponse: {});
+        negativeResponse: []);
     return allProducts;
   }
 

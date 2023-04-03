@@ -1,6 +1,8 @@
 part of 'package:mawa_package/mawa_package.dart';
 
 class JsonResponses {
+
+
   static const String amount = 'amount';
   static const String assignedBy = 'assignedBy';
   static const String assignedByID = 'assignedByID';
@@ -263,6 +265,25 @@ class JsonResponses {
   static const String code = 'code';
 
   static const String procurementType = 'type';
+  static const String supplierId = 'supplierId';
+  static const String quantity = 'quantity';
+  static const String uom = 'uom';
+  static const String unitPrice = 'unitPrice';
+  static const String lineTotal = 'lineTotal';
+
+  static const String deliveryDate = 'deliveryDate';
+  static const String expiryDate = 'expiryDate';
+
+
+
+  static const String totalExcVat = 'totalExcVat';
+  static const String totalIncVat = 'totalIncVat';
+  static const String discountAmount = 'discountAmount';
+  static const String discountPercentage = 'discountPercentage';
+  static const String VATAmount = 'VATAmount';
+  static const String VATPercentage = 'VATPercentage';
+  static const String items = 'items';
+  static const String defaultFunction = 'defaultFunction';
 
 }
 
@@ -387,6 +408,7 @@ class Resources {
   static const String quotation = 'quotation';
   static const String items = 'items';
 
+  static const String calculate_pricing = 'calculate-pricing';
 
 }
 
