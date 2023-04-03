@@ -41,6 +41,7 @@ part 'package:mawa_package/screens/unauthorized.dart';
 part 'package:mawa_package/screens/user_overview.dart';
 
 part 'package:mawa_package/services/attachments.dart';
+part 'package:mawa_package/services/authentication.dart';
 part 'package:mawa_package/services/cashups.dart';
 part 'package:mawa_package/services/claims.dart';
 part 'package:mawa_package/services/client_policy.dart';
@@ -54,6 +55,7 @@ part 'package:mawa_package/services/fields.dart';
 part 'package:mawa_package/services/globals.dart';
 part 'package:mawa_package/services/internet_connect.dart';
 part 'package:mawa_package/services/invoice.dart';
+part 'package:mawa_package/services/items.dart';
 part 'package:mawa_package/services/keys.dart';
 part 'package:mawa_package/services/leaves.dart';
 part 'package:mawa_package/services/location.dart';

@@ -5,33 +5,6 @@ class Quotation{
 
   final String id;
 
-  static Map<String, String> items(
-
-    {
-      required String transaction,
-  required String productId,
-  required String code,
-  required String description,
-  required String ean,
-  required String uom,
-  required String quantity,
-  required String unitPrice,
-      required String lineTotal
-    }
-      ){
-     return
-    {
-      JsonPayloads.transaction: transaction,
-      JsonPayloads.productId: productId,
-      JsonPayloads.code: code,
-      JsonPayloads.description: description,
-      JsonPayloads.ean: ean,
-      JsonPayloads.uom: uom,
-      JsonPayloads.quantity: quantity,
-      JsonPayloads.unitPrice: unitPrice,
-      JsonPayloads.lineTotal: lineTotal
-    };
-  }
 
 // POST /mawa-api/resources/quotation
 //  {
@@ -105,6 +78,14 @@ class Quotation{
     );
   }
 
+  static getQuotes()async{
+    return await NetworkRequests.decodeJson( await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
+      resource: Resources.quotation,
+    ),
+      negativeResponse: {},
+    );
+  }
+
   getQuoteDetail(String detail)async{
     return await NetworkRequests.decodeJson( await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodGet,
@@ -117,7 +98,7 @@ class Quotation{
   deleteQuote()async{
     return  await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodDelete,
-      resource: '${Resources.quotation}/${id ?? ''}',
+      resource: '${Resources.quotation}/$id',
     );
   }
 
