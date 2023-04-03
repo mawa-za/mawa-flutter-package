@@ -55,6 +55,7 @@ part 'package:mawa_package/services/fields.dart';
 part 'package:mawa_package/services/globals.dart';
 part 'package:mawa_package/services/internet_connect.dart';
 part 'package:mawa_package/services/invoice.dart';
+part 'package:mawa_package/services/items.dart';
 part 'package:mawa_package/services/keys.dart';
 part 'package:mawa_package/services/leaves.dart';
 part 'package:mawa_package/services/location.dart';
