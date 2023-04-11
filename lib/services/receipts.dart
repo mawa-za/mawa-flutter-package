@@ -70,25 +70,29 @@ class Receipts {
     List receipts = await NetworkRequests.decodeJson(await NetworkRequests()
         .securedMawaAPI(NetworkRequests.methodGet,
             resource: Resources.receipts,
-            queryParameters: {QueryParameters.reference: referenceNo}));
+            queryParameters: {QueryParameters.reference: referenceNo}), negativeResponse: []);
     // receipts.runtimeType == List &&
     receipts.isNotEmpty ? receiptsList = receipts : receiptsList = [];
     return receiptsList;
   }
 
+  // https://api-qas.mawa.co.za:8181/mawa-api/resources/receipts/{id}
   getReceipt({required String receiptId}) async {
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
-        resource: '${Resources.receipts}/${receiptId ?? ''}');
-    if (receiptId == '') {
-      receiptsList =
-          await NetworkRequests.decodeJson(response, negativeResponse: []);
-      return receiptsList;
-    } else {
+        resource: '${Resources.receipts}/$receiptId');
+
       receipt =
           await NetworkRequests.decodeJson(response, negativeResponse: {});
       return receipt;
-    }
+
+  }
+
+  // https://api-qas.mawa.co.za:8181/mawa-api/resources/receipts
+  static getReceipts() async {
+    return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: Resources.receipts), negativeResponse: []);
   }
 
   // https://api-qas.mawa.co.za:8181/mawa-api/resources/receipts?checkoutId=CU0000000002
