@@ -272,7 +272,9 @@ class JsonResponses {
   static const String lineTotal = 'lineTotal';
 
   static const String deliveryDate = 'deliveryDate';
+  static const String invoiceDate = 'invoiceDate';
   static const String expiryDate = 'expiryDate';
+  static const String productId = 'productId';
 
 
 
