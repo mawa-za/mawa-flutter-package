@@ -709,11 +709,11 @@ class CommentTypes{
 class FieldOptionTypes{
   static const String fieldOptionCategory = 'CATEGORY';
   static const String fieldOptionPriority = 'PRIORITY';
-  static const String fieldOptionIdType = 'idType';
+  static const String fieldOptionIdType = 'ID-TYPE';
   static const String fieldOptionGender = 'GENDER';
   static const String fieldOptionTitle = 'TITLE';
-  static const String fieldOptionMaritalStatus = 'MARITALSTATUS';
-  static const String fieldOptionSuburb = 'suburb';
+  static const String fieldOptionMaritalStatus = 'MARITAL-STATUS';
+  static const String fieldOptionSuburb = 'SUBURB';
   static const String fieldOptionTown = 'TOWN';
   static const String fieldOptionContactType= 'CONTACTTYPE';
 
