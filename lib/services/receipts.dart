@@ -80,7 +80,7 @@ class Receipts {
   getReceipt({required String receiptId}) async {
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
-        resource: '${Resources.receipts}/$receiptId');
+        resource: '${Resources.receipt}/$receiptId');
 
       receipt =
           await NetworkRequests.decodeJson(response, negativeResponse: {});

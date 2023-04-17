@@ -285,6 +285,9 @@ class JsonResponses {
   static const String items = 'items';
   static const String defaultFunction = 'defaultFunction';
 
+  static const String tenderType = 'tenderType';
+  static const String receiptType = 'receiptType';
+
 }
 
 class Resources {
@@ -320,6 +323,7 @@ class Resources {
   static const String workCenterDesc = 'workcenterDesc';
   static const String workCenterId = 'id';
   static const String receipts = 'receipts';
+  static const String receipt = 'receipt';
   static const String cashup = 'cashup';
   static const String policies = 'policies';
 
