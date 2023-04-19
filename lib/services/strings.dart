@@ -51,15 +51,11 @@ class Strings{
     }
   }
 
-  static String personNameFromJson(json){
-    if(json != null){
-      return
-        '${json[JsonResponses
-            .personLastName] ?? ''}, ${json[JsonResponses
-            .personFirstName] ?? ''} ${json[JsonResponses.personMiddleName] ??
-            ''}';
-    }
-    else{
+  static String personNameFromJson(json) {
+    if (json != null) {
+      String name = '${json[JsonResponses.personLastName] ?? ''}, ${json[JsonResponses.personFirstName] ?? ''} ${json[JsonResponses.personMiddleName] ?? ''}';
+      return name == ',  ' ? '': name;
+    } else {
       return '';
     }
   }
