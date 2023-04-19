@@ -8,17 +8,8 @@ class Claims {
   getClaim() async {
     return await NetworkRequests.decodeJson(await NetworkRequests()
         .securedMawaAPI(NetworkRequests.methodGet,
-            resource: Resources.claims,
+            resource: Resources.claim,
             queryParameters: {QueryParameters.policy: id}));
-  }
-
-  getAllClaims() async {
-    claims.clear();
-    dynamic response = await NetworkRequests()
-        .securedMawaAPI(NetworkRequests.methodGet, resource: Resources.claims);
-    claims = await NetworkRequests.decodeJson(response, negativeResponse: []);
-
-    return claims;
   }
 
   getMyClaims() async {
@@ -33,9 +24,9 @@ class Claims {
     return claims;
   }
 
-  declineClaim(String claimNo, dynamic value) async {
+  declineClaim( dynamic value) async {
     return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
-        resource: '${Resources.claims}/$claimNo/${Resources.claimDecline}',
+        resource: '${Resources.claims}/$id/${Resources.claimDecline}',
         body: {
           JsonPayloads.declineReason: [
             {JsonPayloads.value: value}
@@ -43,18 +34,18 @@ class Claims {
         });
   }
 
-  approveClaim(String claimNo) async {
+  approveClaim() async {
     return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
-        resource: '${Resources.claims}/$claimNo/${Resources.claimApprove}',
+        resource: '${Resources.claims}/$id/${Resources.claimApprove}',
         queryParameters: {
           QueryParameters.approver:
               User.loggedInUser[JsonResponses.usersPartner],
         });
   }
 
-  static cancelClaim(String claimNo, String value) async {
+  cancelClaim(String value) async {
     return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
-        resource: '${Resources.claims}/$claimNo/${Resources.claimCancel}',
+        resource: '${Resources.claims}/$id/${Resources.claimCancel}',
         body: {
           JsonPayloads.notes: [
             {JsonPayloads.value: value, JsonPayloads.type: "CANCELCLAIM"},
@@ -62,18 +53,18 @@ class Claims {
         });
   }
 
-  getSpecificClaim(String claimNo) async {
+  getSpecificClaim() async {
     return await NetworkRequests.decodeJson(
         await NetworkRequests().securedMawaAPI(
           NetworkRequests.methodGet,
-          resource: Resources.claims + '/' + claimNo,
+          resource: '${Resources.claim}/$id',
         ),
         negativeResponse: {});
   }
 
-  disputeClaim(String claimNo, String value) async {
+  disputeClaim(String value) async {
     return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
-        resource: Resources.claims + '/' + claimNo + '/' + Resources.refer,
+        resource: '${Resources.claims}/$id/${Resources.refer}',
         body: {
           JsonPayloads.notes: [
             {JsonPayloads.value: value, JsonPayloads.type: "CLAIMDISPUTE"},
@@ -132,18 +123,11 @@ class Claims {
     return claims;
   }
 
-  static getClaimById(String id) async {
-    await NetworkRequests.decodeJson(
-        await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-            resource: '${Resources.claim}/$id'),
-        negativeResponse: {});
-  }
-
   static createClaim({
-    required String claimant,
-    required String deceased,
-    required String member,
-    required String membership,
+    required String claimantId,
+    required String deceasedId,
+    required String memberId,
+    required String membershipId,
     required String type,
     required String deathDate,
     required String burialDate,
@@ -151,10 +135,10 @@ class Claims {
     await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
         resource: Resources.claim,
         body: {
-          JsonPayloads.claimant: claimant,
-          JsonPayloads.deceased: deceased,
-          JsonPayloads.member: member,
-          JsonPayloads.membership: membership,
+          JsonPayloads.claimant: claimantId,
+          JsonPayloads.deceased: deceasedId,
+          JsonPayloads.member: memberId,
+          JsonPayloads.membership: membershipId,
           JsonPayloads.type: type,
           JsonPayloads.deathDate: deathDate,
           JsonPayloads.burialDate: burialDate
