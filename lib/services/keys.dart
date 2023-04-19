@@ -289,6 +289,8 @@ class JsonResponses {
 
   static const String tenderType = 'tenderType';
   static const String receiptType = 'receiptType';
+  static const String membershipHolder = 'membershipHolder';
+  static const String creationDate = 'creationDate';
 
 }
 
