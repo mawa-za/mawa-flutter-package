@@ -19,7 +19,8 @@ class Persons {
 
   static String personNameFromJson(json) {
     if (json != null) {
-      return '${json[JsonResponses.personLastName] ?? ''}, ${json[JsonResponses.personFirstName] ?? ''} ${json[JsonResponses.personMiddleName] ?? ''}';
+      String name = '${json[JsonResponses.personLastName] ?? ''}, ${json[JsonResponses.personFirstName] ?? ''} ${json[JsonResponses.personMiddleName] ?? ''}';
+      return name == ',  ' ? '': name;
     } else {
       return '';
     }
@@ -125,6 +126,7 @@ class Persons {
           JsonPayloads.idType: idType,
           JsonPayloads.personIdNumber: idNumber,
         });
+    return response;
   }
 
   //add Contacts
@@ -139,6 +141,7 @@ class Persons {
           JsonPayloads.type: contactType,
           JsonPayloads.cellNumber: detail,
         });
+    return response;
   }
 
   //Add addresses
@@ -161,6 +164,7 @@ class Persons {
           JsonPayloads.addressline4: city,
           JsonPayloads.postalCode: postalCode,
         });
+    return response;
   }
 
 
