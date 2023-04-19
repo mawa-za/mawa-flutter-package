@@ -1,6 +1,8 @@
 part of 'package:mawa_package/mawa_package.dart';
 
 class Products {
+  Products(this.id);
+  final String id;
   static late String productId = '';
   late String policyType;
   late String policyDescription;
@@ -19,17 +21,16 @@ class Products {
 
   Map<String, dynamic> policyList = {};
 
-  productsList(category) async {
-    products = await NetworkRequests.decodeJson(await NetworkRequests()
+  static getFromCategory(category) async {
+    return await NetworkRequests.decodeJson(await NetworkRequests()
         .securedMawaAPI(NetworkRequests.methodGet,
             resource: Resources.product,
             queryParameters: {'category': category})); //
-    return products;
   }
 
   generatePoliciesMap(String key) async {
     dynamic list =
-        await Products().productsList(Tools.productCategoryFuneralPolicy);
+        await Products.getFromCategory(Tools.productCategoryFuneralPolicy);
     Map<String, String> data = {};
     if (list != null) {
       switch (key) {
@@ -75,7 +76,7 @@ class Products {
     return list;
   }
 
-  getProducts() async {
+  static getlAll() async {
     allProducts = await NetworkRequests.decodeJson(
         await NetworkRequests().securedMawaAPI(
           NetworkRequests.methodGet,
@@ -85,7 +86,7 @@ class Products {
     return allProducts;
   }
 
-  getSpecificProduct({required String id}) async {
+  getSpecificProduct() async {
     product = await NetworkRequests.decodeJson(
         await NetworkRequests().securedMawaAPI(
           NetworkRequests.methodGet,
@@ -95,7 +96,7 @@ class Products {
     return product;
   }
 
-  getProductAttributes(String id) async {
+  getProductAttributes() async {
     attributes = await NetworkRequests.decodeJson(
         await NetworkRequests().securedMawaAPI(
           NetworkRequests.methodGet,
@@ -105,7 +106,7 @@ class Products {
     return attributes;
   }
 
-  getProductPricing(String id) async {
+  getProductPricing() async {
     pricing = await NetworkRequests.decodeJson(
         await NetworkRequests().securedMawaAPI(
           NetworkRequests.methodGet,
@@ -116,7 +117,6 @@ class Products {
   }
 
   editProduct({
-    required String id,
     required category,
     required description,
     required code,
@@ -132,8 +132,7 @@ class Products {
     return response;
   }
 
-  editProductAttributes(
-      {required String id,
+  editProductAttributes({
       required attribute,
       required value,
       required validFrom,
@@ -151,8 +150,7 @@ class Products {
     return await response;
   }
 
-  editProductPricing(
-      {required String id,
+  editProductPricing({
       required priceType,
       required priceTypeDescription,
       required value,
@@ -173,7 +171,6 @@ class Products {
   }
 
   AddProductAttribute({
-    required String id,
     required attribute,
     required String value,
     required dynamic validFrom,
@@ -193,7 +190,6 @@ class Products {
   }
 
   AddProductPricing({
-    required String id,
     required priceType,
     required priceTypeDescription,
     required String value,
@@ -214,7 +210,7 @@ class Products {
     }
   }
 
-  AddProduct({
+  static AddProduct({
     required code,
     required productDescription,
     required productCategory,
@@ -222,7 +218,7 @@ class Products {
     required sellingPrice,
   }) async {
     {
-      dynamic response = await NetworkRequests().securedMawaAPI(
+      return await NetworkRequests().securedMawaAPI(
           NetworkRequests.methodPost,
           resource: Resources.product,
           body: {
@@ -232,16 +228,10 @@ class Products {
             JsonPayloads.baseUnitOfMeasure: measure,
             JsonPayloads.sellingPrice: sellingPrice,
           });
-      productMap =
-          await NetworkRequests.decodeJson(response, negativeResponse: '');
-
-      productId = productMap.values.first;
-
-      return productId;
     }
   }
 
-  deleteProduct({required String id}) async {
+  deleteProduct() async {
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodDelete,
         resource: '${Resources.product}/$id');
