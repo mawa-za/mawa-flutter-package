@@ -102,11 +102,11 @@ class JsonResponses {
   static const String contactTypeDescription = 'typeDescription';
   static const String contactsDetail = 'detail';
 
-  static const String versionAppName = 'appName';
-  static const String versionApkVersionCode = 'versionNumber';
-  static const String versionAppUsable = 'appUsable';
-  static const String versionValidFrom = 'valid_from';
-  static const String versionValidTo = 'valid_to';
+  static const String appName = 'appName';
+  static const String appUsable = 'appUsable';
+  static const String versionNumber = 'versionNumber';
+  static const String valid_from = 'valid_from';
+  static const String valid_to = 'valid_to';
 
   static const String workCenterId = 'id';
   static const String workCenterDescription = 'description';
@@ -417,6 +417,7 @@ class Resources {
   static const String items = 'items';
 
   static const String calculate_pricing = 'calculate-pricing';
+  static const String application = 'application';
 
 }
 
