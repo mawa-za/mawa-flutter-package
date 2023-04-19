@@ -14,7 +14,7 @@ class Attachments{
         QueryParameters.parentType:parentType,
         QueryParameters.parentReference:parentReference,
       },
-    ) ?? []);
+    ), negativeResponse: []);
     return attachments;
   }
 
