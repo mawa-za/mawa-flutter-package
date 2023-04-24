@@ -1,6 +1,6 @@
 part of 'package:mawa_package/mawa_package.dart';
 
-class ApkVersion {
+class Versions {
   late PackageInfo packageInfo;
   late String appName;
   late String packageName;
@@ -10,11 +10,11 @@ class ApkVersion {
 
   static dynamic apkUsable;
 
-  ApkVersion(){
-    getApkInfo();
+  Versions(){
+    getAppInfo();
   }
 
-  Future getApkInfo()async {
+  Future getAppInfo()async {
     packageInfo = await PackageInfo.fromPlatform();
 
     appName = packageInfo.appName;
@@ -31,10 +31,10 @@ class ApkVersion {
     // });
 
 
-    apkUsable = await checkApkValidity();
+    apkUsable = await checkValidity();
   }
 
-  getApkListInfo() async {
+  getAppVersion() async {
 
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
@@ -46,7 +46,7 @@ class ApkVersion {
     // return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet, resource: Resources.versions));
   }
 
-  checkApkValidity(/*{String versionCode}*/) async {
+  checkValidity(/*{String versionCode}*/) async {
     Map<String, dynamic>? query = {
       QueryParameters.versionApkVersionCode:version,
       QueryParameters.versionAppName:appName
@@ -54,7 +54,7 @@ class ApkVersion {
     dynamic response = await NetworkRequests.decodeJson( await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet, resource: Resources.versions, queryParameters: query));
     // if(response.statusCode == 200) {
     // print('response ${response.toString()}');
-      return response[JsonResponses.versionAppUsable];
+      return response[JsonResponses.appUsable];
     // }
     // else {
     //   return null;
@@ -72,7 +72,7 @@ class ApkVersion {
 
   }
 
-  editAPKUsability({
+  editVersionUsability({
     String? appUsability,
     String? appName,
     String? versionNumber,
@@ -119,4 +119,11 @@ class ApkVersion {
 //     )
 //   }
 
+  /// new backend
+  static getAllVersions() async {
+    return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
+        resource: '${Resources.application}/${Resources.versions}'),
+      negativeResponse: [],
+    );
+  }
 }

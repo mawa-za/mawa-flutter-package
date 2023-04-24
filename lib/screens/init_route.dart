@@ -37,7 +37,7 @@ class _InitialRouteState extends State<InitialRoute> {
     initConnectivity();
     _connectivitySubscription =
         _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
-    await ApkVersion().getApkInfo();
+    await Versions().getAppInfo();
   }
 
   @override
@@ -74,8 +74,8 @@ class _InitialRouteState extends State<InitialRoute> {
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
 
-                  if(ApkVersion.apkUsable != null &&
-                      ApkVersion.apkUsable == false) {
+                  if(Versions.apkUsable != null &&
+                      Versions.apkUsable == false) {
                     body = OutdatedAPK();
                   }
                       else{
