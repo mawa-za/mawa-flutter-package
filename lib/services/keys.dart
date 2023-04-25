@@ -307,6 +307,8 @@ class Resources {
   static const String ticketAwaiting = 'awaitingCustomer';
   static const String ticketResolve = 'resolved';
   static const String ticketReject = 'reject';
+  static const String reject = 'reject';
+  static const String dispute = 'dispute';
   static const String ticketCancel = 'cancel';
   static const String user = 'user';
   static const String resetPassword = 'passwordreset';

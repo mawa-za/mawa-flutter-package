@@ -23,24 +23,25 @@ class Claims {
 
     return claims;
   }
-
-  declineClaim( dynamic value) async {
-    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
-        resource: '${Resources.claims}/$id/${Resources.claimDecline}',
-        body: {
-          JsonPayloads.declineReason: [
-            {JsonPayloads.value: value}
-          ]
-        });
+  rejectClaim( dynamic value) async {
+    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPut,
+        resource: '${Resources.claim}/$id/${Resources.reject}',
+        // body: {
+        //   JsonPayloads.declineReason: [
+        //     {JsonPayloads.value: value}
+        //   ]
+        // }
+        );
   }
 
   approveClaim() async {
-    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
-        resource: '${Resources.claims}/$id/${Resources.claimApprove}',
-        queryParameters: {
-          QueryParameters.approver:
-              User.loggedInUser[JsonResponses.usersPartner],
-        });
+    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPut,
+        resource: '${Resources.claim}/$id/${Resources.approve}',
+        // queryParameters: {
+        //   QueryParameters.approver:
+        //       User.loggedInUser[JsonResponses.usersPartner],
+        // }
+        );
   }
 
   cancelClaim(String value) async {
@@ -63,13 +64,14 @@ class Claims {
   }
 
   disputeClaim(String value) async {
-    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
-        resource: '${Resources.claims}/$id/${Resources.refer}',
-        body: {
-          JsonPayloads.notes: [
-            {JsonPayloads.value: value, JsonPayloads.type: "CLAIMDISPUTE"},
-          ]
-        });
+    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPut,
+        resource: '${Resources.claim}/$id/${Resources.dispute}',
+        // body: {
+        //   JsonPayloads.notes: [
+        //     {JsonPayloads.value: value, JsonPayloads.type: "CLAIMDISPUTE"},
+        //   ]
+        // }
+        );
   }
 
   editClaim(String claimNo,
