@@ -36,7 +36,6 @@ class Receipts {
   userProcessedReceipts(bool filter) async {
     String filterString;
     filter ? filterString = 'x' : filterString = '';
-
     receiptsList.clear();
     collectedFunds = 0.00;
     dynamic response = await NetworkRequests().securedMawaAPI(
@@ -58,20 +57,15 @@ class Receipts {
       }
     }
     collectedFunds = funds;
-    // else{
-    //  receiptsList = [];
-    //  }
     return receiptsList;
   }
 
   receiptHistory(String referenceNo) async {
     receiptsList = [];
-    // print('referenceNo'+referenceNo);
     List receipts = await NetworkRequests.decodeJson(await NetworkRequests()
         .securedMawaAPI(NetworkRequests.methodGet,
             resource: Resources.receipts,
             queryParameters: {QueryParameters.reference: referenceNo}), negativeResponse: []);
-    // receipts.runtimeType == List &&
     receipts.isNotEmpty ? receiptsList = receipts : receiptsList = [];
     return receiptsList;
   }

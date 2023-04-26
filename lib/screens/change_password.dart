@@ -128,7 +128,7 @@ class _ChangePasswordState extends State<ChangePassword> {
       FocusScope.of(context).unfocus();
 
       // Alerts.flushbar(message: 'Please Wait', context: context);
-      dynamic request = await User().changePassword(
+      dynamic request = await User.changePassword(
           password: _newPasswordController.value.text.toString());
       User.username = await NetworkRequests.decodeJson(request);
       if (request.statusCode == 200 || request.statusCode == 201) {

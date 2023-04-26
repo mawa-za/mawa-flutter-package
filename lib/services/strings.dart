@@ -53,8 +53,14 @@ class Strings{
 
   static String personNameFromJson(json) {
     if (json != null) {
-      String name = '${json[JsonResponses.personLastName] ?? ''}, ${json[JsonResponses.personFirstName] ?? ''} ${json[JsonResponses.personMiddleName] ?? ''}';
-      return name == ',  ' ? '': name;
+      try{
+        String name =
+            '${json[JsonResponses.personLastName] ?? ''}, ${json[JsonResponses.personFirstName] ?? ''} ${json[JsonResponses.personMiddleName] ?? ''}';
+        return name == ',  ' ? '' : name;
+      }catch(e){
+        print(e);
+        return 'Error Deciphering Name';
+      }
     } else {
       return '';
     }
