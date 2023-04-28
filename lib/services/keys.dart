@@ -68,8 +68,8 @@ class JsonResponses {
   static const String usersPasswordStatus = 'password_status';
   static const String usersPartner = 'partner';
   static const String userPartner = 'userPartner';
-  static const String usersCellphone = 'cellphone';
-  static const String usersEmail = 'email';
+  static const String cellphone = 'cellphone';
+  static const String email = 'email';
   static const String usersStatus = 'status';
   static const String usersGroupId = 'groupID';
   static const String usersGroupName = 'groupName';
@@ -291,6 +291,7 @@ class JsonResponses {
   static const String receiptType = 'receiptType';
   static const String membershipHolder = 'membershipHolder';
   static const String creationDate = 'creationDate';
+  static const String partner = 'partner';
 
 }
 

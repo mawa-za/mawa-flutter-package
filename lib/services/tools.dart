@@ -50,7 +50,7 @@ class Tools{
   dynamic resetPasswordFeedback;
 
   final _forgotPasswordFormKey = GlobalKey<FormState>();
-  final _tokenFormKey = GlobalKey<FormState>();
+  // final _tokenFormKey = GlobalKey<FormState>();
 
   submitEmail() async {
     FocusScope.of(context).unfocus();
@@ -158,7 +158,7 @@ class Tools{
     FocusScope.of(context).unfocus();
 
     // Alerts.flushbar(message: 'Please Wait', context: context);
-    dynamic request = await User().changePassword(password: _newPasswordController.value.text.toString());
+    dynamic request = await User.changePassword(password: _newPasswordController.value.text.toString());
      User.username = await NetworkRequests.decodeJson(request);
     request.statusCode == 200 || request.statusCode == 201
         ?  Navigator.pushReplacementNamed(context, InitialRoute.id)

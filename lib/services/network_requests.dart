@@ -395,7 +395,7 @@ class NetworkRequests {
         // responseCaught.reasonPhrase = 'Ran Into A Problem';
         return responseCaught;
       }
-      print('last');
+      // print('last');
     } else {
       print('\npre\n');
 
@@ -528,7 +528,7 @@ class NetworkRequests {
               //   await User().getUserDetails(payload![JsonResponses.userID]!);
               //   // Navigator.pushReplacementNamed(context, direct!);
               //   postAuthenticate;
-              User.loggedInUser = await User().getUserDetails(User.username);
+              User.loggedInUser = await User(User.username).get();
             }
 
             print('token oyjfjdbfjd\n $token');
