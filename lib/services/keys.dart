@@ -247,6 +247,7 @@ class JsonResponses {
   static const String terminalId = 'terminalId';
 
   static const String amountDeposited = 'amountDeposited';
+  static const String amountCollected = 'amountCollected';
 
   static const String attribute = 'attribute';
   static const String value = 'value';
@@ -292,6 +293,10 @@ class JsonResponses {
   static const String membershipHolder = 'membershipHolder';
   static const String creationDate = 'creationDate';
   static const String partner = 'partner';
+  static const String receipts = 'receipts';
+  static const String createdDate = 'createdDate';
+  static const String changedBy = 'changedBy';
+  static const String lastUpdated = 'lastUpdated';
 
 }
 
@@ -572,6 +577,7 @@ class JsonPayloads {
   static const String lineTotal = 'lineTotal';
 
   static const String username = 'username';
+  static const String amountDeposited = 'amountDeposited';
 
 
 
