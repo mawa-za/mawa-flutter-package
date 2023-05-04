@@ -23,15 +23,14 @@ class Claims {
 
     return claims;
   }
-  rejectClaim( dynamic value) async {
+  rejectClaim({String ? statusReason, String ?description}) async {
     return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPut,
         resource: '${Resources.claim}/$id/${Resources.reject}',
-        // body: {
-        //   JsonPayloads.declineReason: [
-        //     {JsonPayloads.value: value}
-        //   ]
-        // }
-        );
+        queryParameters: {
+          QueryParameters.statusReason:statusReason,
+          QueryParameters.description:description,
+        }
+    );
   }
 
   approveClaim() async {
@@ -63,15 +62,16 @@ class Claims {
         negativeResponse: {});
   }
 
-  disputeClaim(String value) async {
-    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPut,
+  disputeClaim({String ? statusReason, String ?description}) async {
+    dynamic response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPut,
         resource: '${Resources.claim}/$id/${Resources.dispute}',
-        // body: {
-        //   JsonPayloads.notes: [
-        //     {JsonPayloads.value: value, JsonPayloads.type: "CLAIMDISPUTE"},
-        //   ]
-        // }
-        );
+        queryParameters: {
+          QueryParameters.statusReason:statusReason,
+          QueryParameters.description:description,
+        }
+    );
+    return response;
   }
 
   editClaim(String claimNo,
