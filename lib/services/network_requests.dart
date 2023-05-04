@@ -187,8 +187,8 @@ class NetworkRequests {
     // server == 'qas'
     //     ? url =  Uri.https(endpointURL, path + resource, queryParameters)
     //     : url = Uri.http(endpointURL, path + resource, queryParameters);
-    url = Uri.parse(endpointURL + resource);
-    // url = Uri.https(endpointURL, path + resource, queryParameters);
+    // url = Uri.parse(endpointURL + resource);
+    url = Uri.https(server, resource, queryParameters);
     print('mawa');
     print('status code: $statusCode');
     print('$method ');
@@ -438,7 +438,8 @@ class NetworkRequests {
     // endpointURL = server;//'api-$server.mawa.co.za:$pot';
 
     dynamic url;
-    url = Uri.parse(endpointURL + resource);
+    // url = Uri.parse(endpointURL + resource);
+    url = Uri.https(server,resource,queryParameters);
     print('b\t${url.toString()}\n howl');
 
     // print(endpointURL);
