@@ -233,6 +233,8 @@ class JsonResponses {
   static const String idnumber = 'idnumber';
   static const String idNumber = 'idNumber';
   static const String name2 = 'name2';
+  static const String name3 = 'name3';
+  static const String name4 = 'name4';
   static const String birthDate = 'birthDate';
   static const String validFrom = 'validFrom';
   static const String validTo = 'validTo';
@@ -294,6 +296,8 @@ class JsonResponses {
   static const String creationDate = 'creationDate';
   static const String partner = 'partner';
 
+
+
   static const String membershipId = 'membershipId';
   static const String deathDate = 'deathDate';
   static const String burialDate = 'burialDate';
@@ -302,18 +306,24 @@ class JsonResponses {
 
   static const String receipts = 'receipts';
   static const String createdDate = 'createdDate';
+
   // static const String changedBy = 'changedBy';
+
+
   static const String lastUpdated = 'lastUpdated';
   static const String statusReason = 'statusReason';
   static const String memberId = 'memberId';
   static const String deceasedId = 'deceasedId';
 
 
+  static const String title = 'title';
+
 
 }
 
 class Resources {
 
+  static const String assign = 'assign';
   static const String validateSAID = 'validateSAID';
   static const String attachments = 'attachments';
   static const String otp = 'otp';
@@ -431,13 +441,17 @@ class Resources {
   static const String claim = 'claim';
   static const String membership = 'membership';
   static const String dependent = 'dependent';
-  static const String partners = 'partners';
+  static const String partner = 'partner';
 
   static const String quotation = 'quotation';
   static const String items = 'items';
 
   static const String calculate_pricing = 'calculate-pricing';
   static const String application = 'application';
+  static const String customer = 'customer';
+
+
+
 
 }
 
@@ -590,6 +604,12 @@ class JsonPayloads {
 
   static const String username = 'username';
   static const String amountDeposited = 'amountDeposited';
+
+  static const String name1 = 'name1';
+  static const String name2 = 'name2';
+  static const String name3 = 'name3';
+  static const String name4 = 'name4';
+
 
 
 

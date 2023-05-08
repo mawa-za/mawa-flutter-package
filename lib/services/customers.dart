@@ -18,7 +18,7 @@ class Customers {
   getAllCustomers() async {
     customer = await NetworkRequests.decodeJson(
         await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-            resource: Resources.customers),
+            resource: Resources.customer),
         negativeResponse: []);
 
     return customer;
