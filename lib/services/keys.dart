@@ -306,7 +306,15 @@ class JsonResponses {
 
   static const String receipts = 'receipts';
   static const String createdDate = 'createdDate';
+
+  // static const String changedBy = 'changedBy';
+
+
   static const String lastUpdated = 'lastUpdated';
+  static const String statusReason = 'statusReason';
+  static const String memberId = 'memberId';
+  static const String deceasedId = 'deceasedId';
+
 
   static const String title = 'title';
 
@@ -357,7 +365,7 @@ class Resources {
   static const String identity = 'identities';
   static const String contactValue = 'contacts';
 
-  static const String approve = 'Approve';
+  static const String approve = 'approve';
   static const String approveCancellation = 'ApproveCancellation';
   static const String approveEditedLeave = 'ApproveEditedLeave';
   static const String rejectApproval = 'RejectApproval';
@@ -708,6 +716,8 @@ class QueryParameters {
 
   static const String cashupId = 'cashupId';
   static const String checkoutId = 'checkoutId';
+  static const String statusReason = 'statusReason';
+  static const String description = 'description';
 
 // static const String  = '';
 }
@@ -758,5 +768,6 @@ class FieldOptionTypes{
   static const String fieldOptionSuburb = 'SUBURB';
   static const String fieldOptionTown = 'TOWN';
   static const String fieldOptionContactType= 'CONTACTTYPE';
+  static const String fieldClaimDeclineReason= 'CLAIM-DECLINE-REASON';
 
 }
