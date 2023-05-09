@@ -384,6 +384,15 @@ class NetworkRequests {
       //       positive: false);
       //        responseCaught = http.Response('Connection Lost During Request', 494);
       // }
+      on CertificateException catch(e){
+        print(e.toString());
+        Alerts.toastMessage(
+            message: 'Certificate Error',
+            positive: false);
+        responseCaught =
+            http.Response('Certificate Error', 494);
+        return responseCaught;
+      }
       catch (e) {
         print(e.toString());
         Alerts.toastMessage(
@@ -596,7 +605,17 @@ class NetworkRequests {
       // responseCaught.statusCode = 491;
       // responseCaught.reasonPhrase = 'Request Timed Out';
       return responseCaught;
-    } on SocketException catch (e) {
+    }
+    on CertificateException catch(e){
+      print(e.toString());
+      Alerts.toastMessage(
+          message: 'Certificate Error',
+          positive: false);
+      responseCaught =
+          http.Response('Certificate Error', 494);
+      return responseCaught;
+    }
+    on SocketException catch (e) {
       Tools.isTouchLocked = false;
       print(e.toString());
       Alerts.toastMessage(

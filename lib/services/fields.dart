@@ -16,18 +16,20 @@ class Fields {
 
   }
 
-  addField({
-    required String desc
+  static addField({
+    required String desc,
+    required String validFrom,
+    required String validTo,
   }) async {
-
-    dynamic response = await NetworkRequests().securedMawaAPI(
+    return await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPost,
-        resource: Resources.fields,
+        resource: Resources.field,
         body: {
           JsonPayloads.fieldDescription : desc,
-        });
-
-    return await NetworkRequests.decodeJson(response);
+          JsonPayloads.validFrom : validFrom,
+          JsonPayloads.validTo : validTo,
+        },
+    );
   }
 
   getSingleField() async {

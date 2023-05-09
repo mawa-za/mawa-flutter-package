@@ -102,7 +102,7 @@ class User{
           JsonPayloads.userType : userType,
           JsonPayloads.email : email,
           JsonPayloads.cellphone : cellphone,
-          JsonPayloads.partnerID : password,
+          JsonPayloads.password : password,
         });
   }
 

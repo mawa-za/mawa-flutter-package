@@ -243,6 +243,7 @@ class Tools{
 
   static logoutPopup({required BuildContext context, required String redirect}) {
     return AwesomeDialog(
+      width: 500.0,
       context: context,
       dialogType: DialogType.QUESTION,
       animType: AnimType.BOTTOMSLIDE,
