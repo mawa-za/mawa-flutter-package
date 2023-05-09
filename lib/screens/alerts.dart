@@ -51,6 +51,7 @@ class Alerts{
     dynamic dlg =
 
     AwesomeDialog(
+      width: 500.0,
       onDissmissCallback: (O){print('hello');},
       context: context,
       dialogType: DialogType.QUESTION,
@@ -181,6 +182,7 @@ class Alerts{
 
   openPop(context, {message,title}) {
     return AwesomeDialog(
+      width: 500.0,
         context: context,
         title: title ?? '',
         body: Text('$message'),
@@ -190,6 +192,7 @@ class Alerts{
 
   popup(context,{message,title}) {
     return AwesomeDialog(
+      width: 500.0,
         context:  context,
         title: title ?? '',
         body: Text('$message'),

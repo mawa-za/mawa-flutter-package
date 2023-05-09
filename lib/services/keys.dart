@@ -317,6 +317,7 @@ class JsonResponses {
 
 
   static const String title = 'title';
+  static const String receiptNumber = 'receiptNumber';
 
 
 }

@@ -200,5 +200,14 @@ class Persons {
     );
   }
 
+  static getAll() async{
+    return await NetworkRequests.decodeJson( await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: Resources.persons,
+       ),
+      negativeResponse: [],
+    );
+  }
+
 
 }
