@@ -19,35 +19,11 @@ class Partners {
   static createPartner(
       {
         required dynamic body
-        // dynamic type,
-        // String? name1,
-        // String? name2,
-        // String? name3,
-        // String? name4,
-        // dynamic idType,
-        // dynamic idNumber,
-        // dynamic gender,
-        // dynamic title,
-        // dynamic maritalStatus,
-        // dynamic birthdate,
       }) async {
     dynamic response= await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPost,
         resource: Resources.partner,
         body :body
-      // body: {
-      //   JsonPayloads.type: type,
-      //   JsonPayloads.name1: name1,
-      //   JsonPayloads.name2: name2,
-      //   JsonPayloads.name3: name3,
-      //   JsonPayloads.name4: name4,
-      //   JsonPayloads.idType : idType,
-      //   JsonResponses.idNumber:idNumber,
-      //   JsonPayloads.gender: gender,
-      //   JsonPayloads.title: title,
-      //   JsonPayloads.maritalStatus: maritalStatus,
-      //   JsonPayloads.birthDate: birthdate
-      // }
     );
     return response;
   }
@@ -72,9 +48,9 @@ class Partners {
 
   }
   addIdentity(
-      {required String? path,
-        required dynamic idType,
-        required String? idNumber}) async {
+      { String? path,
+        dynamic idType,
+        String? idNumber}) async {
     return await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPost,
         resource: '${Resources.persons}/$partnerId/$path',
@@ -84,9 +60,9 @@ class Partners {
         });
   }
     addContact(
-        {required String? path,
-          required String? contactType,
-          required dynamic detail}) async {
+        {  String? path,
+           String? contactType,
+           dynamic detail}) async {
       dynamic response = await NetworkRequests().securedMawaAPI(
           NetworkRequests.methodPost,
           resource: '${Resources.partner}/$partnerId/$path',
@@ -96,6 +72,27 @@ class Partners {
           });
       return response;
     }
+  addAdress(
+      {  String? path,
+         String? addressType,
+         String? houseno,
+         String? streetName,
+         dynamic suburb,
+         dynamic city,
+         String? postalCode}) async {
+    dynamic response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPost,
+        resource: '${Resources.partner}/$partnerId/$path',
+        body: {
+          JsonPayloads.type: addressType,
+          JsonPayloads.addressline1: houseno,
+          JsonPayloads.addressline2: streetName,
+          JsonPayloads.addressline3: suburb,
+          JsonPayloads.addressline4: city,
+          JsonPayloads.postalCode: postalCode,
+        });
+    return response;
+  }
 
 
 }
