@@ -41,7 +41,7 @@ class Fields {
   }
 
   mapAllFields() async {
-    fields = getFields();
+    fields = await getFields();
     Map mappedFields = {};
 
     for (int index = 0; index < fields.length;  index++) {
@@ -56,5 +56,14 @@ class Fields {
           NetworkRequests.methodGet,
           resource: '${Resources.field}/$code/${Resources.option}',
         ), negativeResponse: []);
+  }
+
+  mapFieldsOptions() async {
+    dynamic options = await getOptions();
+    Map<String, String> mappedFields = {};
+    for (int index = 0; index < options.length;  index++) {
+      mappedFields['${options[index][JsonResponses.fieldOptionDescription]}'] = options[index][JsonResponses.fieldOptionCode].toString();
+    }
+    return mappedFields;
   }
 }

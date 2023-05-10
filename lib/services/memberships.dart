@@ -153,20 +153,15 @@ class Memberships {
   //   "middleName": "string",
   //   "gender": "string"
   // }
-  createDependent( {
-    String? id,
-    required String title ,
-    String? idType ,
-    String? idNumber,
-    required String lastName,
-    required String firstName,
-    String? middleName,
-    required String gender
+  addDependent( {
+    required Map partner
   }) async {
-    return await NetworkRequests.decodeJson(await NetworkRequests()
-        .securedMawaAPI(NetworkRequests.methodGet,
+    return await NetworkRequests()
+        .securedMawaAPI(NetworkRequests.methodPost,
             resource:
-                '${Resources.membership}/$membershipID/${Resources.dependent}'));
+                '${Resources.membership}/$membershipID/${Resources.dependent}',
+      body: partner,
+    );
   }
 
   deleteMembership() async {
