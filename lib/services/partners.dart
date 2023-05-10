@@ -98,4 +98,22 @@ class Partners {
     }
 
 
+    get() async {
+      return await NetworkRequests.decodeJson(
+          await NetworkRequests().securedMawaAPI(
+            NetworkRequests.methodGet,
+            resource: '${Resources.partner}/$partnerId',
+          ),
+          negativeResponse: {});
+    }
+
+    static getAll() async {
+      return await NetworkRequests.decodeJson(
+          await NetworkRequests().securedMawaAPI(
+            NetworkRequests.methodGet,
+            resource: Resources.partner,
+          ),
+          negativeResponse: []);
+    }
+
 }
