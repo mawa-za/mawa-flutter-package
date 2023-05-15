@@ -318,6 +318,7 @@ class JsonResponses {
 
   static const String title = 'title';
   static const String receiptNumber = 'receiptNumber';
+  static const String name1 = 'name1';
 
 
 }
@@ -450,6 +451,10 @@ class Resources {
   static const String calculate_pricing = 'calculate-pricing';
   static const String application = 'application';
   static const String customer = 'customer';
+  static const String prospects='prospects';
+  static const String prospect='prospect';
+  static const String supplier='supplier';
+
 
 
 
