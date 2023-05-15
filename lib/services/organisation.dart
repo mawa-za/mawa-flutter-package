@@ -13,7 +13,7 @@ class Organisation {
         ),
         negativeResponse: []);
   }
-  static getSpecific(orgD) async {
+  getSpecific(orgD) async {
     return await NetworkRequests.decodeJson(
         await NetworkRequests().securedMawaAPI(
           NetworkRequests.methodGet,

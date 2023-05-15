@@ -13,7 +13,7 @@ class Prospect {
         ),
         negativeResponse: []);
   }
-  static getSpecific(prospectID) async {
+   getSpecific(prospectID) async {
     return await NetworkRequests.decodeJson(
         await NetworkRequests().securedMawaAPI(
           NetworkRequests.methodGet,

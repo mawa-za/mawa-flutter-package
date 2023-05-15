@@ -13,11 +13,11 @@ class Supplier {
         ),
         negativeResponse: []);
   }
-  static getSpecific(prospectID) async {
+   getSpecific(supplierID) async {
     return await NetworkRequests.decodeJson(
         await NetworkRequests().securedMawaAPI(
           NetworkRequests.methodGet,
-          resource: '${Resources.supplier}/$prospectID',
+          resource: '${Resources.supplier}/$supplierID',
         ),
         negativeResponse: {});
   }
