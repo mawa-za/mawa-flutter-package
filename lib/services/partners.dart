@@ -1,24 +1,22 @@
 part of 'package:mawa_package/mawa_package.dart';
 
 class Partners {
-  static dynamic partner;
+  static List partner  =[];
   late String partnerId;
   Partners(this.partnerId);
   static getPartnerByRole(
       {required String partnerRole}) async {
-    partner.clear();
-    dynamic response = await NetworkRequests().securedMawaAPI(
-      NetworkRequests.methodGet,
-      resource: '${Resources.partner}/$partnerRole/${Resources.role}',
-    );
+    partner = await NetworkRequests.decodeJson(
+        await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
+            resource: '${Resources.partner}/$partnerRole/${Resources.role}'),
+            negativeResponse: []);
 
-    partner = await NetworkRequests.decodeJson(response, negativeResponse: {});
-    return partner;
+        return partner;
   }
-
   static createPartner(
       {
         required dynamic body
+
       }) async {
     dynamic response= await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPost,
@@ -27,9 +25,6 @@ class Partners {
     );
     return response;
   }
-
-
-
 
   Future assignPersonRole({required String partnerRole}) async {
     await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
@@ -48,9 +43,9 @@ class Partners {
 
   }
   addIdentity(
-      { String? path,
-        dynamic idType,
-        String? idNumber}) async {
+      {required String? path,
+        required dynamic idType,
+        required String? idNumber}) async {
     return await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPost,
         resource: '${Resources.persons}/$partnerId/$path',
@@ -60,9 +55,9 @@ class Partners {
         });
   }
     addContact(
-        {  String? path,
-           String? contactType,
-           dynamic detail}) async {
+        {required String? path,
+          required String? contactType,
+          required dynamic detail}) async {
       dynamic response = await NetworkRequests().securedMawaAPI(
           NetworkRequests.methodPost,
           resource: '${Resources.partner}/$partnerId/$path',
@@ -72,45 +67,6 @@ class Partners {
           });
       return response;
     }
-  addAdress(
-      {  String? path,
-         String? addressType,
-         String? houseno,
-         String? streetName,
-         dynamic suburb,
-         dynamic city,
-         String? postalCode}) async {
-    dynamic response = await NetworkRequests().securedMawaAPI(
-        NetworkRequests.methodPost,
-        resource: '${Resources.partner}/$partnerId/$path',
-        body: {
-          JsonPayloads.type: addressType,
-          JsonPayloads.addressline1: houseno,
-          JsonPayloads.addressline2: streetName,
-          JsonPayloads.addressline3: suburb,
-          JsonPayloads.addressline4: city,
-          JsonPayloads.postalCode: postalCode,
-        });
-    return response;
-  }
 
-
-    get() async {
-      return await NetworkRequests.decodeJson(
-          await NetworkRequests().securedMawaAPI(
-            NetworkRequests.methodGet,
-            resource: '${Resources.partner}/$partnerId',
-          ),
-          negativeResponse: {});
-    }
-
-    static getAll() async {
-      return await NetworkRequests.decodeJson(
-          await NetworkRequests().securedMawaAPI(
-            NetworkRequests.methodGet,
-            resource: Resources.partner,
-          ),
-          negativeResponse: []);
-    }
 
 }
