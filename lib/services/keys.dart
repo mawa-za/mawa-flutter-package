@@ -319,6 +319,19 @@ class JsonResponses {
   static const String title = 'title';
   static const String receiptNumber = 'receiptNumber';
   static const String name1 = 'name1';
+  static const String paymentReason = 'paymentReason';
+  static const String employeeResponsibleId = 'employeeResponsibleId';
+  static const String accountHolder = 'accountHolder';
+  static const String bankName = 'bankName';
+  static const String accountType = 'accountType';
+  static const String accountNumber = 'accountNumber';
+  static const String bankDetails = 'bankDetails';
+
+
+
+
+
+
 
 
 }
@@ -454,6 +467,7 @@ class Resources {
   static const String prospects='prospects';
   static const String prospect='prospect';
   static const String supplier='supplier';
+  static const String paymentRequest = 'payment-request';
 
 
 
@@ -616,7 +630,10 @@ class JsonPayloads {
   static const String name3 = 'name3';
   static const String name4 = 'name4';
 
-
+  static const String employeeResponsibleId = 'employeeResponsibleId';
+  static const String reference = 'reference';
+  static const String amount = 'amount';
+  static const String bankDetails = 'bankDetails';
 
 
 
