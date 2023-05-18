@@ -798,7 +798,9 @@ class FieldOptionTypes{
   static const String fieldOptionMaritalStatus = 'MARITAL-STATUS';
   static const String fieldOptionSuburb = 'SUBURB';
   static const String fieldOptionTown = 'TOWN';
-  static const String fieldOptionContactType= 'CONTACTTYPE';
+  static const String fieldOptionContactType= 'CONTACT-TYPE';
+  static const String fieldAddress= 'ADDRESSES';
+  static const String fieldPartnerRole= 'PARTNER-ROLE';
   static const String fieldClaimDeclineReason= 'CLAIM-DECLINE-REASON';
 
 }

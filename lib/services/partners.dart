@@ -63,7 +63,7 @@ class Partners {
           resource: '${Resources.partner}/$partnerId/$path',
           body: {
             JsonPayloads.type: contactType,
-            JsonPayloads.cellNumber: detail,
+            JsonPayloads.value: detail,
           });
       return response;
     }
