@@ -56,16 +56,19 @@ class NetworkRequests {
 
     Map<String, String> headers = {"X-TenantID": tenantID};
     // {/*"Authorization": "Bearer $tokenKey"*/};
-    secured ? headers["Authorization"] = "Bearer $tokenKey" : null;
+    secured ? headers["Authorization"] = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJhdWQiOiJkZXYiLCJzdWIiOiJhZG1pbiIsImV4cCI6MTY4NDQyMjI1MSwiaWF0IjoxNjg0NDEzMjUxLCJ0ZW5hbnQtaWQiOiJkZXYifQ.aYBtMQ2V4htZfnbyRm6mCrKdd7UW5ViFNo3AcqGIa-xdCdOsjwnuheqwlAG0TPYMiGID8TcosxlzgHHSFfcg4A" : null;
 
     responseType ??= responseJson;
     print('responseType $responseType');
-    if (responseType == responseJson)
+    if (responseType == responseJson) {
       headers['Content-type'] = 'application/json; charset=UTF-8';
-    if (responseType == responseBlob)
+    }
+    if (responseType == responseBlob) {
       headers['Content-type'] = 'application/json';
-    if (responseType == responseFormData)
+    }
+    if (responseType == responseFormData) {
       headers['Content-type'] = 'multipart/form-data';
+    }
 
     return headers;
   }

@@ -469,6 +469,8 @@ class Resources {
   static const String supplier='supplier';
   static const String paymentRequest = 'payment-request';
 
+  static const String attachmentfile = 'attachmentfile';
+  static const String attachment = 'attachment';
 
 
 
@@ -635,6 +637,12 @@ class JsonPayloads {
   static const String amount = 'amount';
   static const String bankDetails = 'bankDetails';
 
+  static const String file = 'file';
+  static const String uploadDate = 'uploadDate';
+  static const String uploadTime = 'uploadTime';
+  static const String uploadedBy = 'uploadedBy';
+  static const String downloadDate = 'downloadDate';
+  static const String downloadedBy = 'downloadedBy';
 
 
 // static const String  = '';
