@@ -67,6 +67,45 @@ class Partners {
           });
       return response;
     }
+  addAdress(
+      {  String? path,
+        String? addressType,
+        String? houseno,
+        String? streetName,
+        dynamic suburb,
+        dynamic city,
+        String? postalCode}) async {
+    dynamic response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPost,
+        resource: '${Resources.partner}/$partnerId/$path',
+        body: {
+          JsonPayloads.type: addressType,
+          JsonPayloads.addressline1: houseno,
+          JsonPayloads.addressline2: streetName,
+          JsonPayloads.addressline3: suburb,
+          JsonPayloads.addressline4: city,
+          JsonPayloads.postalCode: postalCode,
+        });
+    return response;
+  }
+  get() async {
+    return await NetworkRequests.decodeJson(
+        await NetworkRequests().securedMawaAPI(
+          NetworkRequests.methodGet,
+          resource: '${Resources.partner}/$partnerId',
+        ),
+        negativeResponse: {});
+  }
+
+  static getAll() async {
+    return await NetworkRequests.decodeJson(
+        await NetworkRequests().securedMawaAPI(
+          NetworkRequests.methodGet,
+          resource: Resources.partner,
+        ),
+        negativeResponse: []);
+  }
+
 
 
 }
