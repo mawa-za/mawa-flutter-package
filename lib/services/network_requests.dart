@@ -56,7 +56,7 @@ class NetworkRequests {
 
     Map<String, String> headers = {"X-TenantID": tenantID};
     // {/*"Authorization": "Bearer $tokenKey"*/};
-    secured ? headers["Authorization"] = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJhdWQiOiJkZXYiLCJzdWIiOiJhZG1pbiIsImV4cCI6MTY4NDQyMjI1MSwiaWF0IjoxNjg0NDEzMjUxLCJ0ZW5hbnQtaWQiOiJkZXYifQ.aYBtMQ2V4htZfnbyRm6mCrKdd7UW5ViFNo3AcqGIa-xdCdOsjwnuheqwlAG0TPYMiGID8TcosxlzgHHSFfcg4A" : null;
+    secured ? headers["Authorization"] = "Bearer $token" : null;
 
     responseType ??= responseJson;
     print('responseType $responseType');
@@ -419,13 +419,23 @@ class NetworkRequests {
         if (route != null) {
           print(route.settings.name);
           if (route.settings.name.toString() != init) {
-            Navigator.pushNamedAndRemoveUntil(
-                Tools.context, init, (route) => false);
+            try{
+              Navigator.pushNamedAndRemoveUntil(
+                  Tools.context, init, (route) => false);
+            }
+            catch(e){
+
+            }
           }
         }
       } else {
-        // Authorize(context: Tools.context).attempt();
+          try{
+// Authorize(context: Tools.context).attempt();
         Navigator.pushReplacementNamed(Tools.context, init);
+    }
+    catch(e){
+
+    }
       }
     }
   }
