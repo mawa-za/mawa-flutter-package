@@ -472,6 +472,10 @@ class Resources {
   static const String attachmentfile = 'attachmentfile';
   static const String attachment = 'attachment';
 
+  static const String lock = 'lock';
+  static const String unlock = 'unlock';
+  static const String byId = 'byId';
+
 
 
 
@@ -643,6 +647,7 @@ class JsonPayloads {
   static const String uploadedBy = 'uploadedBy';
   static const String downloadDate = 'downloadDate';
   static const String downloadedBy = 'downloadedBy';
+  static const String reason = 'reason';
 
 
 // static const String  = '';
@@ -749,6 +754,11 @@ class QueryParameters {
   static const String checkoutId = 'checkoutId';
   static const String statusReason = 'statusReason';
   static const String description = 'description';
+
+  static const String email = 'email';
+  static const String cellphone = 'cellphone';
+  static const String passwordStatus = 'passwordStatus';
+  static const String userRole = 'userRole';
 
 // static const String  = '';
 }
