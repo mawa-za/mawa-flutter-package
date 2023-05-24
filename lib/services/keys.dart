@@ -649,6 +649,11 @@ class JsonPayloads {
   static const String downloadedBy = 'downloadedBy';
   static const String reason = 'reason';
 
+  static const String previousProduct = 'previousProduct';
+  static const String statusReason = 'statusReason';
+  static const String salesRepresentativeId = 'salesRepresentativeId';
+  static const String premium = 'premium';
+
 
 // static const String  = '';
 }
@@ -759,6 +764,8 @@ class QueryParameters {
   static const String cellphone = 'cellphone';
   static const String passwordStatus = 'passwordStatus';
   static const String userRole = 'userRole';
+
+  static const String fieldOption  = 'fieldOption ';
 
 // static const String  = '';
 }
