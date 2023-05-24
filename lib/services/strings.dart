@@ -32,7 +32,7 @@ class Strings{
     else{
       result = text;
     }
-    return result;
+    return result.trim();
   }
 
   static camelCaseToDescription(entries){
