@@ -92,6 +92,13 @@ class JsonResponses {
   static const String addressesLine2 = 'line2';
   static const String addressesLine3 = 'line3';
   static const String addressesLine4 = 'line4';
+
+  static const String line1 = 'line1';
+  static const String line2 = 'line2';
+  static const String line3 = 'line3';
+  static const String line4 = 'line4';
+
+
   static const String addressesPostalCode = 'postalCode';
   static const String addressesTypeDescription = 'typeDescription';
   static const String addressline3Description = 'line3Description';
@@ -327,12 +334,9 @@ class JsonResponses {
   static const String accountNumber = 'accountNumber';
   static const String bankDetails = 'bankDetails';
 
-
-
-
-
-
-
+  static const typeDescription = 'typeDescription';
+  static const addressId = 'addressId';
+  static const String idType = 'idType';
 
 }
 
@@ -475,6 +479,7 @@ class Resources {
   static const String lock = 'lock';
   static const String unlock = 'unlock';
   static const String byId = 'byId';
+
 
 
 
@@ -685,6 +690,9 @@ class QueryParameters {
 
   static const String personIdNumber = 'idnumber';
   static const String partnerRole = 'partnerRole';
+  static const String idNumber = 'idNumber';
+  static const String idType = 'idType';
+
 
   static const String organisationId = 'organisationId';
   static const String otp = 'otp';
@@ -767,6 +775,8 @@ class QueryParameters {
 
   static const String fieldOption  = 'fieldOption ';
 
+  static const String addressId = 'addressId';
+
 // static const String  = '';
 }
 
@@ -819,5 +829,12 @@ class FieldOptionTypes{
   static const String fieldAddress= 'ADDRESSES';
   static const String fieldPartnerRole= 'PARTNER-ROLE';
   static const String fieldClaimDeclineReason= 'CLAIM-DECLINE-REASON';
+
+}
+class PathNames{
+  static const String identityPath = 'identity';
+  static const String rolePath = 'role';
+  static const String contactPath= 'contact';
+  static const String addressPath= 'address';
 
 }
