@@ -138,7 +138,7 @@ class _ChangePasswordState extends State<ChangePassword> {
 
         Navigator.pushReplacementNamed(context, initialScreen);
       } else if (request.statusCode == 401) {
-        Authenticate.message = 'Token Invalid';
+        AuthenticateView.message = 'Token Invalid';
       } else {
         Alerts.flushbar(
             context: context,

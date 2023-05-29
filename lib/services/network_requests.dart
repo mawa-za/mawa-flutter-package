@@ -166,6 +166,7 @@ class NetworkRequests {
     required String resource,
     dynamic body,
     Map<String, dynamic>? queryParameters,
+        bool secured = true,
   }) async {
     // token == null ? token = await _key: null;
     final SharedPreferences prefs = await preferences;
@@ -185,6 +186,7 @@ class NetworkRequests {
     dynamic url;
     dynamic header = headers(
       tokenKey: token,
+      secured: secured,
     );
     // statusCode == null? statusCode= 100: null;
     // server == 'qas'
@@ -280,7 +282,7 @@ class NetworkRequests {
           case 401:
             {
               print('\npost\n');
-              Navigator.pushReplacementNamed(Tools.context, Authenticate.id);
+              Navigator.pushReplacementNamed(Tools.context, AuthenticateView.id);
             }
             break;
           case 404:
