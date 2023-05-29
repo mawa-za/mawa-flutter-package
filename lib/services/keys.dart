@@ -92,10 +92,22 @@ class JsonResponses {
   static const String addressesLine2 = 'line2';
   static const String addressesLine3 = 'line3';
   static const String addressesLine4 = 'line4';
+
+  static const String line1 = 'line1';
+  static const String line2 = 'line2';
+  static const String line3 = 'line3';
+  static const String line4 = 'line4';
+  static const String postalCode = 'postalCode';
+
+
+
   static const String addressesPostalCode = 'postalCode';
   static const String addressesTypeDescription = 'typeDescription';
+  static const String addressline1Description = 'line1Description';
+  static const String addressline2Description = 'line2Description';
   static const String addressline3Description = 'line3Description';
   static const String adressline4Description = 'line4Description';
+  static const String addressline4Description = 'line4Description';
   static const String addressPostalCode = 'postalcode';
 
   static const String contactsType = 'type';
@@ -327,12 +339,9 @@ class JsonResponses {
   static const String accountNumber = 'accountNumber';
   static const String bankDetails = 'bankDetails';
 
-
-
-
-
-
-
+  static const typeDescription = 'typeDescription';
+  static const addressId = 'addressId';
+  static const String idType = 'idType';
 
 }
 
@@ -475,9 +484,7 @@ class Resources {
   static const String lock = 'lock';
   static const String unlock = 'unlock';
   static const String byId = 'byId';
-
-
-
+  static const String addressId = 'addressId';
 
 }
 
@@ -565,7 +572,7 @@ class JsonPayloads {
   static const String firstName = 'firstName';
   static const String  middleName = 'middleName';
   static const String lastName = 'lastName';
-  static const String idNumber = 'idnumber';
+  static const String idNumber = 'idNumber';
   static const String personIdNumber = 'idNumber';
   static const String idType = 'idType';
   static const String addressline1 = 'line1';
@@ -654,6 +661,11 @@ class JsonPayloads {
   static const String salesRepresentativeId = 'salesRepresentativeId';
   static const String premium = 'premium';
 
+  static const String line1 = 'line1';
+  static const String line2 = 'line2';
+  static const String line3 = 'line3';
+  static const String line4 = 'line4';
+
 
 // static const String  = '';
 }
@@ -683,8 +695,11 @@ class QueryParameters {
   static const String loggedByID = 'loggedByID';
   static const String loggedById = 'loggedById';
 
-  static const String personIdNumber = 'idnumber';
+  static const String personIdNumber = 'idumber';
   static const String partnerRole = 'partnerRole';
+  static const String idNumber = 'idNumber';
+  static const String idType = 'idType';
+
 
   static const String organisationId = 'organisationId';
   static const String otp = 'otp';
@@ -767,6 +782,8 @@ class QueryParameters {
 
   static const String fieldOption  = 'fieldOption ';
 
+  static const String addressId = 'addressId';
+
 // static const String  = '';
 }
 
@@ -821,5 +838,12 @@ class FieldOptionTypes{
   static const String fieldAddress= 'ADDRESSES';
   static const String fieldPartnerRole= 'PARTNER-ROLE';
   static const String fieldClaimDeclineReason= 'CLAIM-DECLINE-REASON';
+
+}
+class PathNames{
+  static const String identityPath = 'identity';
+  static const String rolePath = 'role';
+  static const String contactPath= 'contact';
+  static const String addressPath= 'address';
 
 }
