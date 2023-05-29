@@ -97,12 +97,17 @@ class JsonResponses {
   static const String line2 = 'line2';
   static const String line3 = 'line3';
   static const String line4 = 'line4';
+  static const String postalCode = 'postalCode';
+
 
 
   static const String addressesPostalCode = 'postalCode';
   static const String addressesTypeDescription = 'typeDescription';
+  static const String addressline1Description = 'line1Description';
+  static const String addressline2Description = 'line2Description';
   static const String addressline3Description = 'line3Description';
   static const String adressline4Description = 'line4Description';
+  static const String addressline4Description = 'line4Description';
   static const String addressPostalCode = 'postalcode';
 
   static const String contactsType = 'type';
@@ -479,10 +484,7 @@ class Resources {
   static const String lock = 'lock';
   static const String unlock = 'unlock';
   static const String byId = 'byId';
-
-
-
-
+  static const String addressId = 'addressId';
 
 }
 
@@ -570,7 +572,7 @@ class JsonPayloads {
   static const String firstName = 'firstName';
   static const String  middleName = 'middleName';
   static const String lastName = 'lastName';
-  static const String idNumber = 'idnumber';
+  static const String idNumber = 'idNumber';
   static const String personIdNumber = 'idNumber';
   static const String idType = 'idType';
   static const String addressline1 = 'line1';
@@ -659,6 +661,11 @@ class JsonPayloads {
   static const String salesRepresentativeId = 'salesRepresentativeId';
   static const String premium = 'premium';
 
+  static const String line1 = 'line1';
+  static const String line2 = 'line2';
+  static const String line3 = 'line3';
+  static const String line4 = 'line4';
+
 
 // static const String  = '';
 }
@@ -688,7 +695,7 @@ class QueryParameters {
   static const String loggedByID = 'loggedByID';
   static const String loggedById = 'loggedById';
 
-  static const String personIdNumber = 'idnumber';
+  static const String personIdNumber = 'idumber';
   static const String partnerRole = 'partnerRole';
   static const String idNumber = 'idNumber';
   static const String idType = 'idType';
