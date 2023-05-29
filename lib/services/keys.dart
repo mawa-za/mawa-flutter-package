@@ -818,6 +818,7 @@ class SharedPrefs {
   static const tenantID = 'tenantID';
   static const userID = 'userID';
   static const role = 'role';
+  static const workcenters = 'workcenters';
 }
 
 class CommentTypes{
