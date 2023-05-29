@@ -63,7 +63,7 @@ part 'package:mawa_package/services/items.dart';
 part 'package:mawa_package/services/keys.dart';
 part 'package:mawa_package/services/leaves.dart';
 part 'package:mawa_package/services/location.dart';
-part 'package:mawa_package/services/memberships.dart';
+part 'package:mawa_package/services/membership.dart';
 part 'package:mawa_package/services/network_requests.dart';
 part 'package:mawa_package/services/notification.dart';
 part 'package:mawa_package/services/otp.dart';
