@@ -28,7 +28,7 @@ import 'package:file_picker/file_picker.dart';
 part 'package:mawa_package/mawa.dart';
 
 part 'package:mawa_package/screens/alerts.dart';
-part 'package:mawa_package/screens/authenticate.dart';
+part 'package:mawa_package/screens/authenticate_view.dart';
 part 'package:mawa_package/screens/change_password.dart';
 part 'package:mawa_package/screens/forgot_password.dart';
 part 'package:mawa_package/screens/init_route.dart';
@@ -44,6 +44,7 @@ part 'package:mawa_package/screens/user_overview.dart';
 
 part 'package:mawa_package/services/attachments.dart';
 part 'package:mawa_package/services/attachment.dart';
+part 'package:mawa_package/services/authenticate.dart';
 part 'package:mawa_package/services/calculate_pricing.dart';
 part 'package:mawa_package/services/cashup.dart';
 part 'package:mawa_package/services/claims.dart';
@@ -74,6 +75,7 @@ part 'package:mawa_package/services/quotation.dart';
 part 'package:mawa_package/services/receipts.dart';
 part 'package:mawa_package/services/role.dart';
 part 'package:mawa_package/services/sale_order.dart';
+part 'package:mawa_package/services/shared_storage.dart';
 part 'package:mawa_package/services/strings.dart';
 part 'package:mawa_package/services/tasks.dart';
 part 'package:mawa_package/services/tickets.dart';

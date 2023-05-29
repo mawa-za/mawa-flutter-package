@@ -68,7 +68,7 @@ class Tools{
     //     ? tokenPopup()
     //     : forgotPasswordPopup( message: 'Email Not Associated With Any User');
     Tools.isTouchLocked = false;
-    Authenticate.message = '';
+    AuthenticateView.message = '';
     overlay.dismissOverlay();
   }
 
@@ -147,9 +147,9 @@ class Tools{
     // TrackTicket.id: 4,
   };
 
-  static final Widget exitIconButton = ElevatedButton.icon(onPressed: () => Navigator.popAndPushNamed(context, Authenticate.id), icon: const Icon(Icons.exit_to_app), label: const Text('exit'));
+  static final Widget exitIconButton = ElevatedButton.icon(onPressed: () => Navigator.popAndPushNamed(context, AuthenticateView.id), icon: const Icon(Icons.exit_to_app), label: const Text('exit'));
 
-  static final Widget exit = GestureDetector(child: const Icon(Icons.exit_to_app), onTap: () => Navigator.popAndPushNamed(context, Authenticate.id),);
+  static final Widget exit = GestureDetector(child: const Icon(Icons.exit_to_app), onTap: () => Navigator.popAndPushNamed(context, AuthenticateView.id),);
 
   _resetPassword(/*context*/) async {
     final OverlayWidgets overlay = OverlayWidgets(context: context);
@@ -165,7 +165,7 @@ class Tools{
         : request.statusCode == 401
         ?
 
-    Authenticate.message = 'Token Invalid'
+    AuthenticateView.message = 'Token Invalid'
         : Alerts.flushbar(context: context, message:'Failed To Reset', positive: false, popContext: true);
     overlay.dismissOverlay();
   }
