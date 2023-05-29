@@ -232,11 +232,6 @@ class User {
     return prefs.getBool(SharedPrefs.isLoggedIn) ?? false;
   }
 
-  static Future<String?> getLoggedInUsername() async {
-    final SharedPreferences prefs = await preferences;
-    return prefs.getString(SharedPrefs.username);
-  }
-
   static void setLoggedIn({required bool loggedIn}) async {
     final SharedPreferences prefs = await preferences;
     prefs.setBool(SharedPrefs.isLoggedIn, loggedIn);
