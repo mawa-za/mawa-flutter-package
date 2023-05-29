@@ -17,7 +17,7 @@ Future<void> main() async {
       head.contains('localhost') ? url.substring(0, url.indexOf('.')) : head;
   Mawa(
     server: url,
-    loginScreenID: Authenticate.id,
+    loginScreenID: AuthenticateView.id,
     initialScreenID: InitialRoute.id,
   );
   runApp(Home());
