@@ -42,7 +42,7 @@ class Receipts {
         NetworkRequests.methodGet,
         resource: Resources.receipts,
         queryParameters: {
-          QueryParameters.processedBy: User.loggedInUser[JsonResponses.id],
+          QueryParameters.processedBy: User.loggedInUser[JsonResponses.username],
           QueryParameters.filter: filterString
         });
     double funds = 0.0;
