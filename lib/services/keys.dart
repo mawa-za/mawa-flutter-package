@@ -799,6 +799,8 @@ class SharedPrefs {
   static const loginRole = 'loginRole';
   static const isLoggedIn = 'isLoggedIn';
   static const tenantID = 'tenantID';
+  static const userID = 'userID';
+  static const role = 'role';
 }
 
 class CommentTypes{
