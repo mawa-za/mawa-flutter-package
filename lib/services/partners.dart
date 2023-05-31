@@ -205,7 +205,7 @@ class Partners {
         });
     return response;
   }
-  static getPartnerSpecifIdentity({required String path, required String idNumber, required String idType}) async{
+  static getSpecifIdentity({required String path, required String idNumber, required String idType}) async{
     return await NetworkRequests.decodeJson(
         await NetworkRequests().securedMawaAPI(
           NetworkRequests.methodGet,
@@ -217,8 +217,20 @@ class Partners {
         ),
         negativeResponse: []);
   }
+  getPartnerSpecifIdentity({required String path, required String idNumber, required String idType}) async{
+    return await NetworkRequests.decodeJson(
+        await NetworkRequests().securedMawaAPI(
+          NetworkRequests.methodGet,
+          resource: '${Resources.partner}/$partnerId/$path',
+          queryParameters: {
+            QueryParameters.idType : idType,
+            QueryParameters.idNumber : idNumber,
+          },
+        ),
+        negativeResponse: []);
+  }
 
-  static getPartnerSpecifContact({required String path, required String value, required String type}) async{
+  static getSpecifContact({required String path, required String value, required String type}) async{
     return await NetworkRequests.decodeJson(
         await NetworkRequests().securedMawaAPI(
           NetworkRequests.methodGet,
@@ -230,13 +242,38 @@ class Partners {
         ),
         negativeResponse: []);
   }
-  static getPartnerSpecifAddress({required String path, required String addressType}) async{
+
+  getPartnerSpecifContact({required String path, required String value, required String type}) async{
+    return await NetworkRequests.decodeJson(
+        await NetworkRequests().securedMawaAPI(
+          NetworkRequests.methodGet,
+          resource: '${Resources.partner}/$partnerId/$path',
+          queryParameters: {
+            QueryParameters.type : type,
+            QueryParameters.value : value,
+          },
+        ),
+        negativeResponse: []);
+  }
+  static getSpecifAddress({required String path, required String addressType}) async{
     return await NetworkRequests.decodeJson(
         await NetworkRequests().securedMawaAPI(
           NetworkRequests.methodGet,
           resource: '${Resources.partner}/$path',
           queryParameters: {
             QueryParameters.type : addressType
+          },
+        ),
+        negativeResponse: []);
+  }
+
+  getPartnerSpecifAddress({required String path, required String addressType}) async{
+    return await NetworkRequests.decodeJson(
+        await NetworkRequests().securedMawaAPI(
+          NetworkRequests.methodGet,
+          resource: '${Resources.partner}/$partnerId/$path',
+          queryParameters: {
+            QueryParameters.type : addressType,
           },
         ),
         negativeResponse: []);
