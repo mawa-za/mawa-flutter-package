@@ -839,6 +839,11 @@ class FieldOptionTypes{
   static const String fieldAddress= 'ADDRESSES';
   static const String fieldPartnerRole= 'PARTNER-ROLE';
   static const String fieldClaimDeclineReason= 'CLAIM-DECLINE-REASON';
+  static const String fieldPaymentMethod= 'PAYMENT-METHOD';
+  static const String fieldPaymentRequestType= 'PAYMENT-REQUEST-TYPE';
+  static const String fieldBankAccountType= 'BANK-ACCOUNT-TYPE';
+  static const String fieldPaymentReason= 'PAYMENT-REASON';
+  static const String fieldBankName= 'BANK-NAME';
 
 }
 class PathNames{
