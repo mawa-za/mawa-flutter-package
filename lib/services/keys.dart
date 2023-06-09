@@ -343,11 +343,18 @@ class JsonResponses {
   static const addressId = 'addressId';
   static const String idType = 'idType';
 
+  static const String groupName = 'groupName';
+  static const String startDate = 'startDate';
+  static const String endDate = 'endDate';
+
 }
 
 class Resources {
 
   static const String assign = 'assign';
+  static const String terminate = 'terminate';
+  static const String rehire = 'rehire';
+  static const String suspend = 'suspend';
   static const String validateSAID = 'validateSAID';
   static const String attachments = 'attachments';
   static const String otp = 'otp';
@@ -666,6 +673,13 @@ class JsonPayloads {
   static const String line3 = 'line3';
   static const String line4 = 'line4';
 
+  static const String employeeId = 'employeeId';
+  static const String branch = 'branch';
+  static const String groupID = 'groupID';
+  static const String department = 'department';
+  static const String identityDtos = 'identityDtos';
+  static const String addressDtos = 'addressDtos';
+  static const String contactDtos = 'contactDtos';
 
 // static const String  = '';
 }
@@ -844,6 +858,12 @@ class FieldOptionTypes{
   static const String fieldBankAccountType= 'BANK-ACCOUNT-TYPE';
   static const String fieldPaymentReason= 'PAYMENT-REASON';
   static const String fieldBankName= 'BANK-NAME';
+  static const String fieldBranch= 'BRANCH';
+  static const String fieldDepartment= 'DEPARTMENT';
+  static const String fieldEmploymentType= 'EMPLOYMENTTYPE';
+  static const String fieldJobTitle ='JOBTITLE';
+
+
 
 }
 class PathNames{
@@ -851,5 +871,7 @@ class PathNames{
   static const String rolePath = 'role';
   static const String contactPath= 'contact';
   static const String addressPath= 'address';
+  static const String employmentPath= 'employment';
+  static const String employeePath= 'employee';
 
 }
