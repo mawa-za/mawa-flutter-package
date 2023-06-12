@@ -57,6 +57,14 @@ class Employees {
 
     return employees;
   }
+
+
+  getAllEmployee() async {
+    return await NetworkRequests.decodeJson(
+        await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
+            resource: '${Resources.partner}/${Resources.employee}'),
+        negativeResponse: []);
+  }
   getEmployee(String employeeId) async {
     employee = await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodGet,
@@ -94,7 +102,7 @@ class Employees {
   }
   getEmployeeDetails(String partnerNumber) async {
     return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-        resource: '${Resources.persons}/$partnerNumber'));
+        resource: '${Resources.partner}/$partnerNumber'));
     // /${Resources.employeeId}'
   }
   getEmployeeLeaveProfile(String partnerFunction,String partnerNo) async {

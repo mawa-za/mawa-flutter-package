@@ -28,9 +28,8 @@ class Products {
             queryParameters: {'category': category})); //
   }
 
-  generatePoliciesMap(String key) async {
-    dynamic list =
-        await Products.getFromCategory(Tools.productCategoryFuneralPolicy);
+  static generatePoliciesMap(String category, String key) async {
+    dynamic list = await Products.getFromCategory(category);
     Map<String, String> data = {};
     if (list != null) {
       switch (key) {
@@ -132,8 +131,8 @@ class Products {
     return response;
   }
 
-  editProductAttributes({
-      required attribute,
+  editProductAttributes(
+      {required attribute,
       required value,
       required validFrom,
       required validTo}) async {
@@ -150,8 +149,8 @@ class Products {
     return await response;
   }
 
-  editProductPricing({
-      required priceType,
+  editProductPricing(
+      {required priceType,
       required priceTypeDescription,
       required value,
       required validFrom,
@@ -218,8 +217,7 @@ class Products {
     required sellingPrice,
   }) async {
     {
-      return await NetworkRequests().securedMawaAPI(
-          NetworkRequests.methodPost,
+      return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
           resource: Resources.product,
           body: {
             JsonPayloads.code: code,

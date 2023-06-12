@@ -12,7 +12,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   future() async {
-    await WorkCenters().getAllWorkCenters();
+    return await WorkCenter.getAll();
     // _itemController = DashboardItemController(items:
     // dashboardItems(),);
 
@@ -58,14 +58,15 @@ class _HomePageState extends State<HomePage> {
         builder: (context, snapshot) {
           Widget body;
           if(snapshot.connectionState == ConnectionState.done){
-            if(WorkCenters.workcenters.isNotEmpty){
+            dynamic data = snapshot.data;
+            if(data.isNotEmpty){
                 body = Scaffold(
                   appBar: AppBar(),
                   body: GridView.count(
                     crossAxisCount: 3,
                     crossAxisSpacing: 4.0,
                     mainAxisSpacing: 8.0,
-                    children: dashboardItems(WorkCenters.workcenters),
+                    children: dashboardItems(data),
                   )
                   /*Dashboard(
               dashboardItemController: _itemController,

@@ -56,16 +56,19 @@ class NetworkRequests {
 
     Map<String, String> headers = {"X-TenantID": tenantID};
     // {/*"Authorization": "Bearer $tokenKey"*/};
-    secured ? headers["Authorization"] = "Bearer $tokenKey" : null;
+    secured ? headers["Authorization"] = "Bearer $token" : null;
 
     responseType ??= responseJson;
     print('responseType $responseType');
-    if (responseType == responseJson)
+    if (responseType == responseJson) {
       headers['Content-type'] = 'application/json; charset=UTF-8';
-    if (responseType == responseBlob)
+    }
+    if (responseType == responseBlob) {
       headers['Content-type'] = 'application/json';
-    if (responseType == responseFormData)
+    }
+    if (responseType == responseFormData) {
       headers['Content-type'] = 'multipart/form-data';
+    }
 
     return headers;
   }
@@ -163,6 +166,7 @@ class NetworkRequests {
     required String resource,
     dynamic body,
     Map<String, dynamic>? queryParameters,
+        bool secured = true,
   }) async {
     // token == null ? token = await _key: null;
     final SharedPreferences prefs = await preferences;
@@ -182,6 +186,7 @@ class NetworkRequests {
     dynamic url;
     dynamic header = headers(
       tokenKey: token,
+      secured: secured,
     );
     // statusCode == null? statusCode= 100: null;
     // server == 'qas'
@@ -277,7 +282,7 @@ class NetworkRequests {
           case 401:
             {
               print('\npost\n');
-              Navigator.pushReplacementNamed(Tools.context, Authenticate.id);
+              Navigator.pushReplacementNamed(Tools.context, AuthenticateView.id);
             }
             break;
           case 404:
@@ -416,13 +421,23 @@ class NetworkRequests {
         if (route != null) {
           print(route.settings.name);
           if (route.settings.name.toString() != init) {
-            Navigator.pushNamedAndRemoveUntil(
-                Tools.context, init, (route) => false);
+            try{
+              Navigator.pushNamedAndRemoveUntil(
+                  Tools.context, init, (route) => false);
+            }
+            catch(e){
+
+            }
           }
         }
       } else {
-        // Authorize(context: Tools.context).attempt();
+          try{
+// Authorize(context: Tools.context).attempt();
         Navigator.pushReplacementNamed(Tools.context, init);
+    }
+    catch(e){
+
+    }
       }
     }
   }

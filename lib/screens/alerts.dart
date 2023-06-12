@@ -136,26 +136,21 @@ class Alerts{
 
   static toastMessage({bool? positive, required String message,Toast? length}) {
 
-    Color? backgroundColor;
     Color? textColor;
 
 
     if (positive == null){
-      backgroundColor = Colors.white;
       textColor = Colors.black;
 
     }
     else if(positive){
-      backgroundColor = Colors.green[100]!;
       textColor = Colors.green;
     }
     else if(!positive) {
-      backgroundColor = Colors.red[100]!;
       textColor = Colors.red;
       length = Toast.LENGTH_LONG;
     }
     else{
-      backgroundColor = Colors.white;
       textColor = Colors.black;
     }
     length == null ? length = Toast.LENGTH_SHORT: null;
@@ -165,7 +160,7 @@ class Alerts{
       toastLength: Toast.LENGTH_LONG,
       msg: message,
       timeInSecForIosWeb: 3,
-      backgroundColor: backgroundColor,
+      backgroundColor: Colors.white,
       textColor: textColor,
     );
   }
@@ -173,6 +168,7 @@ class Alerts{
 
   openPopup(context, {message,title}) {
     return AwesomeDialog(
+      width: 500.0,
         context: context,
         title: title ?? '',
         body: Text('$message'),

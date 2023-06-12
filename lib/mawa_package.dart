@@ -22,12 +22,13 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:file_picker/file_picker.dart';
 
 
 part 'package:mawa_package/mawa.dart';
 
 part 'package:mawa_package/screens/alerts.dart';
-part 'package:mawa_package/screens/authenticate.dart';
+part 'package:mawa_package/screens/authenticate_view.dart';
 part 'package:mawa_package/screens/change_password.dart';
 part 'package:mawa_package/screens/forgot_password.dart';
 part 'package:mawa_package/screens/init_route.dart';
@@ -38,9 +39,12 @@ part 'package:mawa_package/screens/overlay_widgets.dart';
 part 'package:mawa_package/screens/page_not_found.dart';
 part 'package:mawa_package/screens/snapshort_static_widgets.dart';
 part 'package:mawa_package/screens/unauthorized.dart';
+part 'package:mawa_package/screens/attach_base64_file.dart';
 part 'package:mawa_package/screens/user_overview.dart';
 
 part 'package:mawa_package/services/attachments.dart';
+part 'package:mawa_package/services/attachment.dart';
+part 'package:mawa_package/services/authenticate.dart';
 part 'package:mawa_package/services/calculate_pricing.dart';
 part 'package:mawa_package/services/cashup.dart';
 part 'package:mawa_package/services/claims.dart';
@@ -59,7 +63,7 @@ part 'package:mawa_package/services/items.dart';
 part 'package:mawa_package/services/keys.dart';
 part 'package:mawa_package/services/leaves.dart';
 part 'package:mawa_package/services/location.dart';
-part 'package:mawa_package/services/memberships.dart';
+part 'package:mawa_package/services/membership.dart';
 part 'package:mawa_package/services/network_requests.dart';
 part 'package:mawa_package/services/notification.dart';
 part 'package:mawa_package/services/otp.dart';
@@ -71,6 +75,7 @@ part 'package:mawa_package/services/quotation.dart';
 part 'package:mawa_package/services/receipts.dart';
 part 'package:mawa_package/services/role.dart';
 part 'package:mawa_package/services/sale_order.dart';
+part 'package:mawa_package/services/shared_storage.dart';
 part 'package:mawa_package/services/strings.dart';
 part 'package:mawa_package/services/tasks.dart';
 part 'package:mawa_package/services/tickets.dart';

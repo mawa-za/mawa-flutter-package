@@ -11,7 +11,7 @@
 // export 'package:mawa_package/services/keys.dart';
 // export 'package:mawa_package/services/leaves.dart';
 // export 'package:mawa_package/services/location.dart';
-// export 'package:mawa_package/services/memberships.dart';
+// export 'package:mawa_package/services/membership.dart';
 // export 'package:mawa_package/services/network_requests.dart';
 // export 'package:mawa_package/services/notification.dart';
 // export 'package:mawa_package/services/otp.dart';

@@ -18,7 +18,7 @@ class Customers {
   getAllCustomers() async {
     customer = await NetworkRequests.decodeJson(
         await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-            resource: Resources.customer),
+            resource: '${Resources.partner}/${Resources.customer}'),
         negativeResponse: []);
 
     return customer;
@@ -30,7 +30,7 @@ class Customers {
     customerDetails = await NetworkRequests.decodeJson(
         await NetworkRequests().securedMawaAPI(
           NetworkRequests.methodGet,
-          resource: '${Resources.persons}/$customerId',
+          resource: '${Resources.partner}/$customerId',
         ),
         negativeResponse: {});
 

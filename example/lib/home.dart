@@ -52,9 +52,9 @@ class Home extends StatelessWidget {
     // DeviceInfo();
 
     return MaterialApp(
-      routes: route,
-      // home: HomePage(),
-      initialRoute: initialRoute,
+      // routes: route,
+      home: AttachBase64File(afterUpload: (){print('object');},),
+      // initialRoute: initialRoute,
       onUnknownRoute: (settings) {
         return MaterialPageRoute<void>(
           settings: settings,
