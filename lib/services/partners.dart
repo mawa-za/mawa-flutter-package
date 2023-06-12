@@ -26,6 +26,19 @@ class Partners {
     return response;
   }
 
+  static editPartner(
+      {
+        required dynamic body
+
+      }) async {
+    dynamic response= await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPut,
+        resource:Resources.partner,
+        body :body
+    );
+    return response;
+  }
+
   Future assignPersonRole({required String partnerRole}) async {
     await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPost,
