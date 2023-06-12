@@ -53,6 +53,7 @@ class Claims {
         });
   }
 
+
   getSpecificClaim() async {
     return await NetworkRequests.decodeJson(
         await NetworkRequests().securedMawaAPI(
@@ -134,16 +135,28 @@ class Claims {
     required String deathDate,
     required String burialDate,
   }) async {
-    await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
+    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
         resource: Resources.claim,
         body: {
-          JsonPayloads.claimant: claimantId,
+          JsonPayloads.claimantId: claimantId,
           JsonPayloads.deceased: deceasedId,
-          JsonPayloads.member: memberId,
-          JsonPayloads.membership: membershipId,
+          JsonPayloads.memberId: memberId,
+          JsonPayloads.membershipId: membershipId,
           JsonPayloads.type: type,
           JsonPayloads.deathDate: deathDate,
           JsonPayloads.burialDate: burialDate
         });
   }
+  static newClaim(
+      {
+        required dynamic body
+      }) async {
+    dynamic response= await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPost,
+        resource: Resources.claim,
+        body :body
+    );
+    return response;
+  }
 }
+

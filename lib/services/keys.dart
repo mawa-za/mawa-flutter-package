@@ -642,6 +642,11 @@ class JsonPayloads {
   static const String name2 = 'name2';
   static const String name3 = 'name3';
   static const String name4 = 'name4';
+  static const String membershipId = 'membershipId';
+  static const String memberId = 'memberId';
+  static const String organizationName = 'organisationName';
+  static const String partnerType = 'partnerType';
+  static const String surname = 'surname';
 
   static const String employeeResponsibleId = 'employeeResponsibleId';
   static const String reference = 'reference';
@@ -774,6 +779,13 @@ class QueryParameters {
   static const String checkoutId = 'checkoutId';
   static const String statusReason = 'statusReason';
   static const String description = 'description';
+  //CLAIM CREATE
+  static const String claimantId = 'claimantId';
+  static const String deceasedId = 'deceasedId';
+  static const String memberId = 'memberId';
+  static const String membershipId = 'membershipId';
+  static const String deathDate = 'deathDate';
+  static const String burialDate = 'burialDate';
 
   static const String email = 'email';
   static const String cellphone = 'cellphone';
