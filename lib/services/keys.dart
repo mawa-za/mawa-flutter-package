@@ -347,6 +347,13 @@ class JsonResponses {
   static const String startDate = 'startDate';
   static const String endDate = 'endDate';
 
+  static const String fieldClaimTypes = 'fieldClaimTypes';
+  static const String mainMember = 'mainMember';
+  static const String dependentDtoList = 'dependentDtoList';
+
+
+
+
 }
 
 class Resources {
@@ -681,6 +688,12 @@ class JsonPayloads {
   static const String addressDtos = 'addressDtos';
   static const String contactDtos = 'contactDtos';
 
+  static const String partnerType = 'partnerType';
+  static const String surname = 'surname';
+  static const String organizationName = 'organizationName';
+  static const String memberId = 'organizationName';
+  static const String membershipId = 'organizationName';
+
 // static const String  = '';
 }
 
@@ -863,7 +876,7 @@ class FieldOptionTypes{
   static const String fieldEmploymentType= 'EMPLOYMENTTYPE';
   static const String fieldJobTitle ='JOBTITLE';
 
-
+  static const String fieldClaimTypes ='CLAIM-TYPE';
 
 }
 class PathNames{
