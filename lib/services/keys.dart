@@ -691,8 +691,15 @@ class JsonPayloads {
   static const String partnerType = 'partnerType';
   static const String surname = 'surname';
   static const String organizationName = 'organizationName';
+
+  static const String memberId = 'organizationName';
+  static const String membershipId = 'organizationName';
+  static const String dateOfBirth = 'dateOfBirth';
+
+
   static const String memberId = 'memberId';
   static const String membershipId = 'membershipId';
+
 
 // static const String  = '';
 }
@@ -886,5 +893,6 @@ class PathNames{
   static const String addressPath= 'address';
   static const String employmentPath= 'employment';
   static const String employeePath= 'employee';
+  static const String customerPath= 'customer';
 
 }

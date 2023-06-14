@@ -26,14 +26,14 @@ class Partners {
     return response;
   }
 
-  static editPartner(
+  editPartner(
       {
         required dynamic body
 
       }) async {
     dynamic response= await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPut,
-        resource:Resources.partner,
+        resource:'${Resources.partner}/$partnerId',
         body :body
     );
     return response;
