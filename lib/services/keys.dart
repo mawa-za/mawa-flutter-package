@@ -888,5 +888,6 @@ class PathNames{
   static const String addressPath= 'address';
   static const String employmentPath= 'employment';
   static const String employeePath= 'employee';
+  static const String customerPath= 'customer';
 
 }
