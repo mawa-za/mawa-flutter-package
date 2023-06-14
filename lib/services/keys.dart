@@ -695,12 +695,6 @@ class JsonPayloads {
   static const String memberId = 'organizationName';
   static const String membershipId = 'organizationName';
   static const String dateOfBirth = 'dateOfBirth';
-
-
-  static const String memberId = 'memberId';
-  static const String membershipId = 'membershipId';
-
-
 // static const String  = '';
 }
 
