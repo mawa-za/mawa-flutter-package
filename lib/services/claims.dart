@@ -139,7 +139,7 @@ class Claims {
         resource: Resources.claim,
         body: {
           JsonPayloads.claimantId: claimantId,
-          JsonPayloads.deceased: deceasedId,
+          JsonPayloads.deceasedId: deceasedId,
           JsonPayloads.memberId: memberId,
           JsonPayloads.membershipId: membershipId,
           JsonPayloads.type: type,
