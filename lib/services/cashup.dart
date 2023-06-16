@@ -25,10 +25,10 @@ class Cashup {
   edit({String? amountDeposited, String? status}) async {
     Map body = {};
     if (status != null) {
-      body[JsonPayloads.amountDeposited] = amountDeposited;
+      body[JsonPayloads.status] = status;
     }
     if (amountDeposited != null) {
-      body[JsonPayloads.status] = status;
+      body[JsonPayloads.amountDeposited] = amountDeposited;
     }
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPut,
