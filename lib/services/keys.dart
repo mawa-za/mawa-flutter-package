@@ -65,7 +65,6 @@ class JsonResponses {
 
   static const String usersFirstName = 'firstName';
   static const String usersLastName = 'lastName';
-  static const String usersPasswordStatus = 'password_status';
   static const String usersPartner = 'partner';
   static const String userPartner = 'userPartner';
   static const String cellphone = 'cellphone';
@@ -207,7 +206,7 @@ class JsonResponses {
   static const String policySalesRepresentativeDetails =
       'salesRepresentativeDetails';
 
-  static const String productDescription = 'description';
+  static const String productDescription = 'productDescription';
   static const String productCategory = 'category';
   static const String productUnitPrice = 'unitPrice';
 
@@ -342,6 +341,7 @@ class JsonResponses {
   static const typeDescription = 'typeDescription';
   static const addressId = 'addressId';
   static const String idType = 'idType';
+  static const String premium = 'premium';
 
   static const String groupName = 'groupName';
   static const String startDate = 'startDate';
@@ -350,9 +350,13 @@ class JsonResponses {
   static const String fieldClaimTypes = 'fieldClaimTypes';
   static const String mainMember = 'mainMember';
   static const String dependentDtoList = 'dependentDtoList';
-
-
-
+  static const String salesRep = 'salesRep';
+  static const String productDetails = 'productDetails';
+  static const String membershipNumber = 'membershipNumber';
+  static const String invoiceNumber = 'invoiceNumber';
+  static const String membershipPeriod = 'membershipPeriod';
+  static const String creationTime = 'creationTime';
+  static const String passwordStatus = 'passwordStatus';
 
 }
 
@@ -808,7 +812,7 @@ class QueryParameters {
   static const String passwordStatus = 'passwordStatus';
   static const String userRole = 'userRole';
 
-  static const String fieldOption  = 'fieldOption ';
+  static const String fieldOption  = 'fieldOption';
 
   static const String addressId = 'addressId';
 
@@ -847,6 +851,7 @@ class SharedPrefs {
   static const userID = 'userID';
   static const role = 'role';
   static const workcenters = 'workcenters';
+  static const loggedInUser = 'loggedInUser';
 }
 
 class CommentTypes{
