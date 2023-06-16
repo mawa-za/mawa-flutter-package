@@ -54,7 +54,10 @@ class NetworkRequests {
   Map<String, String> headers({required String tokenKey, bool secured = true}) {
     print('running $tenantID ${tenantID.runtimeType}');
 
-    Map<String, String> headers = {"X-TenantID": tenantID};
+    Map<String, String> headers = {
+      "X-TenantID": tenantID,
+      // 'Access-Control-Allow-Origin':'*',
+    };
     // {/*"Authorization": "Bearer $tokenKey"*/};
     secured ? headers["Authorization"] = "Bearer $token" : null;
 
@@ -200,7 +203,7 @@ class NetworkRequests {
     print('b\n${url.toString()}\n howl');
     print('headers\n$header');
 
-    if (statusCode != 401) {
+/*    if (statusCode != 401) {*/
       try {
         // print('\n' + token.toString() + '\n');
         // print(method);
@@ -410,7 +413,7 @@ class NetworkRequests {
         return responseCaught;
       }
       // print('last');
-    } else {
+   /* } else {
       print('\npre\n');
 
       dynamic init = await prefs.getString(SharedPrefs.initialRoute) ?? '';
@@ -439,7 +442,7 @@ class NetworkRequests {
 
     }
       }
-    }
+    }*/
   }
 
   Future unsecuredMawaAPI(
