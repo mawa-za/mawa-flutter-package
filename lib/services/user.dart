@@ -24,8 +24,7 @@ class User {
   // GET /user/{id}
   get({bool getPerson = false}) async {
     user = await NetworkRequests.decodeJson(
-      await NetworkRequests()
-          .securedMawaAPI(NetworkRequests.methodGet,
+      await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
           resource: '${Resources.user}/${Resources.byId}/$id'),
       negativeResponse: {},
     );
@@ -105,9 +104,9 @@ class User {
   }
 
   // PUT /user/{username}/{path}
-  action(String path,{Map<String, dynamic>? query}) async {
-    return await NetworkRequests()
-        .securedMawaAPI(NetworkRequests.methodPut, resource: '$resource/$path', queryParameters: query);
+  action(String path, {Map<String, dynamic>? query}) async {
+    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPut,
+        resource: '$resource/$path', queryParameters: query);
   }
 
   // PUT /user/{username}/lock
@@ -167,7 +166,6 @@ class User {
             NetworkRequests.path + Resources.forgotPassword),
         headers: headers,
         body: jsonEncode(json));
-    NetworkRequests.statusCode = response.statusCode;
 
     if (response.statusCode == 200 || response.statusCode == 201) {
       NetworkRequests.token = jsonDecode(response.body);
@@ -197,8 +195,7 @@ class User {
 
   addRoles({required List<String> roles}) async {
     return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
-        resource: '${Resources.user}/$id/${Resources.role}',
-        body: roles);
+        resource: '${Resources.user}/$id/${Resources.role}', body: roles);
   }
 
   static create({

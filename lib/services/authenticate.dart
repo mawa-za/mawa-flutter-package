@@ -37,10 +37,8 @@ class Authenticate {
       //   // Navigator.pushReplacementNamed(context, direct!);
       //   postAuthenticate;
       User.loggedInUser = await User.getByUsername(username);
-      preferences.then((SharedPreferences prefs) {
-        return (prefs.setString(
-            SharedPrefs.userID, User.loggedInUser[JsonResponses.id]));
-      });
+      SharedStorage.setString(key: SharedPrefs.userID, detail: User.loggedInUser[JsonResponses.id]);
+      SharedStorage.setString(key: SharedPrefs.loggedInUser, detail: jsonEncode(User.loggedInUser));
     }
     return response;
   }
