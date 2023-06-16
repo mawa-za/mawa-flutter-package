@@ -221,7 +221,7 @@ class _UserOverviewState extends State<UserOverview> {
                                       ),
                                       DataCell(
                                         Text(
-                                          User.loggedInUser[JsonResponses.usersPasswordStatus] ??
+                                          User.loggedInUser[JsonResponses.passwordStatus] ??
                                               '',
                                         ),
                                       ),
