@@ -5,8 +5,6 @@ class Fields {
   Fields(this.code) {
     resource = '${Resources.field}/$code';
   }
-  static List fields = [];
-  static Map singleField = {};
   late final String resource;
 
   static getFields() async {
@@ -14,8 +12,7 @@ class Fields {
       NetworkRequests.methodGet,
       resource: Resources.field,
     );
-    fields = await NetworkRequests.decodeJson(response, negativeResponse: []);
-    return fields;
+    return await NetworkRequests.decodeJson(response, negativeResponse: []);
   }
 
   static create({
@@ -43,8 +40,8 @@ class Fields {
         negativeResponse: {});
   }
 
-  mapAllFields() async {
-    fields = await getFields();
+  static mapAllFields() async {
+    dynamic fields = await getFields();
     Map mappedFields = {};
 
     for (int index = 0; index < fields.length; index++) {
@@ -61,6 +58,16 @@ class Fields {
           resource: '$resource/${Resources.option}',
         ),
         negativeResponse: []);
+  }
+
+  mapOptions() async {
+    dynamic options = await getOptions();
+    Map mappedFields = {};
+    for (int index = 0; index < options.length; index++) {
+      mappedFields['${options[index][JsonResponses.fieldOptionDescription]}'] =
+      options[index][JsonResponses.fieldOptionCode];
+    }
+    return mappedFields;
   }
 
   mapFieldsOptions() async {
