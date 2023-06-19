@@ -380,6 +380,8 @@ class Resources {
   static const String reject = 'reject';
   static const String dispute = 'dispute';
   static const String ticketCancel = 'cancel';
+  static const String archive = 'archive';
+  static const String unarchive = 'unarchive';
   static const String user = 'user';
   static const String resetPassword = 'passwordreset';
   static const String reset = 'reset';
