@@ -318,6 +318,22 @@ class Partners {
         negativeResponse: []);
   }
 
+  //Archive customer
+   archiveCustomer() async {
+    dynamic response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPut,
+        resource: '${Resources.partner}/$partnerId/${Resources.archive}');
+    return response;
+  }
+
+  //UnArchive customer
+  unArchiveCustomer() async {
+    dynamic response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPut,
+        resource: '${Resources.partner}/$partnerId/${Resources.unarchive}');
+    return response;
+  }
+
 
 
 }
