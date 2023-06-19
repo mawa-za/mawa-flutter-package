@@ -25,6 +25,15 @@ class Organisation {
     );
     return organisation;
   }
+  getSpecificByPartner() async {
+    organisation = await NetworkRequests.decodeJson(
+      await NetworkRequests().securedMawaAPI(
+          NetworkRequests.methodGet,
+          resource: '${Resources.partner}/$organisationID'),
+      negativeResponse: {},
+    );
+    return organisation;
+  }
   static quickCreate({
 
     required String partnerType,
@@ -38,6 +47,24 @@ class Organisation {
         JsonPayloads.partnerType : partnerType,
         JsonPayloads.surname : organisationName,
         JsonPayloads.organizationName : organisationName,
+      },
+    );
+  }
+  //ADD PARTNER ATTRIBUTE
+  addPartnerAttribute({
+
+    required String pathType,
+    required String attributeValue,
+    required String attributeType,
+  }) async {
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodPost,
+      resource: '${Resources.partner}/$organisationID/$pathType',
+      body: {
+
+        JsonPayloads.type : attributeType,
+        JsonPayloads.value : attributeValue,
+
       },
     );
   }
