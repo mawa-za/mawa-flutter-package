@@ -370,6 +370,7 @@ class Resources {
   static const String attachments = 'attachments';
   static const String otp = 'otp';
   static const String employee = 'employee';
+  static const String employees = 'employees';
   static const String authenticate = 'authenticate';
   static const String tickets = 'tickets';
   static const String ticketsLog = 'ticketsLog';
