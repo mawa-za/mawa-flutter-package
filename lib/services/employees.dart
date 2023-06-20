@@ -62,7 +62,7 @@ class Employees {
   getAllEmployee() async {
     return await NetworkRequests.decodeJson(
         await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-            resource: '${Resources.partner}/${Resources.employee}'),
+            resource: '${Resources.employees}'),
         negativeResponse: []);
   }
   getEmployee(String employeeId) async {
