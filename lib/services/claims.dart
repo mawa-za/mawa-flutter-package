@@ -75,31 +75,7 @@ class Claims {
     return response;
   }
 
-  editClaim(String claimNo,
-      {String? deceasedId,
-        String? claimantId,
-        String? type,
-        String? bankName,
-        String? branchName,
-        String? branchCode,
-        String? accountType,
-        String? accountNumber}) async {
-    await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
-        NetworkRequests.methodPut,
-        resource: '${Resources.claims}/$claimNo',
-        body: {
-          JsonPayloads.deceasedId: deceasedId,
-          JsonPayloads.claimantId: claimantId,
-          JsonPayloads.type: type,
-          JsonPayloads.bankAccount: {
-            JsonPayloads.bankName: bankName,
-            JsonPayloads.branchName: branchName,
-            JsonPayloads.branchCode: branchCode,
-            JsonPayloads.accountType: accountType,
-            JsonPayloads.accountNumber: accountNumber,
-          }
-        }));
-  }
+
 
   static submitClaim(String claimNo) async {
     return await NetworkRequests().securedMawaAPI(
@@ -154,6 +130,19 @@ class Claims {
     dynamic response= await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPost,
         resource: Resources.claim,
+        body :body
+    );
+    return response;
+  }
+ static editClaim(
+      {
+        required dynamic body,
+        required String claimNumber
+
+      }) async {
+    dynamic response= await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPut,
+        resource:'${Resources.claim}/$claimNumber',
         body :body
     );
     return response;
