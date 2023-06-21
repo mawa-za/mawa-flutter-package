@@ -201,8 +201,7 @@ class JsonResponses {
   static const String policySalesRepId = 'salesRepresentativeId';
   static const String policyStatus = 'status';
   static const String policyStatusReason = 'statusReason';
-  static const String policyPremium = 'premium';
-  static const String policyAmountDue = 'amountDue';
+  static const String amountDue = 'amountDue';
   static const String policySalesRepresentativeDetails =
       'salesRepresentativeDetails';
 
@@ -357,6 +356,7 @@ class JsonResponses {
   static const String membershipPeriod = 'membershipPeriod';
   static const String creationTime = 'creationTime';
   static const String passwordStatus = 'passwordStatus';
+  static const String dateJoined = 'dateJoined';
 
   //CLAIM
   static const String claimantId = 'claimantId';
@@ -709,6 +709,11 @@ class JsonPayloads {
   static const String memberId = 'memberId';
   static const String membershipId = 'membershipId';
   static const String dateOfBirth = 'dateOfBirth';
+  static const String membershipNumber = 'membershipNumber';
+  static const String receiptType = 'receiptType';
+  static const String invoiceNumber = 'invoiceNumber';
+  static const String membershipPeriod = 'membershipPeriod';
+  static const String tenderType = 'tenderType';
 // static const String  = '';
 }
 
