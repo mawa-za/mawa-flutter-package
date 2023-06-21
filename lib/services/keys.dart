@@ -410,6 +410,7 @@ class Resources {
   static const String cashup = 'cashup';
   static const String policies = 'policies';
 
+
   static const String voucherValue = 'vouchers';
   static const String identity = 'identities';
   static const String contactValue = 'contacts';

@@ -123,6 +123,7 @@ class Claims {
           JsonPayloads.burialDate: burialDate
         });
   }
+  
   static newClaim(
       {
         required dynamic body
