@@ -358,6 +358,12 @@ class JsonResponses {
   static const String creationTime = 'creationTime';
   static const String passwordStatus = 'passwordStatus';
 
+  //CLAIM
+  static const String claimantId = 'claimantId';
+
+
+
+
 }
 
 class Resources {
@@ -405,6 +411,7 @@ class Resources {
   static const String receipt = 'receipt';
   static const String cashup = 'cashup';
   static const String policies = 'policies';
+
 
   static const String voucherValue = 'vouchers';
   static const String identity = 'identities';
