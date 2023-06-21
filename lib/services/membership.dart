@@ -1,7 +1,6 @@
 part of 'package:mawa_package/mawa_package.dart';
 
 class Membership {
-  static dynamic membership;
   static List partnerMemberships = [];
   late final String resource;
 
@@ -12,45 +11,37 @@ class Membership {
   }
 
   membershipsSearch({String? partnerRole, String? idNumber}) async {
-    partnerMemberships.clear();
-    dynamic response = await NetworkRequests().securedMawaAPI(
-            NetworkRequests.methodGet,
-            resource: Resources.membership,
-            queryParameters: {
-              'idnumber': idNumber ??
-                  Persons.person[JsonResponses.personIdNumber] ??
-                  Persons.personIdNumber,
-              'partnerRole': partnerRole
-            }) ??
-        [];
-    // if(response.statusCode == 200){
-    partnerMemberships =
-        await NetworkRequests.decodeJson(response, negativeResponse: []);
-    // }
-    // else {
-    //   personsPolicies = [];
-    // }
-    return partnerMemberships;
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: Resources.membership,
+        queryParameters: {
+          'idnumber': idNumber,
+          QueryParameters.partnerRole: partnerRole,
+        },
+      ),
+      negativeResponse: [],
+    );
   }
 
   get() async {
-    membership = await NetworkRequests.decodeJson(
+    return await NetworkRequests.decodeJson(
       await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: resource,
       ),
       negativeResponse: {},
     );
-    return membership;
   }
 
   static getAll() async {
-    membership = await NetworkRequests.decodeJson(
-      await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-          resource: Resources.membership),
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: Resources.membership,
+      ),
       negativeResponse: {},
     );
-    return membership;
   }
 
   // {
@@ -62,15 +53,18 @@ class Membership {
   static create(Map details) async {
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPost,
-      resource: '${Resources.membership} ',
+      resource: Resources.membership,
       body: details,
     );
   }
 
   getAttribute(String attribute) async {
-    return await NetworkRequests.decodeJson(await NetworkRequests()
-        .securedMawaAPI(NetworkRequests.methodGet,
-            resource: '$resource/$attribute'));
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: '$resource/$attribute',
+      ),
+    );
   }
 
   //  {
@@ -94,7 +88,8 @@ class Membership {
       body: {
         JsonPayloads.status: status,
         JsonPayloads.statusReason: statusReason,
-        JsonPayloads.salesRepresentativeId: User.loggedInUser[JsonResponses.partner],
+        JsonPayloads.salesRepresentativeId:
+            User.loggedInUser[JsonResponses.partner],
         JsonPayloads.premium: premium,
         JsonPayloads.productId: productId,
         JsonPayloads.previousProduct: previousProduct,
@@ -128,8 +123,9 @@ class Membership {
   }
 
   deleteDependent(String dependentId) async {
-    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodDelete,
-        resource: '$resource/${Resources.dependent}/$dependentId',
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodDelete,
+      resource: '$resource/${Resources.dependent}/$dependentId',
     );
   }
 }
