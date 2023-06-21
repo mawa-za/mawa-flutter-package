@@ -1,18 +1,20 @@
 part of 'package:mawa_package/mawa_package.dart';
 
-class Fields {
+class Field {
   final String code;
-  Fields(this.code) {
+  Field(this.code) {
     resource = '${Resources.field}/$code';
   }
   late final String resource;
 
-  static getFields() async {
-    dynamic response = await NetworkRequests().securedMawaAPI(
-      NetworkRequests.methodGet,
-      resource: Resources.field,
+  static getAll() async {
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: Resources.field,
+      ),
+      negativeResponse: [],
     );
-    return await NetworkRequests.decodeJson(response, negativeResponse: []);
   }
 
   static create({
@@ -20,6 +22,7 @@ class Fields {
     required String validFrom,
     required String validTo,
   }) async {
+    desc = Strings.description(desc);
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPost,
       resource: Resources.field,
@@ -33,15 +36,16 @@ class Fields {
 
   get() async {
     return await NetworkRequests.decodeJson(
-        await NetworkRequests().securedMawaAPI(
-          NetworkRequests.methodGet,
-          resource: resource,
-        ),
-        negativeResponse: {});
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: resource,
+      ),
+      negativeResponse: {},
+    );
   }
 
   static mapAllFields() async {
-    dynamic fields = await getFields();
+    dynamic fields = await getAll();
     Map mappedFields = {};
 
     for (int index = 0; index < fields.length; index++) {
@@ -53,29 +57,20 @@ class Fields {
 
   getOptions() async {
     return await NetworkRequests.decodeJson(
-        await NetworkRequests().securedMawaAPI(
-          NetworkRequests.methodGet,
-          resource: '$resource/${Resources.option}',
-        ),
-        negativeResponse: []);
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: '$resource/${Resources.option}',
+      ),
+      negativeResponse: [],
+    );
   }
 
-  mapOptions() async {
-    dynamic options = await getOptions();
-    Map mappedFields = {};
-    for (int index = 0; index < options.length; index++) {
-      mappedFields['${options[index][JsonResponses.fieldOptionDescription]}'] =
-      options[index][JsonResponses.fieldOptionCode];
-    }
-    return mappedFields;
-  }
-
-  mapFieldsOptions() async {
+  Future<Map<String, String>> mapOptions() async {
     dynamic options = await getOptions();
     Map<String, String> mappedFields = {};
     for (int index = 0; index < options.length; index++) {
       mappedFields['${options[index][JsonResponses.fieldOptionDescription]}'] =
-          options[index][JsonResponses.fieldOptionCode].toString();
+          options[index][JsonResponses.fieldOptionCode];
     }
     return mappedFields;
   }

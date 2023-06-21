@@ -55,7 +55,7 @@ part 'package:mawa_package/services/deposits.dart';
 part 'package:mawa_package/services/device_info.dart';
 part 'package:mawa_package/services/employees.dart';
 part 'package:mawa_package/services/field_options.dart';
-part 'package:mawa_package/services/fields.dart';
+part 'package:mawa_package/services/field.dart';
 part 'package:mawa_package/services/globals.dart';
 part 'package:mawa_package/services/internet_connect.dart';
 part 'package:mawa_package/services/invoice.dart';
