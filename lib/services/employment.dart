@@ -38,6 +38,16 @@ class Employment {
         negativeResponse: {});
   }
 
+ //get all employment history
+  static getAll() async {
+    return await NetworkRequests.decodeJson(
+        await NetworkRequests().securedMawaAPI(
+          NetworkRequests.methodGet,
+          resource: Resources.employment,
+        ),
+        negativeResponse: {});
+  }
+
   terminateEmployment({required String startDate}) async {
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPut,
