@@ -2,7 +2,7 @@ part of 'package:mawa_package/mawa_package.dart';
 
 class JsonResponses {
 
-
+  static const String employeeId = 'employeeId';
   static const String amount = 'amount';
   static const String assignedBy = 'assignedBy';
   static const String assignedByID = 'assignedByID';
