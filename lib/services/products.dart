@@ -37,22 +37,21 @@ class Products {
           {
             for (int i = 0; i < list.length; i++) {
               data['${list[i][JsonResponses.id]}'] =
-                  list[i][JsonResponses.productDescription];
+                  list[i][JsonResponses.description];
             }
           }
           break;
-        case JsonResponses.productDescription:
+        case JsonResponses.description:
           {
             for (int i = 0; i < list.length; i++) {
-              data['${list[i][JsonResponses.productDescription]}'] =
+              data['${list[i][JsonResponses.description]}'] =
                   list[i][JsonResponses.id];
             }
           }
           break;
       }
     }
-    Products.productsMap = data;
-    return productsMap;
+    return data;
   }
 
   dynamic getProductInfo(category) async {
