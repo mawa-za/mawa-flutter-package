@@ -55,7 +55,7 @@ class Strings{
     if (json != null) {
       try{
         String name =
-            '${json[JsonResponses.personLastName] ?? ''}, ${json[JsonResponses.personFirstName] ?? ''} ${json[JsonResponses.personMiddleName] ?? ''}';
+            '${json[JsonResponses.personLastName] ?? json[JsonResponses.name1] ?? ''}, ${json[JsonResponses.personFirstName] ??json[JsonResponses.name2] ?? ''} ${json[JsonResponses.personMiddleName] ??json[JsonResponses.name3] ?? ''}';
         return name == ',  ' ? '' : name;
       }catch(e){
         print(e);
