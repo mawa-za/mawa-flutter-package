@@ -357,12 +357,10 @@ class JsonResponses {
   static const String creationTime = 'creationTime';
   static const String passwordStatus = 'passwordStatus';
   static const String dateJoined = 'dateJoined';
+  static const String partnerId = 'partnerId';
 
   //CLAIM
   static const String claimantId = 'claimantId';
-
-
-
 
 }
 
@@ -714,6 +712,9 @@ class JsonPayloads {
   static const String invoiceNumber = 'invoiceNumber';
   static const String membershipPeriod = 'membershipPeriod';
   static const String tenderType = 'tenderType';
+  static const String salesRepresentative = 'salesRepresentative';
+  static const String salesArea = 'salesArea';
+  static const String dateJoined = 'dateJoined';
 // static const String  = '';
 }
 
