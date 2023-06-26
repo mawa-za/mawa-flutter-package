@@ -40,7 +40,7 @@ class Membership {
         NetworkRequests.methodGet,
         resource: Resources.membership,
       ),
-      negativeResponse: {},
+      negativeResponse: [],
     );
   }
 
@@ -50,11 +50,22 @@ class Membership {
   //   "productId": "string",
   //   "dateJoined": "2023-04-17T12:41:46.649Z"
   // }
-  static create(Map details) async {
+  static create(
+      {required String memberId,
+      required String salesRepresentativeId,
+      required String productId,
+      String? salesArea,
+      required String dateJoined}) async {
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPost,
       resource: Resources.membership,
-      body: details,
+      body: {
+        JsonPayloads.memberId: memberId,
+        JsonPayloads.productId: productId,
+        JsonPayloads.salesArea: salesArea,
+        JsonPayloads.salesRepresentativeId: salesRepresentativeId,
+        JsonPayloads.dateJoined: dateJoined,
+      },
     );
   }
 
@@ -82,18 +93,28 @@ class Membership {
     String? productId,
     String? previousProduct,
   }) async {
+    Map<String, dynamic> person = Map<String, dynamic>.from(
+      await jsonDecode(
+        await SharedStorage.getString(SharedPrefs.loggedInUser) ?? '{}',
+      ),
+    );
+    Map<String, String> payload = {
+      JsonPayloads.salesRepresentativeId:
+          person[JsonResponses.partnerId] ?? person[JsonResponses.username],
+    };
+    status != null ? payload[JsonPayloads.status] = status : null;
+    statusReason != null
+        ? payload[JsonPayloads.statusReason] = statusReason
+        : null;
+    premium != null ? payload[JsonPayloads.premium] = premium : null;
+    productId != null ? payload[JsonPayloads.productId] = productId : null;
+    previousProduct != null
+        ? payload[JsonPayloads.previousProduct] = previousProduct
+        : null;
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPut,
       resource: resource,
-      body: {
-        JsonPayloads.status: status,
-        JsonPayloads.statusReason: statusReason,
-        JsonPayloads.salesRepresentativeId:
-            User.loggedInUser[JsonResponses.partner],
-        JsonPayloads.premium: premium,
-        JsonPayloads.productId: productId,
-        JsonPayloads.previousProduct: previousProduct,
-      },
+      body: payload,
     );
   }
 
