@@ -3,6 +3,7 @@ part of 'package:mawa_package/mawa_package.dart';
 class Partners {
   static List partner  =[];
   late String partnerId;
+  dynamic isValid;
   Partners(this.partnerId);
   static getPartnerByRole(
       {required String partnerRole}) async {
@@ -332,6 +333,22 @@ class Partners {
         NetworkRequests.methodPut,
         resource: '${Resources.partner}/$partnerId/${Resources.unarchive}');
     return response;
+  }
+
+  //SA-ID validation
+  static validateID({ required dynamic idType, required String idNumber}) async{
+    dynamic response= await NetworkRequests().securedMawaAPI(
+          NetworkRequests.methodGet,
+          resource: '${Resources.validate}/${Resources.personIdentity}/$idNumber',
+          queryParameters: {
+            QueryParameters.type : idType,
+          },
+
+    );
+    // print('response is $response');
+     var isValid = await NetworkRequests.decodeJson(response, negativeResponse: '');
+     print('response is $isValid');
+     return isValid;
   }
 
 

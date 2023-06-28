@@ -413,6 +413,7 @@ class Resources {
 
   static const String voucherValue = 'vouchers';
   static const String identity = 'identities';
+  static const String personIdentity = 'identity';
   static const String contactValue = 'contacts';
 
   static const String approve = 'approve';
@@ -511,6 +512,9 @@ class Resources {
   static const String unlock = 'unlock';
   static const String byId = 'byId';
   static const String addressId = 'addressId';
+  static const String validate = 'validate';
+
+
 
 }
 
