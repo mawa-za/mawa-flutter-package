@@ -3,7 +3,7 @@ part of 'package:mawa_package/mawa_package.dart';
 class Organisation {
 
   final String organisationID;
-  static dynamic organisation;
+  static dynamic organisation,organisationid;
 
   Organisation(this.organisationID);
 
@@ -34,21 +34,38 @@ class Organisation {
     );
     return organisation;
   }
-  static quickCreate({
+   quickCreate({
 
     required String partnerType,
     required String organisationName,
+
   }) async {
+    DateTime dateCreated=DateTime.now();
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPost,
-      resource: Resources.prospect,
+      resource: Resources.partner,
       body: {
 
-        JsonPayloads.partnerType : partnerType,
-        JsonPayloads.surname : organisationName,
-        JsonPayloads.organizationName : organisationName,
+        JsonPayloads.type : partnerType,
+        JsonPayloads.name1 : organisationName,
+        JsonPayloads.birthDate : dateCreated,
       },
     );
+  }
+
+  static editOrganisation(
+      {
+        required dynamic body,
+        required String? partner
+
+      }) async {
+
+    dynamic response= await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPut,
+        resource:'${Resources.partner}/$partner',
+        body :body
+    );
+    return response;
   }
   //ADD PARTNER ATTRIBUTE
   addPartnerAttribute({
@@ -68,6 +85,23 @@ class Organisation {
       },
     );
   }
+  addPartnerAttribute_({
+
+    required String pathType,
+    required String attributeValue,
+    required String attributeType,
+  }) async {
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodPost,
+      resource: '${Resources.persons}/$organisationID/$pathType',
+      body: {
+
+        JsonPayloads.idType : attributeType,
+        JsonPayloads.idNumber : attributeValue,
+
+      },
+    );
+  }
   //GET PARTNER CONTACT
 
   getPartnerAttribute(path) async {
@@ -78,6 +112,16 @@ class Organisation {
           resource: '${Resources.partner}/$organisationID/$path',
         ),
         negativeResponse: {});
+  }
+  static addContactOnCreate({String ? partnerId, String ? contactType, String ? value  }) async{
+    await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPost,
+        resource: '${Resources.partner}/$partnerId/contact',
+        body: {
+          JsonPayloads.type : contactType,
+          JsonPayloads.value : value,
+        }
+    ));
   }
 
 

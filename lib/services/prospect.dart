@@ -32,6 +32,24 @@ class Prospect {
   //       ),
   //       negativeResponse: {});
   // }
+  //ADD PARTNER ATTRIBUTE
+  addPartnerAttribute({
+
+    required String pathType,
+    required String attributeValue,
+    required String attributeType,
+  }) async {
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodPost,
+      resource: '${Resources.partner}/$prospectID/$pathType',
+      body: {
+
+        JsonPayloads.type : attributeType,
+        JsonPayloads.value : attributeValue,
+
+      },
+    );
+  }
   //GET PARTNER CONTACT
   getPartnerAttribute(path) async {
     //String path='contact';
