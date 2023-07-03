@@ -906,6 +906,7 @@ class FieldOptionTypes{
   static const String fieldClaimTypes ='CLAIM-TYPE';
   static const String fieldOptionBusinessIdentity ='BUSINESS-IDENTITIES';
 
+
 }
 class PathNames{
   static const String identityPath = 'Identity';
