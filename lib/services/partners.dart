@@ -76,13 +76,18 @@ class Partners {
       {  String? path,
         String ? idType,
         String? idNumber}) async {
-    return await NetworkRequests().securedMawaAPI(
-        NetworkRequests.methodPost,
-        resource: '${Resources.persons}/$partnerId/$path',
+
+     dynamic idPost= await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodPost,
+      resource: '${Resources.partner}/$partnerId/$path',
         body: {
-          JsonPayloads.idType: idType,
-          JsonPayloads.personIdNumber: idNumber,
-        });
+         JsonPayloads.idType: idType,
+        JsonPayloads.personIdNumber: idNumber,
+         },
+    );
+    // print('Type is ${idPost.runtimeType}');
+    dynamic response = await json.decode(idPost.body);
+    return response;
   }
     addContact(
         {  String ? path,
