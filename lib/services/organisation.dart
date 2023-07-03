@@ -34,7 +34,7 @@ class Organisation {
     );
     return organisation;
   }
-   quickCreate({
+  static quickCreate({
 
     required String partnerType,
     required String organisationName,
@@ -51,6 +51,18 @@ class Organisation {
         JsonPayloads.birthDate : dateCreated,
       },
     );
+  }
+  static createPartner(
+      {
+        required dynamic body
+
+      }) async {
+    dynamic response= await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPost,
+        resource: Resources.partner,
+        body :body
+    );
+    return response;
   }
 
   static editOrganisation(
@@ -85,11 +97,56 @@ class Organisation {
       },
     );
   }
+ getSpecificPartner() async {
+    return await NetworkRequests.decodeJson(
+        await NetworkRequests().securedMawaAPI(
+          NetworkRequests.methodGet,
+          resource: '${Resources.partner}/$organisationID',
+        ),
+        negativeResponse: {});
+
+  }
   addPartnerAttribute_({
 
     required String pathType,
     required String attributeValue,
     required String attributeType,
+  }) async {
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodPost,
+      resource: '${Resources.persons}/$organisationID/$pathType',
+      body: {
+
+        JsonPayloads.idType : attributeType,
+        JsonPayloads.idNumber : attributeValue,
+
+      },
+    );
+  }
+  static addOrgContact({
+
+    required String pathType,
+    required String attributeValue,
+    required String attributeType,
+    required String organisationID,
+  }) async {
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodPost,
+      resource: '${Resources.partner}/$organisationID/$pathType',
+      body: {
+
+        JsonPayloads.type : attributeType,
+        JsonPayloads.value : attributeValue,
+
+      },
+    );
+  }
+  static addOrgIdentity_({
+
+    required String pathType,
+    required String attributeValue,
+    required String attributeType,
+    required String organisationID,
   }) async {
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPost,
