@@ -17,6 +17,10 @@ class JsonResponses {
   static const String description = 'description';
   static const String dueDate = 'dueDate';
   static const String duration = 'duration';
+  static const String cause = 'cause';
+  static const String message = 'message';
+
+
 
   static const String firstName = 'firstName';
 
