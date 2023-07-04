@@ -361,6 +361,8 @@ class JsonResponses {
 
   //CLAIM
   static const String claimantId = 'claimantId';
+  static const String baseUnitOfMeasure = 'baseUnitOfMeasure';
+  static const String sellingPrice = 'sellingPrice';
 
 }
 
@@ -473,6 +475,7 @@ class Resources {
   static const String claimDecline = 'decline';
 
   static const String deposits = 'deposits';
+  static const String deposit = 'deposit';
 
   static const String attributes = 'attributes';
   static const String pricing = 'pricings';
@@ -719,6 +722,9 @@ class JsonPayloads {
   static const String salesRepresentative = 'salesRepresentative';
   static const String salesArea = 'salesArea';
   static const String dateJoined = 'dateJoined';
+  static const String price = 'price';
+  static const String pricingType = 'pricingType';
+  static const String transactionIdLink = 'transactionIdLink';
 // static const String  = '';
 }
 
@@ -836,6 +842,8 @@ class QueryParameters {
 
   static const String addressId = 'addressId';
   static const String startDate = 'startDate';
+  static const String createdBy = 'createdBy';
+  static const String createdOn = 'createdOn';
 
 // static const String  = '';
 }
