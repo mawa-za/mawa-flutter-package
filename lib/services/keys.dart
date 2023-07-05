@@ -364,6 +364,8 @@ class JsonResponses {
   static const String partnerId = 'partnerId';
 
   //CLAIM
+
+  static const String branchCode = 'branchCode';
   static const String claimantId = 'claimantId';
   static const String baseUnitOfMeasure = 'baseUnitOfMeasure';
   static const String sellingPrice = 'sellingPrice';
@@ -729,6 +731,8 @@ class JsonPayloads {
   static const String price = 'price';
   static const String pricingType = 'pricingType';
   static const String transactionIdLink = 'transactionIdLink';
+  static const String accountHolder = 'transactionIdLink';
+
 // static const String  = '';
 }
 

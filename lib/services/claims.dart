@@ -123,6 +123,27 @@ class Claims {
           JsonPayloads.burialDate: burialDate
         });
   }
+ addBankingDetails({
+    required String accountHolder,
+    required String bankName,
+    required String accountNumber,
+    required String branchCode,
+    required String accountType,
+   required String transaction,
+
+  }) async {
+    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
+        resource: '${Resources.claim}/bankDetails',
+        body: {
+          JsonPayloads.accountHolder: accountHolder,
+          JsonPayloads.bankName: bankName,
+          JsonPayloads.accountNumber: accountNumber,
+          JsonPayloads.branchCode: branchCode,
+          JsonPayloads.accountType: accountType,
+          JsonPayloads.transaction: transaction,
+
+        });
+  }
   
   static newClaim(
       {
