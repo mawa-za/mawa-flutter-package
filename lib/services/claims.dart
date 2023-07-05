@@ -123,12 +123,12 @@ class Claims {
           JsonPayloads.burialDate: burialDate
         });
   }
- addBankingDetails({
+ static addBankingDetails({
     required String accountHolder,
     required String bankName,
     required String accountNumber,
     required String branchCode,
-    required String accountType,
+    required String? accountType,
    required String transaction,
 
   }) async {

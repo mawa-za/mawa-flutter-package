@@ -732,7 +732,7 @@ class JsonPayloads {
   static const String pricingType = 'pricingType';
   static const String transactionIdLink = 'transactionIdLink';
   static const String partnerId = 'partnerId';
-  static const String accountHolder = 'transactionIdLink';
+  static const String accountHolder = 'accountHolder';
 
 // static const String  = '';
 }
