@@ -151,11 +151,13 @@ class User {
 
   // DELETE /user/{username}/role
   deleteRole(String userRole) async {
-    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodDelete,
-        resource: resource,
-        queryParameters: {
-          QueryParameters.userRole: userRole,
-        });
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodDelete,
+      resource: '$resource/${Resources.role}',
+      queryParameters: {
+        QueryParameters.userRole: userRole,
+      },
+    );
   }
 
   forgotPassword({required String emailAddress}) async {
@@ -204,6 +206,7 @@ class User {
     required String cellphone,
     required String password,
     required String userType,
+    required String partnerId,
   }) async {
     return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
         resource: Resources.user,
@@ -213,6 +216,7 @@ class User {
           JsonPayloads.email: email,
           JsonPayloads.cellphone: cellphone,
           JsonPayloads.password: password,
+          JsonPayloads.partnerId: partnerId,
         });
   }
 
