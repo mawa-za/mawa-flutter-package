@@ -1,35 +1,26 @@
 part of 'package:mawa_package/mawa_package.dart';
 
-class Products {
-  Products(this.id);
+class Product {
+  Product(this.id) {
+    resource = '${Resources.product}/$id';
+  }
+  late String resource;
   final String id;
-  static late String productId = '';
-  late String policyType;
-  late String policyDescription;
-  late String payout;
-  final String _directory = 'product/?category=';
-  List/*<Map>*/ products = [];
-  static dynamic allProducts;
-  List attributes = [];
-  List pricing = [];
-  dynamic edit = '';
-  Map productMap = {};
-  static Map<String, String> productsMap = {};
-  static dynamic personsPolicies;
-  static dynamic personsTombstones;
-  static dynamic product;
-
-  Map<String, dynamic> policyList = {};
 
   static getFromCategory(category) async {
-    return await NetworkRequests.decodeJson(await NetworkRequests()
-        .securedMawaAPI(NetworkRequests.methodGet,
-            resource: Resources.product,
-            queryParameters: {'category': category})); //
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: Resources.product,
+        queryParameters: {
+          'category': category,
+        },
+      ),
+    ); //
   }
 
-  static generatePoliciesMap(String category, String key) async {
-    dynamic list = await Products.getFromCategory(category);
+  static generateProductsMap(String category, String key) async {
+    dynamic list = await Product.getFromCategory(category);
     Map<String, String> data = {};
     if (list != null) {
       switch (key) {
@@ -55,183 +46,223 @@ class Products {
   }
 
   dynamic getProductInfo(category) async {
-    String url = NetworkRequests().endpointURL + _directory + category;
-    Map<String, String> headers = {
-      "Content-type": "application/json",
-      "Authorization": "Bearer ${NetworkRequests.token}"
-    };
-
-    final http.Response response =
-        // await http.get(Uri.http(url, ''), headers: headers);
-        await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
-            NetworkRequests.methodGet,
-            resource: Resources.products,
-            queryParameters: {QueryParameters.category: category}));
-    int statusCode = response.statusCode;
-    var data = response.body;
-
-    List list = jsonDecode(data);
-    return list;
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: Resources.products,
+        queryParameters: {
+          QueryParameters.category: category,
+        },
+      ),
+    );
   }
 
-  static getlAll() async {
-    allProducts = await NetworkRequests.decodeJson(
-        await NetworkRequests().securedMawaAPI(
-          NetworkRequests.methodGet,
-          resource: Resources.product,
-        ),
-        negativeResponse: []);
-    return allProducts;
+  static getAll() async {
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: Resources.product,
+      ),
+      negativeResponse: [],
+    );
   }
 
-  getSpecificProduct() async {
-    product = await NetworkRequests.decodeJson(
-        await NetworkRequests().securedMawaAPI(
-          NetworkRequests.methodGet,
-          resource: '${Resources.product}/$id',
-        ),
-        negativeResponse: {});
-    return product;
+  // static mapAll(String key) async {
+  //   dynamic list = await getAll();
+  //   Map<String, Map<String, dynamic>> data = {};
+  //   if (list != null) {
+  //     switch (key) {
+  //       case JsonResponses.id:
+  //         {
+  //           for (int i = 0; i < list.length; i++) {
+  //             data['${list[i][JsonResponses.id]}'] =
+  //             list[i];
+  //           }
+  //         }
+  //         break;
+  //       case JsonResponses.description:
+  //         {
+  //           for (int i = 0; i < list.length; i++) {
+  //             data['${list[i][JsonResponses.description]}'] =
+  //             list[i];
+  //           }
+  //         }
+  //         break;
+  //     }
+  //   }
+  //   return data;
+  // }
+
+  get() async {
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: resource,
+      ),
+      negativeResponse: {},
+    );
   }
 
   getProductAttributes() async {
-    attributes = await NetworkRequests.decodeJson(
-        await NetworkRequests().securedMawaAPI(
-          NetworkRequests.methodGet,
-          resource: '${Resources.products}/$id/${Resources.attributes}',
-        ),
-        negativeResponse: {});
-    return attributes;
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: '$resource/${Resources.attributes}',
+      ),
+      negativeResponse: {},
+    );
   }
 
   getProductPricing() async {
-    pricing = await NetworkRequests.decodeJson(
-        await NetworkRequests().securedMawaAPI(
-          NetworkRequests.methodGet,
-          resource: '${Resources.products}/$id/${Resources.pricing}',
-        ),
-        negativeResponse: {});
-    return pricing;
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: '$resource/${Resources.pricing}',
+      ),
+      negativeResponse: {},
+    );
   }
 
-  editProduct({
-    required category,
-    required description,
-    required code,
+  //  {
+  //   "code": "string",
+  //   "description": "string",
+  //   "category": "string",
+  //   "baseUnitOfMeasure": "string",
+  //   "price": 0,
+  //   "pricingType": "string"
+  // }
+  edit({
+    String? category,
+    String? description,
+    String? code,
+    String? price,
+    String? baseUnitOfMeasure,
+    String? pricingType,
   }) async {
-    dynamic response = await NetworkRequests().securedMawaAPI(
-        NetworkRequests.methodPut,
-        resource: '${Resources.product}/$id',
-        body: {
-          JsonPayloads.code: code,
-          JsonPayloads.description: description,
-          JsonPayloads.category: category,
-        });
-    return response;
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodPut,
+      resource: resource,
+      body: {
+        JsonPayloads.code: code,
+        JsonPayloads.description: description,
+        JsonPayloads.category: category,
+        JsonPayloads.price: price,
+        JsonPayloads.pricingType: pricingType,
+        JsonPayloads.baseUnitOfMeasure: baseUnitOfMeasure,
+      },
+    );
   }
 
-  editProductAttributes(
-      {required attribute,
-      required value,
-      required validFrom,
-      required validTo}) async {
-    dynamic response = await NetworkRequests().securedMawaAPI(
-        NetworkRequests.methodPut,
-        resource: '${Resources.products}/$id/${Resources.attributes}',
-        body: {
-          JsonPayloads.attribute: attribute,
-          JsonPayloads.value: value,
-          JsonPayloads.validFrom: validFrom,
-          JsonPayloads.validTo: validTo,
-        });
-
-    return await response;
+  editProductAttributes({
+    required attribute,
+    required value,
+    required validFrom,
+    required validTo,
+  }) async {
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodPut,
+      resource: '$resource/${Resources.attributes}',
+      body: {
+        JsonPayloads.attribute: attribute,
+        JsonPayloads.value: value,
+        JsonPayloads.validFrom: validFrom,
+        JsonPayloads.validTo: validTo,
+      },
+    );
   }
 
-  editProductPricing(
-      {required priceType,
-      required priceTypeDescription,
-      required value,
-      required validFrom,
-      required validTo}) async {
-    dynamic response = await NetworkRequests().securedMawaAPI(
-        NetworkRequests.methodPut,
-        resource: '${Resources.products}/$id/${Resources.pricing}',
-        body: {
-          JsonPayloads.priceType: priceType,
-          JsonPayloads.priceTypeDescription: priceTypeDescription,
-          JsonPayloads.value: value,
-          JsonPayloads.validFrom: validFrom,
-          JsonPayloads.validTo: validTo,
-        });
-
-    return await response;
+  editProductPricing({
+    required priceType,
+    required priceTypeDescription,
+    required value,
+    required validFrom,
+    required validTo,
+  }) async {
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodPut,
+      resource: '$resource/${Resources.pricing}',
+      body: {
+        JsonPayloads.priceType: priceType,
+        JsonPayloads.priceTypeDescription: priceTypeDescription,
+        JsonPayloads.value: value,
+        JsonPayloads.validFrom: validFrom,
+        JsonPayloads.validTo: validTo,
+      },
+    );
   }
 
-  AddProductAttribute({
+  addAttribute({
     required attribute,
     required String value,
     required dynamic validFrom,
   }) async {
     {
-      dynamic response = await NetworkRequests().securedMawaAPI(
-          NetworkRequests.methodPost,
-          resource: '${Resources.products}/$id/${Resources.attributes}',
-          body: {
-            JsonPayloads.attribute: attribute,
-            JsonPayloads.value: value,
-            JsonPayloads.validFrom: validFrom,
-          });
-
-      return response;
+      return await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPost,
+        resource: '$resource/${Resources.attributes}',
+        body: {
+          JsonPayloads.attribute: attribute,
+          JsonPayloads.value: value,
+          JsonPayloads.validFrom: validFrom,
+        },
+      );
     }
   }
 
-  AddProductPricing({
+  addPricing({
     required priceType,
     required priceTypeDescription,
     required String value,
     required dynamic validFrom,
   }) async {
     {
-      dynamic response = await NetworkRequests().securedMawaAPI(
-          NetworkRequests.methodPost,
-          resource: '${Resources.products}/$id/${Resources.pricing}',
-          body: {
-            JsonPayloads.priceType: priceType,
-            JsonPayloads.priceTypeDescription: priceTypeDescription,
-            JsonPayloads.value: value,
-            JsonPayloads.validFrom: validFrom,
-          });
-
-      return response;
+      return await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPost,
+        resource: '$resource/${Resources.pricing}',
+        body: {
+          JsonPayloads.priceType: priceType,
+          JsonPayloads.priceTypeDescription: priceTypeDescription,
+          JsonPayloads.value: value,
+          JsonPayloads.validFrom: validFrom,
+        },
+      );
     }
   }
 
-  static AddProduct({
-    required code,
-    required productDescription,
-    required productCategory,
-    required measure,
-    required sellingPrice,
+  //  {
+  //   "code": "string",
+  //   "description": "string",
+  //   "category": "string",
+  //   "baseUnitOfMeasure": "string",
+  //   "price": 0,
+  //   "pricingType": "string"
+  // }
+  static add({
+    String? code,
+    required String productDescription,
+    required String productCategory,
+    required String measure,
+    required String sellingPrice,
   }) async {
     {
-      return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
-          resource: Resources.product,
-          body: {
-            JsonPayloads.code: code,
-            JsonPayloads.description: productDescription,
-            JsonPayloads.category: productCategory,
-            JsonPayloads.baseUnitOfMeasure: measure,
-            JsonPayloads.sellingPrice: sellingPrice,
-          });
+      return await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPost,
+        resource: Resources.product,
+        body: {
+          JsonPayloads.code: code,
+          JsonPayloads.description: productDescription,
+          JsonPayloads.category: productCategory,
+          JsonPayloads.baseUnitOfMeasure: measure,
+          JsonPayloads.sellingPrice: sellingPrice,
+        },
+      );
     }
   }
 
-  deleteProduct() async {
-    dynamic response = await NetworkRequests().securedMawaAPI(
-        NetworkRequests.methodDelete,
-        resource: '${Resources.product}/$id');
-    return response;
+  delete() async {
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodDelete,
+      resource: resource,
+    );
   }
 }
