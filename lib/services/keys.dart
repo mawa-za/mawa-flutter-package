@@ -923,8 +923,10 @@ class FieldOptionTypes{
   static const String fieldClaimTypes ='CLAIM-TYPE';
   static const String fieldOptionBusinessIdentity ='BUSINESS-IDENTITIES';
 
+  static const String productCategory = 'PRODUCT-CATEGORY';
 
 }
+
 class PathNames{
   static const String identityPath = 'Identity';
   static const String rolePath = 'Role';
