@@ -420,8 +420,7 @@ class Resources {
 
 
   static const String voucherValue = 'vouchers';
-  static const String identity = 'identities';
-  static const String personIdentity = 'identity';
+  static const String identity = 'identity';
   static const String contactValue = 'contacts';
 
   static const String approve = 'approve';

@@ -8,7 +8,7 @@ class IdentityNumberValidation{
   static validateID({ required dynamic idType, required String idNumber}) async{
     dynamic response= await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodGet,
-      resource: '${Resources.validate}/${Resources.personIdentity}/$idNumber',
+      resource: '${Resources.validate}/${Resources.identity}/$idNumber',
       queryParameters: {
         QueryParameters.type : idType,
       },
