@@ -3,10 +3,17 @@ part of 'package:mawa_package/mawa_package.dart';
 class Purchases {
   late String purchaseId;
   dynamic isValid;
-  getAllLayBy() async {
+  getAllLayBy({String ? customerId, String ? status,String ? endDate,String ? salesRepresentative,String ? number}) async {
     return await NetworkRequests.decodeJson(
         await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-            resource: Resources.layBy),
+            resource: Resources.layBy,
+          queryParameters: {
+            QueryParameters.customerId: customerId,
+            QueryParameters.status: status,
+            QueryParameters.endDate: endDate,
+            QueryParameters.salesRepresentative: salesRepresentative,
+            QueryParameters.number: number,
+          },),
         negativeResponse: []);
   }
 

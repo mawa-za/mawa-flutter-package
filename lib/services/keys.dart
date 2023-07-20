@@ -861,6 +861,10 @@ class QueryParameters {
   static const String startDate = 'startDate';
   static const String createdBy = 'createdBy';
   static const String createdOn = 'createdOn';
+  static const String customerId = 'customerId';
+  static const String endDate = 'endDate';
+  static const String number = 'number';
+
 
 // static const String  = '';
 }
