@@ -369,6 +369,9 @@ class JsonResponses {
   static const String claimantId = 'claimantId';
   static const String baseUnitOfMeasure = 'baseUnitOfMeasure';
   static const String sellingPrice = 'sellingPrice';
+  static const String customer = 'customer';
+  static const String salesRepresentative = 'salesRepresentative';
+
 
 }
 
@@ -521,6 +524,8 @@ class Resources {
   static const String byId = 'byId';
   static const String addressId = 'addressId';
   static const String validate = 'validate';
+
+  static const String layBy = 'layBy';
 
 
 
@@ -732,6 +737,10 @@ class JsonPayloads {
   static const String transactionIdLink = 'transactionIdLink';
   static const String partnerId = 'partnerId';
   static const String accountHolder = 'accountHolder';
+  static const String layById = 'layById';
+
+
+
 
 // static const String  = '';
 }
@@ -923,6 +932,9 @@ class FieldOptionTypes{
   static const String fieldOptionBusinessIdentity ='BUSINESS-IDENTITIES';
 
   static const String productCategory = 'PRODUCT-CATEGORY';
+  static const String fieldOptionLayByStatus = 'LAYBY-STATUS';
+  static const String fieldOptionLayByStatusReason = 'LAYBY-STATUS-REASON';
+
 
 }
 
