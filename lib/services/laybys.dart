@@ -1,7 +1,7 @@
 part of 'package:mawa_package/mawa_package.dart';
 
 class LayBys {
-  late String purchaseId;
+  late String laybyId;
   dynamic isValid;
   getAllLayBy({String ? customerId, String ? status,String ? endDate,String ? salesRepresentative,String ? number}) async {
     return await NetworkRequests.decodeJson(
