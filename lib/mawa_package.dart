@@ -91,4 +91,5 @@ part 'package:mawa_package/services/vouchers.dart';
 part 'package:mawa_package/services/organisation.dart';
 part 'package:mawa_package/services/prospect.dart';
 part 'package:mawa_package/services/supplier.dart';
+part 'package:mawa_package/services/laybys.dart';
 
