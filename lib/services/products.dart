@@ -250,7 +250,7 @@ class Product {
         resource: Resources.product,
         body: {
           JsonPayloads.code: code,
-          JsonPayloads.description: productDescription,
+          JsonPayloads.description: Strings.description(productDescription.trim()),
           JsonPayloads.category: productCategory,
           JsonPayloads.baseUnitOfMeasure: measure,
           JsonPayloads.sellingPrice: sellingPrice,
