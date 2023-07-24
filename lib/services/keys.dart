@@ -865,6 +865,10 @@ class QueryParameters {
   static const String endDate = 'endDate';
   static const String number = 'number';
 
+  static const String membershipPeriod = 'membershipPeriod';
+  static const String membershipNumber = 'membershipNumber';
+  static const String invoiceNumber = 'invoiceNumber';
+  static const String receiptType = 'receiptType';
 
 // static const String  = '';
 }
