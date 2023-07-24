@@ -94,9 +94,10 @@ class Receipt {
 
   // https://api-qas.mawa.co.za:8181/mawa-api/resources/receipts/{id}
   get() async {
-    return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
-        NetworkRequests.methodGet,
-        resource: '${Resources.receipt}/$id'), negativeResponse: {});
+    return await NetworkRequests.decodeJson(
+        await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
+            resource: '${Resources.receipt}/$id'),
+        negativeResponse: {});
   }
 
   // https://api-qas.mawa.co.za:8181/mawa-api/resources/receipts
@@ -105,6 +106,41 @@ class Receipt {
         await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
             resource: Resources.receipts),
         negativeResponse: []);
+  }
+
+  static search({
+    String? receiptType,
+    String? invoiceNumber,
+    String? membershipNumber,
+    String? membershipPeriod,
+    String? tenderType,
+    String? user,
+  }) async {
+    Map<String, dynamic> qaramParam = {};
+    receiptType != null
+        ? qaramParam[QueryParameters.receiptType] = receiptType
+        : null;
+    invoiceNumber != null
+        ? qaramParam[QueryParameters.invoiceNumber] = invoiceNumber
+        : null;
+    membershipNumber != null
+        ? qaramParam[QueryParameters.membershipNumber] = membershipNumber
+        : null;
+    membershipPeriod != null
+        ? qaramParam[QueryParameters.membershipPeriod] = membershipPeriod
+        : null;
+    tenderType != null
+        ? qaramParam[QueryParameters.tenderType] = tenderType
+        : null;
+    user != null ? qaramParam[QueryParameters.user] = user : null;
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: Resources.receipts,
+        queryParameters: qaramParam,
+      ),
+      negativeResponse: [],
+    );
   }
 
   // https://api-qas.mawa.co.za:8181/mawa-api/resources/receipts?checkoutId=CU0000000002
