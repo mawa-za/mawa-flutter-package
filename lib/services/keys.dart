@@ -526,6 +526,8 @@ class Resources {
   static const String validate = 'validate';
 
   static const String layBy = 'layBy';
+  static const String voucher = 'voucher';
+
 
 
 
