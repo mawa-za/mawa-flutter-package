@@ -36,7 +36,7 @@ class Deposit {
         body: {
           JsonPayloads.amount: '$amount',
           JsonPayloads.transactionIdLink: transactionID,
-        });
+        },);
   }
 
   get() async {
@@ -53,7 +53,10 @@ class Deposit {
     return await NetworkRequests.decodeJson(
       await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
-        resource: '${Resources.deposit}/$transactionLinkId',
+        resource: '${Resources.deposit}/${Resources.transactionLink}',
+        queryParameters: {
+          QueryParameters.transactionLinkId: transactionLinkId,
+        }
       ),
       negativeResponse: [],
     );
