@@ -2,7 +2,7 @@ part of 'package:mawa_package/mawa_package.dart';
 
 class OverlayWidgets {
   OverlayWidgets({required this.context}) {
-    overlayState = Overlay.of(context)!;
+    overlayState = Overlay.of(context);
   }
   final BuildContext context;
   // Declaring and Initializing OverlayState
