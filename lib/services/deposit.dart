@@ -53,7 +53,7 @@ class Deposit {
     return await NetworkRequests.decodeJson(
       await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
-        resource: '${Resources.deposit}/$transactionLinkId ',
+        resource: '${Resources.deposit}/$transactionLinkId',
       ),
       negativeResponse: [],
     );
