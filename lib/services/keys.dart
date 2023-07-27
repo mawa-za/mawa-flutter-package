@@ -371,7 +371,7 @@ class JsonResponses {
   static const String sellingPrice = 'sellingPrice';
   static const String customer = 'customer';
   static const String salesRepresentative = 'salesRepresentative';
-
+  static const String createdOn = 'createdOn';
 
 }
 
@@ -527,9 +527,7 @@ class Resources {
 
   static const String layBy = 'layBy';
   static const String voucher = 'voucher';
-
-
-
+  static const String transactionLink = 'transactionLink';
 
 }
 
@@ -871,6 +869,7 @@ class QueryParameters {
   static const String membershipNumber = 'membershipNumber';
   static const String invoiceNumber = 'invoiceNumber';
   static const String receiptType = 'receiptType';
+  static const String transactionLinkId  = 'transactionLinkId';
 
 // static const String  = '';
 }
