@@ -17,37 +17,33 @@ class Vouchers{
     ), negativeResponse: []);
   }
   getAllVouchers() async{
-    return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
+      dynamic voucherData =await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
         resource: Resources.voucher,
-        // queryParameters: {
-        //   // QueryParameters.status: status,
-        //   QueryParameters.customerId: customerId,
-        //   // QueryParameters.number: number,
-        //   // QueryParameters.expiryDate: expiryDate,
-        //   // QueryParameters.IdNumber: IdNumber,
-        //
-        // }
 
-    ), negativeResponse: []);
+    );
+      dynamic jsonData = await json.decode(voucherData.body) ?? [];
+       jsonData = jsonData ?? [];
+       return jsonData;
   }
 
   getVouchersByCustomerId({ required dynamic customerId}) async{
-    return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
+    NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+       NetworkRequests.methodGet,
       resource: Resources.voucher,
       queryParameters: {
         QueryParameters.customerId: customerId,
-      }
-
-    ), negativeResponse: []);
+         }
+        ),
+        negativeResponse: []
+    );
   }
 
 
   getVouchersById() async{
      dynamic data= await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
       resource: '${Resources.voucher}/$voucherId',
-    ), negativeResponse: []);
-     dynamic responseData = await json.decode(data.body);
-     return responseData;
+    ), negativeResponse: {});
+     return data;
   }
 
 
@@ -89,7 +85,7 @@ class Vouchers{
   deleteVoucher() async{
     return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodDelete,
-        resource: '${Resources.voucher}$voucherId',
+        resource: '${Resources.voucher}/$voucherId',
       ),
         negativeResponse: ''
     );
