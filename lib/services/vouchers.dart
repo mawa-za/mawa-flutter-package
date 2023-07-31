@@ -27,7 +27,7 @@ class Vouchers{
   }
 
   getVouchersByCustomerId({ required dynamic customerId}) async{
-    NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+    return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
        NetworkRequests.methodGet,
       resource: Resources.voucher,
       queryParameters: {
