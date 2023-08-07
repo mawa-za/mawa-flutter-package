@@ -434,7 +434,6 @@ class Resources {
   static const String rejectEditedLeave = 'rejectEditedLeave';
   static const String cancel = 'Cancel';
   static const String edit = 'Edit';
-
   static const String roles = 'roles';
   static const String role = 'role';
   static const String products = 'products';

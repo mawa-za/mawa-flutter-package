@@ -65,7 +65,6 @@ class Supplier {
       },
     );
   }
-
   static getPartnerByRole({required String partnerRole}) async{
     return await NetworkRequests.decodeJson(
         await NetworkRequests().securedMawaAPI(
