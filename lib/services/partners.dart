@@ -7,12 +7,15 @@ class Partners {
   Partners(this.partnerId);
   static getPartnerByRole(
       {required String partnerRole}) async {
-    partner = await NetworkRequests.decodeJson(
+    return  await NetworkRequests.decodeJson(
         await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-            resource: '${Resources.partner}/$partnerRole/${Resources.role}'),
-            negativeResponse: []);
-
-        return partner;
+            resource:Resources.partner,
+            queryParameters: {
+              QueryParameters.role: partnerRole,
+            }
+         ),
+        negativeResponse: []
+    );
   }
   static createPartner(
       {
@@ -339,5 +342,6 @@ class Partners {
         resource: '${Resources.partner}/$partnerId/${Resources.unarchive}');
     return response;
   }
+
 
 }
