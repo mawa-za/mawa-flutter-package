@@ -434,7 +434,6 @@ class Resources {
   static const String rejectEditedLeave = 'rejectEditedLeave';
   static const String cancel = 'Cancel';
   static const String edit = 'Edit';
-
   static const String roles = 'roles';
   static const String role = 'role';
   static const String products = 'products';
@@ -943,6 +942,7 @@ class FieldOptionTypes{
   static const String productCategory = 'PRODUCT-CATEGORY';
   static const String fieldOptionLayByStatus = 'LAYBY-STATUS';
   static const String fieldOptionLayByStatusReason = 'LAYBY-STATUS-REASON';
+  static const String fieldOptionPartnerType = 'PARTNER-TYPE';
 
 
 }
