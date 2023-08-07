@@ -943,6 +943,7 @@ class FieldOptionTypes{
   static const String productCategory = 'PRODUCT-CATEGORY';
   static const String fieldOptionLayByStatus = 'LAYBY-STATUS';
   static const String fieldOptionLayByStatusReason = 'LAYBY-STATUS-REASON';
+  static const String fieldOptionPartnerType = 'PARTNER-TYPE';
 
 
 }
