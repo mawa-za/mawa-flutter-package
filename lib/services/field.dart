@@ -19,6 +19,7 @@ class Field {
 
   static create({
     required String desc,
+    String? code,
     required String validFrom,
     required String validTo,
   }) async {
@@ -28,6 +29,14 @@ class Field {
       resource: Resources.field,
       body: {
         JsonPayloads.fieldDescription: desc,
+        JsonPayloads.code: code ??
+            desc
+                .trim()
+                .replaceAll(
+              ' ',
+              '-',
+            )
+                .toUpperCase(),
         JsonPayloads.validFrom: validFrom,
         JsonPayloads.validTo: validTo,
       },
@@ -50,7 +59,7 @@ class Field {
 
     for (int index = 0; index < fields.length; index++) {
       mappedFields['${fields[index][JsonResponses.fieldOptionDescription]}'] =
-          fields[index][JsonResponses.fieldOptionCode];
+      fields[index][JsonResponses.fieldOptionCode];
     }
     return mappedFields;
   }
@@ -70,7 +79,7 @@ class Field {
     Map<String, String> mappedFields = {};
     for (int index = 0; index < options.length; index++) {
       mappedFields['${options[index][JsonResponses.fieldOptionDescription]}'] =
-          options[index][JsonResponses.fieldOptionCode];
+      options[index][JsonResponses.fieldOptionCode];
     }
     return mappedFields;
   }
@@ -84,17 +93,24 @@ class Field {
   // }
   createOption({
     required String description,
+    String? code,
     required String validFrom,
     required String validTo,
   }) async {
     description = Strings.description(description);
-    String code = description.trim().replaceAll(' ', '-').toUpperCase();
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPost,
       resource: '$resource/${Resources.option}',
       body: {
         JsonPayloads.field: this.code,
-        JsonPayloads.code: code,
+        JsonPayloads.code: code ??
+            description
+                .trim()
+                .replaceAll(
+              ' ',
+              '-',
+            )
+                .toUpperCase(),
         JsonPayloads.description: description,
         JsonPayloads.validFrom: validFrom,
         JsonPayloads.validTo: validTo,
