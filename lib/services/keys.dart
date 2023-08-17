@@ -372,6 +372,7 @@ class JsonResponses {
   static const String customer = 'customer';
   static const String salesRepresentative = 'salesRepresentative';
   static const String createdOn = 'createdOn';
+  static const String price = 'price';
 
 }
 
@@ -943,6 +944,8 @@ class FieldOptionTypes{
   static const String fieldOptionLayByStatus = 'LAYBY-STATUS';
   static const String fieldOptionLayByStatusReason = 'LAYBY-STATUS-REASON';
   static const String fieldOptionPartnerType = 'PARTNER-TYPE';
+  static const String pricing_types = 'PRICING-TYPE';
+  static const String uom = 'UOM';
 
 
 }
@@ -956,4 +959,12 @@ class PathNames{
   static const String employeePath= 'Employee Details';
   static const String customerPath= 'Customer Details';
 
+}
+
+class PartnerTypes{
+  static const String dependent = 'DEPENDENT';
+  static const String customer = 'CUSTOMER';
+  static const String employee = 'EMPLOYEE';
+  static const String supplier = 'SUPPLIER';
+  static const String organization = 'ORGANIZATION';
 }
