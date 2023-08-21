@@ -5,7 +5,7 @@ class PurchaseOrder {
       {String? deliveryDate,
       String? supplier,
       String? expiryDate,
-      required List<Map<dynamic, String>> item}) async {
+      required dynamic item}) async {
     dynamic response= await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
         resource: Resources.purchaseOrder,
         body: {
