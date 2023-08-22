@@ -11,7 +11,6 @@ class NetworkRequests {
     _key = preferences.then((SharedPreferences prefs) {
       return (prefs.getString(SharedPrefs.token) ?? '');
     });
-    print('key' + _key.toString());
   }
 
   String? responseType /* = responseJson*/;
@@ -43,7 +42,6 @@ class NetworkRequests {
       try {
         return jsonDecode(response.body) ?? negativeResponse;
       } catch (e) {
-        print(e.toString());
         return negativeResponse;
       }
     } else {
@@ -52,7 +50,6 @@ class NetworkRequests {
   }
 
   Map<String, String> headers({required String tokenKey, bool secured = true}) {
-    print('running $tenantID ${tenantID.runtimeType}');
 
     Map<String, String> headers = {
       "X-TenantID": tenantID,
@@ -62,7 +59,6 @@ class NetworkRequests {
     secured ? headers["Authorization"] = "Bearer $token" : null;
 
     responseType ??= responseJson;
-    print('responseType $responseType');
     if (responseType == responseJson) {
       headers['Content-type'] = 'application/json; charset=UTF-8';
     }
@@ -197,11 +193,6 @@ class NetworkRequests {
     //     : url = Uri.http(endpointURL, path + resource, queryParameters);
     // url = Uri.parse(endpointURL + resource);
     url = Uri.https(server, resource, queryParameters);
-    print('mawa');
-    print('status code: $statusCode');
-    print('$method ');
-    print('b\n${url.toString()}\n howl');
-    print('headers\n$header');
 
 /*    if (statusCode != 401) {*/
       try {
@@ -210,7 +201,6 @@ class NetworkRequests {
         // print(endpointURL);
         // print(path);
         // print(resource);
-        print(body ?? queryParameters);
         // print(header);
         switch (method) {
           case methodGet:
@@ -233,7 +223,6 @@ class NetworkRequests {
                 body: jsonEncode(body));
             break;
           case methodPut:
-            print('wow wow $token');
             feedback = await http.put(url,
                 // Uri.https(endpointURL, path + resource),
                 headers: headers(tokenKey: token),
@@ -241,13 +230,7 @@ class NetworkRequests {
             break;
         }
 
-        print(resource + feedback.body);
-        print('\n' +
-            feedback.runtimeType.toString() +
-            feedback.contentLength.toString() +
-            '\n');
         statusCode = feedback.statusCode;
-        print('status code: $statusCode');
         switch (statusCode) {
           case 200:
             {
@@ -256,7 +239,6 @@ class NetworkRequests {
               // } catch (e) {
               //   print(e.toString());
               // }
-              print('Success');
               // return feedback;
             }
             break;
@@ -267,7 +249,6 @@ class NetworkRequests {
               // } catch (e) {
               //   print(e.toString());
               // }
-              print('Success');
               // return feedback;
             }
             break;
@@ -278,13 +259,11 @@ class NetworkRequests {
               // } catch (e) {
               //   print(e.toString());
               // }
-              print('Success');
               // return feedback;
             }
             break;
           case 401:
             {
-              print('\npost\n');
               Navigator.pushReplacementNamed(Tools.context, AuthenticateView.id);
             }
             break;
@@ -350,8 +329,10 @@ class NetworkRequests {
         // else if (statusCode >= 400 && statusCode < 600 && statusCode != 417) {}
         return feedback;
       } on TimeoutException catch (e) {
+        if (kDebugMode) {
+          print(e);
+        }
         // Navigator.maybePop(Tools.context);
-        print(e.toString());
         Alerts.toastMessage(
             // context: Tools.context,
             message: 'Request Timed Out. \nCheck Network Connection.',
@@ -361,7 +342,9 @@ class NetworkRequests {
         // responseCaught.reasonPhrase = 'Request Timed Out';
         return responseCaught;
       } on SocketException catch (e) {
-        print(e.toString());
+        if (kDebugMode) {
+          print(e);
+        }
         Alerts.toastMessage(
             // context: Tools.context,
             message: 'Encountered Network Problem',
@@ -371,8 +354,9 @@ class NetworkRequests {
         // responseCaught.reasonPhrase = 'Encountered Network Problem';
         return responseCaught;
       } on HandshakeException catch (e) {
-        print(e.toString());
-        Alerts.toastMessage(
+        if (kDebugMode) {
+          print(e);
+        } Alerts.toastMessage(
             // context: Tools.context,
             message: 'Request Terminated During Handshake',
             positive: false);
@@ -393,7 +377,9 @@ class NetworkRequests {
       //        responseCaught = http.Response('Connection Lost During Request', 494);
       // }
       on CertificateException catch(e){
-        print(e.toString());
+        if (kDebugMode) {
+          print(e);
+        }
         Alerts.toastMessage(
             message: 'Certificate Error',
             positive: false);
@@ -402,7 +388,9 @@ class NetworkRequests {
         return responseCaught;
       }
       catch (e) {
-        print(e.toString());
+        if (kDebugMode) {
+          print(e);
+        }
         Alerts.toastMessage(
             // context: Tools.context,
             message: 'Ran Into A Problem',
@@ -467,14 +455,10 @@ class NetworkRequests {
     dynamic url;
     // url = Uri.parse(endpointURL + resource);
     url = Uri.https(server,resource,queryParameters);
-    print('b\t${url.toString()}\n howl');
 
     // print(endpointURL);
     // print(NetworkRequests.path);
     // print(resource);
-    print(payload);
-    print(this.headers(tokenKey: token, secured: false));
-    print('\n');
 
     try {
       // final
@@ -506,18 +490,14 @@ class NetworkRequests {
               body: jsonEncode(payload));
           break;
         case methodPut:
-          print('wow wow $token');
           feedback = await http.put(url,
               headers: this.headers(tokenKey: token, secured: false),
               // headers: headers,
               body: jsonEncode(payload));
           break;
       }
-      print('6854486');
       statusCode = feedback.statusCode;
 
-      print('this ${feedback.statusCode}');
-      print('this ${feedback.body}');
 
       // if (statusCode == 200) {
       //
@@ -559,7 +539,6 @@ class NetworkRequests {
               User.loggedInUser = await User(User.username).get();
             }
 
-            print('token oyjfjdbfjd\n $token');
           }
           break;
         case 401:
@@ -612,9 +591,11 @@ class NetworkRequests {
       Tools.isTouchLocked = false;
       return feedback;
     } on TimeoutException catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
       Tools.isTouchLocked = false;
       // Navigator.maybePop(Tools.context);
-      print(e.toString());
       Alerts.toastMessage(
         message: 'Request Timed Out. \nCheck Network Connection.',
         positive: false,
@@ -625,7 +606,9 @@ class NetworkRequests {
       return responseCaught;
     }
     on CertificateException catch(e){
-      print(e.toString());
+      if (kDebugMode) {
+        print(e);
+      }
       Alerts.toastMessage(
           message: 'Certificate Error',
           positive: false);
@@ -634,8 +617,10 @@ class NetworkRequests {
       return responseCaught;
     }
     on SocketException catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
       Tools.isTouchLocked = false;
-      print(e.toString());
       Alerts.toastMessage(
         message: 'Encountered Network Problem',
         positive: false,
@@ -645,8 +630,10 @@ class NetworkRequests {
       // responseCaught.reasonPhrase = 'Encountered Network Problem';
       return responseCaught;
     } on HandshakeException catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
       Tools.isTouchLocked = false;
-      print(e.toString());
       Alerts.toastMessage(
         message: 'Request Terminated During Handshake',
         positive: false,
@@ -669,7 +656,6 @@ class NetworkRequests {
     // }
     catch (e) {
       Tools.isTouchLocked = false;
-      print(e.toString());
       Alerts.toastMessage(
         // context: Tools.context,
         message: 'Something Went Wrong 2',
