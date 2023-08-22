@@ -373,6 +373,8 @@ class JsonResponses {
   static const String salesRepresentative = 'salesRepresentative';
   static const String createdOn = 'createdOn';
   static const String price = 'price';
+  static const String surname = 'surname';
+  static const String tombstone = 'tombstone';
 
 }
 
@@ -944,8 +946,6 @@ class FieldOptionTypes{
   static const String fieldOptionLayByStatus = 'LAYBY-STATUS';
   static const String fieldOptionLayByStatusReason = 'LAYBY-STATUS-REASON';
   static const String fieldOptionPartnerType = 'PARTNER-TYPE';
-  static const String pricing_types = 'PRICING-TYPE';
-  static const String uom = 'UOM';
 
 
 }
