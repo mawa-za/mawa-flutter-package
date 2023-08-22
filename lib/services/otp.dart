@@ -118,7 +118,7 @@ class OTP {
   validateOTP(String pin) async {
     return await NetworkRequests().unsecuredMawaAPI(NetworkRequests.methodGet,
         resource: Resources.otp,
-        queryParameters: {QueryParameters.otp: pin ?? NetworkRequests.otp},
+        queryParameters: {QueryParameters.otp: pin},
         context: context);
   }
 }
