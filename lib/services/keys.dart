@@ -946,6 +946,8 @@ class FieldOptionTypes{
   static const String fieldOptionLayByStatus = 'LAYBY-STATUS';
   static const String fieldOptionLayByStatusReason = 'LAYBY-STATUS-REASON';
   static const String fieldOptionPartnerType = 'PARTNER-TYPE';
+  static const String uom = 'UOM';
+  static const String pricing_types = 'PRICING_TYPE';
 
 
 }
