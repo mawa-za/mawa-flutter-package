@@ -35,8 +35,8 @@ class Constants {
 
     AwesomeDialog(
       context: context,
-      dialogType: DialogType.QUESTION,
-      animType: AnimType.BOTTOMSLIDE,
+      dialogType: DialogType.question,
+      animType: AnimType.bottomSlide,
       title: 'Warning!',
       desc: 'Are You Sure You Want To Exit?',
       btnOk: TextButton(
