@@ -257,8 +257,8 @@ class Tools {
     return AwesomeDialog(
       width: 500.0,
       context: context,
-      dialogType: DialogType.QUESTION,
-      animType: AnimType.BOTTOMSLIDE,
+      dialogType: DialogType.question,
+      animType: AnimType.bottomSlide,
       desc: 'Do You Really Want To Logout?',
       btnOk: TextButton(
         child: const Text(

@@ -17,13 +17,13 @@ class Strings{
       if (index > 1) {
         while (index > 1) {
           result +=
-              ' ${text[0].toUpperCase()}${text.substring(1, index).toLowerCase()}';
+          ' ${text[0].toUpperCase()}${text.substring(1, index).toLowerCase()}';
           text = text.substring(index + 1);
           index = text.indexOf(' ');
           if (text.length > 0 && index < 0) {
             result +=
-                ' ${text[0].toUpperCase()}${text.substring(1).toLowerCase()}';
-        }
+            ' ${text[0].toUpperCase()}${text.substring(1).toLowerCase()}';
+          }
         }
       } else {
         result = '${text[0].toUpperCase()}${text.substring(1).toLowerCase()}';
@@ -42,7 +42,7 @@ class Strings{
       print('${entries.entries.elementAt(h).value.runtimeType == String}');
       if (entries.entries.elementAt(h).value.runtimeType == String) {
         String key =
-            // '${entries.entries.elementAt(h).key}';
+        // '${entries.entries.elementAt(h).key}';
         keyToDescription('${entries.entries.elementAt(h).key}');
         String value = '${entries.entries.elementAt(h).value}';
         print('$key : $value');
@@ -55,7 +55,7 @@ class Strings{
     if (json != null) {
       try{
         String name =
-            '${json[JsonResponses.personLastName] ?? json[JsonResponses.name1] ?? ''}, ${json[JsonResponses.personFirstName] ??json[JsonResponses.name2] ?? ''} ${json[JsonResponses.personMiddleName] ??json[JsonResponses.name3] ?? ''}';
+            '${json[JsonResponses.personLastName] ?? json[JsonResponses.name1] ?? json[JsonResponses.surname] ?? ''}, ${json[JsonResponses.personFirstName] ??json[JsonResponses.name2] ?? ''} ${json[JsonResponses.personMiddleName] ??json[JsonResponses.name3] ?? ''}';
         return name == ',  ' ? '' : name;
       }catch(e){
         print(e);

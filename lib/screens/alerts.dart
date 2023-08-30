@@ -48,12 +48,12 @@ class Alerts {
 
     dynamic dlg = AwesomeDialog(
       width: 500.0,
-      onDissmissCallback: (O) {
+      onDismissCallback: (O) {
         print('hello');
       },
       context: context,
-      dialogType: DialogType.QUESTION,
-      animType: AnimType.BOTTOMSLIDE,
+      dialogType: DialogType.question,
+      animType: AnimType.bottomSlide,
       title: 'Warning!',
       desc: 'Are You Sure You Want To Exit?',
       btnOk: TextButton(
