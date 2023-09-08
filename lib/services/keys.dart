@@ -1,7 +1,6 @@
 part of 'package:mawa_package/mawa_package.dart';
 
 class JsonResponses {
-
   static const String employeeId = 'employeeId';
   static const String amount = 'amount';
   static const String assignedBy = 'assignedBy';
@@ -19,8 +18,6 @@ class JsonResponses {
   static const String duration = 'duration';
   static const String cause = 'cause';
   static const String message = 'message';
-
-
 
   static const String firstName = 'firstName';
 
@@ -102,8 +99,6 @@ class JsonResponses {
   static const String line4 = 'line4';
   static const String postalCode = 'postalCode';
 
-
-
   static const String addressesPostalCode = 'postalCode';
   static const String addressesTypeDescription = 'typeDescription';
   static const String addressline1Description = 'line1Description';
@@ -146,7 +141,7 @@ class JsonResponses {
   static const String employeeLastName = 'name2';
   static const String employeeIdNumber = 'idNumber';
 
-  static const String identityTypeDescription  = 'typeDescription';
+  static const String identityTypeDescription = 'typeDescription';
 
   static const String ticketLogID = 'ticketLogID';
   static const String ticketLogTicketID = 'ticketID';
@@ -257,7 +252,6 @@ class JsonResponses {
   static const String branch = 'branch';
   static const String department = 'department';
 
-
   static const String location = 'location';
   static const String terminalType = 'terminalType';
   static const String terminalId = 'terminalId';
@@ -293,8 +287,6 @@ class JsonResponses {
   static const String expiryDate = 'expiryDate';
   static const String productId = 'productId';
 
-
-
   static const String totalExcVat = 'totalExcVat';
   static const String totalIncVat = 'totalIncVat';
   static const String discountAmount = 'discountAmount';
@@ -310,8 +302,6 @@ class JsonResponses {
   static const String creationDate = 'creationDate';
   static const String partner = 'partner';
 
-
-
   static const String membershipId = 'membershipId';
   static const String deathDate = 'deathDate';
   static const String burialDate = 'burialDate';
@@ -323,12 +313,10 @@ class JsonResponses {
 
   // static const String changedBy = 'changedBy';
 
-
   static const String lastUpdated = 'lastUpdated';
   static const String statusReason = 'statusReason';
   static const String memberId = 'memberId';
   static const String deceasedId = 'deceasedId';
-
 
   static const String title = 'title';
   static const String receiptNumber = 'receiptNumber';
@@ -375,11 +363,9 @@ class JsonResponses {
   static const String price = 'price';
   static const String surname = 'surname';
   static const String tombstone = 'tombstone';
-
 }
 
 class Resources {
-
   static const String assign = 'assign';
   static const String terminate = 'terminate';
   static const String rehire = 'rehire';
@@ -423,7 +409,6 @@ class Resources {
   static const String receipt = 'receipt';
   static const String cashup = 'cashup';
   static const String policies = 'policies';
-
 
   static const String voucherValue = 'vouchers';
   static const String identity = 'identity';
@@ -513,9 +498,9 @@ class Resources {
   static const String calculate_pricing = 'calculate-pricing';
   static const String application = 'application';
   static const String customer = 'customer';
-  static const String prospects='prospects';
-  static const String prospect='prospect';
-  static const String supplier='supplier';
+  static const String prospects = 'prospects';
+  static const String prospect = 'prospect';
+  static const String supplier = 'supplier';
   static const String paymentRequest = 'payment-request';
 
   static const String attachmentfile = 'attachmentfile';
@@ -530,7 +515,7 @@ class Resources {
   static const String layBy = 'layBy';
   static const String voucher = 'voucher';
   static const String transactionLink = 'transactionLink';
-
+  static const String transaction = 'transaction';
 }
 
 class JsonPayloads {
@@ -589,7 +574,6 @@ class JsonPayloads {
   static const String versionNumber = 'versionNumber';
   static const String appUsable = 'appUsable';
 
-
   static const String email = 'email';
   static const String detail = 'detail';
   static const String cellphone = 'cellphone';
@@ -615,7 +599,7 @@ class JsonPayloads {
   static const String ticketTaskID = 'ticketTaskID';
 
   static const String firstName = 'firstName';
-  static const String  middleName = 'middleName';
+  static const String middleName = 'middleName';
   static const String lastName = 'lastName';
   static const String idNumber = 'idNumber';
   static const String personIdNumber = 'idNumber';
@@ -740,9 +724,7 @@ class JsonPayloads {
   static const String partnerId = 'partnerId';
   static const String accountHolder = 'accountHolder';
   static const String layById = 'layById';
-
-
-
+  static const String fileType = 'layById';
 
 // static const String  = '';
 }
@@ -776,7 +758,6 @@ class QueryParameters {
   static const String partnerRole = 'partnerRole';
   static const String idNumber = 'idNumber';
   static const String idType = 'idType';
-
 
   static const String organisationId = 'organisationId';
   static const String otp = 'otp';
@@ -821,7 +802,6 @@ class QueryParameters {
   static const String workcenter = 'workcenter';
   static const String position = 'position';
 
-
   static const String New = 'new';
   static const String inprogress = 'inprogress';
   static const String open = 'open';
@@ -857,7 +837,7 @@ class QueryParameters {
   static const String passwordStatus = 'passwordStatus';
   static const String userRole = 'userRole';
 
-  static const String fieldOption  = 'fieldOption';
+  static const String fieldOption = 'fieldOption';
 
   static const String addressId = 'addressId';
   static const String startDate = 'startDate';
@@ -871,7 +851,8 @@ class QueryParameters {
   static const String membershipNumber = 'membershipNumber';
   static const String invoiceNumber = 'invoiceNumber';
   static const String receiptType = 'receiptType';
-  static const String transactionLinkId  = 'transactionLinkId';
+  static const String transactionLinkId = 'transactionLinkId';
+  static const String fileType = 'fileType';
 
 // static const String  = '';
 }
@@ -911,12 +892,12 @@ class SharedPrefs {
   static const loggedInUser = 'loggedInUser';
 }
 
-class CommentTypes{
+class CommentTypes {
   static const String ticketComment = 'TICKETCOMMENT';
   static const String leaveComment = 'LEAVEMANAGEMENT';
 }
 
-class FieldOptionTypes{
+class FieldOptionTypes {
   static const String fieldOptionCategory = 'CATEGORY';
   static const String fieldOptionPriority = 'PRIORITY';
   static const String fieldOptionIdType = 'ID-TYPE';
@@ -925,22 +906,22 @@ class FieldOptionTypes{
   static const String fieldOptionMaritalStatus = 'MARITAL-STATUS';
   static const String fieldOptionSuburb = 'SUBURB';
   static const String fieldOptionTown = 'TOWN';
-  static const String fieldOptionContactType= 'CONTACT-TYPE';
-  static const String fieldAddress= 'ADDRESSES';
-  static const String fieldPartnerRole= 'PARTNER-ROLE';
-  static const String fieldClaimDeclineReason= 'CLAIM-DECLINE-REASON';
-  static const String fieldPaymentMethod= 'PAYMENT-METHOD';
-  static const String fieldPaymentRequestType= 'PAYMENT-REQUEST-TYPE';
-  static const String fieldBankAccountType= 'BANK-ACCOUNT-TYPE';
-  static const String fieldPaymentReason= 'PAYMENT-REASON';
-  static const String fieldBankName= 'BANK-NAME';
-  static const String fieldBranch= 'BRANCH';
-  static const String fieldDepartment= 'DEPARTMENT';
-  static const String fieldEmploymentType= 'EMPLOYMENTTYPE';
-  static const String fieldJobTitle ='JOBTITLE';
+  static const String fieldOptionContactType = 'CONTACT-TYPE';
+  static const String fieldAddress = 'ADDRESSES';
+  static const String fieldPartnerRole = 'PARTNER-ROLE';
+  static const String fieldClaimDeclineReason = 'CLAIM-DECLINE-REASON';
+  static const String fieldPaymentMethod = 'PAYMENT-METHOD';
+  static const String fieldPaymentRequestType = 'PAYMENT-REQUEST-TYPE';
+  static const String fieldBankAccountType = 'BANK-ACCOUNT-TYPE';
+  static const String fieldPaymentReason = 'PAYMENT-REASON';
+  static const String fieldBankName = 'BANK-NAME';
+  static const String fieldBranch = 'BRANCH';
+  static const String fieldDepartment = 'DEPARTMENT';
+  static const String fieldEmploymentType = 'EMPLOYMENTTYPE';
+  static const String fieldJobTitle = 'JOBTITLE';
 
-  static const String fieldClaimTypes ='CLAIM-TYPE';
-  static const String fieldOptionBusinessIdentity ='BUSINESS-IDENTITIES';
+  static const String fieldClaimTypes = 'CLAIM-TYPE';
+  static const String fieldOptionBusinessIdentity = 'BUSINESS-IDENTITIES';
 
   static const String productCategory = 'PRODUCT-CATEGORY';
   static const String fieldOptionLayByStatus = 'LAYBY-STATUS';
@@ -948,22 +929,22 @@ class FieldOptionTypes{
   static const String fieldOptionPartnerType = 'PARTNER-TYPE';
   static const String uom = 'UOM';
   static const String pricing_types = 'PRICING_TYPE';
-
-
+  static const String membership_creation_types = 'MEMBERSHIP-CREATION-TYPES';
+  static const String suburbs = 'SUBURBS';
+  static const String user_type = 'USER-TYPE';
 }
 
-class PathNames{
+class PathNames {
   static const String identityPath = 'Identity';
   static const String rolePath = 'Role';
-  static const String contactPath= 'Contact';
-  static const String addressPath= 'Address';
-  static const String employmentPath= 'Employment Details';
-  static const String employeePath= 'Employee Details';
-  static const String customerPath= 'Customer Details';
-
+  static const String contactPath = 'Contact';
+  static const String addressPath = 'Address';
+  static const String employmentPath = 'Employment Details';
+  static const String employeePath = 'Employee Details';
+  static const String customerPath = 'Customer Details';
 }
 
-class PartnerTypes{
+class PartnerTypes {
   static const String dependent = 'DEPENDENT';
   static const String customer = 'CUSTOMER';
   static const String employee = 'EMPLOYEE';
