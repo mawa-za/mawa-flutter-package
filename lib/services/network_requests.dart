@@ -193,7 +193,11 @@ class NetworkRequests {
     //     : url = Uri.http(endpointURL, path + resource, queryParameters);
     // url = Uri.parse(endpointURL + resource);
     url = Uri.https(server, resource, queryParameters);
-
+    if (kDebugMode) {
+      print(url);
+      print(header);
+      print(body);
+    }
 /*    if (statusCode != 401) {*/
       try {
         // print('\n' + token.toString() + '\n');
@@ -327,6 +331,9 @@ class NetworkRequests {
         }
 
         // else if (statusCode >= 400 && statusCode < 600 && statusCode != 417) {}
+        if (kDebugMode) {
+          print('${feedback.statusCode}\n${feedback.body}');
+        }
         return feedback;
       } on TimeoutException catch (e) {
         if (kDebugMode) {

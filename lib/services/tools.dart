@@ -387,9 +387,21 @@ class Tools {
         hintText: hint,
         filled: true,
         fillColor: Colors.grey[100],
+        focusColor: Colors.deepPurple,
         border: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-        ));
+          borderRadius: BorderRadius.all(
+            Radius.circular(
+              10.0,
+            ),
+          ),
+        ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(5.0,),
+        borderSide: BorderSide(
+          color: Colors.grey,
+          width: 1.0,
+        ),
+      ),);
   }
 
   static textInputDecoration(String textLabel,
