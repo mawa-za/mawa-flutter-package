@@ -2,8 +2,15 @@ part of 'package:mawa_package/mawa_package.dart';
 
 class AttachBase64File extends StatefulWidget {
   static const String id = 'attach-file';
-  AttachBase64File({Key? key, this.afterUpload}) : super(key: key);
-  static String? attachmentID;
+  AttachBase64File({
+    Key? key,
+    this.afterUpload,
+    required this.transactionID,
+    required this.partnerID,
+  }) : super(key: key);
+  late String attachmentID;
+  final String transactionID;
+  final String partnerID;
 
   Function()? afterUpload;
   @override
@@ -19,6 +26,7 @@ class _AttachBase64FileState extends State<AttachBase64File> {
   @override
   initState() {
     // Permission.storage.request();
+    print('transaction ${widget.transactionID}');
     super.initState();
   }
 
@@ -53,7 +61,9 @@ class _AttachBase64FileState extends State<AttachBase64File> {
       setState(() {
         isLoading = false;
       });
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
     }
   }
 
@@ -149,18 +159,35 @@ class _AttachBase64FileState extends State<AttachBase64File> {
   }
 
   upload() async {
-    final OverlayWidgets overlay = OverlayWidgets(context: context);
+    final OverlayWidgets overlay = OverlayWidgets(
+      context: context,
+    );
     FocusScope.of(context).unfocus();
-    overlay.showOverlay(SnapShortStaticWidgets.snapshotWaitingIndicator());
-    http.Response response = await Attachment.attachBase64(uint8list!);
+    overlay.showOverlay(
+      SnapShortStaticWidgets.snapshotWaitingIndicator(),
+    );
+    print(base64.encode(uint8list!));
+    dynamic response = await Attachment.attachBase64(uint8list!);
+    print(response.statusCode);
     if (response.statusCode == 200 || response.statusCode == 201) {
       dynamic map = await NetworkRequests.decodeJson(response);
-      AttachBase64File.attachmentID = map[JsonResponses.id];
-      print('Attach64ByteFile.attachmentID ${AttachBase64File.attachmentID}');
+      widget.attachmentID = map[JsonResponses.id];
+      print('Attach64ByteFile.attachmentID ${widget.attachmentID}');
+      Attachment(widget.attachmentID).transactionLink(
+        transaction: widget.transactionID,
+        fileType: pickedFile!.extension ?? '',
+      );
+      Attachment(widget.attachmentID).partnerLink(
+        transaction: widget.partnerID,
+        fileType: pickedFile!.extension ?? '',
+      );
       widget.afterUpload!() ?? () {};
       // Navigator.of(context).pop();
     } else {
-      Alerts.toastMessage(message: 'Could Not Upload File', positive: false);
+      Alerts.toastMessage(
+        message: 'Could Not Upload File',
+        positive: false,
+      );
     }
     overlay.dismissOverlay();
   }
