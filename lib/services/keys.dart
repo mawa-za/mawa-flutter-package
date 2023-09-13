@@ -853,6 +853,13 @@ class QueryParameters {
   static const String receiptType = 'receiptType';
   static const String transactionLinkId = 'transactionLinkId';
   static const String fileType = 'fileType';
+  static const String claimant = 'claimant';
+  static const String no = 'no';
+  static const String deceased = 'deceased';
+  static const String member = 'member';
+  static const String membership = 'membership';
+  static const String deathDate = 'deathDate';
+  static const String burialDate = 'burialDate';
 
 // static const String  = '';
 }
