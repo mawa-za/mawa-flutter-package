@@ -5,36 +5,61 @@ class Claims {
   final String id;
   static List claims = [];
 
-  getClaim() async {
-    return await NetworkRequests.decodeJson(await NetworkRequests()
-        .securedMawaAPI(NetworkRequests.methodGet,
+  static search({
+    String? no,
+    String? claimant,
+    String? deceased,
+    String? member,
+    String? membership,
+    String? type,
+    String? deathDate,
+    String? burialDate,
+    String? status,
+  }) async {
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
         resource: Resources.claim,
-        queryParameters: {QueryParameters.policy: id}));
+        queryParameters: {
+          QueryParameters.no: no,
+          QueryParameters.claimant: claimant,
+          QueryParameters.deceased: deceased,
+          QueryParameters.member: member,
+          QueryParameters.membership: membership,
+          QueryParameters.type: type,
+          QueryParameters.deathDate: deathDate,
+          QueryParameters.burialDate: burialDate,
+          QueryParameters.status: status,
+          QueryParameters.filter: QueryParameters.filterValue,
+        },
+      ),
+    );
   }
 
   getMyClaims() async {
     claims.clear();
     claims = await NetworkRequests.decodeJson(await NetworkRequests()
         .securedMawaAPI(NetworkRequests.methodGet,
-        resource: Resources.claims,
-        queryParameters: {
+            resource: Resources.claims,
+            queryParameters: {
           QueryParameters.processor: 'ME',
         }));
 
     return claims;
   }
-  rejectClaim({String ? statusReason, String ?description}) async {
+
+  rejectClaim({String? statusReason, String? description}) async {
     return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPut,
         resource: '${Resources.claim}/$id/${Resources.reject}',
         queryParameters: {
-          QueryParameters.statusReason:statusReason,
-          QueryParameters.description:description,
-        }
-    );
+          QueryParameters.statusReason: statusReason,
+          QueryParameters.description: description,
+        });
   }
 
   approveClaim() async {
-    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPut,
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodPut,
       resource: '${Resources.claim}/$id/${Resources.approve}',
       // queryParameters: {
       //   QueryParameters.approver:
@@ -53,7 +78,6 @@ class Claims {
         });
   }
 
-
   getSpecificClaim() async {
     return await NetworkRequests.decodeJson(
         await NetworkRequests().securedMawaAPI(
@@ -63,19 +87,16 @@ class Claims {
         negativeResponse: {});
   }
 
-  disputeClaim({String ? statusReason, String ?description}) async {
+  disputeClaim({String? statusReason, String? description}) async {
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPut,
         resource: '${Resources.claim}/$id/${Resources.dispute}',
         queryParameters: {
-          QueryParameters.statusReason:statusReason,
-          QueryParameters.description:description,
-        }
-    );
+          QueryParameters.statusReason: statusReason,
+          QueryParameters.description: description,
+        });
     return response;
   }
-
-
 
   static submitClaim(String claimNo) async {
     return await NetworkRequests().securedMawaAPI(
@@ -123,14 +144,14 @@ class Claims {
           JsonPayloads.burialDate: burialDate
         });
   }
- static addBankingDetails({
+
+  static addBankingDetails({
     required String accountHolder,
     required String bankName,
     required String accountNumber,
     required String branchCode,
     required String? accountType,
-   required String transaction,
-
+    required String transaction,
   }) async {
     return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
         resource: '${Resources.claim}/bankDetails',
@@ -141,34 +162,22 @@ class Claims {
           JsonPayloads.branchCode: branchCode,
           JsonPayloads.accountType: accountType,
           JsonPayloads.transaction: transaction,
-
         });
   }
-  
-  static newClaim(
-      {
-        required dynamic body
-      }) async {
-    dynamic response= await NetworkRequests().securedMawaAPI(
+
+  static newClaim({required dynamic body}) async {
+    dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPost,
         resource: Resources.claim,
-        body :body
-    );
+        body: body);
     return response;
   }
 
- static editClaim(
-      {
-        required dynamic body,
-        required String claimNumber
-
-      }) async {
-    dynamic response= await NetworkRequests().securedMawaAPI(
+  static editClaim({required dynamic body, required String claimNumber}) async {
+    dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPut,
-        resource:'${Resources.claim}/$claimNumber',
-        body :body
-    );
+        resource: '${Resources.claim}/$claimNumber',
+        body: body);
     return response;
   }
 }
-
