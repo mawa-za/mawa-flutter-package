@@ -5,7 +5,9 @@ import 'package:mawa_package/mawa_package.dart';
 import 'routes.dart';
 
 class Home extends StatelessWidget {
-  Home({Key? key,}) : super(key: key);
+  Home({
+    Key? key,
+  }) : super(key: key);
 
   late String initialRoute;
 
@@ -48,12 +50,18 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     initialRoute = InitialRoute.id;
 
-  redirect =  UserOverview.id;
+    redirect = UserOverview.id;
     // DeviceInfo();
 
     return MaterialApp(
       // routes: route,
-      home: AttachBase64File(afterUpload: (){print('object');},),
+      home: AttachBase64File(
+        afterUpload: () {
+          print('object');
+        },
+        transactionID: '',
+        partnerID: '',
+      ),
       // initialRoute: initialRoute,
       onUnknownRoute: (settings) {
         return MaterialPageRoute<void>(
