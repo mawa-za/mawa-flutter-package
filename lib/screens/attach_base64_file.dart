@@ -78,7 +78,10 @@ class _AttachBase64FileState extends State<AttachBase64File> {
         backgroundColor: Colors.white,
       ),
       body: Container(
-        margin: const EdgeInsets.all(20.0),
+        margin: const EdgeInsets.symmetric(
+          vertical: 20.0,
+          horizontal: 100.0,
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -87,7 +90,11 @@ class _AttachBase64FileState extends State<AttachBase64File> {
               child: isLoading
                   ? SnapshotWaitingIndicator()
                   : TextButton(
-                      onPressed: pickFile, child: const Text('Pick File')),
+                      onPressed: pickFile,
+                      child: const Text(
+                        'Pick File',
+                      ),
+                    ),
             ),
             pickedFile != null
                 ? Column(
@@ -97,39 +104,43 @@ class _AttachBase64FileState extends State<AttachBase64File> {
                       const SizedBox(
                         height: 10.0,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Expanded(
-                            child: TextFormField(
-                              initialValue: 'Picked File:\t${pickedFile!.name}',
-                              readOnly: true,
-                            ),
-                          ),
-                          Flexible(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.red,
-                                  width: 1.0,
-                                ),
-                                shape: BoxShape.circle,
-                                color: const Color(0xFFF5E4D0),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 100.0,),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            const Spacer(),
+                            Expanded(
+                              child: TextFormField(
+                                initialValue: 'Picked File:\t${pickedFile!.name}',
+                                readOnly: true,
                               ),
-                              width: double.infinity,
-                              child: CircleAvatar(
-                                child: FloatingActionButton(
-                                  backgroundColor: Colors.white,
-                                  onPressed: clear,
-                                  child: const Icon(
-                                    Icons.clear,
+                            ),
+                            Flexible(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  border: Border.all(
                                     color: Colors.red,
+                                    width: 3.0,
+                                  ),
+                                  shape: BoxShape.circle,
+                                  color: const Color(0xFFF5E4D0),
+                                ),
+                                width: double.infinity,
+                                child: CircleAvatar(
+                                  child: FloatingActionButton(
+                                    backgroundColor: Colors.white,
+                                    onPressed: clear,
+                                    child: const Icon(
+                                      Icons.clear,
+                                      color: Colors.red,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                       const SizedBox(
                         height: 10.0,
@@ -166,23 +177,23 @@ class _AttachBase64FileState extends State<AttachBase64File> {
     overlay.showOverlay(
       SnapShortStaticWidgets.snapshotWaitingIndicator(),
     );
-    print(base64.encode(uint8list!));
+    // print(base64.encode(uint8list!));
     dynamic response = await Attachment.attachBase64(uint8list!);
     print(response.statusCode);
     if (response.statusCode == 200 || response.statusCode == 201) {
       dynamic map = await NetworkRequests.decodeJson(response);
       widget.attachmentID = map[JsonResponses.id];
       print('Attach64ByteFile.attachmentID ${widget.attachmentID}');
-      Attachment(widget.attachmentID).transactionLink(
+      await Attachment(widget.attachmentID).transactionLink(
         transaction: widget.transactionID,
         fileType: pickedFile!.extension ?? '',
       );
-      Attachment(widget.attachmentID).partnerLink(
-        transaction: widget.partnerID,
+      await Attachment(widget.attachmentID).partnerLink(
+        partner: widget.partnerID,
         fileType: pickedFile!.extension ?? '',
       );
       widget.afterUpload!() ?? () {};
-      // Navigator.of(context).pop();
+      dismiss();
     } else {
       Alerts.toastMessage(
         message: 'Could Not Upload File',
@@ -199,5 +210,9 @@ class _AttachBase64FileState extends State<AttachBase64File> {
       isLoading = false;
       uint8list = null;
     });
+  }
+
+  dismiss() {
+    Navigator.of(context).pop();
   }
 }
