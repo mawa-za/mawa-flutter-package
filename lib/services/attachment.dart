@@ -1,16 +1,35 @@
 part of 'package:mawa_package/mawa_package.dart';
 
-class Attachment{
+class Attachment {
   Attachment(this.id);
   final String id;
 
   /// NEW BACKEND
 
-  // /attachmentfile/ff808081882e714501882e8ea8f10001
+  // /attachmentfile/{id}
   get() async {
-    return await NetworkRequests(responseType: NetworkRequests.responseJson,).securedMawaAPI(
-      NetworkRequests.methodGet,
-      resource: '${Resources.attachment}/$id',
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests(
+        responseType: NetworkRequests.responseJson,
+      ).securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: '${Resources.attachment}/$id',
+      ),
+      negativeResponse: '',
+    );
+  }
+
+  // /attachment/transaction/{transactionId}
+  static getForTransaction(String transactionId) async {
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests(
+        responseType: NetworkRequests.responseJson,
+      ).securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource:
+            '${Resources.attachment}/${Resources.transaction}/$transactionId',
+      ),
+      negativeResponse: [],
     );
   }
 
@@ -19,7 +38,9 @@ class Attachment{
   //   "file": "string"
   // }
   static attachBase64(Uint8List fileBytes) async {
-    return await NetworkRequests(responseType: NetworkRequests.responseJson,).securedMawaAPI(
+    return await NetworkRequests(
+      responseType: NetworkRequests.responseJson,
+    ).securedMawaAPI(
       NetworkRequests.methodPost,
       resource: Resources.attachment,
       body: {
@@ -48,19 +69,67 @@ class Attachment{
     String? downloadedBy,
     required dynamic file,
   }) async {
-    return await NetworkRequests(responseType: Headers.jsonContentType,).securedMawaAPI(
+    return await NetworkRequests(
+      responseType: Headers.jsonContentType,
+    ).securedMawaAPI(
       NetworkRequests.methodPost,
       resource: Resources.attachment,
-      body:
-      {
+      body: {
         JsonPayloads.id: id,
         JsonPayloads.uploadDate: uploadDate,
         JsonPayloads.uploadTime: uploadTime,
-        JsonPayloads.uploadedBy: uploadedBy ?? User.loggedInUser[JsonResponses.username],
+        JsonPayloads.uploadedBy:
+            uploadedBy ?? User.loggedInUser[JsonResponses.username],
         JsonPayloads.downloadDate: downloadDate,
         JsonPayloads.downloadedBy: downloadedBy,
         JsonPayloads.file: '$file',
       },
     );
+  }
+
+  // /attachment/{id}/partner
+  // {
+  //   "partner": "string",
+  //   "fileType": "string"
+  // }
+  transactionLink(
+      {required String transaction, required String fileType}) async {
+    return await NetworkRequests(
+      responseType: NetworkRequests.responseJson,
+    ).securedMawaAPI(NetworkRequests.methodPost,
+        resource: '${Resources.attachment}/$id/${Resources.partner}',
+        body: {
+          JsonPayloads.transaction: transaction,
+          JsonPayloads.fileType: fileType
+        });
+  }
+
+  // /attachment/{id}/partner
+  // {
+  //   "partner": "string",
+  //   "fileType": "string"
+  // }
+  partnerLink({required String transaction, required String fileType}) async {
+    return await NetworkRequests(
+      responseType: NetworkRequests.responseJson,
+    ).securedMawaAPI(NetworkRequests.methodPost,
+        resource: '${Resources.attachment}/$id/${Resources.transaction}',
+        body: {
+          JsonPayloads.transaction: transaction,
+          JsonPayloads.fileType: fileType
+        });
+  }
+
+  // /attachment/transaction/{transactionId}?fileType={fileType}
+  deleteFromTransaction(
+      {required String transactionId, required String fileType}) async {
+    return await NetworkRequests(
+      responseType: NetworkRequests.responseJson,
+    ).securedMawaAPI(NetworkRequests.methodDelete,
+        resource:
+            '${Resources.attachment}/${Resources.transaction}/$transactionId',
+        queryParameters: {
+          QueryParameters.fileType: fileType,
+        });
   }
 }
