@@ -363,6 +363,7 @@ class JsonResponses {
   static const String price = 'price';
   static const String surname = 'surname';
   static const String tombstone = 'tombstone';
+  static const String fileType = 'fileType';
 }
 
 class Resources {
@@ -724,7 +725,7 @@ class JsonPayloads {
   static const String partnerId = 'partnerId';
   static const String accountHolder = 'accountHolder';
   static const String layById = 'layById';
-  static const String fileType = 'layById';
+  static const String fileType = 'fileType';
 
 // static const String  = '';
 }
