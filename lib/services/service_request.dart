@@ -31,7 +31,7 @@ class ServiceRequest {
   }
 
   //Get All Ticket
-  static getAllSpecifServiceRequest() async {
+  static getAllServiceRequest() async {
     return await NetworkRequests.decodeJson(
         await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
             resource: Resources.serviceRequest),
