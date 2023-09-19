@@ -7,9 +7,14 @@ class Role {
   }
   late final String resource;
 
-  static create({required String description}) async {
-    description = Strings.description(description.trim());
-    String id = description.trim().replaceAll(' ', '-').toUpperCase();
+  static create({String? id, required String description,}) async {
+    id ??= description
+          .trim()
+          .replaceAll(
+            ' ',
+            '-',
+          )
+          .toUpperCase();
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPost,
       resource: Resources.role,
@@ -69,6 +74,7 @@ class Role {
         resource: '$resource/${Resources.workcenter}',
         queryParameters: {
           QueryParameters.workcenter: workcenter,
-        });
+        },
+    );
   }
 }

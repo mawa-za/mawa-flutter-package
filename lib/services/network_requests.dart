@@ -194,6 +194,7 @@ class NetworkRequests {
     // url = Uri.parse(endpointURL + resource);
     url = Uri.https(server, resource, queryParameters);
     if (kDebugMode) {
+      print(method);
       print(url);
       print(header);
       print(body);
