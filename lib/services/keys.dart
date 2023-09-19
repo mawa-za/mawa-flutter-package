@@ -364,6 +364,8 @@ class JsonResponses {
   static const String surname = 'surname';
   static const String tombstone = 'tombstone';
   static const String fileType = 'fileType';
+  static const String no = 'no';
+
 }
 
 class Resources {
@@ -517,6 +519,9 @@ class Resources {
   static const String voucher = 'voucher';
   static const String transactionLink = 'transactionLink';
   static const String transaction = 'transaction';
+  static const String serviceRequest = 'service-request';
+
+
 }
 
 class JsonPayloads {
