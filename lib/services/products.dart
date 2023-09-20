@@ -254,6 +254,7 @@ class Product {
           JsonPayloads.category: productCategory,
           JsonPayloads.baseUnitOfMeasure: measure,
           JsonPayloads.sellingPrice: sellingPrice,
+          JsonPayloads.autoGenerateCode: 'X',
         },
       );
     }
