@@ -731,6 +731,7 @@ class JsonPayloads {
   static const String accountHolder = 'accountHolder';
   static const String layById = 'layById';
   static const String fileType = 'fileType';
+  static const String autoGenerateCode = 'autoGenerateCode';
 
 // static const String  = '';
 }
@@ -941,10 +942,10 @@ class FieldOptionTypes {
   static const String fieldOptionLayByStatusReason = 'LAYBY-STATUS-REASON';
   static const String fieldOptionPartnerType = 'PARTNER-TYPE';
   static const String uom = 'UOM';
-  static const String pricing_types = 'PRICING_TYPE';
-  static const String membership_creation_types = 'MEMBERSHIP-CREATION-TYPES';
-  static const String suburbs = 'SUBURBS';
-  static const String user_type = 'USER-TYPE';
+  static const String pricingType = 'PRICING_TYPE';
+  static const String membershipCreationType = 'MEMBERSHIP-CREATION-TYPE';
+  static const String suburb = 'SUBURB';
+  static const String userType = 'USER-TYPE';
 }
 
 class PathNames {
@@ -963,4 +964,5 @@ class PartnerTypes {
   static const String employee = 'EMPLOYEE';
   static const String supplier = 'SUPPLIER';
   static const String organization = 'ORGANIZATION';
+  static const String person = 'PERSON';
 }
