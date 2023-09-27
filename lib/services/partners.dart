@@ -197,8 +197,10 @@ class Partners {
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPut,
         resource: '${Resources.partner}/$partnerId/$path',
+        queryParameters: {
+          QueryParameters.contactType:type,
+        },
         body: {
-          JsonPayloads.type: type,
           JsonPayloads.value: value,
           JsonPayloads.validTo: validTo,
           JsonPayloads.validFrom: validFrom

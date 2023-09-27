@@ -868,6 +868,9 @@ class QueryParameters {
   static const String deathDate = 'deathDate';
   static const String burialDate = 'burialDate';
 
+  static const String contactType = 'contactType';
+
+
 // static const String  = '';
 }
 
