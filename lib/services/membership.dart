@@ -136,6 +136,13 @@ class Membership {
     );
   }
 
+  getDependent() async {
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodGet,
+      resource: '$resource/${Resources.dependent}',
+    );
+  }
+
   delete() async {
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodDelete,
@@ -147,6 +154,35 @@ class Membership {
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodDelete,
       resource: '$resource/${Resources.dependent}/$dependentId',
+    );
+  }
+
+  getClaims() async {
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodGet,
+      resource: '$resource/${Resources.claims}',
+    );
+  }
+
+  addTombstoneRecipient({required Map partner}) async {
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodPost,
+      resource: '$resource/${Resources.tombstoneRecipient}',
+      body: partner,
+    );
+  }
+
+  deleteTombstoneRecipient(String recipientId) async {
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodDelete,
+      resource: '$resource/${Resources.tombstoneRecipient}/$recipientId',
+    );
+  }
+
+  getTombstoneRecipient(String recipientId) async {
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodGet,
+      resource: '$resource/${Resources.tombstoneRecipient}/$recipientId',
     );
   }
 }
