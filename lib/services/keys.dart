@@ -520,7 +520,7 @@ class Resources {
   static const String transactionLink = 'transactionLink';
   static const String transaction = 'transaction';
   static const String serviceRequest = 'service-request';
-
+  static const String tombstoneRecipient = 'tombstone-recipient';
 
 }
 

@@ -179,10 +179,10 @@ class Membership {
     );
   }
 
-  getTombstoneRecipient(String recipientId) async {
+  getTombstoneRecipient() async {
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodGet,
-      resource: '$resource/${Resources.tombstoneRecipient}/$recipientId',
+      resource: '$resource/${Resources.tombstoneRecipient}',
     );
   }
 }
