@@ -137,9 +137,12 @@ class Membership {
   }
 
   getDependent() async {
-    return await NetworkRequests().securedMawaAPI(
-      NetworkRequests.methodGet,
-      resource: '$resource/${Resources.dependent}',
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: '$resource/${Resources.dependent}',
+      ),
+      negativeResponse: [],
     );
   }
 
@@ -158,9 +161,12 @@ class Membership {
   }
 
   getClaims() async {
-    return await NetworkRequests().securedMawaAPI(
-      NetworkRequests.methodGet,
-      resource: '$resource/${Resources.claims}',
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: '$resource/${Resources.claims}',
+      ),
+      negativeResponse: [],
     );
   }
 
@@ -179,10 +185,13 @@ class Membership {
     );
   }
 
-  getTombstoneRecipient() async {
-    return await NetworkRequests().securedMawaAPI(
-      NetworkRequests.methodGet,
-      resource: '$resource/${Resources.tombstoneRecipient}',
+  getTombstoneRecipient(String recipientId) async {
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: '$resource/${Resources.tombstoneRecipient',
+      ),
+      negativeResponse: [],
     );
   }
 }
