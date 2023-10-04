@@ -522,7 +522,6 @@ class Resources {
   static const String serviceRequest = 'service-request';
   static const String tombstoneRecipient = 'tombstone-recipient';
 
-
 }
 
 class JsonPayloads {

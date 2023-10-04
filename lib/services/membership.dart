@@ -189,7 +189,7 @@ class Membership {
     return await NetworkRequests.decodeJson(
       await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
-        resource: '$resource/${Resources.tombstoneRecipient}/$recipientId',
+        resource: '$resource/${Resources.tombstoneRecipient',
       ),
       negativeResponse: [],
     );
