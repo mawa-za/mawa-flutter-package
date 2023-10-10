@@ -366,6 +366,10 @@ class JsonResponses {
   static const String fileType = 'fileType';
   static const String no = 'no';
 
+  //attachments
+  static const String fileId = 'fileId';
+  static const String file = 'file';
+
 }
 
 class Resources {
