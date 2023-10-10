@@ -78,14 +78,19 @@ class Partners {
   addIdentity(
       {  String? path,
         String ? idType,
-        String? idNumber}) async {
+        String? idNumber,
+        String ? validFrom,
+        String ? validTo,
+      }) async {
 
      dynamic idPost= await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPost,
       resource: '${Resources.partner}/$partnerId/$path',
         body: {
-         JsonPayloads.idType: idType,
-        JsonPayloads.personIdNumber: idNumber,
+          JsonPayloads.idType: idType,
+          JsonPayloads.personIdNumber: idNumber,
+          JsonPayloads.validFrom: validFrom,
+          JsonPayloads.validTo: validTo,
          },
     );
     // print('Type is ${idPost.runtimeType}');
