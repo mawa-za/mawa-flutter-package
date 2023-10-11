@@ -928,7 +928,8 @@ class FieldOptionTypes {
   static const String fieldOptionSuburb = 'SUBURB';
   static const String fieldOptionTown = 'TOWN';
   static const String fieldOptionContactType = 'CONTACT-TYPE';
-  static const String fieldAddress = 'ADDRESS-TYPE';
+  static const String fieldAddress = 'ADDRESSES';
+  static const String fieldOptionAddressType = 'ADDRESS-TYPE';
   static const String fieldPartnerRole = 'PARTNER-ROLE';
   static const String fieldClaimDeclineReason = 'CLAIM-DECLINE-REASON';
   static const String fieldPaymentMethod = 'PAYMENT-METHOD';
