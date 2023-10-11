@@ -115,6 +115,7 @@ class Receipt {
     String? membershipPeriod,
     String? tenderType,
     String? user,
+    bool? notCashed,
   }) async {
     Map<String, dynamic> qaramParam = {};
     receiptType != null
@@ -133,7 +134,11 @@ class Receipt {
         ? qaramParam[QueryParameters.tenderType] = tenderType
         : null;
     user != null ? qaramParam[QueryParameters.user] = user : null;
-    return await NetworkRequests.decodeJson(
+    notCashed??=false;
+    if(notCashed) {
+      qaramParam[QueryParameters.notCashed] = '$notCashed';
+    }
+    dynamic resp = await NetworkRequests.decodeJson(
       await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: Resources.receipts,
@@ -141,6 +146,7 @@ class Receipt {
       ),
       negativeResponse: [],
     );
+    return resp;
   }
 
   // https://api-qas.mawa.co.za:8181/mawa-api/resources/receipts?checkoutId=CU0000000002
