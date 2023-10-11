@@ -51,7 +51,7 @@ class Role {
     );
   }
 
-  addWorkcenter({required List<String> workcenters}) async {
+  addWorkcenter({required List<Map<String,dynamic>> workcenters}) async {
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPost,
       resource: '$resource/${Resources.workcenter}',
