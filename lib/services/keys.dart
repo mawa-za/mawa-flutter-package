@@ -365,11 +365,10 @@ class JsonResponses {
   static const String tombstone = 'tombstone';
   static const String fileType = 'fileType';
   static const String no = 'no';
-
-  //attachments
   static const String fileId = 'fileId';
   static const String file = 'file';
 
+  //attachments
 }
 
 class Resources {
@@ -480,7 +479,7 @@ class Resources {
   static const String deposit = 'deposit';
 
   static const String attributes = 'attributes';
-  static const String pricing = 'pricings';
+  static const String pricing = 'pricing';
   static const String refer = 'refer';
   static const String vouchers = 'vouchers';
 
@@ -525,6 +524,7 @@ class Resources {
   static const String transaction = 'transaction';
   static const String serviceRequest = 'service-request';
   static const String tombstoneRecipient = 'tombstone-recipient';
+  static const String attribute = 'attribute';
 
 }
 
@@ -736,6 +736,9 @@ class JsonPayloads {
   static const String layById = 'layById';
   static const String fileType = 'fileType';
   static const String autoGenerateCode = 'autoGenerateCode';
+  static const String creationType = 'creationType';
+  static const String previousInsurerId = 'previousInsurerId';
+  static const String pricing = 'pricing';
 
 // static const String  = '';
 }
@@ -873,6 +876,8 @@ class QueryParameters {
   static const String burialDate = 'burialDate';
 
   static const String contactType = 'contactType';
+  static const String attribute = 'attribute';
+  static const String notCashed = 'notCashed';
 
 
 // static const String  = '';
@@ -911,6 +916,7 @@ class SharedPrefs {
   static const role = 'role';
   static const workcenters = 'workcenters';
   static const loggedInUser = 'loggedInUser';
+  static const roleRoot = 'roleRoot';
 }
 
 class CommentTypes {
@@ -954,6 +960,7 @@ class FieldOptionTypes {
   static const String membershipCreationType = 'MEMBERSHIP-CREATION-TYPE';
   static const String suburb = 'SUBURB';
   static const String userType = 'USER-TYPE';
+  static const String productAttribute = 'PRODUCT-AATRIBUTE';
 }
 
 class PathNames {
