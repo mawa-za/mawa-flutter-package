@@ -1,42 +1,62 @@
 part of 'package:mawa_package/mawa_package.dart';
 
-class ChangePassword extends StatefulWidget {
-  const ChangePassword({Key? key}) : super(key: key);
+class ChangePassword {
+  ChangePassword(this.context,{this.user}) {
+    user == null ? isOwner = true: isOwner = false;
+    build();
+  }
+  final BuildContext context;
+  late bool isOwner;
 
-  @override
-  State<ChangePassword> createState() => _ChangePasswordState();
-}
-
-class _ChangePasswordState extends State<ChangePassword> {
+  Map<String, dynamic>? user;
   final _resetPasswordFormKey = GlobalKey<FormState>();
 
   final TextEditingController _newPasswordController = TextEditingController();
-  dynamic resetPasswordFeedback;
 
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Row(
-            children: const [
-              Icon(Icons.lock),
-              Text('Change password'),
-            ],
-          ),
-        ),
-        body: Row(
-          children: [
-            const Spacer(),
-            Expanded(
-              flex: 3,
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Form(
+  Future<void> build() async {
+    return await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (
+            context,
+            setState,
+          ) {
+            return AlertDialog(
+              actionsAlignment: MainAxisAlignment.start,
+              title: const Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: 27.0,
+                    ),
+                    child: Text(
+                      'Change Password',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              content: Container(
+                width: 500.0,
+                height: 250.0,
+                margin: const EdgeInsets.only(
+                  left: 20.00,
+                ),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 0.0,
+                  horizontal: 20.0,
+                ),
+                child: Scaffold(
+                  body: Center(
+                    child: Form(
                       key: _resetPasswordFormKey,
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           TextFormField(
                             autofocus: true,
@@ -54,11 +74,16 @@ class _ChangePasswordState extends State<ChangePassword> {
                               return null;
                             },
                             decoration: const InputDecoration(
-                              icon: Icon(Icons.account_circle),
-                              labelText: 'Enter New Password',
+                              icon: Icon(
+                                Icons.security,
+                              ),
+                              hintText: 'Enter New Password',
+                              // labelText: 'Enter New Password',
                             ),
                           ),
-                          const SizedBox(height: 10.0),
+                          const SizedBox(
+                            height: 10.0,
+                          ),
                           TextFormField(
                             keyboardType: TextInputType.visiblePassword,
                             obscureText: true,
@@ -75,78 +100,110 @@ class _ChangePasswordState extends State<ChangePassword> {
                               return null;
                             },
                             decoration: const InputDecoration(
-                              icon: Icon(Icons.account_circle),
+                              icon: Icon(
+                                Icons.security,
+                              ),
                               labelText: 'Confirm Password',
+                              // hintText: 'Confirm Password',
                             ),
                             onEditingComplete: _resetPassword,
                           ),
                         ],
                       ),
                     ),
-                    const SizedBox(
-                      height: 30.0,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        ElevatedButton(
+                  ),
+                  floatingActionButton: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: TextButton.icon(
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.resolveWith(
-                                (states) => Colors.red),
+                          style: TextButton.styleFrom(
+                              foregroundColor: Colors.red.shade900,
+                              iconColor: Colors.red.shade900,
+                              backgroundColor: Colors.redAccent.shade100
                           ),
-                          child: const Text('Cancel'),
+                          icon: const Icon(Icons.backspace_outlined,),
+                          label: const Text(
+                            'Cancel',
+                          ),
                         ),
-                        ElevatedButton(
+                      ),
+                      const SizedBox(width: 10.0,),
+                      Expanded(
+                        child: TextButton.icon(
                           onPressed: _resetPassword,
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.resolveWith(
-                                (states) => Colors.green),
+                          style: TextButton.styleFrom(
+                              foregroundColor: Colors.green.shade900,
+                              iconColor: Colors.green.shade900,
+                              backgroundColor: Colors.greenAccent.shade100
                           ),
-                          child: const Text(
+                          icon: const Icon(Icons.save_as,),
+                          label: const Text(
                             'Confirm',
                           ),
+
                         ),
-                      ],
-                    )
-                  ]),
-            ),
-            const Spacer(),
-          ],
-        ),
-      ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+            );
+          },
+        );
+      },
     );
   }
 
-  _resetPassword(/*context*/) async {
+  _resetPassword() async {
     if (_resetPasswordFormKey.currentState!.validate()) {
-      final OverlayWidgets overlay = OverlayWidgets(context: context);
-      overlay.showOverlay(SnapShortStaticWidgets.snapshotWaitingIndicator());
+      final OverlayWidgets overlay = OverlayWidgets(
+        context: context,
+      );
+      overlay.showOverlay(
+        SnapShortStaticWidgets.snapshotWaitingIndicator(),
+      );
 
       FocusScope.of(context).unfocus();
-
-      // Alerts.flushbar(message: 'Please Wait', context: context);
-      dynamic request = await User.changePassword(
-          password: _newPasswordController.value.text.toString());
-      User.username = await NetworkRequests.decodeJson(request);
+      user ??= Map<String, dynamic>.from(
+        await jsonDecode(
+          await SharedStorage.getString(SharedPrefs.loggedInUser) ?? '{}',
+        ),
+      );
+      dynamic request = await User(user![JsonResponses.id]).set(
+        password: _newPasswordController.text,
+      );
       if (request.statusCode == 200 || request.statusCode == 201) {
         final SharedPreferences prefs = await preferences;
 
-        String initialScreen = prefs.getString(SharedPrefs.initialRoute) ?? '';
-
-        Navigator.pushReplacementNamed(context, initialScreen);
+        String roleRoot = prefs.getString(SharedPrefs.roleRoot) ?? '';
+        isOwner? navigate(roleRoot):
+        dismiss();
+        Alerts.toastMessage(message: 'Password Successfully Changed', positive: true,);
       } else if (request.statusCode == 401) {
         AuthenticateView.message = 'Token Invalid';
       } else {
-        Alerts.flushbar(
-            context: context,
-            message: 'Failed To Reset',
-            positive: false,
-            popContext: true);
+        failedAlert();
       }
       overlay.dismissOverlay();
     }
   }
+
+  failedAlert() => Alerts.flushbar(
+        context: context,
+        message: 'Failed To Reset',
+        positive: false,
+        popContext: true,
+      );
+
+  navigate(roleRoot) => Navigator.pushReplacementNamed(
+        context,
+        roleRoot,
+      );
+
+  dismiss() => Navigator.pop(context);
 }
