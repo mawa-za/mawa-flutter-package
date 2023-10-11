@@ -92,7 +92,6 @@ class Tools {
                 },
                 validator: (value) {
                   value = value?.trim();
-                  print('*$value*\n*$email*');
                   if (value!.isEmpty) {
                     return 'Enter Email Address';
                   }
@@ -255,26 +254,42 @@ class Tools {
   static logoutPopup(
       {required BuildContext context, required String redirect}) {
     return AwesomeDialog(
+      dismissOnTouchOutside: false,
       width: 500.0,
       context: context,
       dialogType: DialogType.question,
       animType: AnimType.bottomSlide,
-      desc: 'Do You Really Want To Logout?',
+      body:  Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 40.0,
+          vertical: 20.0,
+        ),
+        child: const Text(
+          'Do You Really Want To Logout?',
+          style: TextStyle(fontSize: 20.0,),
+        ),
+      ),
       btnOk: TextButton(
+        style: TextButton.styleFrom(
+            foregroundColor: Colors.red,
+            backgroundColor: Colors.redAccent.shade100
+        ),
         child: const Text(
           'Yes',
-          style: TextStyle(color: Colors.red),
         ),
         onPressed: () {
-          // setState(() {
-          //   Tools.isTouchLocked = true;
-          // });
           Navigator.of(context)
               .pushNamedAndRemoveUntil(redirect, (route) => false);
         },
       ),
       btnCancel: TextButton(
-        child: const Text('No'),
+        style: TextButton.styleFrom(
+          foregroundColor: Colors.green,
+          backgroundColor: Colors.greenAccent.shade100
+        ),
+        child: const Text(
+          'No',
+        ),
         onPressed: () {
           Navigator.of(context).pop();
         },
@@ -378,30 +393,37 @@ class Tools {
   // }
 
 //
-  static textInputDecorations(String textLabel, icon,
-      {String? hint, String? helperTxt}) {
+  static textInputDecorations(
+    String textLabel,
+    icon, {
+    String? hint,
+    String? helperTxt,
+  }) {
     return InputDecoration(
-        helperText: helperTxt ?? '',
-        icon: Icon(icon),
-        labelText: textLabel,
-        hintText: hint,
-        filled: true,
-        fillColor: Colors.grey[100],
-        focusColor: Colors.deepPurple,
-        border: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(
-              10.0,
-            ),
+      helperText: helperTxt ?? '',
+      prefixIcon: Icon(icon),
+      labelText: textLabel,
+      hintText: hint,
+      filled: true,
+      fillColor: Colors.grey[100],
+      focusColor: Colors.deepPurple,
+      border: const OutlineInputBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(
+            10.0,
           ),
         ),
+      ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(5.0,),
-        borderSide: BorderSide(
+        borderRadius: BorderRadius.circular(
+          5.0,
+        ),
+        borderSide: const BorderSide(
           color: Colors.grey,
           width: 1.0,
         ),
-      ),);
+      ),
+    );
   }
 
   static textInputDecoration(String textLabel,
