@@ -945,8 +945,8 @@ class FieldOptionTypes {
   static const String fieldBankName = 'BANK-NAME';
   static const String fieldBranch = 'BRANCH';
   static const String fieldDepartment = 'DEPARTMENT';
-  static const String fieldEmploymentType = 'EMPLOYMENTTYPE';
-  static const String fieldJobTitle = 'JOBTITLE';
+  static const String fieldEmploymentType = 'EMPLOYMENT-TYPE';
+  static const String fieldJobTitle = 'JOB-TITLE';
 
   static const String fieldClaimTypes = 'CLAIM-TYPE';
   static const String fieldOptionBusinessIdentity = 'BUSINESS-IDENTITIES';
@@ -956,11 +956,11 @@ class FieldOptionTypes {
   static const String fieldOptionLayByStatusReason = 'LAYBY-STATUS-REASON';
   static const String fieldOptionPartnerType = 'PARTNER-TYPE';
   static const String uom = 'UOM';
-  static const String pricingType = 'PRICING_TYPE';
+  static const String pricingType = 'PRICING-TYPE';
   static const String membershipCreationType = 'MEMBERSHIP-CREATION-TYPE';
   static const String suburb = 'SUBURB';
   static const String userType = 'USER-TYPE';
-  static const String productAttribute = 'PRODUCT-AATRIBUTE';
+  static const String productAttribute = 'PRODUCT-ATTRIBUTE';
 }
 
 class PathNames {
