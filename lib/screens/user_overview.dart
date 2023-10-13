@@ -281,6 +281,6 @@ class _UserOverviewState extends State<UserOverview> {
     else{
       username = widget.user;
     }
-    await User(username,).get( getPerson: true);
+    await User(username).get();
   }
 }

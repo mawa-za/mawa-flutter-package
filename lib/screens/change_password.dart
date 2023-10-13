@@ -1,8 +1,8 @@
 part of 'package:mawa_package/mawa_package.dart';
 
 class ChangePassword {
-  ChangePassword(this.context,{this.user}) {
-    user == null ? isOwner = true: isOwner = false;
+  ChangePassword(this.context, {this.user}) {
+    user == null ? isOwner = true : isOwner = false;
     build();
   }
   final BuildContext context;
@@ -121,37 +121,41 @@ class ChangePassword {
                             Navigator.of(context).pop();
                           },
                           style: TextButton.styleFrom(
-                              foregroundColor: Colors.red.shade900,
-                              iconColor: Colors.red.shade900,
-                              backgroundColor: Colors.redAccent.shade100
+                            foregroundColor: Colors.red.shade900,
+                            iconColor: Colors.red.shade900,
+                            backgroundColor: Colors.redAccent.shade100,
                           ),
-                          icon: const Icon(Icons.backspace_outlined,),
+                          icon: const Icon(
+                            Icons.backspace_outlined,
+                          ),
                           label: const Text(
                             'Cancel',
                           ),
                         ),
                       ),
-                      const SizedBox(width: 10.0,),
+                      const SizedBox(
+                        width: 10.0,
+                      ),
                       Expanded(
                         child: TextButton.icon(
                           onPressed: _resetPassword,
                           style: TextButton.styleFrom(
-                              foregroundColor: Colors.green.shade900,
-                              iconColor: Colors.green.shade900,
-                              backgroundColor: Colors.greenAccent.shade100
+                            foregroundColor: Colors.green.shade900,
+                            iconColor: Colors.green.shade900,
+                            backgroundColor: Colors.greenAccent.shade100,
                           ),
-                          icon: const Icon(Icons.save_as,),
+                          icon: const Icon(
+                            Icons.save_as,
+                          ),
                           label: const Text(
                             'Confirm',
                           ),
-
                         ),
                       ),
                     ],
                   ),
                 ),
               ),
-
             );
           },
         );
@@ -174,16 +178,32 @@ class ChangePassword {
           await SharedStorage.getString(SharedPrefs.loggedInUser) ?? '{}',
         ),
       );
-      dynamic request = await User(user![JsonResponses.id]).set(
+      User userInstance = User(user![JsonResponses.id]);
+      dynamic request = await userInstance.set(
         password: _newPasswordController.text,
       );
       if (request.statusCode == 200 || request.statusCode == 201) {
         final SharedPreferences prefs = await preferences;
 
         String roleRoot = prefs.getString(SharedPrefs.roleRoot) ?? '';
-        isOwner? navigate(roleRoot):
-        dismiss();
-        Alerts.toastMessage(message: 'Password Successfully Changed', positive: true,);
+        if (isOwner) {
+          user = Map<String, dynamic>.from(await userInstance.get());
+          SharedStorage.setString(
+            key: SharedPrefs.userID,
+            detail: user![JsonResponses.id],
+          );
+          SharedStorage.setString(
+            key: SharedPrefs.loggedInUser,
+            detail: jsonEncode(user),
+          );
+          navigate(roleRoot);
+        } else {
+          dismiss();
+        }
+        Alerts.toastMessage(
+          message: 'Password Successfully Changed',
+          positive: true,
+        );
       } else if (request.statusCode == 401) {
         AuthenticateView.message = 'Token Invalid';
       } else {

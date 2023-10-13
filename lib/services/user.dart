@@ -22,7 +22,7 @@ class User {
   late String resource;
 
   // GET /user/{id}
-  get({bool getPerson = false}) async {
+  get() async {
     user = await NetworkRequests.decodeJson(
       await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
           resource: '${Resources.user}/${Resources.byId}/$id'),
