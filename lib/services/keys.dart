@@ -368,6 +368,9 @@ class JsonResponses {
   static const String fileId = 'fileId';
   static const String file = 'file';
 
+
+  static const String employee = 'employee';
+
   //attachments
 }
 
