@@ -1,12 +1,17 @@
 part of 'package:mawa_package/mawa_package.dart';
 
 class ChangePassword {
-  ChangePassword(this.context, {this.user}) {
+  ChangePassword(
+    this.context, {
+    this.user,
+    this.subtitle,
+  }) {
     user == null ? isOwner = true : isOwner = false;
     build();
   }
   final BuildContext context;
   late bool isOwner;
+  String? subtitle;
 
   Map<String, dynamic>? user;
   final _resetPasswordFormKey = GlobalKey<FormState>();
@@ -25,19 +30,27 @@ class ChangePassword {
           ) {
             return AlertDialog(
               actionsAlignment: MainAxisAlignment.start,
-              title: const Row(
+              icon: const Icon(
+                Icons.lock_clock_outlined,
+              ),
+              title: Column(
                 children: [
-                  Padding(
-                    padding: EdgeInsets.only(
-                      left: 27.0,
-                    ),
-                    child: Text(
-                      'Change Password',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
+                  const Row(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: 27.0,
+                        ),
+                        child: Text(
+                          'Change Password',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
+                  Text(subtitle ?? ''),
                 ],
               ),
               content: Container(
@@ -51,65 +64,66 @@ class ChangePassword {
                   horizontal: 20.0,
                 ),
                 child: Scaffold(
-                  body: Center(
-                    child: Form(
-                      key: _resetPasswordFormKey,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          TextFormField(
-                            autofocus: true,
-                            keyboardType: TextInputType.visiblePassword,
-                            obscureText: true,
-                            textInputAction: TextInputAction.next,
-                            controller: _newPasswordController,
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Enter New Password';
-                              }
-                              if (value.length < 7) {
-                                return 'Password Short';
-                              }
-                              return null;
-                            },
-                            decoration: const InputDecoration(
-                              icon: Icon(
-                                Icons.security,
-                              ),
-                              hintText: 'Enter New Password',
-                              // labelText: 'Enter New Password',
+                  body: Form(
+                    key: _resetPasswordFormKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const SizedBox(
+                          height: 30.0,
+                        ),
+                        TextFormField(
+                          autofocus: true,
+                          keyboardType: TextInputType.visiblePassword,
+                          obscureText: true,
+                          textInputAction: TextInputAction.next,
+                          controller: _newPasswordController,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Enter New Password';
+                            }
+                            if (value.length < 7) {
+                              return 'Password Short';
+                            }
+                            return null;
+                          },
+                          decoration: const InputDecoration(
+                            icon: Icon(
+                              Icons.security,
                             ),
+                            hintText: 'Enter New Password',
+                            // labelText: 'Enter New Password',
                           ),
-                          const SizedBox(
-                            height: 10.0,
-                          ),
-                          TextFormField(
-                            keyboardType: TextInputType.visiblePassword,
-                            obscureText: true,
-                            textInputAction: TextInputAction.send,
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Retype New Password';
-                              }
-                              if (value !=
-                                  _newPasswordController.value.text
-                                      .toString()) {
-                                return 'Passwords Do Not Match';
-                              }
-                              return null;
-                            },
-                            decoration: const InputDecoration(
-                              icon: Icon(
-                                Icons.security,
-                              ),
-                              labelText: 'Confirm Password',
-                              // hintText: 'Confirm Password',
+                        ),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        TextFormField(
+                          keyboardType: TextInputType.visiblePassword,
+                          obscureText: true,
+                          textInputAction: TextInputAction.send,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Retype New Password';
+                            }
+                            if (value !=
+                                _newPasswordController.value.text
+                                    .toString()) {
+                              return 'Passwords Do Not Match';
+                            }
+                            return null;
+                          },
+                          decoration: const InputDecoration(
+                            icon: Icon(
+                              Icons.security,
                             ),
-                            onEditingComplete: _resetPassword,
+                            labelText: 'Confirm New Password',
+                            // hintText: 'Confirm Password',
                           ),
-                        ],
-                      ),
+                          onEditingComplete: _resetPassword,
+                        ),
+                      ],
                     ),
                   ),
                   floatingActionButton: Row(
