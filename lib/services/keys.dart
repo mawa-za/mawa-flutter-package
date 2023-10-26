@@ -742,6 +742,8 @@ class JsonPayloads {
   static const String creationType = 'creationType';
   static const String previousInsurerId = 'previousInsurerId';
   static const String pricing = 'pricing';
+  static const String lastReceiptDate = 'lastReceiptDate';
+  static const String membershipType = 'membershipType';
 
 // static const String  = '';
 }
@@ -965,6 +967,7 @@ class FieldOptionTypes {
   static const String suburb = 'SUBURB';
   static const String userType = 'USER-TYPE';
   static const String productAttribute = 'PRODUCT-ATTRIBUTE';
+  static const String membershipType = 'MEMBERSHIP-TYPE';
 }
 
 class PathNames {
