@@ -4,25 +4,34 @@ class Cashup {
   Cashup(this.id);
   final String id;
 
-  static getCashupCollection({required String processor}) async {
+  static getCashupCollection({
+    required String processor,
+  }) async {
     return await NetworkRequests.decodeJson(
       await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: Resources.cashup,
-        queryParameters: {QueryParameters.processor: processor},
+        queryParameters: {
+          QueryParameters.processor: processor,
+        },
       ),
     );
   }
 
   get() async {
     return await NetworkRequests.decodeJson(
-      await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-          resource: '${Resources.cashup}/$id'),
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: '${Resources.cashup}/$id',
+      ),
       negativeResponse: {},
     );
   }
 
-  edit({String? amountDeposited, String? status}) async {
+  edit({
+    String? amountDeposited,
+    String? status,
+  }) async {
     Map body = {};
     if (status != null) {
       body[JsonPayloads.status] = status;
@@ -39,8 +48,10 @@ class Cashup {
 
   static getAll() async {
     return await NetworkRequests.decodeJson(
-      await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-          resource: Resources.cashup),
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: Resources.cashup,
+      ),
       negativeResponse: [],
     );
   }

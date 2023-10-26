@@ -1,7 +1,6 @@
 part of 'package:mawa_package/mawa_package.dart';
 
 class Prospect {
-
   static dynamic prospect;
   final String prospectID;
 
@@ -24,6 +23,7 @@ class Prospect {
         ),
         negativeResponse: []);
   }
+
   //  getSpecific() async {
   //   return await NetworkRequests.decodeJson(
   //       await NetworkRequests().securedMawaAPI(
@@ -34,7 +34,6 @@ class Prospect {
   // }
   //ADD PARTNER ATTRIBUTE
   addPartnerAttribute({
-
     required String pathType,
     required String attributeValue,
     required String attributeType,
@@ -43,13 +42,12 @@ class Prospect {
       NetworkRequests.methodPost,
       resource: '${Resources.partner}/$prospectID/$pathType',
       body: {
-
-        JsonPayloads.type : attributeType,
-        JsonPayloads.value : attributeValue,
-
+        JsonPayloads.type: attributeType,
+        JsonPayloads.value: attributeValue,
       },
     );
   }
+
   //GET PARTNER CONTACT
   getPartnerAttribute(path) async {
     //String path='contact';
@@ -60,17 +58,15 @@ class Prospect {
         ),
         negativeResponse: {});
   }
+
   getSpecific() async {
     prospect = await NetworkRequests.decodeJson(
-      await NetworkRequests().securedMawaAPI(
-          NetworkRequests.methodGet,
+      await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
           resource: '${Resources.partner}/$prospectID'),
       negativeResponse: {},
     );
     return prospect;
   }
-
-
 
   static createProspect({
     required String fName,
@@ -83,13 +79,12 @@ class Prospect {
       NetworkRequests.methodPost,
       resource: Resources.prospect,
       body: {
-        JsonPayloads.firstName : fName,
-        JsonPayloads.lastName : lName,
-        JsonPayloads.middleName : midName,
-        JsonPayloads.partnerType : partnerType,
-        JsonPayloads.organizationName : organisationName,
+        JsonPayloads.firstName: fName,
+        JsonPayloads.lastName: lName,
+        JsonPayloads.middleName: midName,
+        JsonPayloads.partnerType: partnerType,
+        JsonPayloads.organizationName: organisationName,
       },
     );
   }
-
 }
