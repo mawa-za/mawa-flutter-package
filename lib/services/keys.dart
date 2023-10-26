@@ -532,6 +532,8 @@ class Resources {
 }
 
 class JsonPayloads {
+  static const String claimId = 'claimId';
+  static const String comments = 'comments';
   static const String id = 'id';
   static const String filter = 'filter';
   static const String filterValue = 'x';
