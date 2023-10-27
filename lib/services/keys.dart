@@ -532,6 +532,8 @@ class Resources {
 }
 
 class JsonPayloads {
+  static const String claimId = 'claimId';
+  static const String comments = 'comments';
   static const String id = 'id';
   static const String filter = 'filter';
   static const String filterValue = 'x';
@@ -928,6 +930,7 @@ class CommentTypes {
 }
 
 class FieldOptionTypes {
+  static const String fieldOptionDisputeReason = 'CLAIM-DISPUTE-REASON';
   static const String fieldOptionCategory = 'CATEGORY';
   static const String fieldOptionPriority = 'PRIORITY';
   static const String fieldOptionIdType = 'ID-TYPE';

@@ -100,8 +100,8 @@ class Claims {
 
   static submitClaim(String claimNo) async {
     return await NetworkRequests().securedMawaAPI(
-      NetworkRequests.methodPost,
-      resource: '${Resources.claims}/$claimNo/${Resources.submit}',
+      NetworkRequests.methodPut,
+      resource: '${Resources.claim}/$claimNo/${Resources.submit}',
     );
   }
 
@@ -176,8 +176,24 @@ class Claims {
   static editClaim({required dynamic body, required String claimNumber}) async {
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPut,
-        resource: '${Resources.claim}/$claimNumber',
+        resource: '${Resources.claim}/$claimNumber/${Resources.dispute}',
         body: body);
     return response;
+  }
+  static disputeClaimNew({
+    required String claimantId,
+    required String reason,
+    required String comments,
+
+
+  }) async {
+    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPut,
+        resource: '${Resources.claim}/$claimantId/${Resources.dispute}',
+        body: {
+          JsonPayloads.claimId: claimantId,
+          JsonPayloads.reason: reason,
+          JsonPayloads.comments: comments,
+
+        });
   }
 }
