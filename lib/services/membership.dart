@@ -51,6 +51,7 @@ class Membership {
   //   "dateJoined": "2023-04-17T12:41:46.649Z"
   // }
   static create({
+    required String membershipType,
     required String memberId,
     required String salesRepresentativeId,
     required String productId,
@@ -58,11 +59,13 @@ class Membership {
     required String salesArea,
     required String dateJoined,
     String? prevInsurer,
+    String? lastReceiptDate,
   }) async {
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPost,
       resource: Resources.membership,
       body: {
+        JsonPayloads.membershipType: membershipType,
         JsonPayloads.memberId: memberId,
         JsonPayloads.productId: productId,
         JsonPayloads.salesArea: salesArea,
@@ -70,6 +73,7 @@ class Membership {
         JsonPayloads.dateJoined: dateJoined,
         JsonPayloads.creationType: creationType,
         JsonPayloads.previousInsurerId: prevInsurer,
+        JsonPayloads.lastReceiptDate: lastReceiptDate,
       },
     );
   }
