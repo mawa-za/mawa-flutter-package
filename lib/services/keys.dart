@@ -370,8 +370,14 @@ class JsonResponses {
 
 
   static const String employee = 'employee';
+
   static const String paymentMethod ='paymentMethod';
   static const String recipientId ='recipientId';
+
+  static const String pricing = 'pricing';
+
+  //attachments
+
 }
 
 class Resources {
@@ -889,6 +895,7 @@ class QueryParameters {
   static const String contactType = 'contactType';
   static const String attribute = 'attribute';
   static const String notCashed = 'notCashed';
+  static const String pricing = 'pricing';
 
 
 // static const String  = '';
@@ -975,6 +982,9 @@ class FieldOptionTypes {
   static const String userType = 'USER-TYPE';
   static const String productAttribute = 'PRODUCT-ATTRIBUTE';
   static const String membershipType = 'MEMBERSHIP-TYPE';
+  static const String salesArea = 'SALES-AREA';
+  static const String groupSociety = 'GROUP-SOCIETY';
+  static const String membership = 'MEMBERSHIP';
 }
 
 class PathNames {
@@ -994,4 +1004,18 @@ class PartnerTypes {
   static const String supplier = 'SUPPLIER';
   static const String organization = 'ORGANIZATION';
   static const String person = 'PERSON';
+}
+
+class PartnerRoles{
+  static const String competitor = 'COMPETITOR';
+  static const String dependent = 'DEPENDENT';
+  static const String customer = 'CUSTOMER';
+  static const String employee = 'EMPLOYEE';
+
+}
+
+class MembershipTypes{
+  static const String group = 'GROUP';
+  static const String individual = 'INDIVIDUAL';
+
 }
