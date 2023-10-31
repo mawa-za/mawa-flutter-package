@@ -410,7 +410,7 @@ class Tools {
       border: const OutlineInputBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(
-            10.0,
+            5.0,
           ),
         ),
       ),
