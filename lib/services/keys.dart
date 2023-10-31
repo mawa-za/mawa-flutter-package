@@ -370,9 +370,14 @@ class JsonResponses {
 
 
   static const String employee = 'employee';
+
+  static const String paymentMethod ='paymentMethod';
+  static const String recipientId ='recipientId';
+
   static const String pricing = 'pricing';
 
   //attachments
+
 }
 
 class Resources {
@@ -747,6 +752,10 @@ class JsonPayloads {
   static const String pricing = 'pricing';
   static const String lastReceiptDate = 'lastReceiptDate';
   static const String membershipType = 'membershipType';
+  static const String recipientId = 'recipientId';
+  static const String paymentReason = 'paymentReason';
+  static const String paymentMethod = 'paymentMethod';
+
 
 // static const String  = '';
 }
