@@ -370,6 +370,7 @@ class JsonResponses {
 
 
   static const String employee = 'employee';
+  static const String pricing = 'pricing';
 
   //attachments
 }
@@ -885,6 +886,7 @@ class QueryParameters {
   static const String contactType = 'contactType';
   static const String attribute = 'attribute';
   static const String notCashed = 'notCashed';
+  static const String pricing = 'pricing';
 
 
 // static const String  = '';
