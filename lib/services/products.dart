@@ -135,6 +135,8 @@ class Product {
     required String attribute,
     required String value,
     required String product,
+    required String validFrom,
+    required String validTo,
   }) async {
     {
       return await NetworkRequests().securedMawaAPI(
@@ -144,6 +146,8 @@ class Product {
           JsonPayloads.product: value,
           JsonPayloads.attribute: attribute,
           JsonPayloads.value: value,
+          JsonPayloads.validFrom: validFrom,
+          JsonPayloads.validTo: validTo,
         },
       );
     }
@@ -155,7 +159,8 @@ class Product {
     required String value,
     required String product,
     // required priceTypeDescription,
-    // required dynamic validFrom,
+    required String validFrom,
+    required String validTo,
   }) async {
     {
       return await NetworkRequests().securedMawaAPI(
@@ -166,7 +171,8 @@ class Product {
           JsonPayloads.product: product,
           JsonPayloads.value: value,
           // JsonPayloads.priceTypeDescription: priceTypeDescription,
-          // JsonPayloads.validFrom: validFrom,
+          JsonPayloads.validFrom: validFrom,
+          JsonPayloads.validTo: validTo,
         },
       );
     }
@@ -211,23 +217,15 @@ class Product {
     );
   }
 
-  deleteAttribute(attribute)async{
-    return await NetworkRequests().securedMawaAPI(
-      NetworkRequests.methodDelete,
-      resource: '$resource/${Resources.pricing}',
-      queryParameters: {
-        QueryParameters.attribute: attribute
-      }
-    );
+  deleteAttribute(attribute) async {
+    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodDelete,
+        resource: '$resource/${Resources.pricing}',
+        queryParameters: {QueryParameters.attribute: attribute});
   }
 
-  deletePricing(attribute)async{
-    return await NetworkRequests().securedMawaAPI(
-      NetworkRequests.methodDelete,
-      resource: '$resource/${Resources.pricing}',
-      queryParameters: {
-        QueryParameters.attribute: attribute
-      }
-    );
+  deletePricing(attribute) async {
+    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodDelete,
+        resource: '$resource/${Resources.pricing}',
+        queryParameters: {QueryParameters.pricing: attribute});
   }
 }
