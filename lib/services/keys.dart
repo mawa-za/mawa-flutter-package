@@ -971,6 +971,9 @@ class FieldOptionTypes {
   static const String userType = 'USER-TYPE';
   static const String productAttribute = 'PRODUCT-ATTRIBUTE';
   static const String membershipType = 'MEMBERSHIP-TYPE';
+  static const String salesArea = 'SALES-AREA';
+  static const String groupSociety = 'GROUP-SOCIETY';
+  static const String membership = 'MEMBERSHIP';
 }
 
 class PathNames {
@@ -990,4 +993,10 @@ class PartnerTypes {
   static const String supplier = 'SUPPLIER';
   static const String organization = 'ORGANIZATION';
   static const String person = 'PERSON';
+}
+
+class MembershipTypes{
+  static const String group = 'GROUP';
+  static const String individual = 'INDIVIDUAL';
+
 }
