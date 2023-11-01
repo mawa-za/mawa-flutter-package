@@ -10,14 +10,21 @@ class Membership {
     resource = '${Resources.membership}/$membershipID';
   }
 
-  membershipsSearch({String? partnerRole, String? idNumber}) async {
+  static search({
+    String? partnerRole,
+    String? partnerFunction,
+    String? idNumber,
+    String? status,
+  }) async {
     return await NetworkRequests.decodeJson(
       await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: Resources.membership,
         queryParameters: {
-          'idnumber': idNumber,
-          QueryParameters.partnerRole: partnerRole,
+          QueryParameters.partnerNo: partnerRole,
+          QueryParameters.partnerFunction: partnerFunction,
+          QueryParameters.idNumber: idNumber,
+          QueryParameters.status: status,
         },
       ),
       negativeResponse: [],
