@@ -30,10 +30,42 @@ class Premium {
     );
   }
 
-  static search() async {
+  static search({
+    String? receiptType,
+    String? invoiceNumber,
+    String? membershipNumber,
+    String? membershipPeriod,
+    String? tenderType,
+    String? user,
+    bool? notCashed,
+  }) async {
+    Map<String, dynamic> qaramParam = {};
+    receiptType != null
+        ? qaramParam[QueryParameters.receiptType] = receiptType
+        : null;
+    invoiceNumber != null
+        ? qaramParam[QueryParameters.invoiceNumber] = invoiceNumber
+        : null;
+    membershipNumber != null
+        ? qaramParam[QueryParameters.membershipNumber] = membershipNumber
+        : null;
+    membershipPeriod != null
+        ? qaramParam[QueryParameters.membershipPeriod] = membershipPeriod
+        : null;
+    tenderType != null
+        ? qaramParam[QueryParameters.tenderType] = tenderType
+        : null;
+    user != null ? qaramParam[QueryParameters.user] = user : null;
+    notCashed ??= false;
+    if (notCashed) {
+      qaramParam[QueryParameters.notCashed] = '$notCashed';
+    }
     return await NetworkRequests.decodeJson(
-      await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-          resource: Resources.premium),
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: Resources.premium,
+        queryParameters: qaramParam,
+      ),
       negativeResponse: [],
     );
   }
