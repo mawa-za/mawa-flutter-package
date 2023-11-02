@@ -535,6 +535,7 @@ class Resources {
   static const String serviceRequest = 'service-request';
   static const String tombstoneRecipient = 'tombstone-recipient';
   static const String attribute = 'attribute';
+  static const String premium = 'premium';
 
 }
 
@@ -756,6 +757,8 @@ class JsonPayloads {
   static const String recipientId = 'recipientId';
   static const String paymentReason = 'paymentReason';
   static const String paymentMethod = 'paymentMethod';
+  static const String location = 'location';
+  static const String terminalId = 'terminalId';
 
 
 // static const String  = '';
@@ -984,6 +987,7 @@ class FieldOptionTypes {
   static const String productAttribute = 'PRODUCT-ATTRIBUTE';
   static const String membershipType = 'MEMBERSHIP-TYPE';
   static const String salesArea = 'SALES-AREA';
+  static const String tenderType = 'TENDER-TYPE';
 }
 
 class PathNames {

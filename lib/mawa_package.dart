@@ -69,6 +69,7 @@ part 'package:mawa_package/services/notification.dart';
 part 'package:mawa_package/services/otp.dart';
 part 'package:mawa_package/services/partners.dart';
 part 'package:mawa_package/services/persons.dart';
+part 'package:mawa_package/services/premium.dart';
 part 'package:mawa_package/services/products.dart';
 part 'package:mawa_package/services/purchase_order.dart';
 part 'package:mawa_package/services/quotation.dart';
