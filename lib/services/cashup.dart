@@ -56,10 +56,21 @@ class Cashup {
     );
   }
 
-  static processCashup() async {
+  static create({
+    required String employeeResponsibleId,
+    required String amount,
+    required String salesArea,
+    required List receipts,
+  }) async {
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPost,
       resource: Resources.cashup,
+      queryParameters: {
+        QueryParameters.employeeResponsibleId: employeeResponsibleId,
+        QueryParameters.salesArea: salesArea,
+        QueryParameters.amount: amount,
+        QueryParameters.receipts: receipts,
+      },
     );
   }
 }
