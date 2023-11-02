@@ -20,6 +20,7 @@ class Receipt {
     String? invoiceNumber,
     String? membershipNumber,
     String? membershipPeriod,
+    String? location,
     required String tenderType,
     required String amount,
   }) async {
@@ -35,6 +36,7 @@ class Receipt {
       JsonPayloads.receiptType: receiptType,
       JsonPayloads.tenderType: tenderType,
       JsonPayloads.amount: amount,
+      JsonPayloads.location: location,
     };
     invoiceNumber != null
         ? payment[JsonPayloads.invoiceNumber] = invoiceNumber

@@ -900,7 +900,8 @@ class QueryParameters {
   static const String attribute = 'attribute';
   static const String notCashed = 'notCashed';
   static const String pricing = 'pricing';
-
+  static const String employeeResponsibleId = 'employeeResponsibleId';
+  static const String receipts = 'receipts';
 
 // static const String  = '';
 }
