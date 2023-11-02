@@ -8,11 +8,11 @@ class Authenticate {
     http.Response response = await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPost,
       resource: Resources.authenticate,
-      body: {JsonPayloads.username: username, JsonPayloads.password: password},
+      body: {JsonPayloads.username: username, JsonPayloads.password: password,},
     );
     if (response.statusCode == 200) {
       preferences.then((SharedPreferences prefs) {
-        return (prefs.setString(SharedPrefs.username, username));
+        return (prefs.setString(SharedPrefs.username, username,));
       });
       dynamic data = {};
       data = await NetworkRequests.decodeJson(response);
@@ -20,7 +20,7 @@ class Authenticate {
       NetworkRequests.token = await data[JsonResponses.token];
       Token.refreshToken = await data[JsonResponses.refreshToken] ?? '';
       preferences.then((SharedPreferences prefs) {
-        return (prefs.setString(SharedPrefs.token, NetworkRequests.token));
+        return (prefs.setString(SharedPrefs.token, NetworkRequests.token,));
       });
       preferences.then((SharedPreferences prefs) {
         return (prefs.setString(SharedPrefs.refreshToken, Token.refreshToken));
@@ -37,8 +37,11 @@ class Authenticate {
       //   // Navigator.pushReplacementNamed(context, direct!);
       //   postAuthenticate;
       User.loggedInUser = await User.getByUsername(username);
-      SharedStorage.setString(key: SharedPrefs.userID, detail: User.loggedInUser[JsonResponses.id]);
-      SharedStorage.setString(key: SharedPrefs.loggedInUser, detail: jsonEncode(User.loggedInUser));
+      Map<String, dynamic> partner = Map<String, dynamic>.from(await Partners(User.loggedInUser[JsonResponses.partner]).get());
+      User.loggedInUser[JsonResponses.partner] = partner;
+      User.loggedInUser[JsonResponses.partnerId] = partner[JsonResponses.id];
+      SharedStorage.setString(key: SharedPrefs.userID, detail: User.loggedInUser[JsonResponses.id],);
+      SharedStorage.setString(key: SharedPrefs.loggedInUser, detail: jsonEncode(User.loggedInUser),);
     }
     return response;
   }
