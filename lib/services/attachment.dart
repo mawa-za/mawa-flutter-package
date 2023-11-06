@@ -33,16 +33,20 @@ class Attachment {
     );
   }
 
-  // /attachmentfile
+  // /attachment
   //  {
-  //   "file": "string"
+  //   "file": "string",
+  //   "documentType": "string",
+  //   "objectType": "string",
+  //   "objectId": "string"
   // }
-  static attachBase64(Uint8List fileBytes) async {
-    dynamic base64codec = base64Encode(fileBytes);
+  static create(
+    Uint8List fileBytes, {
+    required String objectId,
+    required String objectType,
+    required String documentType,
+  }) async {
     dynamic base = base64.encode(fileBytes);
-    print('fileBytes ${fileBytes.runtimeType}');
-    print('base64codec ${base64codec.runtimeType}');
-    print('base ${base.runtimeType}');
     return await NetworkRequests(
       responseType: NetworkRequests.responseJson,
     ).securedMawaAPI(
@@ -50,6 +54,9 @@ class Attachment {
       resource: Resources.attachment,
       body: {
         JsonPayloads.file: base.toString(),
+        JsonPayloads.documentType: documentType,
+        JsonPayloads.objectType: objectType,
+        JsonPayloads.objectId: objectId,
       },
     );
   }
@@ -119,10 +126,7 @@ class Attachment {
       responseType: NetworkRequests.responseJson,
     ).securedMawaAPI(NetworkRequests.methodPost,
         resource: '${Resources.attachment}/$id/${Resources.partner}',
-        body: {
-          JsonPayloads.partner: partner,
-          JsonPayloads.fileType: fileType
-        });
+        body: {JsonPayloads.partner: partner, JsonPayloads.fileType: fileType});
   }
 
   // /attachment/transaction/{transactionId}?fileType={fileType}

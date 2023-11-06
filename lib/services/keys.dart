@@ -368,16 +368,14 @@ class JsonResponses {
   static const String fileId = 'fileId';
   static const String file = 'file';
 
-
   static const String employee = 'employee';
 
-  static const String paymentMethod ='paymentMethod';
-  static const String recipientId ='recipientId';
+  static const String paymentMethod = 'paymentMethod';
+  static const String recipientId = 'recipientId';
 
   static const String pricing = 'pricing';
 
   //attachments
-
 }
 
 class Resources {
@@ -536,7 +534,6 @@ class Resources {
   static const String tombstoneRecipient = 'tombstone-recipient';
   static const String attribute = 'attribute';
   static const String premium = 'premium';
-
 }
 
 class JsonPayloads {
@@ -759,7 +756,8 @@ class JsonPayloads {
   static const String paymentMethod = 'paymentMethod';
   static const String location = 'location';
   static const String terminalId = 'terminalId';
-
+  static const String objectType = 'objectType';
+  static const String objectId = 'objectId';
 
 // static const String  = '';
 }
@@ -989,6 +987,7 @@ class FieldOptionTypes {
   static const String membershipType = 'MEMBERSHIP-TYPE';
   static const String salesArea = 'SALES-AREA';
   static const String tenderType = 'TENDER-TYPE';
+  static const String documentType = 'DOCUMENT-TYPE';
 }
 
 class PathNames {
@@ -1012,21 +1011,24 @@ class PartnerTypes {
   static const String individual = 'individual';
 }
 
-class PartnerRoles{
+class PartnerRoles {
   static const String competitor = 'COMPETITOR';
   static const String dependent = 'DEPENDENT';
   static const String customer = 'CUSTOMER';
   static const String employee = 'EMPLOYEE';
-
 }
 
-class MembershipTypes{
+class MembershipTypes {
   static const String group = 'GROUP';
   static const String individual = 'INDIVIDUAL';
-
 }
 
-class ProductTypes{
+class ProductTypes {
   static const String groupSociety = 'GROUP-SOCIETY';
   static const String membership = 'MEMBERSHIP';
+}
+
+class ObjectTypes {
+  static const String transaction = 'PARTNER';
+  static const String partner = 'TRANSACTION';
 }
