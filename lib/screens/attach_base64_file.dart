@@ -109,8 +109,8 @@ class AttachBase64File {
                 ],
               ),
               content: Container(
-                width: 800.0,
-                height: 450.0,
+                width: 600.0,
+                height: 350.0,
                 margin: const EdgeInsets.only(
                   left: 20.00,
                 ),
