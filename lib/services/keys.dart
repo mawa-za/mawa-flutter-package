@@ -1029,6 +1029,6 @@ class ProductTypes {
 }
 
 class ObjectTypes {
-  static const String transaction = 'PARTNER';
-  static const String partner = 'TRANSACTION';
+  static const String transaction = 'TRANSACTION';
+  static const String partner = 'PARTNER';
 }
