@@ -192,6 +192,7 @@ class Product {
     required String productCategory,
     required String measure,
     required String sellingPrice,
+    required String pricingType,
   }) async {
     {
       return await NetworkRequests().securedMawaAPI(
@@ -199,11 +200,11 @@ class Product {
         resource: Resources.product,
         body: {
           JsonPayloads.code: code,
-          JsonPayloads.description:
-              Strings.description(productDescription.trim()),
+          JsonPayloads.description:productDescription.trim(),
           JsonPayloads.category: productCategory,
           JsonPayloads.baseUnitOfMeasure: measure,
           JsonPayloads.sellingPrice: sellingPrice,
+          JsonPayloads.pricingType: pricingType,
           JsonPayloads.autoGenerateCode: 'X',
         },
       );
