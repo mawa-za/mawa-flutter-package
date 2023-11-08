@@ -758,6 +758,7 @@ class JsonPayloads {
   static const String terminalId = 'terminalId';
   static const String objectType = 'objectType';
   static const String objectId = 'objectId';
+  static const String receipts = 'receipts';
 
 // static const String  = '';
 }
