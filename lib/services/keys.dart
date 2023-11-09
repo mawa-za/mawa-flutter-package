@@ -989,6 +989,8 @@ class FieldOptionTypes {
   static const String salesArea = 'SALES-AREA';
   static const String tenderType = 'TENDER-TYPE';
   static const String documentType = 'DOCUMENT-TYPE';
+  static const String membershipStatuses = 'MEMBERSHIP-STATUSES';
+  static const String membershipStatusReasons = 'MEMBERSHIP-STATUS-REASONS';
 }
 
 class PathNames {
