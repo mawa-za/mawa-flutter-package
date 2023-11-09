@@ -65,11 +65,11 @@ class Cashup {
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPost,
       resource: Resources.cashup,
-      queryParameters: {
-        QueryParameters.employeeResponsibleId: employeeResponsibleId,
-        QueryParameters.salesArea: salesArea,
-        QueryParameters.amount: amount,
-        QueryParameters.receipts: receipts,
+      body: {
+        JsonPayloads.employeeResponsibleId: employeeResponsibleId,
+        JsonPayloads.salesArea: salesArea,
+        JsonPayloads.amount: amount,
+        JsonPayloads.receipts: receipts,
       },
     );
   }
