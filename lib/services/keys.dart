@@ -372,8 +372,8 @@ class JsonResponses {
 
   static const String paymentMethod = 'paymentMethod';
   static const String recipientId = 'recipientId';
-
   static const String pricing = 'pricing';
+  static const String gender = 'gender';
 
   //attachments
 }
