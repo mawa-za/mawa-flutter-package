@@ -143,7 +143,7 @@ class Product {
         NetworkRequests.methodPost,
         resource: '$resource/${Resources.attribute}',
         body: {
-          JsonPayloads.product: value,
+          JsonPayloads.product: product,
           JsonPayloads.attribute: attribute,
           JsonPayloads.value: value,
           JsonPayloads.validFrom: validFrom,
@@ -220,13 +220,13 @@ class Product {
 
   deleteAttribute(attribute) async {
     return await NetworkRequests().securedMawaAPI(NetworkRequests.methodDelete,
-        resource: '$resource/${Resources.pricing}',
-        queryParameters: {QueryParameters.attribute: attribute});
+        resource: '$resource/${Resources.attribute}',
+        queryParameters: {QueryParameters.attribute: attribute,},);
   }
 
   deletePricing(attribute) async {
     return await NetworkRequests().securedMawaAPI(NetworkRequests.methodDelete,
         resource: '$resource/${Resources.pricing}',
-        queryParameters: {QueryParameters.pricing: attribute});
+        queryParameters: {QueryParameters.pricing: attribute,},);
   }
 }
