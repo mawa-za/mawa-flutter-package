@@ -375,6 +375,7 @@ class JsonResponses {
   static const String pricing = 'pricing';
   static const String gender = 'gender';
   static const String pricingDescription = 'pricingDescription';
+  static const String documentType = 'documentType';
 
   //attachments
 }
