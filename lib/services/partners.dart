@@ -348,4 +348,29 @@ class Partners {
         resource: '${Resources.partner}/$partnerId/${Resources.unarchive}');
     return response;
   }
+
+  //Attribute methods
+  static createAttribute({
+    required String partner,
+    required String attribute,
+    required String value,
+  }) async {
+    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
+        resource: '${Resources.partner}/$partner/${Resources.attribute}',
+        body: {
+          JsonPayloads.partner: partner,
+          JsonPayloads.attribute: attribute,
+          JsonPayloads.attributeValue: value,
+        });
+  }
+  getAttribute() async{
+    return await NetworkRequests.decodeJson(
+        await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodGet,
+      resource: '${Resources.partner}/$partnerId/${Resources.attribute}',
+    ),
+    negativeResponse: [],
+    );
+  }
+
 }
