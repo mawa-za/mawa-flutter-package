@@ -376,7 +376,8 @@ class JsonResponses {
   static const String gender = 'gender';
   static const String pricingDescription = 'pricingDescription';
   static const String documentType = 'documentType';
-
+  static const String maritalStatus = 'maritalStatus';
+  static const String identity = 'identity';
   //attachments
 }
 
@@ -761,6 +762,8 @@ class JsonPayloads {
   static const String objectType = 'objectType';
   static const String objectId = 'objectId';
   static const String receipts = 'receipts';
+  static const String dateAdded = 'dateAdded';
+  static const String dateEffective = 'dateEffective';
 
 // static const String  = '';
 }

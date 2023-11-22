@@ -38,14 +38,18 @@ class Strings{
   static camelCaseToDescription(entries){
     Map entry = {};
     for (int h = 0; h < entries.length; h++) {
-      print('${entries.entries.elementAt(h).value.runtimeType}');
-      print('${entries.entries.elementAt(h).value.runtimeType == String}');
+      if (kDebugMode) {
+        print('${entries.entries.elementAt(h).value.runtimeType}');
+        print('${entries.entries.elementAt(h).value.runtimeType == String}');
+      }
       if (entries.entries.elementAt(h).value.runtimeType == String) {
         String key =
         // '${entries.entries.elementAt(h).key}';
         keyToDescription('${entries.entries.elementAt(h).key}');
         String value = '${entries.entries.elementAt(h).value}';
-        print('$key : $value');
+        if (kDebugMode) {
+          print('$key : $value');
+        }
         entry[key] = value;
       }
     }
@@ -54,11 +58,14 @@ class Strings{
   static String personNameFromJson(json) {
     if (json != null) {
       try{
+        Map title = Map.from(json[JsonResponses.title] ?? {});
         String name =
-            '${json[JsonResponses.personLastName] ?? json[JsonResponses.name1] ?? json[JsonResponses.surname] ?? ''}, ${json[JsonResponses.personFirstName] ??json[JsonResponses.name2] ?? ''} ${json[JsonResponses.personMiddleName] ??json[JsonResponses.name3] ?? ''}';
+            '${title.isNotEmpty ? title[JsonResponses.description] ?? '' : ''} ${json[JsonResponses.personLastName] ?? json[JsonResponses.name1] ?? json[JsonResponses.surname] ?? ''}, ${json[JsonResponses.personFirstName] ??json[JsonResponses.name2] ?? ''} ${json[JsonResponses.personMiddleName] ??json[JsonResponses.name3] ?? ''}';
         return name == ',  ' ? '' : name;
       }catch(e){
-        print(e);
+        if (kDebugMode) {
+          print(e);
+        }
         return 'Error Deciphering Name';
       }
     } else {
