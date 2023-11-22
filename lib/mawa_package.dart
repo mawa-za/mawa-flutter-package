@@ -57,6 +57,7 @@ part 'package:mawa_package/services/employees.dart';
 part 'package:mawa_package/services/field_options.dart';
 part 'package:mawa_package/services/field.dart';
 part 'package:mawa_package/services/globals.dart';
+part 'package:mawa_package/services/group_society.dart';
 part 'package:mawa_package/services/internet_connect.dart';
 part 'package:mawa_package/services/invoice.dart';
 part 'package:mawa_package/services/items.dart';
