@@ -537,6 +537,7 @@ class Resources {
   static const String tombstoneRecipient = 'tombstone-recipient';
   static const String attribute = 'attribute';
   static const String premium = 'premium';
+  static const String groupSociety = 'group-society';
 }
 
 class JsonPayloads {
