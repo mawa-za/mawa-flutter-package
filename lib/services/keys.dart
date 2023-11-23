@@ -908,6 +908,8 @@ class QueryParameters {
   static const String receipts = 'receipts';
   static const String employeeId = "employeeId";
   static const String bookDate = "bookDate";
+  static const String attributeName = "attributeName";
+  static const String attributeValue = "attributeValue";
 
 // static const String  = '';
 }
