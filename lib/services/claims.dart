@@ -176,7 +176,7 @@ class Claims {
   static editClaim({required dynamic body, required String claimNumber}) async {
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPut,
-        resource: '${Resources.claim}/$claimNumber/${Resources.dispute}',
+        resource: '${Resources.claim}/$claimNumber',
         body: body);
     return response;
   }

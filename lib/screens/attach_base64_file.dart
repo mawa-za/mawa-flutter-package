@@ -7,6 +7,7 @@ class AttachBase64File {
     required this.type,
     required this.id,
     required this.context,
+    required this.postCreate,
   }) {
     docTypes = [];
     docType = {};
@@ -15,6 +16,7 @@ class AttachBase64File {
     );
     build();
   }
+  final Function postCreate;
   late String attachmentID;
   final String type;
   final String id;
@@ -109,14 +111,14 @@ class AttachBase64File {
                 ],
               ),
               content: Container(
-                width: 900.0,
-                height: 700.0,
+                width: 600.0,
+                height: 350.0,
                 margin: const EdgeInsets.only(
                   left: 20.00,
                 ),
                 padding: const EdgeInsets.symmetric(
                   vertical: 0.0,
-                  horizontal: 20.0,
+                  horizontal: 0.0,
                 ),
                 child: FutureBuilder(
                   future: future(),
@@ -164,7 +166,7 @@ class AttachBase64File {
       body: Container(
         margin: const EdgeInsets.symmetric(
           vertical: 20.0,
-          horizontal: 100.0,
+          horizontal: 20.0,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -340,6 +342,7 @@ class AttachBase64File {
                         height: 10.0,
                       ),
                       Row(
+                        // crossAxisAlignment: CrossAxisAlignment.stretch,
                         // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Expanded(
@@ -349,33 +352,6 @@ class AttachBase64File {
                               readOnly: true,
                               decoration: Tools.textInputDecorations(
                                   'File Name', Icons.abc),
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 10.0,
-                          ),
-                          Flexible(
-                            flex: 1,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.red,
-                                  width: 3.0,
-                                ),
-                                shape: BoxShape.circle,
-                                color: const Color(0xFFF5E4D0),
-                              ),
-                              width: double.infinity,
-                              child: CircleAvatar(
-                                child: FloatingActionButton(
-                                  backgroundColor: Colors.white,
-                                  onPressed: clear,
-                                  child: const Icon(
-                                    Icons.clear,
-                                    color: Colors.red,
-                                  ),
-                                ),
-                              ),
                             ),
                           ),
                           const SizedBox(
@@ -452,8 +428,9 @@ class AttachBase64File {
           dismiss();
           Alerts.toastMessage(
             message: 'File Upload Successful',
-            positive: false,
+            positive: true,
           );
+          postCreate();
         } else {
           Alerts.toastMessage(
             message: 'Could Not Upload File',

@@ -372,9 +372,12 @@ class JsonResponses {
 
   static const String paymentMethod = 'paymentMethod';
   static const String recipientId = 'recipientId';
-
   static const String pricing = 'pricing';
-
+  static const String gender = 'gender';
+  static const String pricingDescription = 'pricingDescription';
+  static const String documentType = 'documentType';
+  static const String maritalStatus = 'maritalStatus';
+  static const String identity = 'identity';
   //attachments
 }
 
@@ -535,8 +538,7 @@ class Resources {
   static const String attribute = 'attribute';
   static const String premium = 'premium';
   static const String booking = 'booking';
-
-
+  static const String groupSociety = 'group-society';
 }
 
 class JsonPayloads {
@@ -764,6 +766,10 @@ class JsonPayloads {
   static const String attributeValue = 'value';
   static const String bookDate = "bookDate";
   static const String bookTime = "bookTime";
+  static const String receipts = 'receipts';
+  static const String dateAdded = 'dateAdded';
+  static const String dateEffective = 'dateEffective';
+
 
 // static const String  = '';
 }
@@ -998,6 +1004,8 @@ class FieldOptionTypes {
   static const String salesArea = 'SALES-AREA';
   static const String tenderType = 'TENDER-TYPE';
   static const String documentType = 'DOCUMENT-TYPE';
+  static const String membershipStatuses = 'MEMBERSHIP-STATUSES';
+  static const String membershipStatusReasons = 'MEMBERSHIP-STATUS-REASONS';
 }
 
 class PathNames {
@@ -1039,6 +1047,6 @@ class ProductTypes {
 }
 
 class ObjectTypes {
-  static const String transaction = 'PARTNER';
-  static const String partner = 'TRANSACTION';
+  static const String transaction = 'TRANSACTION';
+  static const String partner = 'PARTNER';
 }

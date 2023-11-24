@@ -186,11 +186,10 @@ class Membership {
     );
   }
 
-  addTombstoneRecipient({required Map partner}) async {
+  addTombstoneRecipient({required String partnerId}) async {
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPost,
-      resource: '$resource/${Resources.tombstoneRecipient}',
-      body: partner,
+      resource: '$resource/${Resources.tombstoneRecipient}/$partnerId',
     );
   }
 
