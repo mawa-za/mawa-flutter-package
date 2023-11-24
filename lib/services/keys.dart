@@ -20,6 +20,7 @@ class JsonResponses {
   static const String message = 'message';
 
   static const String firstName = 'firstName';
+  static const String genderTypeDescription = 'genderTypeDescription';
 
   static const String id = 'id';
 
@@ -106,6 +107,9 @@ class JsonResponses {
   static const String addressline3Description = 'line3Description';
   static const String adressline4Description = 'line4Description';
   static const String addressline4Description = 'line4Description';
+
+  static const String maritalStatusDescription = 'maritalStatusDescription';
+
   static const String addressPostalCode = 'postalcode';
 
   static const String contactsType = 'type';
@@ -143,6 +147,8 @@ class JsonResponses {
 
   static const String identityTypeDescription = 'typeDescription';
 
+  static const String titleDescription = 'titleDescription';
+
   static const String ticketLogID = 'ticketLogID';
   static const String ticketLogTicketID = 'ticketID';
   static const String ticketLogPartnerId = 'partnerID';
@@ -174,6 +180,9 @@ class JsonResponses {
   static const String leaveProfilesStatus = 'status';
   static const String leaveProfilesValidFrom = 'validFrom';
   static const String leaveProfilesValidTo = 'validTo';
+
+  static const String partnerTypeDescription = 'partnerTypeDescription';
+
 
   static const String leaveTypeItem = 'itemNo';
   static const String leaveTypeProductCode = 'productCode';
