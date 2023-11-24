@@ -537,6 +537,7 @@ class Resources {
   static const String tombstoneRecipient = 'tombstone-recipient';
   static const String attribute = 'attribute';
   static const String premium = 'premium';
+  static const String booking = 'booking';
   static const String groupSociety = 'group-society';
 }
 
@@ -762,9 +763,13 @@ class JsonPayloads {
   static const String terminalId = 'terminalId';
   static const String objectType = 'objectType';
   static const String objectId = 'objectId';
+  static const String attributeValue = 'value';
+  static const String bookDate = "bookDate";
+  static const String bookTime = "bookTime";
   static const String receipts = 'receipts';
   static const String dateAdded = 'dateAdded';
   static const String dateEffective = 'dateEffective';
+
 
 // static const String  = '';
 }
@@ -907,6 +912,10 @@ class QueryParameters {
   static const String pricing = 'pricing';
   static const String employeeResponsibleId = 'employeeResponsibleId';
   static const String receipts = 'receipts';
+  static const String employeeId = "employeeId";
+  static const String bookDate = "bookDate";
+  static const String attributeName = "attributeName";
+  static const String attributeValue = "attributeValue";
 
 // static const String  = '';
 }
