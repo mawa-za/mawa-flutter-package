@@ -1,18 +1,378 @@
 part of 'package:mawa_package/mawa_package.dart';
 
 class Partners {
-  static dynamic partner;
+  static List partner = [];
+  late String partnerId;
+  dynamic isValid;
+  Partners(this.partnerId);
 
-  static getPartnerByRole(
-      {required String partnerRole}) async {
-    partner.clear();
+  static search({String? role,String?attributeName,String?attributeValue}) async {
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
+          resource: Resources.partner,
+          queryParameters: {
+            QueryParameters.role: role,
+            QueryParameters.attributeName:attributeName,
+            QueryParameters.attributeValue:attributeValue,
+          }),
+      negativeResponse: [],
+    );
+  }
+
+  static createPartner({required dynamic body}) async {
     dynamic response = await NetworkRequests().securedMawaAPI(
-        NetworkRequests.methodGet,
-        resource: '${Resources.partners}/$partnerRole/${Resources.role}',
-        );
+        NetworkRequests.methodPost,
+        resource: Resources.partner,
+        body: body);
+    return response;
+  }
 
-    partner = await NetworkRequests.decodeJson(response, negativeResponse: {});
-    return partner;
+  editPartner({required dynamic body}) async {
+    dynamic response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPut,
+        resource: '${Resources.partner}/$partnerId',
+        body: body);
+    return response;
+  }
+
+  Future assignPersonRole({required String partnerRole}) async {
+    await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPost,
+        resource: '${Resources.partner}/$partnerId/${Resources.assign}',
+        queryParameters: {QueryParameters.role: partnerRole}));
+  }
+
+  static getSpecificPartner(String partnerId) async {
+    return await NetworkRequests.decodeJson(
+        await NetworkRequests().securedMawaAPI(
+          NetworkRequests.methodGet,
+          resource: '${Resources.partner}/$partnerId',
+        ),
+        negativeResponse: {});
+  }
+
+  getPartnerDetails({required String path}) async {
+    return await NetworkRequests.decodeJson(
+        await NetworkRequests().securedMawaAPI(
+          NetworkRequests.methodGet,
+          resource: '${Resources.partner}/$partnerId/$path',
+        ),
+        negativeResponse: {});
+  }
+
+  getSpecificPartnerAddress({String? path, String? type}) async {
+    await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPost,
+        resource: '${Resources.partner}/$path',
+        queryParameters: {QueryParameters.type: type}));
+  }
+
+  addIdentity({
+    String? path,
+    String? idType,
+    String? idNumber,
+    String? validFrom,
+    String? validTo,
+  }) async {
+    dynamic idPost = await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodPost,
+      resource: '${Resources.partner}/$partnerId/$path',
+      body: {
+        JsonPayloads.idType: idType,
+        JsonPayloads.personIdNumber: idNumber,
+        JsonPayloads.validFrom: validFrom,
+        JsonPayloads.validTo: validTo,
+      },
+    );
+    // print('Type is ${idPost.runtimeType}');
+    dynamic response = await json.decode(idPost.body);
+    return response;
+  }
+
+  addContact({String? path, String? contactType, dynamic detail}) async {
+    dynamic response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPost,
+        resource: '${Resources.partner}/$partnerId/$path',
+        body: {
+          JsonPayloads.type: contactType,
+          JsonPayloads.value: detail,
+        });
+    return response;
+  }
+
+  addAdress(
+      {String? path,
+      String? addressType,
+      String? houseno,
+      String? streetName,
+      dynamic suburb,
+      dynamic city,
+      String? postalCode}) async {
+    dynamic response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPost,
+        resource: '${Resources.partner}/$partnerId/$path',
+        body: {
+          JsonPayloads.type: addressType,
+          JsonPayloads.addressline1: houseno,
+          JsonPayloads.addressline2: streetName,
+          JsonPayloads.addressline3: suburb,
+          JsonPayloads.addressline4: city,
+          JsonPayloads.postalCode: postalCode,
+        });
+    return response;
+  }
+
+  deleteAddress({String? path, dynamic addressId, String? type}) async {
+    await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodDelete,
+        resource: '${Resources.partner}/$partnerId/$path',
+        queryParameters: {
+          QueryParameters.addressId: addressId,
+          QueryParameters.type: type
+        }));
+  }
+
+  deleteContact({String? path, String? type}) async {
+    await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodDelete,
+        resource: '${Resources.partner}/$partnerId/$path',
+        queryParameters: {QueryParameters.type: type}));
+  }
+
+  deleteRole({String? path, String? role}) async {
+    await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodDelete,
+        resource: '${Resources.partner}/$partnerId/$path',
+        queryParameters: {QueryParameters.role: role}));
+  }
+
+  static deleteIdentity(
+      {String? path, String? idType, String? idNumber}) async {
+    await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodDelete,
+        resource: '${Resources.partner}/$path',
+        queryParameters: {
+          QueryParameters.idType: idType,
+          QueryParameters.idNumber: idNumber,
+        }));
+  }
+
+  editIdentity(
+      {String? idNumber,
+      String? validTo,
+      String? validFrom,
+      // required String ? partnerId,
+      required String? path,
+      required String? idType}) async {
+    dynamic response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPut,
+        resource: '${Resources.partner}/$partnerId/$path',
+        queryParameters: {
+          QueryParameters.idType: idType,
+        },
+        body: {
+          JsonPayloads.idNumber: idNumber,
+          JsonPayloads.validTo: validTo,
+          JsonPayloads.validFrom: validFrom
+        });
+    return response;
+  }
+
+  editContact({
+    String? value,
+    String? validTo,
+    String? validFrom,
+    String? type,
+    required String? path,
+  }) async {
+    dynamic response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPut,
+        resource: '${Resources.partner}/$partnerId/$path',
+        queryParameters: {
+          QueryParameters.contactType: type,
+        },
+        body: {
+          JsonPayloads.value: value,
+          JsonPayloads.validTo: validTo,
+          JsonPayloads.validFrom: validFrom
+        });
+    return response;
+  }
+
+  editAddress(
+      {String? houseNo,
+      String? streetName,
+      String? suburb,
+      String? city,
+      String? postalCode,
+      dynamic addressId,
+      required String? path,
+      dynamic idType}) async {
+    dynamic response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPut,
+        resource: '${Resources.partner}/$path/$addressId',
+        body: {
+          JsonPayloads.line1: houseNo,
+          JsonPayloads.line2: streetName,
+          JsonPayloads.line3: suburb,
+          JsonPayloads.line4: city,
+          JsonPayloads.postalCode: postalCode
+        });
+    return response;
+  }
+
+  static getSpecifIdentity(
+      {required String path,
+      required String idNumber,
+      required String idType}) async {
+    return await NetworkRequests.decodeJson(
+        await NetworkRequests().securedMawaAPI(
+          NetworkRequests.methodGet,
+          resource: '${Resources.partner}/$path',
+          queryParameters: {
+            QueryParameters.idType: idType,
+            QueryParameters.idNumber: idNumber,
+          },
+        ),
+        negativeResponse: []);
+  }
+
+  getPartnerSpecifIdentity(
+      {required String path,
+      required String idNumber,
+      required String idType}) async {
+    return await NetworkRequests.decodeJson(
+        await NetworkRequests().securedMawaAPI(
+          NetworkRequests.methodGet,
+          resource: '${Resources.partner}/$partnerId/$path',
+          queryParameters: {
+            QueryParameters.idType: idType,
+            QueryParameters.idNumber: idNumber,
+          },
+        ),
+        negativeResponse: []);
+  }
+
+  static getSpecifContact(
+      {required String path,
+      required String value,
+      required String type}) async {
+    return await NetworkRequests.decodeJson(
+        await NetworkRequests().securedMawaAPI(
+          NetworkRequests.methodGet,
+          resource: '${Resources.partner}/$path',
+          queryParameters: {
+            QueryParameters.type: type,
+            QueryParameters.value: value,
+          },
+        ),
+        negativeResponse: []);
+  }
+
+  getPartnerSpecifContact(
+      {required String path,
+      required String value,
+      required String type}) async {
+    return await NetworkRequests.decodeJson(
+        await NetworkRequests().securedMawaAPI(
+          NetworkRequests.methodGet,
+          resource: '${Resources.partner}/$partnerId/$path',
+          queryParameters: {
+            QueryParameters.type: type,
+            QueryParameters.value: value,
+          },
+        ),
+        negativeResponse: []);
+  }
+
+  static getSpecifAddress(
+      {required String path, required String addressType}) async {
+    return await NetworkRequests.decodeJson(
+        await NetworkRequests().securedMawaAPI(
+          NetworkRequests.methodGet,
+          resource: '${Resources.partner}/$path',
+          queryParameters: {QueryParameters.type: addressType},
+        ),
+        negativeResponse: []);
+  }
+
+  getPartnerSpecifAddress(
+      {required String path, required String addressType}) async {
+    return await NetworkRequests.decodeJson(
+        await NetworkRequests().securedMawaAPI(
+          NetworkRequests.methodGet,
+          resource: '${Resources.partner}/$partnerId/$path',
+          queryParameters: {
+            QueryParameters.type: addressType,
+          },
+        ),
+        negativeResponse: []);
+  }
+
+  assignPartnerRole({required String path, dynamic body}) async {
+    dynamic response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPost,
+        resource: '${Resources.partner}/$partnerId/$path',
+        body: body);
+    return response;
+  }
+
+  get() async {
+    return await NetworkRequests.decodeJson(
+        await NetworkRequests().securedMawaAPI(
+          NetworkRequests.methodGet,
+          resource: '${Resources.partner}/$partnerId',
+        ),
+        negativeResponse: {});
+  }
+
+  static getAll() async {
+    return await NetworkRequests.decodeJson(
+        await NetworkRequests().securedMawaAPI(
+          NetworkRequests.methodGet,
+          resource: Resources.partner,
+        ),
+        negativeResponse: []);
+  }
+
+  //Archive customer
+  archiveCustomer() async {
+    dynamic response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPut,
+        resource: '${Resources.partner}/$partnerId/${Resources.archive}');
+    return response;
+  }
+
+  //UnArchive customer
+  unArchiveCustomer() async {
+    dynamic response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPut,
+        resource: '${Resources.partner}/$partnerId/${Resources.unarchive}');
+    return response;
+  }
+
+  //Attribute methods
+  static createAttribute({
+    required String partner,
+    required String attribute,
+    required String value,
+  }) async {
+    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
+        resource: '${Resources.partner}/$partner/${Resources.attribute}',
+        body: {
+          JsonPayloads.partner: partner,
+          JsonPayloads.attribute: attribute,
+          JsonPayloads.attributeValue: value,
+        });
+  }
+  getAttribute() async{
+    return await NetworkRequests.decodeJson(
+        await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodGet,
+      resource: '${Resources.partner}/$partnerId/${Resources.attribute}',
+    ),
+    negativeResponse: [],
+    );
   }
 
 }

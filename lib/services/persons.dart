@@ -19,7 +19,14 @@ class Persons {
 
   static String personNameFromJson(json) {
     if (json != null) {
-      return '${json[JsonResponses.personLastName] ?? ''}, ${json[JsonResponses.personFirstName] ?? ''} ${json[JsonResponses.personMiddleName] ?? ''}';
+      try{
+        String name =
+            '${json[JsonResponses.personLastName] ?? ''}, ${json[JsonResponses.personFirstName] ?? ''} ${json[JsonResponses.personMiddleName] ?? ''}';
+        return name == ',  ' ? '' : name;
+      }catch(e){
+        print(e);
+        return 'Error Deciphering Name';
+      }
     } else {
       return '';
     }
@@ -125,6 +132,7 @@ class Persons {
           JsonPayloads.idType: idType,
           JsonPayloads.personIdNumber: idNumber,
         });
+    return response;
   }
 
   //add Contacts
@@ -139,6 +147,7 @@ class Persons {
           JsonPayloads.type: contactType,
           JsonPayloads.cellNumber: detail,
         });
+    return response;
   }
 
   //Add addresses
@@ -161,6 +170,7 @@ class Persons {
           JsonPayloads.addressline4: city,
           JsonPayloads.postalCode: postalCode,
         });
+    return response;
   }
 
 
@@ -187,6 +197,15 @@ class Persons {
         NetworkRequests.methodGet,
         resource: '${Resources.persons}/$id',
        )
+    );
+  }
+
+  static getAll() async{
+    return await NetworkRequests.decodeJson( await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: Resources.persons,
+       ),
+      negativeResponse: [],
     );
   }
 

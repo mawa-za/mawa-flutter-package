@@ -5,6 +5,8 @@ class Invoice{
   static createInvoice({
     String ? customer,
     String ? dueDate,
+    String ? invoiceDate,
+    String ? paymentTerms,
     required List<Map<dynamic,String>> item
   }) async{
 

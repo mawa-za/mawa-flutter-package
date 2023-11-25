@@ -199,7 +199,7 @@ class _UserOverviewState extends State<UserOverview> {
 
                                       ),
                                       DataCell(
-                                        Text(User.loggedInUser[JsonResponses.usersEmail] ?? ''),
+                                        Text(User.loggedInUser[JsonResponses.email] ?? ''),
 
                                       ),
                                     ]),
@@ -209,7 +209,7 @@ class _UserOverviewState extends State<UserOverview> {
 
                                       ),
                                       DataCell(
-                                        Text(User.loggedInUser[JsonResponses.usersCellphone] ?? ''),
+                                        Text(User.loggedInUser[JsonResponses.cellphone] ?? ''),
 
                                       ),
                                     ]),
@@ -221,7 +221,7 @@ class _UserOverviewState extends State<UserOverview> {
                                       ),
                                       DataCell(
                                         Text(
-                                          User.loggedInUser[JsonResponses.usersPasswordStatus] ??
+                                          User.loggedInUser[JsonResponses.passwordStatus] ??
                                               '',
                                         ),
                                       ),
@@ -281,6 +281,6 @@ class _UserOverviewState extends State<UserOverview> {
     else{
       username = widget.user;
     }
-    await User().getUserDetails(username, getPerson: true);
+    await User(username).get();
   }
 }

@@ -5,8 +5,7 @@ import 'package:mawa_package/mawa_package.dart';
 import 'Dashboard.dart';
 import 'home.dart';
 
-Future<void> main() async{
-
+Future<void> main() async {
   HttpOverrides.global = MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
   DeviceInfo();
@@ -14,9 +13,12 @@ Future<void> main() async{
   var base = Uri.base.origin;
   var head = base.split('//').last;
   String url = 'dev.api.app.mawa.co.za';
-  String tenantID = head.contains('localhost')? url.substring(0,url.indexOf('.')): head;
+  String tenantID =
+      head.contains('localhost') ? url.substring(0, url.indexOf('.')) : head;
   Mawa(
-    server: url
+    server: url,
+    loginScreenID: AuthenticateView.id,
+    initialScreenID: InitialRoute.id,
   );
   runApp(Home());
 }

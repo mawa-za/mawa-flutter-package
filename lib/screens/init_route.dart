@@ -3,9 +3,9 @@ part of 'package:mawa_package/mawa_package.dart';
 class InitialRoute extends StatefulWidget {
   static const String id = '/';
   var className;
-  InitialRoute({this.className});
+  InitialRoute({super.key, this.className});
   @override
-  _InitialRouteState createState() => _InitialRouteState();
+  State<InitialRoute> createState() => _InitialRouteState();
 }
 
 class _InitialRouteState extends State<InitialRoute> {
@@ -19,7 +19,7 @@ class _InitialRouteState extends State<InitialRoute> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       result = await _connectivity.checkConnectivity();
-    } on PlatformException catch (e) {
+    } on PlatformException catch (_) {
       // print(e.toString());
     }
 
@@ -37,7 +37,7 @@ class _InitialRouteState extends State<InitialRoute> {
     initConnectivity();
     _connectivitySubscription =
         _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
-    await ApkVersion().getApkInfo();
+    await Versions().getAppInfo();
   }
 
   @override
@@ -74,8 +74,8 @@ class _InitialRouteState extends State<InitialRoute> {
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
 
-                  if(ApkVersion.apkUsable != null &&
-                      ApkVersion.apkUsable == false) {
+                  if(Versions.apkUsable != null &&
+                      Versions.apkUsable == false) {
                     body = OutdatedAPK();
                   }
                       else{

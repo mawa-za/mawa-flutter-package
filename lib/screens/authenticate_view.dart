@@ -1,19 +1,19 @@
 part of 'package:mawa_package/mawa_package.dart';
 
-class Authenticate extends StatefulWidget {
+class AuthenticateView extends StatefulWidget {
   static const String id = 'Login';
   Widget? logo;
   static String? message;
   static Color messageColor = Colors.redAccent;
   late Function postAuthenticate;
   static dynamic response;
-  Authenticate({super.key, route, required this.postAuthenticate, this.logo});
+  AuthenticateView({super.key, route, required this.postAuthenticate, this.logo});
 
   @override
-  _AuthenticateState createState() => _AuthenticateState();
+  State<AuthenticateView> createState() => _AuthenticateViewState();
 }
 
-class _AuthenticateState extends State<Authenticate> {
+class _AuthenticateViewState extends State<AuthenticateView> {
   late String username;
   late String password;
   dynamic usn;
@@ -31,13 +31,13 @@ class _AuthenticateState extends State<Authenticate> {
 
       User.username = username;
       User.password = password;
-      Authenticate.response = await NetworkRequests().unsecuredMawaAPI(NetworkRequests.methodPost,
+      AuthenticateView.response = await NetworkRequests().unsecuredMawaAPI(NetworkRequests.methodPost,
           resource: Resources.authenticate,
           payload: {
             "username": User.username,
             "password": User.password},
           context: context,);
-      if (Authenticate.response.statusCode == 200) {
+      if (AuthenticateView.response.statusCode == 200) {
         widget.postAuthenticate();
       } else{
         Alerts.flushbar(context: context, message: 'Incorrect Login', positive: false);
@@ -59,7 +59,7 @@ class _AuthenticateState extends State<Authenticate> {
   @override
   Widget build(BuildContext context) {
     Tools.context = context;
-    setLastPage(Authenticate.id);
+    setLastPage(AuthenticateView.id);
 
     // preferences.then((SharedPreferences prefs) {
     //   return (prefs.setString(SharedPreferencesKeys.lastPage, Authenticate.id));
@@ -115,7 +115,7 @@ class _AuthenticateState extends State<Authenticate> {
                         onChanged: (value) {
                           setState(() {
                             usn = {};
-                            Authenticate.message = '';
+                            AuthenticateView.message = '';
                             username = value;
                           });
                         }),
@@ -135,7 +135,7 @@ class _AuthenticateState extends State<Authenticate> {
                       ),
                       onChanged: (value) {
                         setState(() {
-                          Authenticate.message = '';
+                          AuthenticateView.message = '';
                           password = value;
                         });
                       },

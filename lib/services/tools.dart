@@ -2,8 +2,7 @@ part of 'package:mawa_package/mawa_package.dart';
 
 late final GlobalKey<NavigatorState> navKey = GlobalKey<NavigatorState>();
 
-class Tools{
-
+class Tools {
   static const String productCategoryFuneralPolicy = 'FUNERALPOLICY';
   static const String productCategoryTombstone = 'TOMBSTONE';
 
@@ -50,7 +49,7 @@ class Tools{
   dynamic resetPasswordFeedback;
 
   final _forgotPasswordFormKey = GlobalKey<FormState>();
-  final _tokenFormKey = GlobalKey<FormState>();
+  // final _tokenFormKey = GlobalKey<FormState>();
 
   submitEmail() async {
     FocusScope.of(context).unfocus();
@@ -59,8 +58,11 @@ class Tools{
     overlay.showOverlay(SnapShortStaticWidgets.snapshotWaitingIndicator());
 
     // Alerts.flushbar(context: context, message: 'Please Wait');
-    dynamic request = await NetworkRequests().unsecuredMawaAPI(NetworkRequests.methodPost,
-        resource: Resources.otp, payload: {JsonPayloads.partnerEmail: email}, context: context);
+    dynamic request = await NetworkRequests().unsecuredMawaAPI(
+        NetworkRequests.methodPost,
+        resource: Resources.otp,
+        payload: {JsonPayloads.partnerEmail: email},
+        context: context);
     Tools.isTouchLocked = true;
     // Authenticate.message = 'Please Wait';
     OTP(context).postOTPRequest(request);
@@ -68,21 +70,20 @@ class Tools{
     //     ? tokenPopup()
     //     : forgotPasswordPopup( message: 'Email Not Associated With Any User');
     Tools.isTouchLocked = false;
-    Authenticate.message = '';
+    AuthenticateView.message = '';
     overlay.dismissOverlay();
   }
 
   forgotPasswordPopup({String? message}) {
     return AwesomeDialog(
-        context: context,
-        title: 'Forgot Password',
-        body: Column(
-          children: [
-            Text(message ?? '', style: const TextStyle(color: Colors.red)),
-            Form(
-              key: _forgotPasswordFormKey,
-              child: TextFormField(
-
+      context: context,
+      title: 'Forgot Password',
+      body: Column(
+        children: [
+          Text(message ?? '', style: const TextStyle(color: Colors.red)),
+          Form(
+            key: _forgotPasswordFormKey,
+            child: TextFormField(
                 autofocus: true,
                 textInputAction: TextInputAction.send,
                 onChanged: (value) {
@@ -91,7 +92,6 @@ class Tools{
                 },
                 validator: (value) {
                   value = value?.trim();
-                  print('*$value*\n*$email*');
                   if (value!.isEmpty) {
                     return 'Enter Email Address';
                   }
@@ -104,52 +104,58 @@ class Tools{
                   icon: Icon(Icons.account_circle),
                   labelText: 'Enter Your Email Address',
                 ),
-                onEditingComplete:  () {
-                     if(_forgotPasswordFormKey.currentState!.validate()) {
-                       Navigator.of(context).pop();
-                       submitEmail();
-                     }
-                    }
-                    ),
-            ),
-            TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  OTP(context).otpPopup();
-                },
-                child: const Text(
-                  'Already have An OTP',
-                  style: TextStyle(color: Colors.blue),
-                ))
-          ],
-        ),
-        btnOk: DialogButton(
-          onPressed: () {
-            if(_forgotPasswordFormKey.currentState!.validate()) {
-              Navigator.of(context).pop();
-              submitEmail();
-            }
-            },
-            color: Colors.green,
-          child: const Text('Proceed'),
+                onEditingComplete: () {
+                  if (_forgotPasswordFormKey.currentState!.validate()) {
+                    Navigator.of(context).pop();
+                    submitEmail();
+                  }
+                }),
           ),
-        btnCancel: Constants.dialogCloseButton(context: context),
-        ).show();
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              OTP(context).otpPopup();
+            },
+            child: const Text(
+              'Already have An OTP',
+              style: TextStyle(color: Colors.blue),
+            ),
+          )
+        ],
+      ),
+      btnOk: DialogButton(
+        onPressed: () {
+          if (_forgotPasswordFormKey.currentState!.validate()) {
+            Navigator.of(context).pop();
+            submitEmail();
+          }
+        },
+        color: Colors.green,
+        child: const Text('Proceed'),
+      ),
+      btnCancel: Constants.dialogCloseButton(context: context),
+    ).show();
   }
 
   static final Map<String, int> tabs = {
-    'Balance':0,
-    'History':1,
-    'Approvals':2,
+    'Balance': 0,
+    'History': 1,
+    'Approvals': 2,
     // SearchTicket.id: 0,
     // MyTickets.id: 1,
     // NewTickets.id: 2,
     // TrackTicket.id: 4,
   };
 
-  static final Widget exitIconButton = ElevatedButton.icon(onPressed: () => Navigator.popAndPushNamed(context, Authenticate.id), icon: const Icon(Icons.exit_to_app), label: const Text('exit'));
+  static final Widget exitIconButton = ElevatedButton.icon(
+      onPressed: () => Navigator.popAndPushNamed(context, AuthenticateView.id),
+      icon: const Icon(Icons.exit_to_app),
+      label: const Text('exit'));
 
-  static final Widget exit = GestureDetector(child: const Icon(Icons.exit_to_app), onTap: () => Navigator.popAndPushNamed(context, Authenticate.id),);
+  static final Widget exit = GestureDetector(
+    child: const Icon(Icons.exit_to_app),
+    onTap: () => Navigator.popAndPushNamed(context, AuthenticateView.id),
+  );
 
   _resetPassword(/*context*/) async {
     final OverlayWidgets overlay = OverlayWidgets(context: context);
@@ -158,107 +164,132 @@ class Tools{
     FocusScope.of(context).unfocus();
 
     // Alerts.flushbar(message: 'Please Wait', context: context);
-    dynamic request = await User().changePassword(password: _newPasswordController.value.text.toString());
-     User.username = await NetworkRequests.decodeJson(request);
+    dynamic request = await User.changePassword(
+        password: _newPasswordController.value.text.toString());
+    User.username = await NetworkRequests.decodeJson(request);
     request.statusCode == 200 || request.statusCode == 201
-        ?  Navigator.pushReplacementNamed(context, InitialRoute.id)
+        ? Navigator.pushReplacementNamed(context, InitialRoute.id)
         : request.statusCode == 401
-        ?
-
-    Authenticate.message = 'Token Invalid'
-        : Alerts.flushbar(context: context, message:'Failed To Reset', positive: false, popContext: true);
+            ? AuthenticateView.message = 'Token Invalid'
+            : Alerts.flushbar(
+                context: context,
+                message: 'Failed To Reset',
+                positive: false,
+                popContext: true);
     overlay.dismissOverlay();
   }
 
   passwordResetPopup(context) {
     return AwesomeDialog(
-        context: context,
-        title: 'Reset Password',
-        body: Form(
-          key: _resetPasswordFormKey,
-          child: Column(
-            children: [
-              TextFormField(
-                autofocus: true,
-                keyboardType: TextInputType.visiblePassword,
-                obscureText: true,
-                textInputAction: TextInputAction.next,
-                controller: _newPasswordController,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Enter New Password';
-                  }
-                  if (value.length < 7) {
-                    return 'Password Short';
-                  }
-                  return null;
-                },
-                decoration: const InputDecoration(
-                  icon: Icon(Icons.account_circle),
-                  labelText: 'Enter New Password',
-                ),
+      context: context,
+      title: 'Reset Password',
+      body: Form(
+        key: _resetPasswordFormKey,
+        child: Column(
+          children: [
+            TextFormField(
+              autofocus: true,
+              keyboardType: TextInputType.visiblePassword,
+              obscureText: true,
+              textInputAction: TextInputAction.next,
+              controller: _newPasswordController,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Enter New Password';
+                }
+                if (value.length < 7) {
+                  return 'Password Short';
+                }
+                return null;
+              },
+              decoration: const InputDecoration(
+                icon: Icon(Icons.account_circle),
+                labelText: 'Enter New Password',
               ),
-              const SizedBox(height: 10.0),
-              TextFormField(
-                keyboardType: TextInputType.visiblePassword,
-                obscureText: true, textInputAction: TextInputAction.send,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Retype New Password';
-                  }
-                  if (value != _newPasswordController.value.text.toString()) {
-                    return 'Passwords Do Not Match';
-                  }
-                  return null;
-                },
-                decoration: const InputDecoration(
-                  icon: Icon(Icons.account_circle),
-                  labelText: 'Confirm Password',
-                ),
-                onEditingComplete: (){
-                  if (_resetPasswordFormKey.currentState!.validate()) {
-                    Navigator.of(context).pop();
-                    _resetPassword(/*context*/);
-                  }
-                },
-              ),
-            ],
-          ),
-        ),
-        btnOk: DialogButton(
-            onPressed: () {
-              if (_resetPasswordFormKey.currentState!.validate()) {
-                Navigator.of(context).pop();
-                _resetPassword(/*context*/);
-              }
-            },
-            color: Colors.green,
-            child: const Text(
-              'Confirm',
             ),
-          ),
+            const SizedBox(height: 10.0),
+            TextFormField(
+              keyboardType: TextInputType.visiblePassword,
+              obscureText: true,
+              textInputAction: TextInputAction.send,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Retype New Password';
+                }
+                if (value != _newPasswordController.value.text.toString()) {
+                  return 'Passwords Do Not Match';
+                }
+                return null;
+              },
+              decoration: const InputDecoration(
+                icon: Icon(Icons.account_circle),
+                labelText: 'Confirm Password',
+              ),
+              onEditingComplete: () {
+                if (_resetPasswordFormKey.currentState!.validate()) {
+                  Navigator.of(context).pop();
+                  _resetPassword(/*context*/);
+                }
+              },
+            ),
+          ],
+        ),
+      ),
+      btnOk: DialogButton(
+        onPressed: () {
+          if (_resetPasswordFormKey.currentState!.validate()) {
+            Navigator.of(context).pop();
+            _resetPassword(/*context*/);
+          }
+        },
+        color: Colors.green,
+        child: const Text(
+          'Confirm',
+        ),
+      ),
       btnCancel: Constants.dialogCloseButton(context: context),
-        ).show();
+    ).show();
   }
 
-  static logoutPopup({required BuildContext context, required String redirect}) {
+  static logoutPopup(
+      {required BuildContext context, required String redirect}) {
     return AwesomeDialog(
+      dismissOnTouchOutside: false,
+      width: 500.0,
       context: context,
-      dialogType: DialogType.QUESTION,
-      animType: AnimType.BOTTOMSLIDE,
-      desc: 'Do You Really Want To Logout?',
+      dialogType: DialogType.question,
+      animType: AnimType.bottomSlide,
+      body:  Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 40.0,
+          vertical: 20.0,
+        ),
+        child: const Text(
+          'Do You Really Want To Logout?',
+          style: TextStyle(fontSize: 20.0,),
+        ),
+      ),
       btnOk: TextButton(
-        child: const Text('Yes'),
+        style: TextButton.styleFrom(
+            foregroundColor: Colors.red,
+            backgroundColor: Colors.redAccent.shade100
+        ),
+        child: const Text(
+          'Yes',
+        ),
         onPressed: () {
-          // setState(() {
-          //   Tools.isTouchLocked = true;
-          // });
           Navigator.of(context)
               .pushNamedAndRemoveUntil(redirect, (route) => false);
         },
       ),
       btnCancel: TextButton(
-        child: const Text('No'),
+        style: TextButton.styleFrom(
+          foregroundColor: Colors.green,
+          backgroundColor: Colors.greenAccent.shade100
+        ),
+        child: const Text(
+          'No',
+        ),
         onPressed: () {
           Navigator.of(context).pop();
         },
@@ -362,20 +393,41 @@ class Tools{
   // }
 
 //
-  static textInputDecorations(String textLabel, icon, {String? hint, String? helperTxt}) {
+  static textInputDecorations(
+    String textLabel,
+    icon, {
+    String? hint,
+    String? helperTxt,
+  }) {
     return InputDecoration(
-        helperText: helperTxt ?? '',
-        icon: Icon(icon),
-        labelText: textLabel,
-        hintText: hint,
-        filled: true,
-        fillColor: Colors.grey[100],
-        border: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-        ));
+      helperText: helperTxt ?? '',
+      prefixIcon: Icon(icon),
+      labelText: textLabel,
+      hintText: hint,
+      filled: true,
+      fillColor: Colors.grey[100],
+      focusColor: Colors.deepPurple,
+      border: const OutlineInputBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(
+            5.0,
+          ),
+        ),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(
+          5.0,
+        ),
+        borderSide: const BorderSide(
+          color: Colors.grey,
+          width: 1.0,
+        ),
+      ),
+    );
   }
 
-  static textInputDecoration(String textLabel, {String? hint, String? helperTxt}) {
+  static textInputDecoration(String textLabel,
+      {String? hint, String? helperTxt}) {
     return InputDecoration(
         helperText: helperTxt ?? '',
         labelText: textLabel,
@@ -405,4 +457,10 @@ class Tools{
     // );
   }
 
+  static FloatingActionButton backFloatingActionButton(context) =>
+      FloatingActionButton.extended(
+        onPressed: () => Navigator.pop(context),
+        label: const Text('Back'),
+        icon: const Icon(Icons.arrow_back_ios_new),
+      );
 }

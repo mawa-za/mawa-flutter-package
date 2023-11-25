@@ -1,8 +1,7 @@
 part of 'package:mawa_package/mawa_package.dart';
 
 class JsonResponses {
-
-
+  static const String employeeId = 'employeeId';
   static const String amount = 'amount';
   static const String assignedBy = 'assignedBy';
   static const String assignedByID = 'assignedByID';
@@ -17,8 +16,11 @@ class JsonResponses {
   static const String description = 'description';
   static const String dueDate = 'dueDate';
   static const String duration = 'duration';
+  static const String cause = 'cause';
+  static const String message = 'message';
 
   static const String firstName = 'firstName';
+  static const String genderTypeDescription = 'genderTypeDescription';
 
   static const String id = 'id';
 
@@ -65,11 +67,10 @@ class JsonResponses {
 
   static const String usersFirstName = 'firstName';
   static const String usersLastName = 'lastName';
-  static const String usersPasswordStatus = 'password_status';
   static const String usersPartner = 'partner';
   static const String userPartner = 'userPartner';
-  static const String usersCellphone = 'cellphone';
-  static const String usersEmail = 'email';
+  static const String cellphone = 'cellphone';
+  static const String email = 'email';
   static const String usersStatus = 'status';
   static const String usersGroupId = 'groupID';
   static const String usersGroupName = 'groupName';
@@ -92,21 +93,34 @@ class JsonResponses {
   static const String addressesLine2 = 'line2';
   static const String addressesLine3 = 'line3';
   static const String addressesLine4 = 'line4';
+
+  static const String line1 = 'line1';
+  static const String line2 = 'line2';
+  static const String line3 = 'line3';
+  static const String line4 = 'line4';
+  static const String postalCode = 'postalCode';
+
   static const String addressesPostalCode = 'postalCode';
   static const String addressesTypeDescription = 'typeDescription';
+  static const String addressline1Description = 'line1Description';
+  static const String addressline2Description = 'line2Description';
   static const String addressline3Description = 'line3Description';
   static const String adressline4Description = 'line4Description';
+  static const String addressline4Description = 'line4Description';
+
+  static const String maritalStatusDescription = 'maritalStatusDescription';
+
   static const String addressPostalCode = 'postalcode';
 
   static const String contactsType = 'type';
   static const String contactTypeDescription = 'typeDescription';
   static const String contactsDetail = 'detail';
 
-  static const String versionAppName = 'appName';
-  static const String versionApkVersionCode = 'versionNumber';
-  static const String versionAppUsable = 'appUsable';
-  static const String versionValidFrom = 'valid_from';
-  static const String versionValidTo = 'valid_to';
+  static const String appName = 'appName';
+  static const String appUsable = 'appUsable';
+  static const String versionNumber = 'versionNumber';
+  static const String valid_from = 'valid_from';
+  static const String valid_to = 'valid_to';
 
   static const String workCenterId = 'id';
   static const String workCenterDescription = 'description';
@@ -131,7 +145,9 @@ class JsonResponses {
   static const String employeeLastName = 'name2';
   static const String employeeIdNumber = 'idNumber';
 
-  static const String identityTypeDescription  = 'typeDescription';
+  static const String identityTypeDescription = 'typeDescription';
+
+  static const String titleDescription = 'titleDescription';
 
   static const String ticketLogID = 'ticketLogID';
   static const String ticketLogTicketID = 'ticketID';
@@ -165,6 +181,9 @@ class JsonResponses {
   static const String leaveProfilesValidFrom = 'validFrom';
   static const String leaveProfilesValidTo = 'validTo';
 
+  static const String partnerTypeDescription = 'partnerTypeDescription';
+
+
   static const String leaveTypeItem = 'itemNo';
   static const String leaveTypeProductCode = 'productCode';
   static const String leaveTypeProductDescription = 'productDescription';
@@ -190,12 +209,11 @@ class JsonResponses {
   static const String policySalesRepId = 'salesRepresentativeId';
   static const String policyStatus = 'status';
   static const String policyStatusReason = 'statusReason';
-  static const String policyPremium = 'premium';
-  static const String policyAmountDue = 'amountDue';
+  static const String amountDue = 'amountDue';
   static const String policySalesRepresentativeDetails =
       'salesRepresentativeDetails';
 
-  static const String productDescription = 'description';
+  static const String productDescription = 'productDescription';
   static const String productCategory = 'category';
   static const String productUnitPrice = 'unitPrice';
 
@@ -233,6 +251,8 @@ class JsonResponses {
   static const String idnumber = 'idnumber';
   static const String idNumber = 'idNumber';
   static const String name2 = 'name2';
+  static const String name3 = 'name3';
+  static const String name4 = 'name4';
   static const String birthDate = 'birthDate';
   static const String validFrom = 'validFrom';
   static const String validTo = 'validTo';
@@ -241,12 +261,12 @@ class JsonResponses {
   static const String branch = 'branch';
   static const String department = 'department';
 
-
   static const String location = 'location';
   static const String terminalType = 'terminalType';
   static const String terminalId = 'terminalId';
 
   static const String amountDeposited = 'amountDeposited';
+  static const String amountCollected = 'amountCollected';
 
   static const String attribute = 'attribute';
   static const String value = 'value';
@@ -272,9 +292,9 @@ class JsonResponses {
   static const String lineTotal = 'lineTotal';
 
   static const String deliveryDate = 'deliveryDate';
+  static const String invoiceDate = 'invoiceDate';
   static const String expiryDate = 'expiryDate';
-
-
+  static const String productId = 'productId';
 
   static const String totalExcVat = 'totalExcVat';
   static const String totalIncVat = 'totalIncVat';
@@ -283,15 +303,103 @@ class JsonResponses {
   static const String VATAmount = 'VATAmount';
   static const String VATPercentage = 'VATPercentage';
   static const String items = 'items';
+  static const String defaultFunction = 'defaultFunction';
 
+  static const String tenderType = 'tenderType';
+  static const String receiptType = 'receiptType';
+  static const String membershipHolder = 'membershipHolder';
+  static const String creationDate = 'creationDate';
+  static const String partner = 'partner';
+
+  static const String membershipId = 'membershipId';
+  static const String deathDate = 'deathDate';
+  static const String burialDate = 'burialDate';
+  static const String changedBy = 'changedBy';
+  static const String member = 'member';
+
+  static const String receipts = 'receipts';
+  static const String createdDate = 'createdDate';
+
+  // static const String changedBy = 'changedBy';
+
+  static const String lastUpdated = 'lastUpdated';
+  static const String statusReason = 'statusReason';
+  static const String memberId = 'memberId';
+  static const String deceasedId = 'deceasedId';
+
+  static const String title = 'title';
+  static const String receiptNumber = 'receiptNumber';
+  static const String name1 = 'name1';
+  static const String paymentReason = 'paymentReason';
+  static const String employeeResponsibleId = 'employeeResponsibleId';
+  static const String accountHolder = 'accountHolder';
+  static const String bankName = 'bankName';
+  static const String accountType = 'accountType';
+  static const String accountNumber = 'accountNumber';
+  static const String bankDetails = 'bankDetails';
+
+  static const typeDescription = 'typeDescription';
+  static const addressId = 'addressId';
+  static const String idType = 'idType';
+  static const String premium = 'premium';
+
+  static const String groupName = 'groupName';
+  static const String startDate = 'startDate';
+  static const String endDate = 'endDate';
+
+  static const String fieldClaimTypes = 'fieldClaimTypes';
+  static const String mainMember = 'mainMember';
+  static const String dependentDtoList = 'dependentDtoList';
+  static const String salesRep = 'salesRep';
+  static const String productDetails = 'productDetails';
+  static const String membershipNumber = 'membershipNumber';
+  static const String invoiceNumber = 'invoiceNumber';
+  static const String membershipPeriod = 'membershipPeriod';
+  static const String creationTime = 'creationTime';
+  static const String passwordStatus = 'passwordStatus';
+  static const String dateJoined = 'dateJoined';
+  static const String partnerId = 'partnerId';
+
+  //CLAIM
+
+  static const String branchCode = 'branchCode';
+  static const String claimantId = 'claimantId';
+  static const String baseUnitOfMeasure = 'baseUnitOfMeasure';
+  static const String sellingPrice = 'sellingPrice';
+  static const String customer = 'customer';
+  static const String salesRepresentative = 'salesRepresentative';
+  static const String createdOn = 'createdOn';
+  static const String price = 'price';
+  static const String surname = 'surname';
+  static const String tombstone = 'tombstone';
+  static const String fileType = 'fileType';
+  static const String no = 'no';
+  static const String fileId = 'fileId';
+  static const String file = 'file';
+
+  static const String employee = 'employee';
+
+  static const String paymentMethod = 'paymentMethod';
+  static const String recipientId = 'recipientId';
+  static const String pricing = 'pricing';
+  static const String gender = 'gender';
+  static const String pricingDescription = 'pricingDescription';
+  static const String documentType = 'documentType';
+  static const String maritalStatus = 'maritalStatus';
+  static const String identity = 'identity';
+  //attachments
 }
 
 class Resources {
-
+  static const String assign = 'assign';
+  static const String terminate = 'terminate';
+  static const String rehire = 'rehire';
+  static const String suspend = 'suspend';
   static const String validateSAID = 'validateSAID';
   static const String attachments = 'attachments';
   static const String otp = 'otp';
-  static const String customers = 'customers';
+  static const String employee = 'employee';
+  static const String employees = 'employees';
   static const String authenticate = 'authenticate';
   static const String tickets = 'tickets';
   static const String ticketsLog = 'ticketsLog';
@@ -299,7 +407,11 @@ class Resources {
   static const String ticketAwaiting = 'awaitingCustomer';
   static const String ticketResolve = 'resolved';
   static const String ticketReject = 'reject';
+  static const String reject = 'reject';
+  static const String dispute = 'dispute';
   static const String ticketCancel = 'cancel';
+  static const String archive = 'archive';
+  static const String unarchive = 'unarchive';
   static const String user = 'user';
   static const String resetPassword = 'passwordreset';
   static const String reset = 'reset';
@@ -319,14 +431,15 @@ class Resources {
   static const String workCenterDesc = 'workcenterDesc';
   static const String workCenterId = 'id';
   static const String receipts = 'receipts';
+  static const String receipt = 'receipt';
   static const String cashup = 'cashup';
   static const String policies = 'policies';
 
   static const String voucherValue = 'vouchers';
-  static const String identity = 'identities';
+  static const String identity = 'identity';
   static const String contactValue = 'contacts';
 
-  static const String approve = 'Approve';
+  static const String approve = 'approve';
   static const String approveCancellation = 'ApproveCancellation';
   static const String approveEditedLeave = 'ApproveEditedLeave';
   static const String rejectApproval = 'RejectApproval';
@@ -334,7 +447,6 @@ class Resources {
   static const String rejectEditedLeave = 'rejectEditedLeave';
   static const String cancel = 'Cancel';
   static const String edit = 'Edit';
-
   static const String roles = 'roles';
   static const String role = 'role';
   static const String products = 'products';
@@ -373,6 +485,7 @@ class Resources {
   static const String product = 'product';
   static const String identities = 'identities';
   static const String contacts = 'contacts';
+  static const String contact = 'contact';
   static const String employeeId = 'employeeId';
   static const String startDate = 'startDate';
   static const String branch = 'branch';
@@ -383,9 +496,10 @@ class Resources {
   static const String claimDecline = 'decline';
 
   static const String deposits = 'deposits';
+  static const String deposit = 'deposit';
 
   static const String attributes = 'attributes';
-  static const String pricing = 'pricings';
+  static const String pricing = 'pricing';
   static const String refer = 'refer';
   static const String vouchers = 'vouchers';
 
@@ -402,16 +516,43 @@ class Resources {
   static const String claim = 'claim';
   static const String membership = 'membership';
   static const String dependent = 'dependent';
-  static const String partners = 'partners';
+  static const String partner = 'partner';
 
   static const String quotation = 'quotation';
   static const String items = 'items';
 
   static const String calculate_pricing = 'calculate-pricing';
+  static const String application = 'application';
+  static const String customer = 'customer';
+  static const String prospects = 'prospects';
+  static const String prospect = 'prospect';
+  static const String supplier = 'supplier';
+  static const String paymentRequest = 'payment-request';
 
+  static const String attachmentfile = 'attachmentfile';
+  static const String attachment = 'attachment';
+
+  static const String lock = 'lock';
+  static const String unlock = 'unlock';
+  static const String byId = 'byId';
+  static const String addressId = 'addressId';
+  static const String validate = 'validate';
+
+  static const String layBy = 'layBy';
+  static const String voucher = 'voucher';
+  static const String transactionLink = 'transactionLink';
+  static const String transaction = 'transaction';
+  static const String serviceRequest = 'service-request';
+  static const String tombstoneRecipient = 'tombstone-recipient';
+  static const String attribute = 'attribute';
+  static const String premium = 'premium';
+  static const String booking = 'booking';
+  static const String groupSociety = 'group-society';
 }
 
 class JsonPayloads {
+  static const String claimId = 'claimId';
+  static const String comments = 'comments';
   static const String id = 'id';
   static const String filter = 'filter';
   static const String filterValue = 'x';
@@ -467,7 +608,6 @@ class JsonPayloads {
   static const String versionNumber = 'versionNumber';
   static const String appUsable = 'appUsable';
 
-
   static const String email = 'email';
   static const String detail = 'detail';
   static const String cellphone = 'cellphone';
@@ -493,9 +633,9 @@ class JsonPayloads {
   static const String ticketTaskID = 'ticketTaskID';
 
   static const String firstName = 'firstName';
-  static const String  middleName = 'middleName';
+  static const String middleName = 'middleName';
   static const String lastName = 'lastName';
-  static const String idNumber = 'idnumber';
+  static const String idNumber = 'idNumber';
   static const String personIdNumber = 'idNumber';
   static const String idType = 'idType';
   static const String addressline1 = 'line1';
@@ -559,8 +699,85 @@ class JsonPayloads {
   static const String lineTotal = 'lineTotal';
 
   static const String username = 'username';
+  static const String amountDeposited = 'amountDeposited';
 
+  static const String name1 = 'name1';
+  static const String name2 = 'name2';
+  static const String name3 = 'name3';
+  static const String name4 = 'name4';
 
+  static const String employeeResponsibleId = 'employeeResponsibleId';
+  static const String reference = 'reference';
+  static const String amount = 'amount';
+  static const String bankDetails = 'bankDetails';
+
+  static const String file = 'file';
+  static const String uploadDate = 'uploadDate';
+  static const String uploadTime = 'uploadTime';
+  static const String uploadedBy = 'uploadedBy';
+  static const String downloadDate = 'downloadDate';
+  static const String downloadedBy = 'downloadedBy';
+  static const String reason = 'reason';
+
+  static const String previousProduct = 'previousProduct';
+  static const String statusReason = 'statusReason';
+  static const String salesRepresentativeId = 'salesRepresentativeId';
+  static const String premium = 'premium';
+
+  static const String line1 = 'line1';
+  static const String line2 = 'line2';
+  static const String line3 = 'line3';
+  static const String line4 = 'line4';
+
+  static const String employeeId = 'employeeId';
+  static const String branch = 'branch';
+  static const String groupID = 'groupID';
+  static const String department = 'department';
+  static const String identityDtos = 'identityDtos';
+  static const String addressDtos = 'addressDtos';
+  static const String contactDtos = 'contactDtos';
+
+  static const String partnerType = 'partnerType';
+  static const String surname = 'surname';
+  static const String organizationName = 'organizationName';
+
+  static const String memberId = 'memberId';
+  static const String membershipId = 'membershipId';
+  static const String dateOfBirth = 'dateOfBirth';
+  static const String membershipNumber = 'membershipNumber';
+  static const String receiptType = 'receiptType';
+  static const String invoiceNumber = 'invoiceNumber';
+  static const String membershipPeriod = 'membershipPeriod';
+  static const String tenderType = 'tenderType';
+  static const String salesRepresentative = 'salesRepresentative';
+  static const String salesArea = 'salesArea';
+  static const String dateJoined = 'dateJoined';
+  static const String price = 'price';
+  static const String pricingType = 'pricingType';
+  static const String transactionIdLink = 'transactionIdLink';
+  static const String partnerId = 'partnerId';
+  static const String accountHolder = 'accountHolder';
+  static const String layById = 'layById';
+  static const String fileType = 'fileType';
+  static const String autoGenerateCode = 'autoGenerateCode';
+  static const String creationType = 'creationType';
+  static const String previousInsurerId = 'previousInsurerId';
+  static const String pricing = 'pricing';
+  static const String lastReceiptDate = 'lastReceiptDate';
+  static const String membershipType = 'membershipType';
+  static const String recipientId = 'recipientId';
+  static const String paymentReason = 'paymentReason';
+  static const String paymentMethod = 'paymentMethod';
+  static const String location = 'location';
+  static const String terminalId = 'terminalId';
+  static const String objectType = 'objectType';
+  static const String objectId = 'objectId';
+  static const String attributeValue = 'value';
+  static const String bookDate = "bookDate";
+  static const String bookTime = "bookTime";
+  static const String receipts = 'receipts';
+  static const String dateAdded = 'dateAdded';
+  static const String dateEffective = 'dateEffective';
 
 
 // static const String  = '';
@@ -591,8 +808,10 @@ class QueryParameters {
   static const String loggedByID = 'loggedByID';
   static const String loggedById = 'loggedById';
 
-  static const String personIdNumber = 'idnumber';
+  static const String personIdNumber = 'idumber';
   static const String partnerRole = 'partnerRole';
+  static const String idNumber = 'idNumber';
+  static const String idType = 'idType';
 
   static const String organisationId = 'organisationId';
   static const String otp = 'otp';
@@ -637,7 +856,6 @@ class QueryParameters {
   static const String workcenter = 'workcenter';
   static const String position = 'position';
 
-
   static const String New = 'new';
   static const String inprogress = 'inprogress';
   static const String open = 'open';
@@ -665,6 +883,48 @@ class QueryParameters {
 
   static const String cashupId = 'cashupId';
   static const String checkoutId = 'checkoutId';
+  static const String statusReason = 'statusReason';
+  static const String description = 'description';
+
+  static const String email = 'email';
+  static const String cellphone = 'cellphone';
+  static const String passwordStatus = 'passwordStatus';
+  static const String userRole = 'userRole';
+
+  static const String fieldOption = 'fieldOption';
+
+  static const String addressId = 'addressId';
+  static const String startDate = 'startDate';
+  static const String createdBy = 'createdBy';
+  static const String createdOn = 'createdOn';
+  static const String customerId = 'customerId';
+  static const String endDate = 'endDate';
+  static const String number = 'number';
+
+  static const String membershipPeriod = 'membershipPeriod';
+  static const String membershipNumber = 'membershipNumber';
+  static const String invoiceNumber = 'invoiceNumber';
+  static const String receiptType = 'receiptType';
+  static const String transactionLinkId = 'transactionLinkId';
+  static const String fileType = 'fileType';
+  static const String claimant = 'claimant';
+  static const String no = 'no';
+  static const String deceased = 'deceased';
+  static const String member = 'member';
+  static const String membership = 'membership';
+  static const String deathDate = 'deathDate';
+  static const String burialDate = 'burialDate';
+
+  static const String contactType = 'contactType';
+  static const String attribute = 'attribute';
+  static const String notCashed = 'notCashed';
+  static const String pricing = 'pricing';
+  static const String employeeResponsibleId = 'employeeResponsibleId';
+  static const String receipts = 'receipts';
+  static const String employeeId = "employeeId";
+  static const String bookDate = "bookDate";
+  static const String attributeName = "attributeName";
+  static const String attributeValue = "attributeValue";
 
 // static const String  = '';
 }
@@ -698,22 +958,104 @@ class SharedPrefs {
   static const loginRole = 'loginRole';
   static const isLoggedIn = 'isLoggedIn';
   static const tenantID = 'tenantID';
+  static const userID = 'userID';
+  static const role = 'role';
+  static const workcenters = 'workcenters';
+  static const loggedInUser = 'loggedInUser';
+  static const roleRoot = 'roleRoot';
 }
 
-class CommentTypes{
+class CommentTypes {
   static const String ticketComment = 'TICKETCOMMENT';
   static const String leaveComment = 'LEAVEMANAGEMENT';
 }
 
-class FieldOptionTypes{
+class FieldOptionTypes {
+  static const String fieldOptionDisputeReason = 'CLAIM-DISPUTE-REASON';
   static const String fieldOptionCategory = 'CATEGORY';
   static const String fieldOptionPriority = 'PRIORITY';
-  static const String fieldOptionIdType = 'idType';
+  static const String fieldOptionIdType = 'ID-TYPE';
   static const String fieldOptionGender = 'GENDER';
   static const String fieldOptionTitle = 'TITLE';
-  static const String fieldOptionMaritalStatus = 'MARITALSTATUS';
-  static const String fieldOptionSuburb = 'suburb';
+  static const String fieldOptionMaritalStatus = 'MARITAL-STATUS';
+  static const String fieldOptionSuburb = 'SUBURB';
   static const String fieldOptionTown = 'TOWN';
-  static const String fieldOptionContactType= 'CONTACTTYPE';
+  static const String fieldOptionCity = 'CITY';
+  static const String fieldOptionContactType = 'CONTACT-TYPE';
+  static const String fieldAddress = 'ADDRESSES';
+  static const String fieldOptionAddressType = 'ADDRESS-TYPE';
+  static const String fieldPartnerRole = 'PARTNER-ROLE';
+  static const String fieldClaimDeclineReason = 'CLAIM-DECLINE-REASON';
+  static const String fieldPaymentMethod = 'PAYMENT-METHOD';
+  static const String fieldPaymentRequestType = 'PAYMENT-REQUEST-TYPE';
+  static const String fieldBankAccountType = 'BANK-ACCOUNT-TYPE';
+  static const String fieldPaymentReason = 'PAYMENT-REASON';
+  static const String fieldBankName = 'BANK-NAME';
+  static const String fieldBranch = 'BRANCH';
+  static const String fieldDepartment = 'DEPARTMENT';
+  static const String fieldEmploymentType = 'EMPLOYMENT-TYPE';
+  static const String fieldJobTitle = 'JOB-TITLE';
 
+  static const String fieldClaimTypes = 'CLAIM-TYPE';
+  static const String fieldOptionBusinessIdentity = 'BUSINESS-IDENTITIES';
+
+  static const String productCategory = 'PRODUCT-CATEGORY';
+  static const String fieldOptionLayByStatus = 'LAYBY-STATUS';
+  static const String fieldOptionLayByStatusReason = 'LAYBY-STATUS-REASON';
+  static const String fieldOptionPartnerType = 'PARTNER-TYPE';
+  static const String uom = 'UOM';
+  static const String pricingType = 'PRICING-TYPE';
+  static const String membershipCreationType = 'MEMBERSHIP-CREATION-TYPE';
+  static const String suburb = 'SUBURB';
+  static const String userType = 'USER-TYPE';
+  static const String productAttribute = 'PRODUCT-ATTRIBUTE';
+  static const String membershipType = 'MEMBERSHIP-TYPE';
+  static const String salesArea = 'SALES-AREA';
+  static const String tenderType = 'TENDER-TYPE';
+  static const String documentType = 'DOCUMENT-TYPE';
+  static const String membershipStatuses = 'MEMBERSHIP-STATUSES';
+  static const String membershipStatusReasons = 'MEMBERSHIP-STATUS-REASONS';
+}
+
+class PathNames {
+  static const String identityPath = 'Identity';
+  static const String rolePath = 'Role';
+  static const String contactPath = 'Contact';
+  static const String addressPath = 'Address';
+  static const String employmentPath = 'Employment Details';
+  static const String employeePath = 'Employee Details';
+  static const String customerPath = 'Customer Details';
+}
+
+class PartnerTypes {
+  static const String dependent = 'DEPENDENT';
+  static const String customer = 'CUSTOMER';
+  static const String employee = 'EMPLOYEE';
+  static const String supplier = 'SUPPLIER';
+  static const String organization = 'ORGANIZATION';
+  static const String person = 'PERSON';
+  static const String group = 'GROUP';
+  static const String individual = 'individual';
+}
+
+class PartnerRoles {
+  static const String competitor = 'COMPETITOR';
+  static const String dependent = 'DEPENDENT';
+  static const String customer = 'CUSTOMER';
+  static const String employee = 'EMPLOYEE';
+}
+
+class MembershipTypes {
+  static const String group = 'GROUP';
+  static const String individual = 'INDIVIDUAL';
+}
+
+class ProductTypes {
+  static const String groupSociety = 'GROUP-SOCIETY';
+  static const String membership = 'MEMBERSHIP';
+}
+
+class ObjectTypes {
+  static const String transaction = 'TRANSACTION';
+  static const String partner = 'PARTNER';
 }

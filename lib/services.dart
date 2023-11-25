@@ -5,13 +5,13 @@
 // export 'package:mawa_package/services/device_info.dart';
 // export 'package:mawa_package/services/employees.dart';
 // export 'package:mawa_package/services/field_options.dart';
-// export 'package:mawa_package/services/fields.dart';
+// export 'package:mawa_package/services/field.dart';
 // export 'package:mawa_package/services/globals.dart';
 // export 'package:mawa_package/services/internet_connect.dart';
 // export 'package:mawa_package/services/keys.dart';
 // export 'package:mawa_package/services/leaves.dart';
 // export 'package:mawa_package/services/location.dart';
-// export 'package:mawa_package/services/memberships.dart';
+// export 'package:mawa_package/services/membership.dart';
 // export 'package:mawa_package/services/network_requests.dart';
 // export 'package:mawa_package/services/notification.dart';
 // export 'package:mawa_package/services/otp.dart';
@@ -26,5 +26,5 @@
 // export 'package:mawa_package/services/tools.dart';
 // export 'package:mawa_package/services/transaction_notes.dart';
 // export 'package:mawa_package/services/user.dart';
-// export 'package:mawa_package/services/versioning.dart';
+// export 'package:mawa_package/services/versions.dart';
 // export 'package:mawa_package/services/workcenters.dart';

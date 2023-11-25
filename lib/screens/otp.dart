@@ -22,8 +22,8 @@ class _OTPScreentate extends State<OTPScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Row(
-            children: const [
+          title: const Row(
+            children: [
               Icon(Icons.pin),
               Text('One Time Pin'),
             ],
@@ -139,12 +139,7 @@ class _OTPScreentate extends State<OTPScreen> {
           preferences.then((SharedPreferences prefs) {
             return (prefs.setString(SharedPrefs.token, NetworkRequests.token));
           });
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute<void>(
-              builder: (BuildContext context) => const ChangePassword(),
-            ),
-          );
+          passwordChange();
         }
       } else {
         Alerts.toastMessage(
@@ -156,4 +151,6 @@ class _OTPScreentate extends State<OTPScreen> {
       overlay.dismissOverlay();
     }
   }
+
+  passwordChange()=>ChangePassword(context);
 }

@@ -3,15 +3,15 @@ import 'Dashboard.dart';
 import 'package:flutter/material.dart';
 
 // 0649
-Authenticate _authenticate(context) {
-  return Authenticate(
+AuthenticateView _authenticate(context) {
+  return AuthenticateView(
     logo: const Image(
       image: AssetImage('assets/images/appicon.png', package: 'mawa_package'),
     ),
 // Image.asset('packages/mawa_package/assets/images/app_icon.png'),
     route: HomePage.id,
     postAuthenticate: () {
-      if (Authenticate.response.statusCode == 200) {
+      if (AuthenticateView.response.statusCode == 200) {
         Navigator.pushNamed(context, redirect);
       } else {
         Navigator.pushNamed(context, Unauthorized.id);
@@ -21,7 +21,7 @@ Authenticate _authenticate(context) {
 }
 
 var route = {
-  Authenticate.id: (context) => _authenticate(context),
+  AuthenticateView.id: (context) => _authenticate(context),
   HomePage.id: (context) => const HomePage(),
   InitialRoute.id: (context) => InitialRoute(
         className: _authenticate(context),
