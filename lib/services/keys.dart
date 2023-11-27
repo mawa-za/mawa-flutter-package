@@ -19,6 +19,8 @@ class JsonResponses {
   static const String cause = 'cause';
   static const String message = 'message';
 
+  static const String field = 'field';
+
   static const String firstName = 'firstName';
   static const String genderTypeDescription = 'genderTypeDescription';
 
@@ -571,6 +573,8 @@ class JsonPayloads {
   static const String otp = 'otp';
   static const String partnerEmail = 'partnerEmail';
 
+
+  static const String number = 'number';
   static const String New = 'New';
   static const String Open = 'Open';
   static const String Closed = 'Closed';
@@ -1043,6 +1047,14 @@ class PartnerRoles {
   static const String dependent = 'DEPENDENT';
   static const String customer = 'CUSTOMER';
   static const String employee = 'EMPLOYEE';
+}
+
+
+class PartnerAttributes {
+  static const String identity = 'identity';
+  static const String contact = 'contact';
+  static const String address = 'address';
+  static const String bank = 'bank';
 }
 
 class MembershipTypes {
