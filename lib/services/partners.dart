@@ -78,8 +78,8 @@ class Partners {
       NetworkRequests.methodPost,
       resource: '${Resources.partner}/$partnerId/$path',
       body: {
-        JsonPayloads.idType: idType,
-        JsonPayloads.personIdNumber: idNumber,
+        JsonPayloads.type: idType,
+        JsonPayloads.number: idNumber,
         JsonPayloads.validFrom: validFrom,
         JsonPayloads.validTo: validTo,
       },
@@ -122,6 +122,36 @@ class Partners {
     return response;
   }
 
+  addBankDetails(
+      {String? path,
+        required dynamic accType,
+        required String? accountHolder,
+        required String? accountNumber,
+        required String ? branchCode,
+        required dynamic bankName,
+        String? postalCode}) async {
+    dynamic response = await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPost,
+        resource: '${Resources.partner}/$partnerId/$path',
+        body: {
+          JsonPayloads.type: accType,
+          JsonPayloads.accountHolder: accountHolder,
+          JsonPayloads.accountNumber: accountNumber,
+          JsonPayloads.bankName: bankName,
+          JsonPayloads.branchCode: branchCode,
+        });
+    return response;
+  }
+  // Get Bank Details
+  getPartnerBankDetails({String? path}) async {
+    await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: '${Resources.partner}/$partnerId/$path'
+     )
+    );
+  }
+
+
   deleteAddress({String? path, dynamic addressId, String? type}) async {
     await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodDelete,
@@ -163,15 +193,17 @@ class Partners {
       String? validFrom,
       // required String ? partnerId,
       required String? path,
-      required String? idType}) async {
+      required String? idType
+      }) async {
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPut,
         resource: '${Resources.partner}/$partnerId/$path',
-        queryParameters: {
-          QueryParameters.idType: idType,
-        },
+        // queryParameters: {
+        //   QueryParameters.idType: idType,
+        // },
         body: {
-          JsonPayloads.idNumber: idNumber,
+          JsonPayloads.type : idType,
+          JsonPayloads.number: idNumber,
           JsonPayloads.validTo: validTo,
           JsonPayloads.validFrom: validFrom
         });
