@@ -63,7 +63,7 @@ class Premium {
     return await NetworkRequests.decodeJson(
       await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
-        resource: Resources.premium,
+        resource: '${Resources.premium}/${Resources.premiums}',
         queryParameters: qaramParam,
       ),
       negativeResponse: [],
@@ -77,4 +77,6 @@ class Premium {
       negativeResponse: [],
     );
   }
+
+
 }

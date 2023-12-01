@@ -550,6 +550,7 @@ class Resources {
   static const String premium = 'premium';
   static const String booking = 'booking';
   static const String groupSociety = 'group-society';
+  static const String premiums = 'premiums';
 }
 
 class JsonPayloads {
