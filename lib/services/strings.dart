@@ -61,7 +61,7 @@ class Strings{
         Map title = Map.from(json[JsonResponses.title] ?? {});
         String name =
             '${title.isNotEmpty ? title[JsonResponses.description] ?? '' : ''} ${json[JsonResponses.personLastName] ?? json[JsonResponses.name1] ?? json[JsonResponses.surname] ?? ''}, ${json[JsonResponses.personFirstName] ??json[JsonResponses.name2] ?? ''} ${json[JsonResponses.personMiddleName] ??json[JsonResponses.name3] ?? ''}';
-        return name == ',  ' ? '' : name;
+        return name == ' ,  ' ? '' : name;
       }catch(e){
         if (kDebugMode) {
           print(e);
