@@ -7,16 +7,15 @@ class Organisation {
 
   Organisation(this.organisationID);
 
-    static getAll() async {
-      return await NetworkRequests.decodeJson(
-        await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-            resource: Resources.partner,
-            queryParameters: {
-              QueryParameters.type: "ORGANISATION",
-            }),
-        negativeResponse: [],
-      );
-    }
+   
+  static getAll() async {
+    return await NetworkRequests.decodeJson(
+        await NetworkRequests().securedMawaAPI(
+          NetworkRequests.methodGet,
+          resource: Resources.organization,
+        ),
+        negativeResponse: []);
+  }
   getSpecific() async {
     organisation = await NetworkRequests.decodeJson(
       await NetworkRequests().securedMawaAPI(
