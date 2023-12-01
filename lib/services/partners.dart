@@ -6,15 +6,17 @@ class Partners {
   dynamic isValid;
   Partners(this.partnerId);
 
-  static search({String? role,String?attributeName,String?attributeValue}) async {
+  static search({String? role,String?attributeName,String?attributeValue, String? type,}) async {
     return await NetworkRequests.decodeJson(
       await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
           resource: Resources.partner,
           queryParameters: {
             QueryParameters.role: role,
-            QueryParameters.attributeName:attributeName,
-            QueryParameters.attributeValue:attributeValue,
-          }),
+            QueryParameters.attributeName: attributeName,
+            QueryParameters.attributeValue: attributeValue,
+            QueryParameters.type: type,
+          },
+      ),
       negativeResponse: [],
     );
   }
