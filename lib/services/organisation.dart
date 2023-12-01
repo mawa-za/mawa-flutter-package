@@ -7,6 +7,7 @@ class Organisation {
 
   Organisation(this.organisationID);
 
+   
     static getAll() async {
       return await NetworkRequests.decodeJson(
         await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,

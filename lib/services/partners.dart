@@ -76,7 +76,7 @@ class Partners {
     String? validFrom,
     String? validTo,
   }) async {
-    dynamic idPost = await NetworkRequests().securedMawaAPI(
+    return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPost,
       resource: '${Resources.partner}/$partnerId/$path',
       body: {
@@ -86,9 +86,6 @@ class Partners {
         JsonPayloads.validTo: validTo,
       },
     );
-    // print('Type is ${idPost.runtimeType}');
-    dynamic response = await json.decode(idPost.body);
-    return response;
   }
 
   addContact({String? path, String? contactType, dynamic detail}) async {
