@@ -389,6 +389,7 @@ class JsonResponses {
   static const String documentType = 'documentType';
   static const String maritalStatus = 'maritalStatus';
   static const String identity = 'identity';
+  static const String baseUnitOfMeasureDescription = 'baseUnitOfMeasureDescription';
   //attachments
 }
 
