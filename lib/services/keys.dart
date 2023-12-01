@@ -782,6 +782,7 @@ class JsonPayloads {
   static const String receipts = 'receipts';
   static const String dateAdded = 'dateAdded';
   static const String dateEffective = 'dateEffective';
+  static const String language = 'language';
 
 
 // static const String  = '';
