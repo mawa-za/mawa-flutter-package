@@ -378,6 +378,11 @@ class JsonResponses {
   static const String no = 'no';
   static const String fileId = 'fileId';
   static const String file = 'file';
+  static const String membership = 'membership';
+  static const String paymentMethodDescription = 'paymentMethodDescription';
+  static const String statusDescription = 'statusDescription';
+
+
 
   static const String employee = 'employee';
 
