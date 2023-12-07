@@ -18,6 +18,7 @@ class JsonResponses {
   static const String duration = 'duration';
   static const String cause = 'cause';
   static const String message = 'message';
+  static const String membership = 'membership';
 
   static const String field = 'field';
 
