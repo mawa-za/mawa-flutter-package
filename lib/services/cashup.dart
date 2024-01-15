@@ -58,7 +58,6 @@ class Cashup {
 
   static create({
     required String employeeResponsibleId,
-    required String amount,
     required String salesArea,
     required List receipts,
   }) async {
@@ -68,7 +67,6 @@ class Cashup {
       body: {
         JsonPayloads.employeeResponsibleId: employeeResponsibleId,
         JsonPayloads.salesArea: salesArea,
-        JsonPayloads.amount: amount,
         JsonPayloads.receipts: receipts,
       },
     );
