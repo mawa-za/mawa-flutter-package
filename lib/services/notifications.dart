@@ -3,7 +3,7 @@ part of 'package:mawa_package/mawa_package.dart';
 class Notifications {
   late String id;
   Notifications({ required this.id});
-  createNotification( {required String transactionId, required String processorId, required String recipientId, required String subType} ) async{
+  createNotification( {required String transactionId, required String processorId, required String recipientId, required String subType, required dynamic location} ) async{
     return await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPost,
         resource: Resources.notifications,
@@ -12,6 +12,7 @@ class Notifications {
           JsonPayloads.processor:processorId,
           JsonPayloads.recipient:recipientId,
           JsonPayloads.subType:subType,
+          JsonPayloads.location:location
         }
     );
   }
