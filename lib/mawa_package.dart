@@ -96,5 +96,6 @@ part 'package:mawa_package/services/supplier.dart';
 part 'package:mawa_package/services/laybys.dart';
 part 'package:mawa_package/services/service_request.dart';
 part 'package:mawa_package/services/booking.dart';
+part 'package:mawa_package/services/notifications.dart';
 
 

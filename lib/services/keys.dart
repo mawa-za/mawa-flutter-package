@@ -395,7 +395,12 @@ class JsonResponses {
   static const String maritalStatus = 'maritalStatus';
   static const String identity = 'identity';
   static const String baseUnitOfMeasureDescription = 'baseUnitOfMeasureDescription';
-  //attachments
+
+  //Notification
+  static const String notificationDtos = 'notificationDtos';
+  static const String SubType = 'SubType';
+
+
 }
 
 class Resources {
@@ -557,6 +562,12 @@ class Resources {
   static const String booking = 'booking';
   static const String groupSociety = 'group-society';
   static const String premiums = 'premiums';
+
+  static const String notifications = 'notifications';
+  static const String read = 'read';
+  static const String byTrans = 'byTrans';
+
+
 }
 
 class JsonPayloads {
@@ -790,6 +801,10 @@ class JsonPayloads {
   static const String dateAdded = 'dateAdded';
   static const String dateEffective = 'dateEffective';
   static const String language = 'language';
+
+  static const String processor = 'processor';
+  static const String recipient = 'recipient';
+  static const String subType = 'subType';
 
 
 // static const String  = '';
