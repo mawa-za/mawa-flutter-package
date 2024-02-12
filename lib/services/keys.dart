@@ -400,6 +400,8 @@ class JsonResponses {
   static const String notificationDtos = 'notificationDtos';
   static const String SubType = 'SubType';
 
+  //Bank
+  static const String partnerBankAccountDtoList = 'partnerBankAccountDtoList';
 
 }
 

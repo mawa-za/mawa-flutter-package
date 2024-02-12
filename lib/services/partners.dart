@@ -103,6 +103,7 @@ class Partners {
       {String? path,
       String? addressType,
       String? houseno,
+        String? partnerId,
       String? streetName,
       dynamic suburb,
       dynamic city,
@@ -111,6 +112,7 @@ class Partners {
         NetworkRequests.methodPost,
         resource: '${Resources.partner}/$partnerId/$path',
         body: {
+          JsonPayloads.partner: partnerId,
           JsonPayloads.type: addressType,
           JsonPayloads.addressline1: houseno,
           JsonPayloads.addressline2: streetName,
@@ -128,22 +130,24 @@ class Partners {
         required String? accountNumber,
         required String ? branchCode,
         required dynamic bankName,
+        required branchName,
         String? postalCode}) async {
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPost,
         resource: '${Resources.partner}/$partnerId/$path',
         body: {
-          JsonPayloads.type: accType,
+          JsonPayloads.accountType: accType,
           JsonPayloads.accountHolder: accountHolder,
           JsonPayloads.accountNumber: accountNumber,
           JsonPayloads.bankName: bankName,
+          JsonPayloads.branchName: branchName,
           JsonPayloads.branchCode: branchCode,
         });
     return response;
   }
   // Get Bank Details
   getPartnerBankDetails({String? path}) async {
-    await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+    return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: '${Resources.partner}/$partnerId/$path'
      )
@@ -184,6 +188,12 @@ class Partners {
           QueryParameters.idType: idType,
           QueryParameters.idNumber: idNumber,
         }));
+  }
+
+  static deleteAccount({required String id}) async {
+    await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodDelete,
+        resource: '${Resources.partner}/$id/${PartnerAttributes.bank}'));
   }
 
   editIdentity(
@@ -250,6 +260,33 @@ class Partners {
           JsonPayloads.postalCode: postalCode
         });
     return response;
+  }
+
+  static editBankDetails(
+      { required dynamic id,
+        String? accHolderName,
+        dynamic bankName,
+        String? accType,
+        String? accNumber,
+        dynamic branchName,
+        String? branchCode,
+        String? validFrom,
+        String? validTo
+      }) async {
+    return await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPut,
+        resource: '${Resources.partner}/$id/${PartnerAttributes.bank}',
+        body: {
+          JsonPayloads.accountHolder: accHolderName,
+          JsonPayloads.bankName: bankName,
+          JsonPayloads.accountType: accType,
+          JsonPayloads.accountNumber: accNumber,
+          JsonPayloads.branchName: branchName,
+          JsonPayloads.branchCode: branchCode,
+          JsonPayloads.validFrom: validFrom,
+          JsonPayloads.validTo: validTo
+        });
+
   }
 
   static getSpecifIdentity(
