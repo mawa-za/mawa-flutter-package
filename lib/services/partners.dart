@@ -158,7 +158,7 @@ class Partners {
   deleteAddress({String? path, dynamic addressId, String? type}) async {
     await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodDelete,
-        resource: '${Resources.partner}/$partnerId/$path',
+        resource: '${Resources.partner}/$partnerId/$path/$addressId',
         queryParameters: {
           QueryParameters.addressId: addressId,
           QueryParameters.type: type
@@ -200,17 +200,15 @@ class Partners {
       {String? idNumber,
       String? validTo,
       String? validFrom,
-      // required String ? partnerId,
+      String ? partnerId,
       required String? path,
       required String? idType
       }) async {
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPut,
         resource: '${Resources.partner}/$partnerId/$path',
-        // queryParameters: {
-        //   QueryParameters.idType: idType,
-        // },
         body: {
+          JsonPayloads.partner:partnerId,
           JsonPayloads.type : idType,
           JsonPayloads.number: idNumber,
           JsonPayloads.validTo: validTo,
@@ -241,18 +239,21 @@ class Partners {
   }
 
   editAddress(
-      {String? houseNo,
-      String? streetName,
-      String? suburb,
-      String? city,
-      String? postalCode,
-      dynamic addressId,
-      required String? path,
-      dynamic idType}) async {
+      {
+        String? id,
+        String? houseNo,
+        String? streetName,
+        String? suburb,
+        String? city,
+        String? postalCode,
+        dynamic addressId,
+        required String? path,
+        dynamic idType}) async {
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPut,
-        resource: '${Resources.partner}/$path/$addressId',
+        resource: '${Resources.partner}/$partnerId/$path/$addressId',
         body: {
+          JsonPayloads.id: id,
           JsonPayloads.line1: houseNo,
           JsonPayloads.line2: streetName,
           JsonPayloads.line3: suburb,
