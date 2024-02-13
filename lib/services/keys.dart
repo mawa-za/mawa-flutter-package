@@ -102,6 +102,7 @@ class JsonResponses {
   static const String line4 = 'line4';
   static const String postalCode = 'postalCode';
 
+  static const String address = 'address';
   static const String addressesPostalCode = 'postalCode';
   static const String addressesTypeDescription = 'typeDescription';
   static const String addressline1Description = 'line1Description';
