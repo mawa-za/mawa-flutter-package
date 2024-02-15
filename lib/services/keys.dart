@@ -397,6 +397,8 @@ class JsonResponses {
   static const String identity = 'identity';
   static const String baseUnitOfMeasureDescription = 'baseUnitOfMeasureDescription';
   static const String uploadDate = 'uploadDate';
+  static const String claims = 'claims';
+  static const String amounts = 'amounts';
 
   //Notification
   static const String notificationDtos = 'notificationDtos';
