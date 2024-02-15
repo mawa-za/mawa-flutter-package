@@ -396,6 +396,7 @@ class JsonResponses {
   static const String maritalStatus = 'maritalStatus';
   static const String identity = 'identity';
   static const String baseUnitOfMeasureDescription = 'baseUnitOfMeasureDescription';
+  static const String uploadDate = 'uploadDate';
 
   //Notification
   static const String notificationDtos = 'notificationDtos';
@@ -808,6 +809,7 @@ class JsonPayloads {
   static const String processor = 'processor';
   static const String recipient = 'recipient';
   static const String subType = 'subType';
+  static const String extension = 'extension';
 
 
 // static const String  = '';
@@ -955,6 +957,7 @@ class QueryParameters {
   static const String bookDate = "bookDate";
   static const String attributeName = "attributeName";
   static const String attributeValue = "attributeValue";
+  static const String objectId = "objectId";
 
 // static const String  = '';
 }
