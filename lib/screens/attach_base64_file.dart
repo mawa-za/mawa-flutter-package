@@ -28,6 +28,7 @@ class AttachBase64File {
   bool isLoading = false;
   bool isFilePicked = false;
   Uint8List? uint8list;
+  String? extension;
   late final OverlayWidgets overlay;
   final _formKey = GlobalKey<FormState>();
 
@@ -63,6 +64,7 @@ class AttachBase64File {
         setState(() {
           pickedFile = result!.files.single;
           uint8list = result!.files.single.bytes;
+          extension = result!.files.single.extension;
           isFilePicked = true;
         });
       } else {
@@ -417,6 +419,7 @@ class AttachBase64File {
           objectId: id,
           objectType: type,
           documentType: docType[JsonResponses.code],
+            extension: extension!,
         );
         if (response.statusCode == 200 || response.statusCode == 201) {
           Map<String, dynamic> map =
