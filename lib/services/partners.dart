@@ -125,12 +125,12 @@ class Partners {
 
   addBankDetails(
       {String? path,
-        required dynamic accType,
-        required String? accountHolder,
-        required String? accountNumber,
-        required String ? branchCode,
-        required dynamic bankName,
-        required branchName,
+         dynamic accType,
+         String? accountHolder,
+         String? accountNumber,
+         String ? branchCode,
+         dynamic bankName,
+         branchName,
         String? postalCode}) async {
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPost,
