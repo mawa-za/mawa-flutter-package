@@ -69,17 +69,14 @@ class Home extends StatelessWidget {
         );
       },
       theme: ThemeData(
-        primarySwatch: Colors.pink,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         scaffoldBackgroundColor: Colors.white,
-        // const Color(0xFFB398),
-        backgroundColor: Colors.white,
         elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
           // primary: const Color(0xFF45ABA6),
-          primary: Colors.black,
+          // primary: Colors.black,
           enableFeedback: false,
-        )),
+        )), colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.pink).copyWith(background: Colors.white),
       ),
     );
   }
