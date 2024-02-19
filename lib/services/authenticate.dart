@@ -37,7 +37,7 @@ class Authenticate {
       //   // Navigator.pushReplacementNamed(context, direct!);
       //   postAuthenticate;
       User.loggedInUser = await User.getByUsername(username);
-      Map<String, dynamic> partner = Map<String, dynamic>.from(await Partners(User.loggedInUser[JsonResponses.partner]).get());
+      Map<String, dynamic> partner = Map<String, dynamic>.from(User.loggedInUser[JsonResponses.partner]);
       User.loggedInUser[JsonResponses.partner] = partner;
       User.loggedInUser[JsonResponses.partnerId] = partner[JsonResponses.id];
       SharedStorage.setString(key: SharedPrefs.userID, detail: User.loggedInUser[JsonResponses.id],);
