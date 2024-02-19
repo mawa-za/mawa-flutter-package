@@ -35,7 +35,55 @@ class PaymentRequests {
     return response;
   }
 
+  approvePayment({required String ? paymentId, dynamic statusReason, String ? description}) async {
+    return await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPut,
+        resource: '${Resources.paymentRequest}/$paymentId/${Resources.approve}',
+        queryParameters: {
+          QueryParameters.statusReason:statusReason,
+          QueryParameters.description:description,
+        }
+    );
+  }
 
+  rejectPayment({required String ? paymentId, dynamic  statusReason, String ? description}) async {
+    return await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPut,
+        resource: '${Resources.paymentRequest}/$paymentId/${Resources.reject}',
+        queryParameters: {
+          QueryParameters.statusReason:statusReason,
+          QueryParameters.description:description,
+        }
+    );
+  }
 
+  cancelPayment({required String ? paymentId, dynamic statusReason, String ? description}) async {
+    return await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPut,
+        resource: '${Resources.paymentRequest}/$paymentId/${Resources.cancel}',
+        queryParameters: {
+          QueryParameters.statusReason:statusReason,
+          QueryParameters.description:description,
+        }
+    );
+  }
+
+  completePayment({required String ? paymentId, dynamic statusReason, String ? description}) async {
+    return await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPut,
+        resource: '${Resources.paymentRequest}/$paymentId/${Resources.complete}',
+        queryParameters: {
+          QueryParameters.statusReason:statusReason,
+          QueryParameters.description:description,
+        }
+    );
+  }
+
+  submitPayment({required String ? paymentId}) async {
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodPut,
+      resource: '${Resources.paymentRequest}/$paymentId/${Resources.submit}',
+    );
+  }
 
 }
