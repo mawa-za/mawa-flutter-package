@@ -410,6 +410,7 @@ class JsonResponses {
 }
 
 class Resources {
+  static const String bankAccount = 'bank-account';
   static const String assign = 'assign';
   static const String terminate = 'terminate';
   static const String rehire = 'rehire';
