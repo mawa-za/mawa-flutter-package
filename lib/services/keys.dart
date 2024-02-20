@@ -573,6 +573,9 @@ class Resources {
   static const String read = 'read';
   static const String byTrans = 'byTrans';
 
+  static const String complete = 'complete';
+
+
 
 }
 
