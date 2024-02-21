@@ -407,6 +407,10 @@ class JsonResponses {
   //Bank
   static const String partnerBankAccountDtoList = 'partnerBankAccountDtoList';
 
+  static const String recipient = 'recipient';
+  static const String employeeResponsible = 'employeeResponsible';
+
+
 }
 
 class Resources {
