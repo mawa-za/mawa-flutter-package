@@ -7,6 +7,7 @@ class Receipt {
 
   Receipt(this.id);
 
+  // https://dev.api.app.mawa.co.za/receipt
   // {
   //   "receiptType": "string",
   //   "invoiceNumber": "string",
@@ -17,6 +18,7 @@ class Receipt {
   // }
   static create({
     required String receiptType,
+    required String transaction,
     String? invoiceNumber,
     String? membershipNumber,
     String? membershipPeriod,
@@ -34,6 +36,7 @@ class Receipt {
     // location = Location.address;
     Map payment = {
       JsonPayloads.receiptType: receiptType,
+      JsonPayloads.transaction: transaction,
       JsonPayloads.tenderType: tenderType,
       JsonPayloads.amount: amount,
       JsonPayloads.location: location,
@@ -55,46 +58,7 @@ class Receipt {
     );
   }
 
-  static userProcessedReceipts(bool filter) async {
-    String filterString;
-    filter ? filterString = 'x' : filterString = '';
-    receiptsList.clear();
-    collectedFunds = 0.00;
-    dynamic response = await NetworkRequests().securedMawaAPI(
-        NetworkRequests.methodGet,
-        resource: Resources.receipts,
-        queryParameters: {
-          QueryParameters.processedBy:
-              User.loggedInUser[JsonResponses.username],
-          QueryParameters.filter: filterString
-        });
-    double funds = 0.0;
-    if (response.statusCode == 200) {
-      receiptsList = await NetworkRequests.decodeJson(response);
-      for (int index = 0; index < receiptsList.length; index++) {
-        // receiptsList.length > 0
-        //     ?
-        funds += double.parse(receiptsList[index][JsonResponses.amount])
-            // : collectedFunds = 0.0
-            ;
-      }
-    }
-    collectedFunds = funds;
-    return receiptsList;
-  }
-
-  static receiptHistory(String referenceNo) async {
-    receiptsList = [];
-    List receipts = await NetworkRequests.decodeJson(
-        await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-            resource: Resources.receipts,
-            queryParameters: {QueryParameters.reference: referenceNo}),
-        negativeResponse: []);
-    receipts.isNotEmpty ? receiptsList = receipts : receiptsList = [];
-    return receiptsList;
-  }
-
-  // https://api-qas.mawa.co.za:8181/mawa-api/resources/receipts/{id}
+  // https://dev.api.app.mawa.co.za/receipt/ff8080818d9f8dc9018d9f94339c0001
   get() async {
     return await NetworkRequests.decodeJson(
         await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
@@ -102,19 +66,18 @@ class Receipt {
         negativeResponse: {});
   }
 
-  // https://api-qas.mawa.co.za:8181/mawa-api/resources/receipts
+  // https://dev.api.app.mawa.co.za/receipt
   static getAll() async {
     return await NetworkRequests.decodeJson(
         await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-            resource: Resources.receipts),
-        negativeResponse: []);
+            resource: Resources.receipt,),
+        negativeResponse: [],);
   }
 
+  // https://dev.api.app.mawa.co.za/receipt
   static search({
     String? receiptType,
-    String? invoiceNumber,
-    String? membershipNumber,
-    String? membershipPeriod,
+    String? transaction,
     String? tenderType,
     String? user,
     bool? notCashed,
@@ -124,14 +87,8 @@ class Receipt {
     receiptType != null
         ? qaramParam[QueryParameters.receiptType] = receiptType
         : null;
-    invoiceNumber != null
-        ? qaramParam[QueryParameters.invoiceNumber] = invoiceNumber
-        : null;
-    membershipNumber != null
-        ? qaramParam[QueryParameters.membershipNumber] = membershipNumber
-        : null;
-    membershipPeriod != null
-        ? qaramParam[QueryParameters.membershipPeriod] = membershipPeriod
+    transaction != null
+        ? qaramParam[QueryParameters.transaction] = transaction
         : null;
     tenderType != null
         ? qaramParam[QueryParameters.tenderType] = tenderType
@@ -149,7 +106,7 @@ class Receipt {
     dynamic resp = await NetworkRequests.decodeJson(
       await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
-        resource: Resources.receipts,
+        resource: Resources.receipt,
         queryParameters: qaramParam,
       ),
       negativeResponse: [],
@@ -157,11 +114,11 @@ class Receipt {
     return resp;
   }
 
-  // https://api-qas.mawa.co.za:8181/mawa-api/resources/receipts?checkoutId=CU0000000002
+  // https://dev.api.app.mawa.co.za/receipt?transaction=ff8080818d9f8dc9018d9f94339c0001
   static getReceiptsForCashup(String cashupID) async {
     return await NetworkRequests.decodeJson(
       await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-          resource: Resources.receipts,
+          resource: Resources.receipt,
           queryParameters: {
             QueryParameters.checkoutId: cashupID,
           }),
