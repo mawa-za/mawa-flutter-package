@@ -414,6 +414,7 @@ class JsonResponses {
 }
 
 class Resources {
+  static const String address = 'address';
   static const String bankAccount = 'bank-account';
   static const String assign = 'assign';
   static const String terminate = 'terminate';
@@ -585,6 +586,11 @@ class Resources {
 }
 
 class JsonPayloads {
+  static const String suburb = 'suburb';
+  static const String city = 'city';
+  static const String town = 'town';
+  static const String province = 'province';
+
   static const String claimId = 'claimId';
   static const String comments = 'comments';
   static const String id = 'id';
@@ -826,6 +832,8 @@ class JsonPayloads {
 }
 
 class QueryParameters {
+  static const String transactionId = 'transactionId';
+
   static const String versionAppName = 'appName';
   static const String versionAppUsable = 'appUsable';
   static const String approverId = 'approverId';
