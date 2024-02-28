@@ -1038,6 +1038,7 @@ class FieldOptionTypes {
   static const String fieldPartnerRole = 'PARTNER-ROLE';
   static const String fieldClaimDeclineReason = 'CLAIM-DECLINE-REASON';
   static const String fieldPaymentMethod = 'PAYMENT-METHOD';
+  static const String fieldOptionPaymentRequestStatusReason = 'PAYMENT-REQUEST-STATUS-REASON';
   static const String fieldPaymentRequestType = 'PAYMENT-REQUEST-TYPE';
   static const String fieldBankAccountType = 'BANK-ACCOUNT-TYPE';
   static const String fieldPaymentReason = 'PAYMENT-REASON';
