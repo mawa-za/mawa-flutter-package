@@ -210,4 +210,40 @@ class Alerts {
         //   ]
         ).show();
   }
+
+  static actionFailAlert({
+    required BuildContext context,
+    required String message,
+  }) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    AwesomeDialog(
+      width: width * 0.4,
+      dialogType: DialogType.error,
+      context: context,
+      title: 'Alert',
+      body: SizedBox(
+        height: height * 0.1,
+        child: Center(
+          child: Text(
+            message,
+          ),
+        ),
+      ),
+      btnOk: TextButton.icon(
+        onPressed: () => Navigator.of(context).pop(),
+        label: const Text(
+          'Ok',
+        ),
+        icon: const Icon(
+          Icons.error_outline,
+        ),
+        style: TextButton.styleFrom(
+          foregroundColor: Colors.blue.shade900,
+          iconColor: Colors.blue.shade900,
+          backgroundColor: Colors.lightBlueAccent.shade100,
+        ),
+      ),
+    ).show();
+  }
 }
