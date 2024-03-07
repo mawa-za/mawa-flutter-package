@@ -27,6 +27,23 @@ import 'package:file_picker/file_picker.dart';
 
 part 'package:mawa_package/mawa.dart';
 
+part 'package:mawa_package/keys/comment_types.dart';
+part 'package:mawa_package/keys/field_option_types.dart';
+part 'package:mawa_package/keys/json_payloads.dart';
+part 'package:mawa_package/keys/json_responses.dart';
+part 'package:mawa_package/keys/membership_types.dart';
+part 'package:mawa_package/keys/object_types.dart';
+part 'package:mawa_package/keys/partner_attributes.dart';
+part 'package:mawa_package/keys/partner_roles.dart';
+part 'package:mawa_package/keys/partner_types.dart';
+part 'package:mawa_package/keys/path_names.dart';
+part 'package:mawa_package/keys/product_types.dart';
+part 'package:mawa_package/keys/query_parameters.dart';
+part 'package:mawa_package/keys/resources.dart';
+part 'package:mawa_package/keys/shared_preferences.dart';
+part 'package:mawa_package/keys/status_reasons.dart';
+part 'package:mawa_package/keys/statuses.dart';
+
 part 'package:mawa_package/screens/alerts.dart';
 part 'package:mawa_package/screens/authenticate_view.dart';
 part 'package:mawa_package/screens/change_password.dart';
@@ -61,7 +78,6 @@ part 'package:mawa_package/services/group_society.dart';
 part 'package:mawa_package/services/internet_connect.dart';
 part 'package:mawa_package/services/invoice.dart';
 part 'package:mawa_package/services/items.dart';
-part 'package:mawa_package/services/keys.dart';
 part 'package:mawa_package/services/leaves.dart';
 part 'package:mawa_package/services/location.dart';
 part 'package:mawa_package/services/membership.dart';
