@@ -18,7 +18,7 @@
 // export 'package:mawa_package/services/persons.dart';
 // export 'package:mawa_package/services/products.dart';
 // export 'package:mawa_package/services/receipts.dart';
-// export 'package:mawa_package/services/tasks.dart';
+// export 'package:mawa_package/services/task.dart';
 // export 'package:mawa_package/services/tickets.dart';
 // export 'package:mawa_package/services/ticket_logs.dart';
 // export 'package:mawa_package/services/timer.dart';
