@@ -1,51 +1,68 @@
-
 part of 'package:mawa_package/mawa_package.dart';
 
 class ServiceRequest {
-  dynamic serviceRequestID;
-  ServiceRequest(this.serviceRequestID);
+  String id;
+  ServiceRequest(this.id) {
+    resource = '${Resources.serviceRequest}/$id';
+  }
+  late final String resource;
   //Create Ticket
-  static createServiceRequest({
-          required String customerId,
-          required String description,
-          required String category,
-          required String priority}) async {
-      return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
-          resource: Resources.serviceRequest,
-          body: {
-            JsonPayloads.customerId: customerId,
-            JsonPayloads.description: description,
-            JsonPayloads.category: category,
-            JsonResponses.priority: priority
-          }
-      );
-
+  static create({
+    required String customerId,
+    required String description,
+    required String category,
+    required String priority,
+  }) async {
+    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
+        resource: Resources.serviceRequest,
+        body: {
+          JsonPayloads.customerId: customerId,
+          JsonPayloads.description: description,
+          JsonPayloads.category: category,
+          JsonResponses.priority: priority
+        });
   }
 
 //Get specif Ticket
-  getSpecifServiceRequest() async {
+  get() async {
     return await NetworkRequests.decodeJson(
-        await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-            resource: '${Resources.serviceRequest}/$serviceRequestID'),
-        negativeResponse: []);
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: resource,
+      ),
+      negativeResponse: [],
+    );
   }
 
   //Get All Ticket
-  static getAllServiceRequest() async {
+  static getAll() async {
     return await NetworkRequests.decodeJson(
-        await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-            resource: Resources.serviceRequest),
-        negativeResponse: []);
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: Resources.serviceRequest,
+      ),
+      negativeResponse: [],
+    );
   }
-
 
   //Delete specif Ticket
-  deleteSpecifServiceRequest() async {
+  delete() async {
     return await NetworkRequests.decodeJson(
-        await NetworkRequests().securedMawaAPI(NetworkRequests.methodDelete,
-            resource: '${Resources.serviceRequest}/$serviceRequestID'),
-        negativeResponse: []);
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodDelete,
+        resource: resource,
+      ),
+      negativeResponse: [],
+    );
   }
 
-
+  edit() async {
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPut,
+        resource: resource,
+      ),
+      negativeResponse: [],
+    );
+  }
 }
