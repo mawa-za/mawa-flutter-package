@@ -1,7 +1,7 @@
 part of 'package:mawa_package/mawa_package.dart';
 
-class Tasks {
-  Tasks({required this.id}) {
+class Task {
+  Task({required this.id}) {
     resource = '${Resources.task}/$id';
   }
   final String id;
