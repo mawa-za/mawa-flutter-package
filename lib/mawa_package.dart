@@ -79,7 +79,7 @@ part 'package:mawa_package/services/role.dart';
 part 'package:mawa_package/services/sale_order.dart';
 part 'package:mawa_package/services/shared_storage.dart';
 part 'package:mawa_package/services/strings.dart';
-part 'package:mawa_package/services/tasks.dart';
+part 'package:mawa_package/services/task.dart';
 part 'package:mawa_package/services/tickets.dart';
 part 'package:mawa_package/services/ticket_logs.dart';
 part 'package:mawa_package/services/timer.dart';
