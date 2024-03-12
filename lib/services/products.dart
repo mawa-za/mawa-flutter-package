@@ -186,10 +186,11 @@ class Product {
   //   "price": 0,
   //   "pricingType": "string"
   // }
-  static add({
+  static create({
     String? code,
-    required String productDescription,
-    required String productCategory,
+    required String description,
+    required String category,
+    required String type,
     required String measure,
     required String sellingPrice,
     required String pricingType,
@@ -200,8 +201,9 @@ class Product {
         resource: Resources.product,
         body: {
           JsonPayloads.code: code,
-          JsonPayloads.description:productDescription.trim(),
-          JsonPayloads.category: productCategory,
+          JsonPayloads.description: description.trim(),
+          JsonPayloads.type: type,
+          JsonPayloads.category: category,
           JsonPayloads.baseUnitOfMeasure: measure,
           JsonPayloads.sellingPrice: sellingPrice,
           JsonPayloads.pricingType: pricingType,
@@ -224,9 +226,9 @@ class Product {
         queryParameters: {QueryParameters.attribute: attribute,},);
   }
 
-  deletePricing(attribute) async {
+  deletePricing(String id) async {
     return await NetworkRequests().securedMawaAPI(NetworkRequests.methodDelete,
         resource: '$resource/${Resources.pricing}',
-        queryParameters: {QueryParameters.pricing: attribute,},);
+        queryParameters: {QueryParameters.pricing: id,},);
   }
 }

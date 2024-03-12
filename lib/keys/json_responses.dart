@@ -407,4 +407,5 @@ class JsonResponses {
 
   static const String recipient = 'recipient';
   static const String employeeResponsible = 'employeeResponsible';
+  static const String pricings = 'pricings';
 }
