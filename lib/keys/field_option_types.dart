@@ -41,6 +41,7 @@ class FieldOptionTypes {
   static const String suburb = 'SUBURB';
   static const String userType = 'USER-TYPE';
   static const String productAttribute = 'PRODUCT-ATTRIBUTE';
+  static const String productType = 'PRODUCT-TYPE';
   static const String membershipType = 'MEMBERSHIP-TYPE';
   static const String salesArea = 'SALES-AREA';
   static const String tenderType = 'TENDER-TYPE';
