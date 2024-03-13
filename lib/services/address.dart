@@ -52,6 +52,7 @@ class Address {
           JsonPayloads.line3: line3,
           JsonPayloads.line4: line4,
           JsonPayloads.suburb: suburb,
+          JsonPayloads.city:city,
           JsonPayloads.town: town,
           JsonPayloads.province: province,
           JsonPayloads.postalCode: postalCode
@@ -82,6 +83,7 @@ class Address {
           JsonPayloads.line3: line3,
           JsonPayloads.line4: line4,
           JsonPayloads.suburb: suburb,
+          JsonPayloads.city:city,
           JsonPayloads.town: town,
           JsonPayloads.province: province,
           JsonPayloads.postalCode: postalCode
