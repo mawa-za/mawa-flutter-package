@@ -414,4 +414,5 @@ class JsonResponses {
 
   static const String pricings = 'pricings';
 
+  static const String language = 'language';
 }

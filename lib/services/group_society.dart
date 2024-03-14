@@ -3,7 +3,7 @@ part of 'package:mawa_package/mawa_package.dart';
 class GroupSociety {
   final String id;
 
-  GroupSociety(this.id){
+  GroupSociety(this.id) {
     resource = '${Resources.groupSociety}/$id';
   }
   late final String resource;
@@ -66,4 +66,39 @@ class GroupSociety {
     );
   }
 
+  addRepresentative({
+    required String partnerId,
+    required String dateAdded,
+    String? dateEffective,
+  }) async {
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodPost,
+      resource: '$resource/${Resources.representative}',
+      body: {
+        JsonPayloads.partnerId: partnerId,
+        JsonPayloads.dateAdded: dateAdded,
+        JsonPayloads.dateEffective: dateEffective
+      },
+    );
+  }
+
+  getRepresentative() async {
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: '$resource/${Resources.representative}',
+      ),
+      negativeResponse: [],
+    );
+  }
+
+  deleteRepresentative(String repID) async {
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodDelete,
+        resource: '$resource/${Resources.representative}/$repID',
+      ),
+      negativeResponse: [],
+    );
+  }
 }
