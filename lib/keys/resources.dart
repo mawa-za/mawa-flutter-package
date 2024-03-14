@@ -168,4 +168,5 @@ class Resources {
 
   static const String complete = 'complete';
   static const String task = 'task';
+  static const String representative = 'representative';
 }
