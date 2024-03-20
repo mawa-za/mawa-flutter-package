@@ -11,14 +11,12 @@ class Attachment {
 
   // /attachmentfile/{id}
   get() async {
-    return await NetworkRequests.decodeJson(
+    return
       await NetworkRequests(
         responseType: NetworkRequests.responseJson,
       ).securedMawaAPI(
         NetworkRequests.methodGet,
         resource: resource,
-      ),
-      negativeResponse: '',
     );
   }
 
