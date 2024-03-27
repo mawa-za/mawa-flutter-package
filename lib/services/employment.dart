@@ -3,11 +3,13 @@ import '../mawa_package.dart';
 class Employment {
   dynamic partnerId;
   Employment(this.partnerId);
-   createEmployment({String ? empNo, String ? type, String ? startDate, String ? endDate, String ? branch, String ? department, String ? position }) async {
+   static createEmployment({String ? empNo, String ? type, String ? partnerId,String ? startDate, String ? endDate, String ? branch, String ? department, String ? position }) async {
     return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
-        resource:'${Resources.employment}/$partnerId',
+        resource:Resources.employment,
         body: {
           JsonPayloads.type: type,
+          JsonResponses.employeeNumber:empNo,
+          JsonPayloads.partnerId: partnerId,
           JsonPayloads.position: position,
           JsonPayloads.startDate: startDate,
           JsonPayloads.endDate: endDate,
@@ -18,22 +20,22 @@ class Employment {
   editEmployment({String ? empNo, String ? type, String ? startDate, String ? endDate, String ? branch, String ? department, String ? position }) async {
     return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPut,
         resource: '${Resources.employment}/$partnerId',
-        queryParameters: {
-          QueryParameters.startDate: startDate,
-        },
         body: {
+          JsonPayloads.employeeNumber: empNo,
           JsonPayloads.type: type,
           JsonPayloads.position: position,
           JsonPayloads.endDate: endDate,
+          JsonPayloads.startDate:startDate,
           JsonPayloads.branch: branch,
           JsonPayloads.department: department,
         });
   }
-  getSpecificEmployeeDetails() async {
+  getSpecificEmploymentDetails() async {
     return await NetworkRequests.decodeJson(
         await NetworkRequests().securedMawaAPI(
           NetworkRequests.methodGet,
-          resource: '${Resources.employment}/$partnerId',
+          resource: Resources.employment,
+            queryParameters: {QueryParameters.partnerId: partnerId}
         ),
         negativeResponse: {});
   }
@@ -48,36 +50,30 @@ class Employment {
         negativeResponse: {});
   }
 
-  terminateEmployment({required String startDate}) async {
+  terminateEmployment() async {
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPut,
         resource: '${Resources.employment}/$partnerId/${Resources.terminate}',
-        queryParameters: {
-           QueryParameters.startDate: startDate,
-       },
     );
     return response;
   }
 
-  rehireEmployment({required String startDate}) async {
+  rehireEmployment({required String startDate, required String endDate}) async {
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPut,
         resource: '${Resources.employment}/$partnerId/${Resources.rehire}',
         queryParameters: {
          QueryParameters.startDate: startDate,
+          QueryParameters.endDate: endDate,
         },
     );
     return response;
   }
 
-  suspendEmployment({required String startDate}) async {
+  suspendEmployment() async {
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPut,
         resource: '${Resources.employment}/$partnerId/${Resources.suspend}',
-        queryParameters: {
-            QueryParameters.startDate: startDate,
-         },
-
     );
     return response;
   }

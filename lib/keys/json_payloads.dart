@@ -246,5 +246,8 @@ class JsonPayloads {
   static const String actualStartDate = 'actualStartDate';
   static const String actualEndDate = 'actualEndDate';
 
+  static const String employeeNumber = 'employeeNumber';
+
+
 // static const String  = '';
 }
