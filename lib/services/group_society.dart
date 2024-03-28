@@ -14,6 +14,10 @@ class GroupSociety {
     required String product,
     required String salesArea,
     required String dateJoined,
+    required String creationType,
+    String? openingBalance,
+    String? totalDeposited,
+    String? totalWithdrawn,
   }) async {
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPost,
@@ -23,7 +27,11 @@ class GroupSociety {
         JsonPayloads.salesRepresentative: salesRepresentative,
         JsonPayloads.product: product,
         JsonPayloads.salesArea: salesArea,
-        JsonPayloads.dateJoined: dateJoined
+        JsonPayloads.dateJoined: dateJoined,
+        JsonPayloads.creationType: creationType,
+        JsonPayloads.openingBalance: openingBalance,
+        JsonPayloads.totalDeposited: totalDeposited,
+        JsonPayloads.totalWithdrawn: totalWithdrawn,
       },
     );
   }

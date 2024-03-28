@@ -249,5 +249,9 @@ class JsonPayloads {
   static const String employeeNumber = 'employeeNumber';
 
 
+  static const String openingBalance = 'openingBalance';
+  static const String totalWithdrawn = 'totalWithdrawn';
+  static const String totalDeposited = 'totalDeposited';
+
 // static const String  = '';
 }
