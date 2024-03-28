@@ -205,7 +205,7 @@ class Product {
           JsonPayloads.type: type,
           JsonPayloads.category: category,
           JsonPayloads.baseUnitOfMeasure: measure,
-          JsonPayloads.sellingPrice: sellingPrice,
+          JsonPayloads.price: sellingPrice,
           JsonPayloads.pricingType: pricingType,
           JsonPayloads.autoGenerateCode: 'X',
         },
