@@ -54,5 +54,6 @@ class FieldOptionTypes {
   static const String serviceRequestStatus = 'SERVICE-REQUEST-STATUS-REASON';
   static const String serviceRequestStatusReason = 'SERVICE-REQUEST-STATUS';
   static const String bankName = 'BANK-NAME';
+  static const String groupSocietyCreationType = 'GROUP-SOCIETY-CREATION-TYPE';
 
 }
