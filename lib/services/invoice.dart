@@ -14,7 +14,7 @@ class Invoice{
         NetworkRequests.methodPost,
         resource: Resources.invoice,
         body: {
-          JsonPayloads.customer: customer,
+          JsonPayloads.customerId: customer,
           JsonPayloads.dueDate: dueDate,
           JsonPayloads.items:item
 
