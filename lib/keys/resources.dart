@@ -170,4 +170,5 @@ class Resources {
   static const String task = 'task';
   static const String representative = 'representative';
   static const String claimByMember = 'claimByMember';
+  static const String category = 'category';
 }

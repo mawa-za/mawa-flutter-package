@@ -7,15 +7,22 @@ class Product {
   late String resource;
   final String id;
 
-  static search({String? category, String? code}) async {
+  static search({String? category, String? code, String? type}) async {
+    Map<String, String> query = {};
+    if (category != null) {
+      query[JsonPayloads.category] = category;
+    }
+    if (type != null) {
+      query[JsonPayloads.type] = type;
+    }
+    if (code != null) {
+      query[JsonPayloads.code] = code;
+    }
     return await NetworkRequests.decodeJson(
       await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: Resources.product,
-        queryParameters: {
-          JsonPayloads.category: category,
-          JsonPayloads.code: code,
-        },
+        queryParameters: query,
       ),
     ); //
   }
@@ -55,6 +62,16 @@ class Product {
       await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: '$resource/${Resources.pricing}',
+      ),
+      negativeResponse: [],
+    );
+  }
+
+  getCategories() async {
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: '$resource/${Resources.category}',
       ),
       negativeResponse: [],
     );
@@ -110,7 +127,6 @@ class Product {
     );
   }
 
-  // TODO: Revise this method
   editPricing({
     required priceType,
     required priceTypeDescription,
@@ -153,12 +169,10 @@ class Product {
     }
   }
 
-  // TODO: Revise this method
   addPricing({
     required priceType,
     required String value,
     required String product,
-    // required priceTypeDescription,
     required String validFrom,
     required String validTo,
   }) async {
@@ -170,10 +184,21 @@ class Product {
           JsonPayloads.pricing: priceType,
           JsonPayloads.product: product,
           JsonPayloads.value: value,
-          // JsonPayloads.priceTypeDescription: priceTypeDescription,
           JsonPayloads.validFrom: validFrom,
           JsonPayloads.validTo: validTo,
         },
+      );
+    }
+  }
+
+  addCategory({
+    required List<String> categories,
+  }) async {
+    {
+      return await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPost,
+        resource: '$resource/${Resources.category}',
+        body:  categories,
       );
     }
   }
@@ -189,7 +214,6 @@ class Product {
   static create({
     String? code,
     required String description,
-    required String category,
     required String type,
     required String measure,
     required String sellingPrice,
@@ -203,7 +227,6 @@ class Product {
           JsonPayloads.code: code,
           JsonPayloads.description: description.trim(),
           JsonPayloads.type: type,
-          JsonPayloads.category: category,
           JsonPayloads.baseUnitOfMeasure: measure,
           JsonPayloads.price: sellingPrice,
           JsonPayloads.pricingType: pricingType,
@@ -221,14 +244,32 @@ class Product {
   }
 
   deleteAttribute(attribute) async {
-    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodDelete,
-        resource: '$resource/${Resources.attribute}',
-        queryParameters: {QueryParameters.attribute: attribute,},);
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodDelete,
+      resource: '$resource/${Resources.attribute}',
+      queryParameters: {
+        QueryParameters.attribute: attribute,
+      },
+    );
   }
 
   deletePricing(String id) async {
-    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodDelete,
-        resource: '$resource/${Resources.pricing}',
-        queryParameters: {QueryParameters.pricing: id,},);
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodDelete,
+      resource: '$resource/${Resources.pricing}',
+      queryParameters: {
+        QueryParameters.pricing: id,
+      },
+    );
+  }
+
+  deleteCategory(String category) async {
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodDelete,
+      resource: '$resource/${Resources.category}',
+      queryParameters: {
+        QueryParameters.category : category,
+      },
+    );
   }
 }

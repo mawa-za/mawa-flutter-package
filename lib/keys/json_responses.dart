@@ -418,4 +418,5 @@ class JsonResponses {
   static const String attributes = 'attributes';
 
   static const String language = 'language';
+  static const String categories = 'categories';
 }
