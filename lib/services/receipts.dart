@@ -25,6 +25,7 @@ class Receipt {
     String? location,
     required String tenderType,
     required String amount,
+    String? externalReceiptNo,
   }) async {
     // // DeviceInfo info =
     // await DeviceInfo();
@@ -49,6 +50,9 @@ class Receipt {
         : null;
     membershipNumber != null
         ? payment[JsonPayloads.membershipPeriod] = membershipPeriod
+        : null;
+    externalReceiptNo != null
+        ? payment[JsonPayloads.externalReceiptNo] = externalReceiptNo
         : null;
 
     return await NetworkRequests().securedMawaAPI(
