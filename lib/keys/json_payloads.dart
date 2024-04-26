@@ -252,6 +252,7 @@ class JsonPayloads {
   static const String openingBalance = 'openingBalance';
   static const String totalWithdrawn = 'totalWithdrawn';
   static const String totalDeposited = 'totalDeposited';
+  static const String externalReceiptNo = 'externalReceiptNo';
 
 // static const String  = '';
 }
