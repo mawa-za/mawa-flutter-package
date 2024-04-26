@@ -419,4 +419,8 @@ class JsonResponses {
 
   static const String language = 'language';
   static const String categories = 'categories';
+  static const String transaction = 'transaction';
+  static const String transactionNumber = 'transactionNumber';
+  static const String transactionType = 'transactionType';
+  static const String externalReceiptNo = 'externalReceiptNo';
 }

@@ -15,6 +15,7 @@ class Premium {
     required String tenderType,
     required String location,
     required String amount,
+    required String externalReceiptNo,
   }) async {
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPost,
@@ -25,6 +26,7 @@ class Premium {
         JsonPayloads.tenderType: tenderType,
         JsonPayloads.location: location,
         JsonPayloads.amount: amount,
+        JsonPayloads.externalReceiptNo: externalReceiptNo,
         JsonPayloads.terminalId: ' ',
       },
     );
