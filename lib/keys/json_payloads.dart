@@ -253,6 +253,7 @@ class JsonPayloads {
   static const String totalWithdrawn = 'totalWithdrawn';
   static const String totalDeposited = 'totalDeposited';
   static const String externalReceiptNo = 'externalReceiptNo';
+  static const String informantId = 'informantId';
 
 // static const String  = '';
 }

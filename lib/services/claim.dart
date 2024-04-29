@@ -24,6 +24,7 @@ class Claim {
   static create({
     required String claimantId,
     required String deceasedId,
+    required String informantId,
     required String memberId,
     required String membershipId,
     required String type,
@@ -38,6 +39,7 @@ class Claim {
       body: {
         JsonPayloads.claimantId: claimantId,
         JsonPayloads.deceasedId: deceasedId,
+        JsonPayloads.informantId: informantId,
         JsonPayloads.memberId: memberId,
         JsonPayloads.membershipId: membershipId,
         JsonPayloads.type: type,

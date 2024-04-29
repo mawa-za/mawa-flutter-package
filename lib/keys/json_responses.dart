@@ -423,4 +423,5 @@ class JsonResponses {
   static const String transactionNumber = 'transactionNumber';
   static const String transactionType = 'transactionType';
   static const String externalReceiptNo = 'externalReceiptNo';
+  static const String informant = 'informant';
 }
