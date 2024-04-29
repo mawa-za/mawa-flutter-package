@@ -14,7 +14,7 @@ class GroupSociety {
     required String product,
     required String salesArea,
     required String dateJoined,
-    required String creationType,
+    String? creationType,
     String? openingBalance,
     String? totalDeposited,
     String? totalWithdrawn,
