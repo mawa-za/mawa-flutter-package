@@ -255,5 +255,12 @@ class JsonPayloads {
   static const String externalReceiptNo = 'externalReceiptNo';
   static const String informantId = 'informantId';
 
+  static const String totalExcVat = 'totalExcVat';
+  static const String totalIncVat = 'totalIncVat';
+  static const String discountAmount = 'discountAmount';
+  static const String discountPercentage = 'discountPercentage';
+  static const String vatpercentage = 'vatpercentage';
+  static const String vatamount = 'vatamount';
+
 // static const String  = '';
 }
