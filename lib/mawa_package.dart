@@ -116,3 +116,4 @@ part 'package:mawa_package/services/user.dart';
 part 'package:mawa_package/services/versions.dart';
 part 'package:mawa_package/services/workcenters.dart';
 part 'package:mawa_package/services/vouchers.dart';
+part 'package:mawa_package/services/pricing_engine.dart';
