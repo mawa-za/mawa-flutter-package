@@ -261,6 +261,8 @@ class JsonPayloads {
   static const String discountPercentage = 'discountPercentage';
   static const String vatpercentage = 'vatpercentage';
   static const String vatamount = 'vatamount';
+  static const String invoiceDate = 'invoiceDate';
+  static const String paymentTerms = 'paymentTerms';
 
 // static const String  = '';
 }
