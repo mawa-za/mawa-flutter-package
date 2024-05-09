@@ -1,6 +1,10 @@
 part of 'package:mawa_package/mawa_package.dart';
 
 class JsonResponses {
+  static const String defendants = 'defendants';
+  static const String applicants = 'applicants';
+  static const String client = 'client';
+  static const String dates = 'dates';
   static const String employeeId = 'employeeId';
   static const String amount = 'amount';
   static const String assignedBy = 'assignedBy';

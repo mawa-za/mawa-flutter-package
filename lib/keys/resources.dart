@@ -1,6 +1,7 @@
 part of 'package:mawa_package/mawa_package.dart';
 
 class Resources {
+
   static const String address = 'address';
   static const String bankAccount = 'bank-account';
   static const String assign = 'assign';
@@ -173,6 +174,6 @@ class Resources {
   static const String category = 'category';
 
   static const String  pricingEngine ='pricing-engine';
-
+  static const String case_ = 'case';
 
 }

@@ -161,12 +161,14 @@ class Claim {
     required String reason,
     required String comments,
   }) async {
-    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPut,
-        resource: '$resource/${Resources.reject}',
-        body: {
-          JsonPayloads.reason: reason,
-          JsonPayloads.comments: comments,
-        });
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodPut,
+      resource: '$resource/${Resources.reject}',
+      body: {
+        JsonPayloads.statusReason: reason,
+        JsonPayloads.description: comments,
+      },
+    );
   }
 
   submit() async {
