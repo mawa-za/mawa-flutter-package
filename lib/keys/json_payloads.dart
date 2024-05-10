@@ -1,6 +1,10 @@
 part of 'package:mawa_package/mawa_package.dart';
 
 class JsonPayloads {
+  static const String defendants = 'defendants';
+  static const String applicants = 'applicants';
+  static const String court = 'court';
+  static const String client = 'client';
   static const String suburb = 'suburb';
   static const String city = 'city';
   static const String town = 'town';
