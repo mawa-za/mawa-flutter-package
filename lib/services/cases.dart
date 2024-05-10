@@ -4,7 +4,6 @@ import '../mawa_package.dart';
 class Cases {
   late final String caseID;
   Cases(this.caseID);
-
   static getSpecific( String caseID,) async {
     return await NetworkRequests.decodeJson(
         await NetworkRequests().securedMawaAPI(
@@ -22,7 +21,6 @@ class Cases {
       negativeResponse: {},
     );
   }
-
   static create({
     required String client,
     required String type,
@@ -45,6 +43,5 @@ class Cases {
       },
     );
   }
-
 
 }
