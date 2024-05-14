@@ -60,6 +60,7 @@ class Cashup {
     required String employeeResponsibleId,
     required String salesArea,
     required List receipts,
+    double amount =0
   }) async {
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPost,
@@ -67,6 +68,7 @@ class Cashup {
       body: {
         JsonPayloads.employeeResponsibleId: employeeResponsibleId,
         JsonPayloads.salesArea: salesArea,
+        JsonPayloads.amount: amount,
         JsonPayloads.receipts: receipts,
       },
     );
