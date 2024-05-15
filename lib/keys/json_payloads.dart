@@ -1,6 +1,7 @@
 part of 'package:mawa_package/mawa_package.dart';
 
 class JsonPayloads {
+  static const String function = 'function';
   static const String defendants = 'defendants';
   static const String applicants = 'applicants';
   static const String court = 'court';
