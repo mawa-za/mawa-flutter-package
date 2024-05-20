@@ -43,5 +43,18 @@ class Cases {
       },
     );
   }
+  static addParticipant({
+    required String partner,
+    required String function,
+    required String caseID,
+  }) async {
+    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
+        resource: '${Resources.case_}/$caseID/${Resources.participant}',
+        body: {
+          JsonPayloads.partner: partner,
+          JsonPayloads.function: function
+
+        });
+  }
 
 }
