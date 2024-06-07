@@ -20,14 +20,16 @@ class Items {
   itemCreate(
       {required String transaction,
       required String productId,
+        required String item,
       required String code,
       required String description,
-      required String ean,
-      required String uom,
-      required String quantity,
-      required String unitPrice,
-      required String lineTotal}) async {
+        String? ean,
+        String? uom,
+        double quantity =0,
+        double unitPrice =0,
+        double lineTotal =0}) async {
     Map payload = {
+      JsonPayloads.itemId: item,
       JsonPayloads.transaction: transaction,
       JsonPayloads.productId: productId,
       JsonPayloads.code: code,
@@ -44,6 +46,37 @@ class Items {
       body: payload,
     );
   }
+
+  itemEdit(
+      {required String transaction,
+        required String item,
+        required String productId,
+        required String code,
+        required String description,
+        String? ean,
+        String? uom,
+        double quantity =0,
+        double unitPrice =0,
+        double lineTotal =0}) async {
+    Map payload = {
+      JsonPayloads.itemId: item,
+      JsonPayloads.transaction: transaction,
+      JsonPayloads.productId: productId,
+      JsonPayloads.code: code,
+      JsonPayloads.description: description,
+      JsonPayloads.ean: ean,
+      JsonPayloads.uom: uom,
+      JsonPayloads.quantity: quantity,
+      JsonPayloads.unitPrice: unitPrice,
+      JsonPayloads.lineTotal: lineTotal
+    };
+    return await NetworkRequests()
+        .securedMawaAPI(NetworkRequests.methodPut,
+      resource: '$path/$id/${Resources.items}',
+      body: payload,
+    );
+  }
+
 
   // GET /{id}/items
   getItems() async {
