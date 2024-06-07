@@ -43,5 +43,12 @@ class Invoice{
         ),
         negativeResponse: []);
   }
+  static deleteInvoice({required String invoiceId}) async {
+    return await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodDelete, resource: '${Resources.invoice}/$invoiceId',
+    ),
+    );
+  }
+
 
 }
