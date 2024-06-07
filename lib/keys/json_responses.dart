@@ -429,4 +429,5 @@ class JsonResponses {
   static const String externalReceiptNo = 'externalReceiptNo';
   static const String informant = 'informant';
   static const String vouchers = 'vouchers';
+  static const String item = 'item';
 }
