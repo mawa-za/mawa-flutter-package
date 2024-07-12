@@ -176,5 +176,6 @@ class Resources {
 
   static const String  pricingEngine ='pricing-engine';
   static const String case_ = 'case';
+  static const String username = 'username';
 
 }

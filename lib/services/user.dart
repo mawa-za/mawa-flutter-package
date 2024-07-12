@@ -25,7 +25,7 @@ class User {
   get() async {
     user = await NetworkRequests.decodeJson(
       await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-          resource: '${Resources.user}/${Resources.byId}/$id'),
+          resource: '${Resources.user}/$id'),
       negativeResponse: {},
     );
     return user;
@@ -35,7 +35,7 @@ class User {
   static getByUsername(String username) async {
     return await NetworkRequests.decodeJson(
       await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-          resource: '${Resources.user}/$username'),
+          resource: '${Resources.user}/${Resources.username}/$username'),
       negativeResponse: {},
     );
   }
