@@ -216,7 +216,7 @@ class Product {
     required String description,
     required String type,
     required String measure,
-    required String sellingPrice,
+    required String price,
     required String pricingType,
   }) async {
     {
@@ -228,7 +228,7 @@ class Product {
           JsonPayloads.description: description.trim(),
           JsonPayloads.type: type,
           JsonPayloads.baseUnitOfMeasure: measure,
-          JsonPayloads.price: sellingPrice,
+          JsonPayloads.price: price,
           JsonPayloads.pricingType: pricingType,
           JsonPayloads.autoGenerateCode: 'X',
         },
