@@ -51,6 +51,8 @@ class NetworkRequests {
 
   Map<String, String> headers({required String tokenKey, bool secured = true}) {
 
+
+
     Map<String, String> headers = {
       "X-TenantID": tenantID,
       // 'Access-Control-Allow-Origin':'*',
@@ -173,11 +175,17 @@ class NetworkRequests {
     server = await prefs.getString(SharedPrefs.server) ?? '';
     token = await prefs.getString(SharedPrefs.token) ?? '';
 
-    if (kIsWeb) {
-      var base = Uri.base.origin;
-      tenantID = base.split('//').last;
-    } else {
-      tenantID = await prefs.getString(SharedPrefs.tenantID) ?? '';
+    String tenant = prefs.getString(SharedPrefs.tenantID) ?? '';
+    if(tenant.isNotEmpty){
+      tenantID = tenant;
+    }
+    else{
+      if (kIsWeb) {
+        var base = Uri.base.origin;
+        tenantID = base.split('//').last;
+      } else {
+        tenantID = tenant;
+      }
     }
     endpointURL = 'https://$server/';
     // server;//'api-$server.mawa.co.za:$pot';
