@@ -124,8 +124,7 @@ class Claim {
   }) async {
     return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPut,
         resource: '$resource/${Resources.dispute}',
-        body: {
-          JsonPayloads.claimId: claimantId,
+        queryParameters: {
           JsonPayloads.reason: reason,
           JsonPayloads.comments: comments,
         });
