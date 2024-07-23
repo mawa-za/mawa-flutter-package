@@ -46,11 +46,14 @@ class Cashup {
     );
   }
 
-  static getAll() async {
+  static getAll(String ? cashUpType) async {
     return await NetworkRequests.decodeJson(
       await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
         resource: Resources.cashup,
+        queryParameters: {
+          QueryParameters.cashUpType: cashUpType,
+        },
       ),
       negativeResponse: [],
     );
