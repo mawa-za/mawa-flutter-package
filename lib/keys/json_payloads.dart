@@ -269,6 +269,12 @@ class JsonPayloads {
   static const String invoiceDate = 'invoiceDate';
   static const String paymentTerms = 'paymentTerms';
   static const String itemId = 'itemId';
+  static const String receiptFrom = 'receiptFrom';
+  static const String receiptTo = 'receiptTo';
+  static const String cashUpType = 'cashUpType';
+
+
+
 
 // static const String  = '';
 }
