@@ -24,18 +24,44 @@ class User {
   // GET /user/{id}
   get() async {
     user = await NetworkRequests.decodeJson(
-      await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-          resource: '${Resources.user}/${Resources.byId}/$id'),
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: '${Resources.user}/$id',
+      ),
       negativeResponse: {},
     );
     return user;
   }
 
-  // GET /user/{username}
+  // GET /user/{username}/username
   static getByUsername(String username) async {
     return await NetworkRequests.decodeJson(
-      await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-          resource: '${Resources.user}/$username'),
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: '${Resources.user}/$username/${Resources.username}',
+      ),
+      negativeResponse: {},
+    );
+  }
+
+  // GET /user/email/{email}
+  static getByEmail(String email) async {
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: '${Resources.user}/$email/${Resources.email}',
+      ),
+      negativeResponse: {},
+    );
+  }
+
+  // GET /user/cellphone/{cellphone}
+  static getByCellphone(String cellphone) async {
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: '${Resources.user}/$cellphone/${Resources.cellphone}',
+      ),
       negativeResponse: {},
     );
   }
@@ -43,9 +69,12 @@ class User {
   // GET /user
   static getAll() async {
     listUsers = await NetworkRequests.decodeJson(
-        await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-            resource: Resources.user),
-        negativeResponse: []);
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: Resources.user,
+      ),
+      negativeResponse: [],
+    );
     return listUsers;
   }
 
@@ -81,21 +110,23 @@ class User {
     String? userType,
   }) async {
     return await NetworkRequests.decodeJson(
-      await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-          resource: Resources.user,
-          queryParameters: {
-            QueryParameters.email: email,
-            QueryParameters.cellphone: cellphone,
-            QueryParameters.partnerId: partnerID,
-            QueryParameters.passwordStatus: password,
-            QueryParameters.status: status,
-            QueryParameters.userType: userType
-          }),
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: Resources.user,
+        queryParameters: {
+          QueryParameters.email: email,
+          QueryParameters.cellphone: cellphone,
+          QueryParameters.partnerId: partnerID,
+          QueryParameters.passwordStatus: password,
+          QueryParameters.status: status,
+          QueryParameters.userType: userType
+        },
+      ),
       negativeResponse: [],
     );
   }
 
-  // DELETE /user/{username}
+  // DELETE /user/{id}
   delete() async {
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodDelete,
@@ -103,23 +134,31 @@ class User {
     );
   }
 
-  // PUT /user/{username}/{path}
+  // PUT /user/{id}/{path}
   action(String path, {Map<String, dynamic>? query}) async {
-    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPut,
-        resource: '$resource/$path', queryParameters: query);
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodPut,
+      resource: '$resource/$path',
+      queryParameters: query,
+    );
   }
 
-  // PUT /user/{username}/lock
+  // PUT /user/{id}/lock
   lock(String reason) async {
-    return await action(Resources.lock, query: {JsonPayloads.reason: reason});
+    return await action(
+      Resources.lock,
+      query: {
+        JsonPayloads.reason: reason,
+      },
+    );
   }
 
-  // PUT /user/{username}/unlock
+  // PUT /user/{id}/unlock
   unlock() async {
     return await action(Resources.unlock);
   }
 
-  // PUT /user/{username}/reset
+  // PUT /user/{id}/reset
   reset() async {
     return await action(Resources.reset);
   }
@@ -149,7 +188,7 @@ class User {
     );
   }
 
-  // DELETE /user/{username}/role
+  // DELETE /user/{id}/role
   deleteRole(String userRole) async {
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodDelete,
@@ -177,27 +216,40 @@ class User {
   }
 
   static changePassword({required String password}) async {
-    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPut,
-        resource: Resources.resetPassword,
-        body: {JsonPayloads.password: password});
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodPut,
+      resource: Resources.resetPassword,
+      body: {
+        JsonPayloads.password: password,
+      },
+    );
   }
 
   resetPassword() async {
-    return await NetworkRequests.decodeJson(await NetworkRequests()
-        .securedMawaAPI(NetworkRequests.methodPost,
-            resource: '${Resources.user}/$id/${Resources.reset}'));
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPost,
+        resource: '$resource/${Resources.reset}',
+      ),
+    );
   }
 
   getRoles() async {
     return await NetworkRequests.decodeJson(
-        await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-            resource: '${Resources.user}/$id/${Resources.role}'),
-        negativeResponse: []);
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: '$resource/${Resources.role}',
+      ),
+      negativeResponse: [],
+    );
   }
 
   addRoles({required List<String> roles}) async {
-    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
-        resource: '${Resources.user}/$id/${Resources.role}', body: roles);
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodPost,
+      resource: '$resource/${Resources.role}',
+      body: roles,
+    );
   }
 
   static create({
@@ -208,24 +260,31 @@ class User {
     required String userType,
     required String partnerId,
   }) async {
-    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
-        resource: Resources.user,
-        body: {
-          JsonPayloads.username: username,
-          JsonPayloads.userType: userType,
-          JsonPayloads.email: email,
-          JsonPayloads.cellphone: cellphone,
-          JsonPayloads.password: password,
-          JsonPayloads.partnerId: partnerId,
-        });
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodPost,
+      resource: Resources.user,
+      body: {
+        JsonPayloads.username: username,
+        JsonPayloads.userType: userType,
+        JsonPayloads.email: email,
+        JsonPayloads.cellphone: cellphone,
+        JsonPayloads.password: password,
+        JsonPayloads.partnerId: partnerId,
+      },
+    );
   }
 
   static getUsersByOrganisation(String organizationId) async {
     return await NetworkRequests.decodeJson(
-        await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
-            resource: '${Resources.user}/${Resources.OrganizationUsers}',
-            queryParameters: {QueryParameters.organizationId: organizationId}),
-        negativeResponse: []);
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: '${Resources.user}/${Resources.OrganizationUsers}',
+        queryParameters: {
+          QueryParameters.organizationId: organizationId,
+        },
+      ),
+      negativeResponse: [],
+    );
   }
 
   static Future<bool> isLoggedIn() async {
@@ -235,6 +294,9 @@ class User {
 
   static void setLoggedIn({required bool loggedIn}) async {
     final SharedPreferences prefs = await preferences;
-    prefs.setBool(SharedPrefs.isLoggedIn, loggedIn);
+    prefs.setBool(
+      SharedPrefs.isLoggedIn,
+      loggedIn,
+    );
   }
 }
