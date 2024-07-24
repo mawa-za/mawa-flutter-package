@@ -59,6 +59,7 @@ class Cashup {
     );
   }
 
+  //Create manual receipt
   static create({
     required String employeeResponsibleId,
     required String salesArea,
@@ -76,4 +77,29 @@ class Cashup {
       },
     );
   }
+
+  //Create manual cashup
+  static createManual({
+    required String employeeResponsibleId,
+    required String salesArea,
+    required String cashUpType,
+    required String receiptFrom,
+    required String receiptTo,
+    double amount =0
+  }) async {
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodPost,
+      resource: Resources.cashup,
+      body: {
+        JsonPayloads.employeeResponsibleId: employeeResponsibleId,
+        JsonPayloads.salesArea: salesArea,
+        JsonPayloads.cashUpType: cashUpType,
+        JsonPayloads.amount: amount,
+        JsonPayloads.receiptFrom: receiptFrom,
+        JsonPayloads.receiptTo: receiptTo,
+      },
+    );
+  }
+
+
 }
