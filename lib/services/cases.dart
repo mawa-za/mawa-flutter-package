@@ -16,12 +16,13 @@ class Cases {
     return await NetworkRequests.decodeJson(
       await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
-        resource: 'case',
+        resource: Resources.case_,
       ),
-      negativeResponse: {},
+       negativeResponse: {},
     );
   }
   static create({
+    required String product,
     required String client,
     required String type,
     required String court,
@@ -33,6 +34,7 @@ class Cases {
       NetworkRequests.methodPost,
       resource: Resources.case_,
       body: {
+        JsonPayloads.product: product,
         JsonPayloads.client: client,
         JsonPayloads.type: type,
         JsonPayloads.court: court,
