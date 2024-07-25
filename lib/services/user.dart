@@ -38,7 +38,7 @@ class User {
     return await NetworkRequests.decodeJson(
       await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
-        resource: '${Resources.user}/$username/${Resources.username}',
+        resource: '${Resources.user}/${Resources.username}/$username',
       ),
       negativeResponse: {},
     );
