@@ -10,7 +10,7 @@ class Premium {
   late String resource;
 
   static create({
-    required String membershipNumber,
+    required String membershipId,
     required String membershipPeriod,
     required String tenderType,
     required String location,
@@ -21,7 +21,7 @@ class Premium {
       NetworkRequests.methodPost,
       resource: Resources.premium,
       body: {
-        JsonPayloads.membershipNumber: membershipNumber,
+        JsonPayloads.membershipId: membershipId,
         JsonPayloads.membershipPeriod: membershipPeriod,
         JsonPayloads.tenderType: tenderType,
         JsonPayloads.location: location,
