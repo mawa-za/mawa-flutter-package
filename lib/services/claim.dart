@@ -163,7 +163,7 @@ class Claim {
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPut,
       resource: '$resource/${Resources.reject}',
-      body: {
+      queryParameters: {
         JsonPayloads.statusReason: reason,
         JsonPayloads.description: comments,
       },
