@@ -1,7 +1,6 @@
 part of 'package:mawa_package/mawa_package.dart';
 
 class NetworkRequests {
-  // final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   NetworkRequests({this.responseType}) {
     _getToken();
@@ -55,9 +54,7 @@ class NetworkRequests {
 
     Map<String, String> headers = {
       "X-TenantID": tenantID,
-      // 'Access-Control-Allow-Origin':'*',
     };
-    // {/*"Authorization": "Bearer $tokenKey"*/};
     secured ? headers["Authorization"] = "Bearer $token" : null;
 
     responseType ??= responseJson;
@@ -84,14 +81,6 @@ class NetworkRequests {
       // NOT running on the web! You can check for additional platforms here.
     }
   }
-
-  // tenant(){
-  //   final SharedPreferences prefs = await preferences;
-  //
-  //   tenantID = await prefs.getString(SharedPrefs.tenantID) ?? '';
-  //   print('running $tenantID ${tenantID.runtimeType}');
-  //   return tenantID;
-  // }
 
   Map statusMessages = {
     200: 'OK',
@@ -188,18 +177,12 @@ class NetworkRequests {
       }
     }
     endpointURL = 'https://$server/';
-    // server;//'api-$server.mawa.co.za:$pot';
 
     dynamic url;
     dynamic header = headers(
       tokenKey: token,
       secured: secured,
     );
-    // statusCode == null? statusCode= 100: null;
-    // server == 'qas'
-    //     ? url =  Uri.https(endpointURL, path + resource, queryParameters)
-    //     : url = Uri.http(endpointURL, path + resource, queryParameters);
-    // url = Uri.parse(endpointURL + resource);
     url = Uri.https(server, resource, queryParameters);
     if (kDebugMode) {
       print(method);
@@ -207,14 +190,7 @@ class NetworkRequests {
       print(header);
       print(body);
     }
-/*    if (statusCode != 401) {*/
       try {
-        // print('\n' + token.toString() + '\n');
-        // print(method);
-        // print(endpointURL);
-        // print(path);
-        // print(resource);
-        // print(header);
         switch (method) {
           case methodGet:
             feedback = await http.get(
@@ -247,32 +223,14 @@ class NetworkRequests {
         switch (statusCode) {
           case 200:
             {
-              // try {
-              //   return jsonDecode(feedback.body);
-              // } catch (e) {
-              //   print(e.toString());
-              // }
-              // return feedback;
             }
             break;
           case 201:
             {
-              // try {
-              //   return jsonDecode(feedback.body);
-              // } catch (e) {
-              //   print(e.toString());
-              // }
-              // return feedback;
             }
             break;
           case 202:
             {
-              // try {
-              //   return jsonDecode(feedback.body);
-              // } catch (e) {
-              //   print(e.toString());
-              // }
-              // return feedback;
             }
             break;
           case 401:
@@ -283,7 +241,6 @@ class NetworkRequests {
           case 404:
             {
               Tools.isTouchLocked = false;
-              // message(message: 'Server Is Down', textColor: Colors.redAccent, isLock: false);
               Alerts.toastMessage(
                 message: 'Server Down',
                 positive: false,
@@ -302,7 +259,6 @@ class NetworkRequests {
           case 405:
             {
               Tools.isTouchLocked = false;
-              // message(message: 'Login failed', textColor: Colors.redAccent, isLock: false);
               Alerts.toastMessage(message: 'Not Allowed', positive: false);
             }
             break;
@@ -339,7 +295,6 @@ class NetworkRequests {
             break;
         }
 
-        // else if (statusCode >= 400 && statusCode < 600 && statusCode != 417) {}
         if (kDebugMode) {
           print('${feedback.statusCode}\n${feedback.body}');
         }
@@ -348,50 +303,30 @@ class NetworkRequests {
         if (kDebugMode) {
           print(e);
         }
-        // Navigator.maybePop(Tools.context);
         Alerts.toastMessage(
-            // context: Tools.context,
             message: 'Request Timed Out. \nCheck Network Connection.',
             positive: false);
         responseCaught = http.Response('Request Timed Out', 491);
-        // responseCaught.statusCode = 491;
-        // responseCaught.reasonPhrase = 'Request Timed Out';
         return responseCaught;
       } on SocketException catch (e) {
         if (kDebugMode) {
           print(e);
         }
         Alerts.toastMessage(
-            // context: Tools.context,
             message: 'Encountered Network Problem',
             positive: false);
         responseCaught = http.Response('Encountered Network Problem', 492);
-        // responseCaught.statusCode = 492;
-        // responseCaught.reasonPhrase = 'Encountered Network Problem';
         return responseCaught;
       } on HandshakeException catch (e) {
         if (kDebugMode) {
           print(e);
         } Alerts.toastMessage(
-            // context: Tools.context,
             message: 'Request Terminated During Handshake',
             positive: false);
         responseCaught =
             http.Response('Could Not Establish Connection With Remote', 493);
-        // responseCaught.statusCode = 493;
-        // responseCaught.reasonPhrase =
-        //     'Could Not Establish Connection With Remote';
         return responseCaught;
       }
-      // on PresentationConnectionCloseEvent catch (e) {
-      //   Tools.isTouchLocked = false;
-      //   print(e.toString());
-      //   Alerts.flushbar(
-      //       context: Tools.context,
-      //       message: 'Connection Lost During Request',
-      //       positive: false);
-      //        responseCaught = http.Response('Connection Lost During Request', 494);
-      // }
       on CertificateException catch(e){
         if (kDebugMode) {
           print(e);
@@ -407,46 +342,14 @@ class NetworkRequests {
         if (kDebugMode) {
           print(e);
         }
-        Alerts.toastMessage(
-            // context: Tools.context,
-            message: 'Ran Into A Problem',
-            positive: false);
+        // Alerts.toastMessage(
+        //     // context: Tools.context,
+        //     message: 'Ran Into A Problem',
+        //     positive: false);
         responseCaught = http.Response('Ran Into A Problem', 499);
-        // responseCaught.statusCode = 499;
-        // responseCaught.reasonPhrase = 'Ran Into A Problem';
         return responseCaught;
       }
-      // print('last');
-   /* } else {
-      print('\npre\n');
 
-      dynamic init = await prefs.getString(SharedPrefs.initialRoute) ?? '';
-      print('Initial route rerouting $init');
-      if (init != null) {
-        var route = ModalRoute.of(Tools.context);
-
-        if (route != null) {
-          print(route.settings.name);
-          if (route.settings.name.toString() != init) {
-            try{
-              Navigator.pushNamedAndRemoveUntil(
-                  Tools.context, init, (route) => false);
-            }
-            catch(e){
-
-            }
-          }
-        }
-      } else {
-          try{
-// Authorize(context: Tools.context).attempt();
-        Navigator.pushReplacementNamed(Tools.context, init);
-    }
-    catch(e){
-
-    }
-      }
-    }*/
   }
 
   Future unsecuredMawaAPI(
@@ -472,9 +375,6 @@ class NetworkRequests {
     // url = Uri.parse(endpointURL + resource);
     url = Uri.https(server,resource,queryParameters);
 
-    // print(endpointURL);
-    // print(NetworkRequests.path);
-    // print(resource);
 
     try {
       // final
