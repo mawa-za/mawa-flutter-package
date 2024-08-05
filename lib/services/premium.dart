@@ -10,10 +10,10 @@ class Premium {
   late String resource;
 
   static create({
-    required String membershipNumber,
-    required String membershipPeriod,
+    required String membershipId,
+    String? membershipPeriod,
     required String tenderType,
-    required String location,
+    String? location,
     required String amount,
     required String externalReceiptNo,
   }) async {
@@ -21,7 +21,7 @@ class Premium {
       NetworkRequests.methodPost,
       resource: Resources.premium,
       body: {
-        JsonPayloads.membershipNumber: membershipNumber,
+        JsonPayloads.membershipId: membershipId,
         JsonPayloads.membershipPeriod: membershipPeriod,
         JsonPayloads.tenderType: tenderType,
         JsonPayloads.location: location,
@@ -35,7 +35,7 @@ class Premium {
   static search({
     String? receiptType,
     String? invoiceNumber,
-    String? membershipNumber,
+    String? membershipId,
     String? membershipPeriod,
     String? tenderType,
     String? user,
@@ -48,8 +48,8 @@ class Premium {
     invoiceNumber != null
         ? qaramParam[QueryParameters.invoiceNumber] = invoiceNumber
         : null;
-    membershipNumber != null
-        ? qaramParam[QueryParameters.membershipNumber] = membershipNumber
+    membershipId != null
+        ? qaramParam[QueryParameters.membershipId] = membershipId
         : null;
     membershipPeriod != null
         ? qaramParam[QueryParameters.membershipPeriod] = membershipPeriod
