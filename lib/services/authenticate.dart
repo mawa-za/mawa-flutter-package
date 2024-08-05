@@ -37,11 +37,19 @@ class Authenticate {
       //   // Navigator.pushReplacementNamed(context, direct!);
       //   postAuthenticate;
       User.loggedInUser = await User.getByUsername(username);
-      Map<String, dynamic> partner = Map<String, dynamic>.from(User.loggedInUser[JsonResponses.partner]);
-      User.loggedInUser[JsonResponses.partner] = partner;
-      User.loggedInUser[JsonResponses.partnerId] = partner[JsonResponses.id];
-      SharedStorage.setString(key: SharedPrefs.userID, detail: User.loggedInUser[JsonResponses.id],);
-      SharedStorage.setString(key: SharedPrefs.loggedInUser, detail: jsonEncode(User.loggedInUser),);
+      if(User.loggedInUser.isNotEmpty){
+        Map<String, dynamic> partner = Map<String, dynamic>.from(
+            User.loggedInUser[JsonResponses.partner]);
+        User.loggedInUser[JsonResponses.partner] = partner;
+        User.loggedInUser[JsonResponses.partnerId] = partner[JsonResponses.id];
+        SharedStorage.setString(key: SharedPrefs.userID,
+          detail: User.loggedInUser[JsonResponses.id],);
+        SharedStorage.setString(key: SharedPrefs.loggedInUser,
+          detail: jsonEncode(User.loggedInUser),);
+      }
+      else{
+        response = http.Response('Not Found', 404,);
+      }
     }
     return response;
   }
