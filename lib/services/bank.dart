@@ -34,6 +34,37 @@ dynamic finaleResponse={};
 
         });
   }
+static deleteAccount({required String id}) async {
+  await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodDelete,
+      resource: '${Resources.bankAccount}/$id'));
+}
+
+static edit(
+    { required dynamic id,
+      String? accHolderName,
+      String? bankName,
+      String? accType,
+      String? accNumber,
+      String? branchCode,
+      String? validFrom,
+      String? validTo
+    }) async {
+  return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodPut,
+      resource: '${Resources.bankAccount}/$id',
+      body: {
+        JsonResponses.id:id,
+        JsonPayloads.accountHolder: accHolderName,
+        JsonPayloads.bankName: bankName,
+        JsonPayloads.accountType: accType,
+        JsonPayloads.accountNumber: accNumber,
+        JsonPayloads.branchCode: branchCode,
+        JsonPayloads.validFrom: validFrom,
+        JsonPayloads.validTo: validTo
+      });
+
+}
 
 
 }
