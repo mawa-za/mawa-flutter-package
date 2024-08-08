@@ -87,6 +87,8 @@ class AttachBase64File {
   }
 
   build() async {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return await showDialog(
       context: context,
       builder: (context) {
@@ -97,9 +99,10 @@ class AttachBase64File {
           ) {
             return AlertDialog(
               actionsAlignment: MainAxisAlignment.start,
-              title: const Row(
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.only(
                       left: 27.0,
                     ),
@@ -110,11 +113,19 @@ class AttachBase64File {
                       ),
                     ),
                   ),
+                  IconButton(
+                    onPressed: () => Navigator.pop(context),
+                    icon: const Icon(
+                      Icons.cancel_outlined,
+                      color: Colors.red,
+                    ),
+                    tooltip: 'Cancel',
+                  ),
                 ],
               ),
               content: Container(
-                width: 600.0,
-                height: 350.0,
+                width: width * 0.5,
+                height: height * 0.4,
                 margin: const EdgeInsets.only(
                   left: 20.00,
                 ),
@@ -151,15 +162,42 @@ class AttachBase64File {
                         displayMessage: 'No data',
                       );
                     }
-
                     return widget;
                   },
                 ),
               ),
+              actions: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const Expanded(
+                      child: SizedBox(
+                        width: 20.0,
+                      ),
+                    ),
+                    Expanded(
+                      child: TextButton.icon(
+                        onPressed: upload,
+                        icon: const Icon(
+                          Icons.save_as,
+                        ),
+                        style: TextButton.styleFrom(
+                          foregroundColor: Colors.green,
+                          backgroundColor: Colors.greenAccent.shade100,
+                        ),
+                        label: const Text(
+                          'Upload',
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             );
           },
         );
       },
+      barrierDismissible: false,
     );
   }
 
@@ -325,14 +363,29 @@ class AttachBase64File {
             ),
             Visibility(
               visible: !isFilePicked,
-              child: TextButton(
-                onPressed: () {
-                  pickFile(setState);
-                  setState(() {});
-                },
-                child: const Text(
-                  'Pick File',
-                ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Spacer(),
+                  Expanded(
+                    flex:2,
+                    child: TextButton.icon(
+                      icon: const Icon(Icons.attachment,),
+                      style: TextButton.styleFrom(
+                        foregroundColor: Colors.blue.shade900,
+                        backgroundColor: Colors.blue.shade100,
+                      ),
+                      onPressed: () {
+                        pickFile(setState);
+                        setState(() {});
+                      },
+                      label: const Text(
+                        'Pick File',
+                      ),
+                    ),
+                  ),
+                  const Spacer(),
+                ],
               ),
             ),
             pickedFile != null
@@ -392,17 +445,6 @@ class AttachBase64File {
                 : Container(),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: upload,
-        icon: const Icon(
-          Icons.save_as,
-        ),
-        label: const Text(
-          'Upload',
-        ),
-        tooltip: 'Upload Attachment',
-        heroTag: 'upload att',
       ),
     );
   }
