@@ -58,5 +58,10 @@ class Cases {
 
         });
   }
+  static deleteParticipant({required String id,partner,function}) async {
+    await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodDelete,
+        resource: '${Resources.case_}/$id/participant/$partner/$function'));
+  }
 
 }
