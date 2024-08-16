@@ -151,13 +151,14 @@ class Alerts {
     length == null ? length = Toast.LENGTH_SHORT : null;
 
     Fluttertoast.showToast(
-      gravity: ToastGravity.TOP,
+      gravity: ToastGravity.CENTER,
       toastLength: Toast.LENGTH_LONG,
       msg: message,
       timeInSecForIosWeb: 3,
       backgroundColor: Colors.white,
       textColor: textColor,
       webBgColor: "linear-gradient(to right, #FFFFFF, #FFFFFF)",
+      webPosition: "center"
     );
   }
 

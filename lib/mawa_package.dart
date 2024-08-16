@@ -71,6 +71,7 @@ part 'package:mawa_package/services/calculate_pricing.dart';
 part 'package:mawa_package/services/cashup.dart';
 part 'package:mawa_package/services/claim.dart';
 part 'package:mawa_package/services/client_policy.dart';
+part 'package:mawa_package/services/comment.dart';
 part 'package:mawa_package/services/constants.dart';
 part 'package:mawa_package/services/customers.dart';
 part 'package:mawa_package/services/deposit.dart';
