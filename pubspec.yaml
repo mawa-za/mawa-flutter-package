@@ -22,7 +22,7 @@ dependencies:
   device_info_plus: ^10.1.0
   email_validator: ^3.0.0
   another_flushbar: ^1.10.29
-  permission_handler: ^11.3.1
+  permission_handler: ^10.4.5
   fluttertoast: ^8.0.9
   #  device_info: ^2.0.2
   #  geolocator: ^7.1.1
