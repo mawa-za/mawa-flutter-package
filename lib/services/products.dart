@@ -100,8 +100,6 @@ class Product {
         JsonPayloads.code: code,
         JsonPayloads.description: description,
         JsonPayloads.category: category,
-        JsonPayloads.price: price,
-        JsonPayloads.pricingType: pricingType,
         JsonPayloads.baseUnitOfMeasure: baseUnitOfMeasure,
       },
     );
