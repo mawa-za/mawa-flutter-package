@@ -33,6 +33,7 @@ part 'package:mawa_package/keys/field_option_types.dart';
 part 'package:mawa_package/keys/id_types.dart';
 part 'package:mawa_package/keys/json_payloads.dart';
 part 'package:mawa_package/keys/json_responses.dart';
+part 'package:mawa_package/keys/membership_creation_types.dart';
 part 'package:mawa_package/keys/membership_types.dart';
 part 'package:mawa_package/keys/object_types.dart';
 part 'package:mawa_package/keys/partner_attributes.dart';
