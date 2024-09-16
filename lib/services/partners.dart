@@ -20,7 +20,20 @@ class Partners {
       negativeResponse: [],
     );
   }
+  static newSearch({String? role,String? pageSize ,String? pageNumber,String?attributeName,String?attributeValue, String? type,}) async {
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
+        resource: Resources.newPartner,
+        queryParameters: {
+          QueryParameters.role: role,
+          QueryParameters.pageSize: pageSize,
+          QueryParameters.pageNumber: pageNumber,
 
+        },
+      ),
+      negativeResponse: [],
+    );
+  }
   static createPartner({required dynamic body}) async {
     dynamic response = await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodPost,
