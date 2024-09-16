@@ -27,6 +27,9 @@ class JsonPayloads {
   static const String value = 'value';
   static const String type = 'type';
   static const String transaction = 'transaction';
+  static const String transactionId = 'transactionId';
+
+  static const String invoiceType = 'invoiceType';
 
   static const String otp = 'otp';
   static const String partnerEmail = 'partnerEmail';

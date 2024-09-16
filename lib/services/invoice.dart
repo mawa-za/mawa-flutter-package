@@ -8,7 +8,9 @@ class Invoice{
     String ? invoiceDate,
     String ? paymentTerms,
     required Map<String, dynamic> pricing,
-    required List<Map<String, dynamic>> item
+    required List<Map<String, dynamic>> item,
+    String ? transactionID,
+    String ? invoiceType
   }) async{
 
     dynamic response=await NetworkRequests().securedMawaAPI(
@@ -21,7 +23,9 @@ class Invoice{
           JsonPayloads.invoiceDate: invoiceDate,
           JsonPayloads.paymentTerms: paymentTerms,
           JsonPayloads.items:item,
-          JsonPayloads.pricing:pricing
+          JsonPayloads.pricing:pricing,
+          JsonPayloads.transactionId:transactionID,
+          JsonPayloads.invoiceType:invoiceType
         });
     return response;
 
