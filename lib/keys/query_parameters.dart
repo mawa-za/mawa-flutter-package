@@ -1,6 +1,8 @@
 part of 'package:mawa_package/mawa_package.dart';
 
 class QueryParameters {
+  static const String pageSize = 'pageSize';
+  static const String pageNumber = 'pageNumber';
   static const String transactionId = 'transactionId';
 
   static const String versionAppName = 'appName';
