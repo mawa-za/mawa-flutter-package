@@ -1,7 +1,7 @@
 part of 'package:mawa_package/mawa_package.dart';
 
 class Resources {
-
+  static const String newPartner = 'partner/new';
   static const String participant = 'participant';
   static const String address = 'address';
   static const String bankAccount = 'bank-account';

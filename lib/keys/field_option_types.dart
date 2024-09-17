@@ -1,6 +1,7 @@
 part of 'package:mawa_package/mawa_package.dart';
 
 class FieldOptionTypes {
+  static const String fieldOptionInvoiceType = 'INVOICE-TYPE';
   static const String fieldOptionDisputeReason = 'CLAIM-DISPUTE-REASON';
   static const String fieldOptionCategory = 'CATEGORY';
   static const String fieldOptionPriority = 'PRIORITY';
