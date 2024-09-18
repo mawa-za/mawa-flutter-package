@@ -58,5 +58,8 @@ class FieldOptionTypes {
   static const String groupSocietyCreationType = 'GROUP-SOCIETY-CREATION-TYPE';
   static const String caseType = 'CASE-TYPE';
   static const String courtName = 'COURT';
+  static const String documentTypeDeposit = 'DOCUMENT-TYPE-DEPOSIT';
+  static const String documentTypeCashUp = 'DOCUMENT-TYPE-CASHUP';
+  static const String documentTypePaymentRequest = 'DOCUMENT-TYPE-PAYMENT-REQUEST';
 
 }
