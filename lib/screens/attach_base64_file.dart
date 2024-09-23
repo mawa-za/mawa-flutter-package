@@ -8,6 +8,8 @@ class AttachBase64File {
     required this.id,
     required this.context,
     required this.postCreate,
+    required this.documentTypeField,
+
   }) {
     docTypes = [];
     docType = {};
@@ -17,6 +19,7 @@ class AttachBase64File {
     build();
   }
   final Function postCreate;
+  final String documentTypeField;
   late String attachmentID;
   final String type;
   final String id;
@@ -36,7 +39,7 @@ class AttachBase64File {
     if (docTypes.isEmpty) {
       docTypes = List<Map<String, dynamic>>.from(
         await Field(
-          FieldOptionTypes.documentType,
+          documentTypeField,
         ).getOptions(),
       );
     }
@@ -125,7 +128,7 @@ class AttachBase64File {
               ),
               content: Container(
                 width: width * 0.5,
-                height: height * 0.4,
+                height: height * 0.5,
                 margin: const EdgeInsets.only(
                   left: 20.00,
                 ),
