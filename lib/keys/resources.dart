@@ -180,4 +180,6 @@ class Resources {
   static const String cellphone = 'cellphone';
   static const String email = 'email';
 
+  static const String depositAttachment = 'deposit-attachment';
+
 }
