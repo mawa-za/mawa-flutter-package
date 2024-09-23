@@ -38,6 +38,27 @@ class Deposit {
           JsonPayloads.transactionIdLink: transactionID,
         },);
   }
+  static attachmentDepositCreate(Uint8List fileBytes,{
+    required String transactionID,
+    required double amount,
+    required String extension,
+    required String documentType,
+    required String objectType
+
+  }) async {
+    dynamic fileString = base64.encode(fileBytes);
+    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
+      resource: '${Resources.deposit}/${Resources.depositAttachment}',
+      body: {
+        JsonPayloads.amount: '$amount',
+        JsonPayloads.transactionIdLink: transactionID,
+        JsonPayloads.file: fileString.toString(),
+        JsonPayloads.extension: extension,
+        JsonPayloads.documentType: documentType,
+        JsonPayloads.objectType: objectType,
+
+      },);
+  }
 
   get() async {
     return NetworkRequests.decodeJson(
