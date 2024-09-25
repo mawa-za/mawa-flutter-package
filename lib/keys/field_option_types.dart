@@ -62,5 +62,8 @@ class FieldOptionTypes {
   static const String documentTypeDeposit = 'DOCUMENT-TYPE-DEPOSIT';
   static const String documentTypeCashUp = 'DOCUMENT-TYPE-CASHUP';
   static const String documentTypePaymentRequest = 'DOCUMENT-TYPE-PAYMENT-REQUEST';
-
+  static const String documentTypeClaim = 'DOCUMENT-TYPE-CLAIM';
+  static const String documentTypeGroupSociety = 'DOCUMENT-TYPE-GROUP-SOCIETY';
+  static const String documentTypeLeave = 'DOCUMENT-TYPE-LEAVE';
+  static const String documentTypeMembership = 'DOCUMENT-TYPE-MEMBERSHIP';
 }
