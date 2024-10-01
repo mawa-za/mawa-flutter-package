@@ -275,6 +275,9 @@ class JsonPayloads {
   static const String receiptFrom = 'receiptFrom';
   static const String receiptTo = 'receiptTo';
   static const String cashUpType = 'cashUpType';
+  static const String priority = 'priority';
+  static const String assignee = 'assignee';
+  static const String assigneeIds = 'assigneeIds';
 
 
 
