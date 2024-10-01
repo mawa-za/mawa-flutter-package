@@ -20,4 +20,5 @@ class SharedPrefs {
   static const workcenters = 'workcenters';
   static const loggedInUser = 'loggedInUser';
   static const roleRoot = 'roleRoot';
+  static const organization = 'organization';
 }
