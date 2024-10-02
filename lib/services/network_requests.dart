@@ -342,10 +342,10 @@ class NetworkRequests {
         if (kDebugMode) {
           print(e);
         }
-        // Alerts.toastMessage(
-        //     // context: Tools.context,
-        //     message: 'Ran Into A Problem',
-        //     positive: false);
+        Alerts.toastMessage(
+            // context: Tools.context,
+            message: 'Ran Into A Problem',
+            positive: false);
         responseCaught = http.Response('Ran Into A Problem', 499);
         return responseCaught;
       }

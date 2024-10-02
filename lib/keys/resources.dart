@@ -179,6 +179,8 @@ class Resources {
   static const String username = 'username';
   static const String cellphone = 'cellphone';
   static const String email = 'email';
+  static const String close = 'close';
+  static const String unassign = 'unassign';
 
   static const String depositAttachment = 'deposit-attachment';
 
