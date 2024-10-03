@@ -149,6 +149,7 @@ class QueryParameters {
   static const String objectId = "objectId";
   static const String cashUpType = "cashUpType";
   static const String membershipId = "membershipId";
+  static const String parentTransactionId = 'parentTransactionId';
   static const String priority = 'priority';
   static const String creationDate = 'creationDate';
 
