@@ -434,6 +434,7 @@ class JsonResponses {
   static const String item = 'item';
   static const String cashUpType = 'cashUpType';
   static const String uploadBy = 'uploadBy';
+  static const String comments = 'comments';
   static const String attachment = 'attachment';
   static const String assignee = 'assignee';
   static const String tasks = 'tasks';
