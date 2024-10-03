@@ -1,6 +1,7 @@
 part of 'package:mawa_package/mawa_package.dart';
 
 class FieldOptionTypes {
+  static const String fieldOptionInvoiceType = 'INVOICE-TYPE';
   static const String fieldOptionDisputeReason = 'CLAIM-DISPUTE-REASON';
   static const String fieldOptionCategory = 'CATEGORY';
   static const String fieldOptionPriority = 'PRIORITY';
@@ -57,5 +58,12 @@ class FieldOptionTypes {
   static const String groupSocietyCreationType = 'GROUP-SOCIETY-CREATION-TYPE';
   static const String caseType = 'CASE-TYPE';
   static const String courtName = 'COURT';
-
+  static const String documentTypeCase = 'DOCUMENT-TYPE-CASE';
+  static const String documentTypeDeposit = 'DOCUMENT-TYPE-DEPOSIT';
+  static const String documentTypeCashUp = 'DOCUMENT-TYPE-CASHUP';
+  static const String documentTypePaymentRequest = 'DOCUMENT-TYPE-PAYMENT-REQUEST';
+  static const String documentTypeClaim = 'DOCUMENT-TYPE-CLAIM';
+  static const String documentTypeGroupSociety = 'DOCUMENT-TYPE-GROUP-SOCIETY';
+  static const String documentTypeLeave = 'DOCUMENT-TYPE-LEAVE';
+  static const String documentTypeMembership = 'DOCUMENT-TYPE-MEMBERSHIP';
 }

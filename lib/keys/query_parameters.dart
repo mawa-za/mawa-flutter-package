@@ -1,6 +1,8 @@
 part of 'package:mawa_package/mawa_package.dart';
 
 class QueryParameters {
+  static const String pageSize = 'pageSize';
+  static const String pageNumber = 'pageNumber';
   static const String transactionId = 'transactionId';
 
   static const String versionAppName = 'appName';
@@ -148,6 +150,8 @@ class QueryParameters {
   static const String cashUpType = "cashUpType";
   static const String membershipId = "membershipId";
   static const String parentTransactionId = 'parentTransactionId';
+  static const String priority = 'priority';
+  static const String creationDate = 'creationDate';
 
 // static const String  = '';
 }
