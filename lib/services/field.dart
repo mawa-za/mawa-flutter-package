@@ -64,6 +64,17 @@ class Field {
     return mappedFields;
   }
 
+  static getAllOptions() async {
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: '${Resources.field}/${Resources.option}',
+      ),
+      negativeResponse: [],
+    );
+
+  }
+
   getOptions() async {
     return await NetworkRequests.decodeJson(
       await NetworkRequests().securedMawaAPI(
