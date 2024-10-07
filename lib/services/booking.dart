@@ -59,11 +59,12 @@ class Booking {
         .securedMawaAPI(NetworkRequests.methodDelete, resource: resource);
   }
 
-  edit({String? bookTime, String? bookDate, String? employeeId}) async {
+  edit({String? bookTime, String? bookDate, String? employeeId,String? bookStatus}) async {
     Map<String, String> payload = {};
-    if (bookTime != null && bookDate != null) {
+    if (bookTime != null && bookDate != null && bookStatus != null) {
       payload[JsonPayloads.bookDate] = bookDate;
       payload[JsonPayloads.bookTime] = bookTime;
+      payload[JsonPayloads.status] = bookStatus;
     }
     if (employeeId != null) {
       payload[JsonPayloads.employeeId] = employeeId;
