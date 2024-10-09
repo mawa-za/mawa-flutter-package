@@ -440,5 +440,5 @@ class JsonResponses {
   static const String tasks = 'tasks';
   static const String plannedEndDate = 'plannedEndDate';
   static const String plannedStartDate = 'plannedStartDate';
-
+  static const String invoiceType = 'invoiceType';
 }
