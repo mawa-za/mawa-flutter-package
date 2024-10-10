@@ -183,5 +183,7 @@ class Resources {
   static const String unassign = 'unassign';
 
   static const String depositAttachment = 'deposit-attachment';
+  static const String activate = 'activate';
+  static const String deactivate = 'de-activate';
 
 }
