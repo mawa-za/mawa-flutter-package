@@ -209,4 +209,24 @@ class Membership {
       negativeResponse: [],
     );
   }
+
+  activate({required String statusReason, String? description}) async {
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodPost,
+      resource: '$resource/${Resources.activate}',
+    );
+  }
+  deactivate({required String statusReason, String? description}) async {
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodPost,
+      resource: '$resource/${Resources.deactivate}',
+    );
+  }
+
+  cancel({required String statusReason, String? description}) async {
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodPost,
+      resource: '$resource/${Resources.cancel}',
+    );
+  }
 }
