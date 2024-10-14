@@ -48,7 +48,7 @@ class FieldOptionTypes {
   static const String tenderType = 'TENDER-TYPE';
   static const String documentType = 'DOCUMENT-TYPE';
   static const String membershipStatuses = 'MEMBERSHIP-STATUSES';
-  static const String membershipStatusReasons = 'MEMBERSHIP-STATUS-REASONS';
+  static const String membershipStatusReason = 'MEMBERSHIP-STATUS-REASON';
   static const String serviceRequestCategory = 'SERVICE-REQUEST-CATEGORY';
   static const String serviceRequestDescription = 'SERVICE-REQUEST-DESCRIPTION';
   static const String serviceRequestPriority = 'SERVICE-REQUEST-PRIORITY';
