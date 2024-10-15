@@ -31,6 +31,36 @@ class Membership {
     );
   }
 
+  static searchV2({
+    String? status,
+    String? mainPartner,
+    String? employeeResponsibleName,
+    String? creationDate,
+    String? idNumber,
+  }) async {
+    Map<String, String> param = {};
+    status != null ? param[QueryParameters.status] = status : null;
+    mainPartner != null
+        ? param[QueryParameters.mainPartner] = mainPartner
+        : null;
+    employeeResponsibleName != null
+        ? param[QueryParameters.employeeResponsibleName] =
+            employeeResponsibleName
+        : null;
+    creationDate != null
+        ? param[QueryParameters.creationDate] = creationDate
+        : null;
+    idNumber != null ? param[QueryParameters.idNumber] = idNumber : null;
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: '${Resources.membership}/${Resources.v2}',
+        queryParameters: param,
+      ),
+      negativeResponse: [],
+    );
+  }
+
   get() async {
     return await NetworkRequests.decodeJson(
       await NetworkRequests().securedMawaAPI(
@@ -216,6 +246,7 @@ class Membership {
       resource: '$resource/${Resources.activate}',
     );
   }
+
   deactivate({required String statusReason, String? description}) async {
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPost,
