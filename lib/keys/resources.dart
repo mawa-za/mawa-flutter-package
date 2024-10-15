@@ -131,6 +131,7 @@ class Resources {
   static const String membership = 'membership';
   static const String dependent = 'dependent';
   static const String partner = 'partner';
+  static const String partnerV2 = 'partner/v2';
 
   static const String quotation = 'quotation';
   static const String items = 'items';
