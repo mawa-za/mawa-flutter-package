@@ -214,12 +214,20 @@ class Membership {
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPost,
       resource: '$resource/${Resources.activate}',
+      body: {
+        JsonPayloads.statusReason: statusReason,
+        JsonPayloads.description: description,
+      },
     );
   }
   deactivate({required String statusReason, String? description}) async {
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPost,
       resource: '$resource/${Resources.deactivate}',
+      body: {
+        JsonPayloads.statusReason: statusReason,
+        JsonPayloads.description: description,
+      },
     );
   }
 
@@ -227,6 +235,10 @@ class Membership {
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPost,
       resource: '$resource/${Resources.cancel}',
+      body: {
+        JsonPayloads.statusReason: statusReason,
+        JsonPayloads.description: description,
+      },
     );
   }
 }
