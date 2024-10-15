@@ -152,6 +152,8 @@ class QueryParameters {
   static const String parentTransactionId = 'parentTransactionId';
   static const String priority = 'priority';
   static const String creationDate = 'creationDate';
+  static const String employeeResponsibleName = 'employeeResponsibleName';
+  static const String mainPartner = 'mainPartner';
 
 // static const String  = '';
 }
