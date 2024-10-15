@@ -20,6 +20,20 @@ class Partners {
       negativeResponse: [],
     );
   }
+  static searchV2({String? role,String?attributeName,String?attributeValue, String? type,}) async {
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
+        resource: Resources.partnerV2,
+        queryParameters: {
+          QueryParameters.role: role,
+          QueryParameters.attributeName: attributeName,
+          QueryParameters.attributeValue: attributeValue,
+          QueryParameters.type: type,
+        },
+      ),
+      negativeResponse: [],
+    );
+  }
   static newSearch({String? role,String? pageSize ,String? pageNumber,String?attributeName,String?attributeValue, String? type,}) async {
     return await NetworkRequests.decodeJson(
       await NetworkRequests().securedMawaAPI(NetworkRequests.methodGet,
