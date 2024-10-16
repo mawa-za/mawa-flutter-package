@@ -186,5 +186,6 @@ class Resources {
   static const String depositAttachment = 'deposit-attachment';
   static const String activate = 'activate';
   static const String deactivate = 'de-activate';
+  static const String v2 = 'v2';
 
 }
