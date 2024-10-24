@@ -279,6 +279,7 @@ class JsonPayloads {
   static const String priority = 'priority';
   static const String assignee = 'assignee';
   static const String assigneeIds = 'assigneeIds';
+  static const String serviceProviders = 'serviceProviders';
 
 
 
