@@ -20,10 +20,14 @@ class Field {
   static create({
     required String desc,
     String? code,
-    required String validFrom,
-    required String validTo,
+    String? validFrom,
+    String? validTo,
   }) async {
     desc = Strings.description(desc);
+    validFrom ??= DateFormat(
+      'yyyy-MM-dd',
+    ).format(DateTime.now());
+    validTo ??= '9999-12-31';
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPost,
       resource: Resources.field,
@@ -33,9 +37,9 @@ class Field {
             desc
                 .trim()
                 .replaceAll(
-              ' ',
-              '-',
-            )
+                  ' ',
+                  '-',
+                )
                 .toUpperCase(),
         JsonPayloads.validFrom: validFrom,
         JsonPayloads.validTo: validTo,
@@ -59,7 +63,7 @@ class Field {
 
     for (int index = 0; index < fields.length; index++) {
       mappedFields['${fields[index][JsonResponses.fieldOptionDescription]}'] =
-      fields[index][JsonResponses.fieldOptionCode];
+          fields[index][JsonResponses.fieldOptionCode];
     }
     return mappedFields;
   }
@@ -72,7 +76,6 @@ class Field {
       ),
       negativeResponse: [],
     );
-
   }
 
   getOptions() async {
@@ -90,7 +93,7 @@ class Field {
     Map<String, String> mappedFields = {};
     for (int index = 0; index < options.length; index++) {
       mappedFields['${options[index][JsonResponses.fieldOptionDescription]}'] =
-      options[index][JsonResponses.fieldOptionCode];
+          options[index][JsonResponses.fieldOptionCode];
     }
     return mappedFields;
   }
@@ -118,9 +121,9 @@ class Field {
             description
                 .trim()
                 .replaceAll(
-              ' ',
-              '-',
-            )
+                  ' ',
+                  '-',
+                )
                 .toUpperCase(),
         JsonPayloads.description: description,
         JsonPayloads.validFrom: validFrom,
