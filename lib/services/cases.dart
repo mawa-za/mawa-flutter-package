@@ -24,11 +24,12 @@ class Cases {
   static create({
     required String product,
     required String client,
-    required type,
-    required court,
+    String ? type,
+    String ? court,
     required String description,
     required List applicants,
     required List defendants,
+    required List serviceProvider,
   }) async {
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPost,
@@ -41,6 +42,7 @@ class Cases {
         JsonPayloads.description: description,
         JsonPayloads.applicants: applicants,
         JsonPayloads.defendants: defendants,
+        JsonPayloads.serviceProviders: serviceProvider,
       },
     );
   }
