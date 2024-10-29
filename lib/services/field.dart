@@ -20,10 +20,14 @@ class Field {
   static create({
     required String desc,
     String? code,
-    required String validFrom,
-    required String validTo,
+    String? validFrom,
+    String? validTo,
   }) async {
     desc = Strings.description(desc);
+    validFrom ??= DateFormat(
+                'yyyy-MM-dd',
+              ).format(DateTime.now());
+    validTo ??= '9999-12-31';
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPost,
       resource: Resources.field,
