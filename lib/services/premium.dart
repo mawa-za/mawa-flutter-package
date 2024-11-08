@@ -12,10 +12,11 @@ class Premium {
   static create({
     required String membershipId,
     String? membershipPeriod,
+    String? terminalId,
     required String tenderType,
-    String? location,
     required String amount,
-    required String externalReceiptNo,
+    String? externalReceiptNo,
+    required String employeeResponsible,
   }) async {
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPost,
@@ -24,10 +25,10 @@ class Premium {
         JsonPayloads.membershipId: membershipId,
         JsonPayloads.membershipPeriod: membershipPeriod,
         JsonPayloads.tenderType: tenderType,
-        JsonPayloads.location: location,
+        JsonPayloads.employeeResponsible: employeeResponsible,
         JsonPayloads.amount: amount,
         JsonPayloads.externalReceiptNo: externalReceiptNo,
-        JsonPayloads.terminalId: ' ',
+        JsonPayloads.terminalId: terminalId,
       },
     );
   }
