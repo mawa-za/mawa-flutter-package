@@ -9,5 +9,5 @@ class PartnerTypes {
   static const String organisation = 'ORGANISATION';
   static const String person = 'PERSON';
   static const String group = 'GROUP';
-  static const String individual = 'individual';
+  static const String individual = 'INDIVIDUAL';
 }
