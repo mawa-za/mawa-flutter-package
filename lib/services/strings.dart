@@ -73,4 +73,21 @@ class Strings{
     }
   }
 
+  static String personNameFromJsonV2(json) {
+    if (json != null) {
+      try{
+        String name =
+            '${json[JsonResponses.title] ?? ''} ${json[JsonResponses.name1] ?? ''}, ${json[JsonResponses.name2] ?? ''} ${json[JsonResponses.name3] ?? ''}';
+        return name == ' ,  ' ? '' : name;
+      }catch(e){
+        if (kDebugMode) {
+          print(e);
+        }
+        return 'Error Deciphering Name';
+      }
+    } else {
+      return '';
+    }
+  }
+
 }
