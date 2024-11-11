@@ -15,7 +15,7 @@ class Claim {
     return await NetworkRequests.decodeJson(
       await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
-        resource: Resources.claimV2,
+        resource: Resources.claim,
       ),
       negativeResponse: [],
     );
