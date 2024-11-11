@@ -128,6 +128,7 @@ class Resources {
   static const String field = 'field';
   static const String option = 'option';
   static const String claim = 'claim';
+  static const String claimV2 = 'claim/v2';
   static const String membership = 'membership';
   static const String dependent = 'dependent';
   static const String partner = 'partner';
