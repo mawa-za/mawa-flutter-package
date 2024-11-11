@@ -20,6 +20,15 @@ class Claim {
       negativeResponse: [],
     );
   }
+  static getAllV2() async {
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: Resources.claimV2,
+      ),
+      negativeResponse: [],
+    );
+  }
 
   static create({
     required String claimantId,
