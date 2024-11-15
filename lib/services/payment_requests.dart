@@ -14,6 +14,17 @@ class PaymentRequests {
 
   }
 
+  //get all payment request v2
+  static getAllV2() async {
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests().securedMawaAPI(
+          NetworkRequests.methodGet,
+          resource: Resources.paymentRequestV2
+      ),
+      negativeResponse: [],
+    );
+  }
+
   static getSpecificPayments(String paymentId) async {
     return await NetworkRequests.decodeJson(
         await NetworkRequests().securedMawaAPI(

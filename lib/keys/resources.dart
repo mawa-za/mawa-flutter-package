@@ -128,6 +128,7 @@ class Resources {
   static const String field = 'field';
   static const String option = 'option';
   static const String claim = 'claim';
+  static const String claimV2 = 'claim/v2';
   static const String membership = 'membership';
   static const String dependent = 'dependent';
   static const String partner = 'partner';
@@ -143,6 +144,7 @@ class Resources {
   static const String prospect = 'prospect';
   static const String supplier = 'supplier';
   static const String paymentRequest = 'payment-request';
+  static const String paymentRequestV2 = 'payment-request/v2';
 
   static const String attachmentfile = 'attachmentfile';
   static const String attachment = 'attachment';
