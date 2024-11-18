@@ -144,6 +144,7 @@ class Resources {
   static const String prospect = 'prospect';
   static const String supplier = 'supplier';
   static const String paymentRequest = 'payment-request';
+  static const String paymentRequestV2 = 'payment-request/v2';
 
   static const String attachmentfile = 'attachmentfile';
   static const String attachment = 'attachment';
