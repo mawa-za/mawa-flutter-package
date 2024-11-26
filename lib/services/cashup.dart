@@ -46,7 +46,7 @@ class Cashup {
     );
   }
 
-  static getAll(String ? cashUpType) async {
+  static getAll(String? cashUpType) async {
     return await NetworkRequests.decodeJson(
       await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
@@ -54,6 +54,34 @@ class Cashup {
         queryParameters: {
           QueryParameters.cashUpType: cashUpType,
         },
+      ),
+      negativeResponse: [],
+    );
+  }
+
+  static searchV2({
+    String? status,
+    String? employeeResponsibleName,
+    String? creationDate,
+    String? cashUpType,
+    String? idNumber,
+  }) async {
+    Map<String, String> query = {};
+    status != null ? query[QueryParameters.status] = status : null;
+    employeeResponsibleName != null
+        ? query[QueryParameters.employeeResponsibleName] =
+        employeeResponsibleName
+        : null;
+    creationDate != null
+        ? query[QueryParameters.creationDate] = creationDate
+        : null;
+    cashUpType != null ? query[QueryParameters.cashUpType] = cashUpType : null;
+    idNumber != null ? query[QueryParameters.idNumber] = idNumber : null;
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: '${Resources.cashup}/${Resources.v2}',
+        queryParameters: query,
       ),
       negativeResponse: [],
     );
@@ -83,14 +111,13 @@ class Cashup {
   }
 
   //Create manual cashup
-  static createManual({
-    required String employeeResponsibleId,
-    required String salesArea,
-    required String cashUpType,
-    required String receiptFrom,
-    required String receiptTo,
-    double amount =0
-  }) async {
+  static createManual(
+      {required String employeeResponsibleId,
+        required String salesArea,
+        required String cashUpType,
+        required String receiptFrom,
+        required String receiptTo,
+        double amount = 0}) async {
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPost,
       resource: Resources.cashup,
@@ -104,6 +131,4 @@ class Cashup {
       },
     );
   }
-
-
 }
