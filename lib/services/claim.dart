@@ -113,6 +113,7 @@ class Claim {
     String? claimantId,
     String? deathDate,
     String? burialDate,
+    double paidOutAmount =0.0
   }) async {
     dynamic response = await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPut,
@@ -121,6 +122,7 @@ class Claim {
         JsonPayloads.claimantId: claimantId,
         JsonPayloads.deathDate: deathDate,
         JsonPayloads.burialDate: burialDate,
+        JsonPayloads.paidOutAmount: paidOutAmount,
       },
     );
     return response;
