@@ -4,6 +4,7 @@ class FieldOptionTypes {
   static const String fieldOptionInvoiceType = 'INVOICE-TYPE';
   static const String fieldOptionDisputeReason = 'CLAIM-DISPUTE-REASON';
   static const String fieldOptionCategory = 'CATEGORY';
+  static const String fieldOptionCalendarProductCategory = 'CALENDAR-PRODUCT-CATEGORY';
   static const String fieldOptionPriority = 'PRIORITY';
   static const String fieldOptionIdType = 'ID-TYPE';
   static const String fieldOptionGender = 'GENDER';
