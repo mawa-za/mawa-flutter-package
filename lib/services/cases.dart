@@ -25,6 +25,9 @@ class Cases {
     required String client,
     required type,
     required String description,
+    required List applicants,
+    required List defendants,
+    required List serviceProvider,
   }) async {
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPost,
@@ -33,7 +36,9 @@ class Cases {
         JsonPayloads.client: client,
         JsonPayloads.type: type,
         JsonPayloads.description: description,
-
+        JsonPayloads.applicants: applicants,
+        JsonPayloads.defendants: defendants,
+        JsonPayloads.serviceProviders: serviceProvider,
       },
     );
   }
