@@ -22,10 +22,8 @@ class Cases {
     );
   }
   static create({
-    required String product,
     required String client,
-    String ? type,
-    String ? court,
+    required type,
     required String description,
     required List applicants,
     required List defendants,
@@ -35,10 +33,8 @@ class Cases {
       NetworkRequests.methodPost,
       resource: Resources.case_,
       body: {
-        JsonPayloads.product: product,
         JsonPayloads.client: client,
         JsonPayloads.type: type,
-        JsonPayloads.court: court,
         JsonPayloads.description: description,
         JsonPayloads.applicants: applicants,
         JsonPayloads.defendants: defendants,
