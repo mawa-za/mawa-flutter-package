@@ -8,19 +8,25 @@ class ServiceRequest {
   late final String resource;
   //Create Ticket
   static create({
-    required String customerId,
+    required String customer,
     required String description,
     required String category,
     required String priority,
+    String? dueDate,
+    List<String>? assignees,
   }) async {
-    return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodPost,
         resource: Resources.serviceRequest,
         body: {
-          JsonPayloads.customerId: customerId,
+          JsonPayloads.customer: customer,
           JsonPayloads.description: description,
           JsonPayloads.category: category,
-          JsonResponses.priority: priority
-        });
+          JsonResponses.priority: priority,
+          JsonResponses.dueDate: dueDate,
+          JsonResponses.assignees: assignees,
+        },
+    );
   }
 
 //Get specific Ticket
