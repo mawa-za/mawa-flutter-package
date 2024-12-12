@@ -450,5 +450,6 @@ class JsonResponses {
   static const String mainPartner = 'mainPartner';
   static const String transactionStatus = 'transactionStatus';
   static const String transactionId = 'transactionId';
+  static const String assignees = 'assignees';
   static const String serviceProviders = 'serviceProviders';
 }
