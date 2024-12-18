@@ -46,6 +46,15 @@ class GroupSociety {
     );
   }
 
+  static searchV2() async {
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: '${Resources.groupSociety}/${Resources.v2}',
+      ),
+    );
+  }
+
   get() async {
     return await NetworkRequests.decodeJson(
       await NetworkRequests().securedMawaAPI(
