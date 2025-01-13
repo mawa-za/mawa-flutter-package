@@ -197,4 +197,15 @@ class Claim {
       negativeResponse: [],
     );
   }
+
+  // claim payment request creation
+  createClaimPaymentRequest() async {
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPost,
+        resource:'$resource/${Resources.paymentRequest}',
+      ),
+      negativeResponse: {},
+    );
+  }
 }
