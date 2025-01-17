@@ -93,10 +93,11 @@ class Membership {
     required String salesRepresentativeId,
     required String productId,
     required String creationType,
-    required String salesArea,
+    String? salesArea,
     required String dateJoined,
     String? prevInsurer,
     String? lastReceiptDate,
+    String? currentMembershipId,
   }) async {
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPost,
@@ -111,6 +112,7 @@ class Membership {
         JsonPayloads.creationType: creationType,
         JsonPayloads.previousInsurerId: prevInsurer,
         JsonPayloads.lastReceiptDate: lastReceiptDate,
+        JsonPayloads.currentMembershipId: currentMembershipId,
       },
     );
   }

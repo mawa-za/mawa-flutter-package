@@ -282,6 +282,7 @@ class JsonPayloads {
   static const String assigneeIds = 'assigneeIds';
   static const String serviceProviders = 'serviceProviders';
   static const String employeeResponsible = 'employeeResponsible';
+  static const String currentMembershipId = 'currentMembershipId';
 
 
 
