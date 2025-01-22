@@ -1,6 +1,8 @@
 part of 'package:mawa_package/mawa_package.dart';
 
 class JsonResponses {
+  static const String participant = 'participant';
+  static const String legalRepresentative = 'legalRepresentative';
   static const String paidOutAmount = 'paidOutAmount';
   static const String transactionSubtype = 'transactionSubtype';
   static const String identityNumber = 'identityNumber';
