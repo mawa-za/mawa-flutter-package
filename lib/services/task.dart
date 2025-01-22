@@ -15,6 +15,7 @@ class Task {
     required String employeeResponsibleId,
     required String plannedStartDate,
     required String plannedEndDate,
+    String? taskDuration
   }) async {
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPost,
@@ -26,7 +27,8 @@ class Task {
         JsonPayloads.customerId: customerId,
         JsonPayloads.employeeResponsibleId: employeeResponsibleId,
         JsonPayloads.plannedStartDate: plannedStartDate,
-        JsonPayloads.plannedEndDate: plannedEndDate
+        JsonPayloads.plannedEndDate: plannedEndDate,
+        JsonPayloads.duration: taskDuration
       },
     );
   }
@@ -53,13 +55,13 @@ class Task {
 
   edit(
       {String? number,
-      String? type,
-      String? description,
-      String? employeeResponsibleId,
-      String? plannedStartDate,
-      String? plannedEndDate,
-      String? actualStartDate,
-      String? actualEndDate}) async {
+        String? type,
+        String? description,
+        String? employeeResponsibleId,
+        String? plannedStartDate,
+        String? plannedEndDate,
+        String? actualStartDate,
+        String? actualEndDate}) async {
     await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPut,
       resource: resource,
