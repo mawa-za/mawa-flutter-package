@@ -8,10 +8,10 @@ class Task {
   late String resource;
 
   static create({
-    String? parentId,
+    required String parentId,
     String? type,
     String? description,
-    String? customerId,
+    required String customerId,
     String? employeeResponsibleId,
     String? plannedStartDate,
      String? plannedEndDate,
