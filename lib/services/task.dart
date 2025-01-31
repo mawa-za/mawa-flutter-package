@@ -9,13 +9,14 @@ class Task {
 
   static create({
     required String parentId,
-    required String type,
-    required String description,
+    String? type,
+    String? description,
     required String customerId,
-    required String employeeResponsibleId,
-    required String plannedStartDate,
-    required String plannedEndDate,
-    String? taskDuration
+    String? employeeResponsibleId,
+    String? plannedStartDate,
+     String? plannedEndDate,
+    String? taskDuration,
+    String? startDate
   }) async {
     return await NetworkRequests().securedMawaAPI(
       NetworkRequests.methodPost,
@@ -28,7 +29,8 @@ class Task {
         JsonPayloads.employeeResponsibleId: employeeResponsibleId,
         JsonPayloads.plannedStartDate: plannedStartDate,
         JsonPayloads.plannedEndDate: plannedEndDate,
-        JsonPayloads.duration: taskDuration
+        JsonPayloads.duration: taskDuration,
+        JsonPayloads.startDate: startDate
       },
     );
   }
