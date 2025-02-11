@@ -18,7 +18,7 @@ class Cases {
         NetworkRequests.methodGet,
         resource: Resources.case_,
       ),
-       negativeResponse: {},
+      negativeResponse: {},
     );
   }
   static create({
@@ -46,14 +46,27 @@ class Cases {
     required String partner,
     required String function,
     required String caseID,
+    String? representativeID,
   }) async {
+    dynamic postBody={};
+    if(representativeID!=null)
+    {
+      postBody={
+        JsonPayloads.partner: partner,
+        JsonPayloads.function: function,
+        JsonPayloads.legalRepresentative: representativeID
+      };
+    }else
+    {
+      postBody={
+        JsonPayloads.partner: partner,
+        JsonPayloads.function: function
+      };
+    }
     return await NetworkRequests().securedMawaAPI(NetworkRequests.methodPost,
         resource: '${Resources.case_}/$caseID/${Resources.participant}',
-        body: {
-          JsonPayloads.partner: partner,
-          JsonPayloads.function: function
-
-        });
+        body: postBody
+    );
   }
   static deleteParticipant({required String id,partner,function}) async {
     await NetworkRequests.decodeJson(await NetworkRequests().securedMawaAPI(
