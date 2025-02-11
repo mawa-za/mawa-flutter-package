@@ -278,6 +278,7 @@ class Tools {
           'Yes',
         ),
         onPressed: () {
+          onLogout();
           Navigator.of(context)
               .pushNamedAndRemoveUntil(redirect, (route) => false);
         },
