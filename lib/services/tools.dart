@@ -252,7 +252,7 @@ class Tools {
   }
 
   static logoutPopup(
-      {required BuildContext context, required String redirect}) {
+      {required BuildContext context, required String redirect, required Function onLogout}) {
     return AwesomeDialog(
       dismissOnTouchOutside: false,
       width: 500.0,
