@@ -15,7 +15,7 @@ class PaymentRequests {
   }
 
   //get all payment request v2
-  static getAllV2(String ? status) async {
+  static getAllV2({String? status}) async {
     return await NetworkRequests.decodeJson(
       await NetworkRequests().securedMawaAPI(
           NetworkRequests.methodGet,
