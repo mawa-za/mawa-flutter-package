@@ -15,14 +15,15 @@ class PaymentRequests {
   }
 
   //get all payment request v2
-  static getAllV2({String? status}) async {
+  static getAllV2({dynamic status}) async {
+    Map<String, String> obj = {};
+    status ==null ? null:obj[QueryParameters.status]=status;
     return await NetworkRequests.decodeJson(
       await NetworkRequests().securedMawaAPI(
           NetworkRequests.methodGet,
           resource: Resources.paymentRequestV2,
-          queryParameters: {
-            JsonPayloads.status: status,
-          }
+          queryParameters: obj
+
       ),
       negativeResponse: [],
     );

@@ -10,6 +10,25 @@ class Membership {
     resource = '${Resources.membership}/$membershipID';
   }
 
+
+  getMembershipInvoices() async {
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: '${Resources.membership}/$membershipID/${Resources.invoice}',
+      ),
+      negativeResponse: [],
+    );
+  }
+
+  static downloadMembershipInvoice(String? id) async {
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodPost,
+      resource: '${Resources.membership}/$id/${Resources.invoicePdf}',
+    );
+  }
+
+
   static search({
     String? partnerRole,
     String? partnerFunction,
