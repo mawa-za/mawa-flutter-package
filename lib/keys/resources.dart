@@ -190,4 +190,7 @@ class Resources {
   static const String deactivate = 'de-activate';
   static const String v2 = 'v2';
 
+  static const String claimFormPdf = 'pdf-form';
+  static const String membershipBilling = 'bill-memberships';
+  static const String invoicePdf = 'invoice-pdf';
 }
