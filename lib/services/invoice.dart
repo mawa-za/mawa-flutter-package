@@ -30,6 +30,14 @@ class Invoice{
     return response;
 
   }
+
+  static downloadMembershipInvoice(String? id) async {
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodPost,
+      resource: '${Resources.invoice}/$id/${Resources.invoicePdf}',
+    );
+  }
+
   getInvoice(String id) async {
     return await NetworkRequests.decodeJson(
         await NetworkRequests().securedMawaAPI(
