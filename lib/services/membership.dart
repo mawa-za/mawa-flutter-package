@@ -21,13 +21,6 @@ class Membership {
     );
   }
 
-  static downloadMembershipInvoice(String? id) async {
-    return await NetworkRequests().securedMawaAPI(
-      NetworkRequests.methodPost,
-      resource: '${Resources.membership}/$id/${Resources.invoicePdf}',
-    );
-  }
-
 
   static search({
     String? partnerRole,
