@@ -11,6 +11,13 @@ class Claim {
 
   //ENDPOINTS FOR THE NEW BACKEND
 
+  claimFormDownloadPdf() async {
+    return await NetworkRequests().securedMawaAPI(
+      NetworkRequests.methodPost,
+      resource: '$resource/${Resources.claimFormPdf}',
+    );
+  }
+
   static getAll() async {
     return await NetworkRequests.decodeJson(
       await NetworkRequests().securedMawaAPI(
