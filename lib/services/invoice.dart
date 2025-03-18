@@ -38,6 +38,15 @@ class Invoice{
     );
   }
 
+  getInvoicesV2() async {
+    return await NetworkRequests.decodeJson(
+        await NetworkRequests().securedMawaAPI(
+          NetworkRequests.methodGet,
+          resource: '${Resources.invoice}/${Resources.v2}',
+        ),
+        negativeResponse: []);
+  }
+
   getInvoice(String id) async {
     return await NetworkRequests.decodeJson(
         await NetworkRequests().securedMawaAPI(
