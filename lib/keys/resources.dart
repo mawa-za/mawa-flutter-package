@@ -193,4 +193,6 @@ class Resources {
   static const String claimFormPdf = 'pdf-form';
   static const String membershipBilling = 'bill-memberships';
   static const String invoicePdf = 'invoice-pdf';
+  static const String forgotPasswordSelf = 'forgot-password';
+  static const String setNewPassword = 'password/reset';
 }

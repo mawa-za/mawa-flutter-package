@@ -8,23 +8,27 @@ class ForgotPassword extends StatefulWidget {
 }
 
 class _ForgotPasswordState extends State<ForgotPassword> {
-  late OTP otp;
+
+  bool emailSent=false;
+  bool errorMessage=false;
+  late String submitBtnText;
   final _forgotPasswordFormKey = GlobalKey<FormState>();
   late String email;
-
   @override
   void initState() {
     super.initState();
-    otp = OTP(context);
+    email ='';
+    submitBtnText ='Send';
   }
 
   @override
   Widget build(BuildContext context) {
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Row(
-            children: const [
+          title: const Row(
+            children: [
               Icon(Icons.alternate_email),
               Text('Forgot password'),
             ],
@@ -39,6 +43,23 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  //  Row(
+                  //   mainAxisAlignment: MainAxisAlignment.end,
+                  //   children: [
+                  //     Visibility(
+                  //       visible:emailSent,
+                  //       child: Text(
+                  //         'Reset link was sent to the user "$email" email, check your email',
+                  //         style: const TextStyle(
+                  //           // decoration: TextDecoration.underline,
+                  //           color: Colors.green,
+                  //           fontSize: 15.0,
+                  //           // fontWeight: FontWeight.bold,
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
                   Form(
                     key: _forgotPasswordFormKey,
                     child: TextFormField(
@@ -50,40 +71,40 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       },
                       validator: (value) {
                         value = value?.trim();
-                        print('*$value*\n*$email*');
                         if (value!.isEmpty) {
-                          return 'Enter Email Address';
-                        }
-                        if (value.isNotEmpty && !EmailValidator.validate(value)) {
-                          return 'Please Enter Correct Email Address';
+                          return 'Enter Username';
                         }
                         return null;
                       },
                       decoration: const InputDecoration(
                         icon: Icon(Icons.account_circle),
-                        labelText: 'Enter Your Email Address',
+                        labelText: 'Enter Your Username',
                       ),
                       onEditingComplete: submitEmail,
                     ),
                   ),
-                  TextButton(
-                      onPressed: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute<void>(
-                            builder: (BuildContext context) => const OTPScreen(),
-                          ),
-                        );
-                      },
-                      child: const Text(
-                        'Already have An OTP',
-                        style: TextStyle(color: Colors.blue),
-                      )),
                   const SizedBox(
                     height: 30.0,
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Visibility(
+                        visible:emailSent,
+                        child: const Text(
+                          'Did not received email?',
+                          style:  TextStyle(
+                            // decoration: TextDecoration.underline,
+                            color: Colors.blue,
+                            fontSize: 15.0,
+                            // fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       ElevatedButton(
                         onPressed: () {
@@ -91,20 +112,62 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         },
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.resolveWith(
-                              (states) => Colors.red),
+                                  (states) => Colors.red),
                         ),
                         child: const Text('Cancel'),
+                      ),
+                      const SizedBox(
+                        width: 15.0,
                       ),
                       ElevatedButton(
                         onPressed: submitEmail,
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.resolveWith(
-                              (states) => Colors.green),
+                                  (states) => Colors.green),
                         ),
-                        child: const Text('Proceed'),
+                        child:  Text(submitBtnText),
                       ),
                     ],
-                  )
+
+                  ),
+                  const SizedBox(
+                    height: 15.0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Visibility(
+                        visible:emailSent,
+                        child: Flexible(
+                          flex: 1,
+                          child: Text(
+                            'Reset link was sent to the user "$email" email, check your email',
+                            style: const TextStyle(
+                              color: Colors.green,
+                              fontSize: 15.0,
+                              // fontWeight: FontWeight.bold,
+                            ),
+                            softWrap:true,
+                          ),
+                        ),
+                      ),
+                      Visibility(
+                        visible:errorMessage,
+                        child: const Flexible(
+                          flex: 1,
+                          child: Text(
+                            'Oops!.., something went wrong please contact system administrator',
+                            style: TextStyle(
+                              color: Colors.red,
+                              fontSize: 15.0,
+                              // fontWeight: FontWeight.bold,
+                            ),
+                            softWrap:true,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -116,41 +179,39 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   }
 
   submitEmail() async {
+    final OverlayWidgets overlay = OverlayWidgets(
+      context: context,
+    );
     if (_forgotPasswordFormKey.currentState!.validate()) {
+      overlay.showOverlay(
+        SnapShortStaticWidgets.snapshotWaitingIndicator(),
+      );
       FocusScope.of(context).unfocus();
+      dynamic response = await ResetPassword.passUserName(user: email ?? '');
 
-      final OverlayWidgets overlay = OverlayWidgets(context: context);
-      overlay.showOverlay(SnapShortStaticWidgets.snapshotWaitingIndicator());
-
-      dynamic request = await otp.requestOTP(email);
-      print('code');
-      print('\n${request.statusCode}');
-      if(request.statusCode == 200 || request.statusCode == 201) {
-        String message = await NetworkRequests.decodeJson(request, negativeResponse: '');
-        print('\n message ${message}');
-        if(message != otp.userDoesntExist) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute<void>(
-              builder: (BuildContext context) => const OTPScreen(),
-            ),);
-
-        }
-        else{
-          Alerts.toastMessage(
-            message: 'Email Not Associated With Any User',
-            positive: false,);
-        }
+      if(response.statusCode == 200 || response.statusCode == 201) {
+        setState(() {
+          emailSent = true;
+          errorMessage = false;
+          submitBtnText ="Resend";
+        });
+      }else{
+        setState(() {
+          errorMessage = true;
+          emailSent = false;
+          submitBtnText ="Send";
+        });
       }
-      else{
-        Tools().forgotPasswordPopup();
-        Alerts.toastMessage(
-          message: 'Could not request OTP. Please try again ',
-          positive: false,
-        );
-      }
+    } else {
 
-      overlay.dismissOverlay();
+
+      // Alerts.toastMessage(
+      //   message: 'Could not send email ',
+      //   positive: false,
+      // );
     }
+    overlay.dismissOverlay();
+
   }
+
 }
