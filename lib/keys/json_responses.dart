@@ -456,5 +456,6 @@ class JsonResponses {
   static const String membershipHistory = 'membershipHistory';
   static const String membershipHistoryLinks = 'membershipHistoryLinks';
   static const String batchNumber = 'batchNumber';
+  static const String products = 'products';
   static const String serviceProviders = 'serviceProviders';
 }
