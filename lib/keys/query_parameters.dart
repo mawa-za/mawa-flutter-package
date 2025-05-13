@@ -154,6 +154,9 @@ class QueryParameters {
   static const String creationDate = 'creationDate';
   static const String employeeResponsibleName = 'employeeResponsibleName';
   static const String mainPartner = 'mainPartner';
+  static const String query = 'query';
+
+
 
 // static const String  = '';
 }
