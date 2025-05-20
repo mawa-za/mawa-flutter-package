@@ -333,19 +333,18 @@ class Partners {
   }
 
   static getSpecifIdentity(
-      {required String path,
-      required String idNumber,
+      {required String idNumber,
       required String idType}) async {
     return await NetworkRequests.decodeJson(
         await NetworkRequests().securedMawaAPI(
           NetworkRequests.methodGet,
-          resource: '${Resources.partner}/$path',
+          resource: '${Resources.partner}/${Resources.identity}',
           queryParameters: {
             QueryParameters.idType: idType,
             QueryParameters.idNumber: idNumber,
           },
         ),
-        negativeResponse: []);
+        negativeResponse: {},);
   }
 
   getPartnerSpecifIdentity(
