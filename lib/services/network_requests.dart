@@ -221,76 +221,14 @@ class NetworkRequests {
 
         statusCode = feedback.statusCode;
         switch (statusCode) {
-          case 200:
-            {
-            }
-            break;
-          case 201:
-            {
-            }
-            break;
-          case 202:
-            {
-            }
-            break;
           case 401:
             {
               Navigator.pushReplacementNamed(Tools.context, AuthenticateView.id);
             }
             break;
-          case 404:
-            {
-              Tools.isTouchLocked = false;
-              Alerts.toastMessage(
-                message: 'Server Down',
-                positive: false,
-              );
-            }
-            break;
-          case 417:
-            {
-              Alerts.toastMessage(
-                message: NetworkRequests()
-                    .statusMessages[NetworkRequests.statusCode],
-                positive: false,
-              );
-            }
-            break;
-          case 405:
-            {
-              Tools.isTouchLocked = false;
-              Alerts.toastMessage(message: 'Not Allowed', positive: false);
-            }
-            break;
-          case 500:
-            {
-              Tools.isTouchLocked = false;
-              Alerts.toastMessage(
-                  message: 'Something Went Wrong', positive: false);
-            }
-            break;
-          case 0:
-            {
-              Tools.isTouchLocked = false;
-              Alerts.toastMessage(
-                message: 'Network Error',
-                positive: false,
-              );
-            }
-            break;
-          case 1:
-            {
-              Tools.isTouchLocked = false;
-              Alerts.toastMessage(
-                message: 'Network Error',
-                positive: false,
-              );
-            }
-            break;
           default:
             {
-              Tools.isTouchLocked = false;
-              Alerts.toastMessage(message: 'Request Failed', positive: false);
+
             }
             break;
         }
