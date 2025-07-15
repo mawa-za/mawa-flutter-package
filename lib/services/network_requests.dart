@@ -1,7 +1,6 @@
 part of 'package:mawa_package/mawa_package.dart';
 
 class NetworkRequests {
-
   NetworkRequests({this.responseType}) {
     _getToken();
   }
@@ -49,9 +48,6 @@ class NetworkRequests {
   }
 
   Map<String, String> headers({required String tokenKey, bool secured = true}) {
-
-
-
     Map<String, String> headers = {
       "X-TenantID": tenantID,
     };
@@ -156,7 +152,7 @@ class NetworkRequests {
     required String resource,
     dynamic body,
     Map<String, dynamic>? queryParameters,
-        bool secured = true,
+    bool secured = true,
   }) async {
     // token == null ? token = await _key: null;
     final SharedPreferences prefs = await preferences;
@@ -165,10 +161,9 @@ class NetworkRequests {
     token = await prefs.getString(SharedPrefs.token) ?? '';
 
     String tenant = prefs.getString(SharedPrefs.tenantID) ?? '';
-    if(tenant.isNotEmpty){
+    if (tenant.isNotEmpty) {
       tenantID = tenant;
-    }
-    else{
+    } else {
       if (kIsWeb) {
         var base = Uri.base.origin;
         tenantID = base.split('//').last;
@@ -176,7 +171,11 @@ class NetworkRequests {
         tenantID = tenant;
       }
     }
-    endpointURL = 'https://$server/';
+    if (server.contains("localhost")) {
+      endpointURL = 'http://$server/';
+    } else {
+      endpointURL = 'https://$server/';
+    }
 
     dynamic url;
     dynamic header = headers(
@@ -190,104 +189,95 @@ class NetworkRequests {
       print(header);
       print(body);
     }
-      try {
-        switch (method) {
-          case methodGet:
-            feedback = await http.get(
+    try {
+      switch (method) {
+        case methodGet:
+          feedback = await http.get(
+            url,
+            headers: header,
+          );
+          break;
+        case methodDelete:
+          feedback = await http.delete(
+            url,
+            headers: header,
+          );
+          break;
+        case methodPost:
+          feedback = await http.post(
+              // Uri.https(endpointURL, path + resource, queryParameters),
               url,
-              headers: header,
-            );
-            break;
-          case methodDelete:
-            feedback = await http.delete(
-              url,
-              headers: header,
-            );
-            break;
-          case methodPost:
-            feedback = await http.post(
-                // Uri.https(endpointURL, path + resource, queryParameters),
-                url,
-                headers: headers(tokenKey: token),
-                body: jsonEncode(body));
-            break;
-          case methodPut:
-            feedback = await http.put(url,
-                // Uri.https(endpointURL, path + resource),
-                headers: headers(tokenKey: token),
-                body: jsonEncode(body));
-            break;
-        }
-
-        statusCode = feedback.statusCode;
-        switch (statusCode) {
-          case 401:
-            {
-              Navigator.pushReplacementNamed(Tools.context, AuthenticateView.id);
-            }
-            break;
-          default:
-            {
-
-            }
-            break;
-        }
-
-        if (kDebugMode) {
-          print('${feedback.statusCode}\n${feedback.body}');
-        }
-        return feedback;
-      } on TimeoutException catch (e) {
-        if (kDebugMode) {
-          print(e);
-        }
-        Alerts.toastMessage(
-            message: 'Request Timed Out. \nCheck Network Connection.',
-            positive: false);
-        responseCaught = http.Response('Request Timed Out', 491);
-        return responseCaught;
-      } on SocketException catch (e) {
-        if (kDebugMode) {
-          print(e);
-        }
-        Alerts.toastMessage(
-            message: 'Encountered Network Problem',
-            positive: false);
-        responseCaught = http.Response('Encountered Network Problem', 492);
-        return responseCaught;
-      } on HandshakeException catch (e) {
-        if (kDebugMode) {
-          print(e);
-        } Alerts.toastMessage(
-            message: 'Request Terminated During Handshake',
-            positive: false);
-        responseCaught =
-            http.Response('Could Not Establish Connection With Remote', 493);
-        return responseCaught;
-      }
-      on CertificateException catch(e){
-        if (kDebugMode) {
-          print(e);
-        }
-        Alerts.toastMessage(
-            message: 'Certificate Error',
-            positive: false);
-        responseCaught =
-            http.Response('Certificate Error', 494);
-        return responseCaught;
-      }
-      catch (e) {
-        if (kDebugMode) {
-          print(e);
-        }
-        Alerts.toastMessage(
-            // context: Tools.context,
-            message: 'Ran Into A Problem',
-            positive: false);
-        responseCaught = http.Response('Ran Into A Problem', 499);
-        return responseCaught;
+              headers: headers(tokenKey: token),
+              body: jsonEncode(body));
+          break;
+        case methodPut:
+          feedback = await http.put(url,
+              // Uri.https(endpointURL, path + resource),
+              headers: headers(tokenKey: token),
+              body: jsonEncode(body));
+          break;
       }
 
+      statusCode = feedback.statusCode;
+      switch (statusCode) {
+        case 401:
+          {
+            Navigator.pushReplacementNamed(Tools.context, AuthenticateView.id);
+          }
+          break;
+        default:
+          {}
+          break;
+      }
+
+      if (kDebugMode) {
+        print('${feedback.statusCode}\n${feedback.body}');
+      }
+      return feedback;
+    } on TimeoutException catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+      Alerts.toastMessage(
+          message: 'Request Timed Out. \nCheck Network Connection.',
+          positive: false);
+      responseCaught = http.Response('Request Timed Out', 491);
+      return responseCaught;
+    } on SocketException catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+      Alerts.toastMessage(
+          message: 'Encountered Network Problem', positive: false);
+      responseCaught = http.Response('Encountered Network Problem', 492);
+      return responseCaught;
+    } on HandshakeException catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+      Alerts.toastMessage(
+          message: 'Request Terminated During Handshake', positive: false);
+      responseCaught =
+          http.Response('Could Not Establish Connection With Remote', 493);
+      return responseCaught;
+    } on CertificateException catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+      Alerts.toastMessage(message: 'Certificate Error', positive: false);
+      responseCaught = http.Response('Certificate Error', 494);
+      return responseCaught;
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+      Alerts.toastMessage(
+          // context: Tools.context,
+          message: 'Ran Into A Problem',
+          positive: false);
+      responseCaught = http.Response('Ran Into A Problem', 499);
+      return responseCaught;
+    }
   }
 
   Future unsecuredMawaAPI(
@@ -306,13 +296,16 @@ class NetworkRequests {
     } else {
       tenantID = await prefs.getString(SharedPrefs.tenantID) ?? '';
     }
-    endpointURL = 'https://$server/';
+    if (server.contains("localhost")) {
+      endpointURL = 'http://$server/';
+    } else {
+      endpointURL = 'https://$server/';
+    }
     // endpointURL = server;//'api-$server.mawa.co.za:$pot';
 
     dynamic url;
     // url = Uri.parse(endpointURL + resource);
-    url = Uri.https(server,resource,queryParameters);
-
+    url = Uri.https(server, resource, queryParameters);
 
     try {
       // final
@@ -351,7 +344,6 @@ class NetworkRequests {
           break;
       }
       statusCode = feedback.statusCode;
-
 
       // if (statusCode == 200) {
       //
@@ -392,7 +384,6 @@ class NetworkRequests {
               //   postAuthenticate;
               User.loggedInUser = await User(User.username).get();
             }
-
           }
           break;
         case 401:
@@ -458,19 +449,14 @@ class NetworkRequests {
       // responseCaught.statusCode = 491;
       // responseCaught.reasonPhrase = 'Request Timed Out';
       return responseCaught;
-    }
-    on CertificateException catch(e){
+    } on CertificateException catch (e) {
       if (kDebugMode) {
         print(e);
       }
-      Alerts.toastMessage(
-          message: 'Certificate Error',
-          positive: false);
-      responseCaught =
-          http.Response('Certificate Error', 494);
+      Alerts.toastMessage(message: 'Certificate Error', positive: false);
+      responseCaught = http.Response('Certificate Error', 494);
       return responseCaught;
-    }
-    on SocketException catch (e) {
+    } on SocketException catch (e) {
       if (kDebugMode) {
         print(e);
       }
