@@ -182,7 +182,11 @@ class NetworkRequests {
       tokenKey: token,
       secured: secured,
     );
-    url = Uri.https(server, resource, queryParameters);
+    if (server.contains("localhost")) {
+      url = Uri.http(server, resource, queryParameters);
+    } else {
+      url = Uri.https(server, resource, queryParameters);
+    }
     if (kDebugMode) {
       print(method);
       print(url);
@@ -305,7 +309,12 @@ class NetworkRequests {
 
     dynamic url;
     // url = Uri.parse(endpointURL + resource);
-    url = Uri.https(server, resource, queryParameters);
+    if (server.contains("localhost")) {
+      url = Uri.http(server, resource, queryParameters);
+    } else {
+      url = Uri.https(server, resource, queryParameters);
+    }
+
 
     try {
       // final
