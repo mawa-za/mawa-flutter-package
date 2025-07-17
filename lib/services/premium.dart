@@ -100,11 +100,11 @@ class Premium {
     );
   }
 
-  static delete(String id) async {
+  delete() async {
     return await NetworkRequests.decodeJson(
       await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodDelete,
-        resource: Resources.premium,
+        resource: resource,
       ),
       negativeResponse: [],
     );
