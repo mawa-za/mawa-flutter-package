@@ -87,6 +87,28 @@ class Premium {
     );
   }
 
+  update({required String membershipPeriod}) async {
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodPut,
+        resource: resource,
+        body:{
+          JsonPayloads.membershipPeriod: membershipPeriod,
+        }
+      ),
+      negativeResponse: [],
+    );
+  }
+
+  static delete(String id) async {
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodDelete,
+        resource: Resources.premium,
+      ),
+      negativeResponse: [],
+    );
+  }
   static getAll() async {
     return await NetworkRequests.decodeJson(
       await NetworkRequests().securedMawaAPI(
