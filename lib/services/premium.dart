@@ -6,6 +6,7 @@ class Premium {
   }) {
     resource = '${Resources.premium}/$id';
   }
+
   final String id;
   late String resource;
 
@@ -73,13 +74,26 @@ class Premium {
     );
   }
 
-  get() async {
+  getByNumber(String query) async {
+    Map<String, dynamic> queryParameters = {};
+    queryParameters['query'] = query;
     return await NetworkRequests.decodeJson(
-      await NetworkRequests()
-          .securedMawaAPI(NetworkRequests.methodGet, resource: resource),
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: resource,
+        queryParameters: queryParameters,
+      ),
       negativeResponse: [],
     );
   }
 
-
+  static getAll() async {
+    return await NetworkRequests.decodeJson(
+      await NetworkRequests().securedMawaAPI(
+        NetworkRequests.methodGet,
+        resource: Resources.premium,
+      ),
+      negativeResponse: [],
+    );
+  }
 }
