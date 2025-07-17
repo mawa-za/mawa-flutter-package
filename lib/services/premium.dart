@@ -74,13 +74,13 @@ class Premium {
     );
   }
 
-  getByNumber(String query) async {
+  static getByNumber(String query) async {
     Map<String, dynamic> queryParameters = {};
     queryParameters['query'] = query;
     return await NetworkRequests.decodeJson(
       await NetworkRequests().securedMawaAPI(
         NetworkRequests.methodGet,
-        resource: resource,
+        resource: Resources.premium,
         queryParameters: queryParameters,
       ),
       negativeResponse: [],
