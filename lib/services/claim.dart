@@ -38,6 +38,7 @@ class Claim {
   }
 
   static create({
+    required String claimId,
     required String claimantId,
     required String deceasedId,
     required String informantId,
@@ -53,6 +54,7 @@ class Claim {
       NetworkRequests.methodPost,
       resource: Resources.claim,
       body: {
+        JsonPayloads.claimId: claimId,
         JsonPayloads.claimantId: claimantId,
         JsonPayloads.deceasedId: deceasedId,
         JsonPayloads.informantId: informantId,
