@@ -41,6 +41,7 @@ class Partners {
           resource:'${Resources.v2}/${Resources.partner}',
           queryParameters: {
             QueryParameters.query: query??'',
+            QueryParameters.role:''
           },
 
         ),
