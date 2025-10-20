@@ -77,7 +77,7 @@ part 'package:mawa_package/services/comment.dart';
 part 'package:mawa_package/services/constants.dart';
 part 'package:mawa_package/services/customers.dart';
 part 'package:mawa_package/services/deposit.dart';
-part 'package:mawa_package/services/device_info.dart';
+// part 'package:mawa_package/services/device_info.dart';
 part 'package:mawa_package/services/employees.dart';
 part 'package:mawa_package/services/field_options.dart';
 part 'package:mawa_package/services/field.dart';
