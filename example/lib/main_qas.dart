@@ -8,7 +8,7 @@ import 'home.dart';
 Future<void> main() async {
   HttpOverrides.global = MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
-  DeviceInfo();
+  // DeviceInfo();
 
   var base = Uri.base.origin;
   var head = base.split('//').last;
