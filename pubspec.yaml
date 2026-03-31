@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.5
+  cupertino_icons: ^1.0.9
   rflutter_alert: ^2.0.4
   awesome_dialog: ^3.2.1
   connectivity_plus: ^5.0.2
